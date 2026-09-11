@@ -79,6 +79,18 @@ CRITICOS = [
     "docs/EMPACOTAMENTO.md",
     "CLAUDE.md",
     "README.md",
+    # Fase 10
+    "app/caminhos.py",
+    "app/instalacao.py",
+    "app/atualizacao.py",
+    "app/principal.py",
+    "app/versao.py",
+    "pipeline/80_identidade.py",
+    "scripts/build_exe.py",
+    "scripts/preparar_conhecimento.py",
+    "tests/fase10_empacotamento.py",
+    "tests/fase10_v2_independente.py",
+    "docs/GUIA_INSTALACAO.md",
 ]
 
 
@@ -173,6 +185,22 @@ def fora_do_backup(dentro: set) -> list:
             "NENHUM"),
         "__pycache__": ("cache do interpretador", "recriado no próximo import",
                         "NENHUM"),
+        "dist/": ("executável gerado pelo build (Fase 10)",
+                  "recriado por `scripts/build_exe.py` em ~17 s",
+                  "NENHUM — é artefato, não fonte"),
+        "build/": ("arquivos intermediários do PyInstaller",
+                   "recriados por `scripts/build_exe.py`", "NENHUM"),
+        "conhecimento/": ("banco distribuível, cópia do banco em uso com o "
+                          "atendimento esvaziado",
+                          "recriado por `scripts/preparar_conhecimento.py`",
+                          "NENHUM — `database/conciliador.db` está no backup"),
+        "config/sessao.chave": ("SEGREDO por instalação — assina o cookie de "
+                                "sessão", "regenerado sozinho na próxima "
+                                "execução", "NENHUM — e nunca deve ser "
+                                "versionado"),
+        "backups/": ("cópias de segurança feitas antes de atualizar o "
+                     "conhecimento", "permanecem no disco local",
+                     "NENHUM"),
     }
     saida = []
     for rel, p, tam in percorrer():
@@ -195,6 +223,12 @@ def main() -> int:
     estado = "FASE 9 — CONCLUÍDA / APTO PARA EMPACOTAMENTO"
     if "--estado" in sys.argv:
         estado = sys.argv[sys.argv.index("--estado") + 1]
+    # A declaracao acompanha o estado. Escrita a mao, ela diria "anterior a
+    # Fase 10" num manifesto gerado depois da Fase 10.
+    declaracao = ("Este backup corresponde ao estado imediatamente anterior à "
+                  "Fase 10.")
+    if "--declaracao" in sys.argv:
+        declaracao = sys.argv[sys.argv.index("--declaracao") + 1]
 
     agora = datetime.now()
     dentro = versionado()
@@ -234,8 +268,7 @@ def main() -> int:
     dados = {
         "gerado_em": agora.isoformat(timespec="seconds"),
         "estado_do_projeto": estado,
-        "declaracao": "Este backup corresponde ao estado imediatamente "
-                      "anterior à Fase 10.",
+        "declaracao": declaracao,
         "raiz": str(RAIZ),
         "no_backup": {"arquivos": n_dentro, "bytes": tam_dentro,
                       "por_diretorio": {k: {"arquivos": v[0], "bytes": v[1]}
@@ -252,9 +285,8 @@ def main() -> int:
 
     L = []
     w = L.append
-    w("# Manifesto do backup — estado anterior à Fase 10\n")
-    w("> **Este backup corresponde ao estado imediatamente anterior à "
-      "Fase 10.**\n")
+    w("# Manifesto do backup — %s\n" % estado)
+    w("> **%s**\n" % declaracao)
     w("| | |")
     w("|---|---|")
     w("| Gerado em | %s |" % agora.strftime("%d/%m/%Y %H:%M:%S"))
@@ -330,6 +362,13 @@ def main() -> int:
                  if "conciliador_backup_" in e["arquivo"]
                  else "`__pycache__/` (cache)" if "__pycache__" in e["arquivo"]
                  else "data/preview/*.html" if "data/preview/" in e["arquivo"]
+                 else "dist/ (executável gerado)" if e["arquivo"].startswith("dist/")
+                 else "build/ (intermediários do build)"
+                 if e["arquivo"].startswith("build/")
+                 else "conhecimento/ (banco distribuível)"
+                 if e["arquivo"].startswith("conhecimento/")
+                 else "backups/ (cópias do usuário)"
+                 if e["arquivo"].startswith("backups/")
                  else e["arquivo"])
         g = agrupado.setdefault(chave, {"bytes": 0, "n": 0, "e": e})
         g["bytes"] += e["bytes"]

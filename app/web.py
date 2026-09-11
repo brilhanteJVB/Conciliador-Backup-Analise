@@ -39,18 +39,24 @@ from flask import (Flask, abort, flash, get_flashed_messages, jsonify, redirect,
 from werkzeug.exceptions import HTTPException  # noqa: E402
 
 import busca                       # noqa: E402
+import caminhos                    # noqa: E402
+import instalacao                  # noqa: E402
 import relatorio as rel            # noqa: E402
 import rotulos as rot              # noqa: E402
 import servicos as sv              # noqa: E402
+import versao as ver               # noqa: E402
 from servicos import ErroDeUso     # noqa: E402
 
-app = Flask(__name__, template_folder=str(RAIZ / "app" / "templates"),
-            static_folder=str(RAIZ / "app" / "static"))
-app.secret_key = os.environ.get("CONCILIADOR_SECRET", "conciliador-local-fase6")
+# Templates e CSS vem COM o programa (somente leitura); o banco e o log vao
+# para a pasta de dados do usuario. Em desenvolvimento os dois sao a raiz do
+# repositorio, e nada muda. Ver `app/caminhos.py`.
+app = Flask(__name__, template_folder=str(caminhos.templates()),
+            static_folder=str(caminhos.estaticos()))
+app.secret_key = instalacao.segredo_da_sessao()
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
-ARQUIVO_LOG = RAIZ / "data" / "aplicacao.log"
+ARQUIVO_LOG = caminhos.log()
 ARQUIVO_LOG.parent.mkdir(parents=True, exist_ok=True)
 logging.basicConfig(
     filename=str(ARQUIVO_LOG), level=logging.INFO, encoding="utf-8",

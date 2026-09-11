@@ -53,14 +53,20 @@ ETAPAS = ["10_fontes.py", "20_substancias.py", "30_produtos.py", "40_atc.py",
           "50_regras_administracao.py", "55_regras_bula.py",
           "58_conflitos_administracao.py", "60_interacoes_substancia.py",
           "62_papel_farmacocinetico.py", "64_contraindicacoes_bula.py",
-          "65_habitos_bula.py", "68_vincular_atc_pendente.py"]
+          "65_habitos_bula.py", "68_vincular_atc_pendente.py",
+          "80_identidade.py"]
 
 # Hora de entrada da linha, nao o dado. Cada exclusao esta justificada.
 VOLATEIS = {
     "carga": {"data_importacao"},            # quando o lote foi lido
     "substancia": {"criado_em"},             # quando a linha entrou
     "auditoria_conflito": {"registrado_em"},  # quando o conflito foi visto
+    "propriedade": {"atualizado_em"},        # quando o carimbo foi gravado
 }
+# Valor que muda a cada carga por natureza: o carimbo de hora da identidade.
+# A VERSAO e a IMPRESSAO DIGITAL ficam na fotografia — sao elas que provam que
+# o conhecimento e o mesmo. So o instante em que o carimbo foi aposto sai.
+LINHAS_VOLATEIS = {"propriedade": {"conhecimento.gerado_em"}}
 # Nao fazem parte da carga: sao o atendimento e a camada de ML.
 FORA_DA_CARGA = {"paciente", "atendimento", "atendimento_medicamento",
                  "atendimento_item", "posologia", "horario_administracao",
@@ -98,10 +104,13 @@ def fotografia(caminho: Path) -> dict:
             colunas = [d[1] for d in con.execute(
                 "PRAGMA table_info(%s)" % t)]
             usar = [c for c in colunas if c not in VOLATEIS.get(t, ())]
+            fora = LINHAS_VOLATEIS.get(t, set())
             h, n = hashlib.sha256(), 0
             for linha in con.execute(
                     "SELECT %s FROM %s ORDER BY rowid"
                     % (", ".join(usar), t)):
+                if fora and linha and linha[0] in fora:
+                    continue
                 h.update(repr(linha).encode("utf-8"))
                 n += 1
             foto[t] = (n, h.hexdigest()[:16])
@@ -152,6 +161,9 @@ def detalhes(caminho: Path) -> dict:
             "contraindicações": q("SELECT COUNT(*) FROM interacao_doenca"),
             "evidências": q("SELECT COUNT(*) FROM evidencia"),
             "lotes de carga": q("SELECT COUNT(*) FROM carga"),
+            "impressão digital gravada": q(
+                "SELECT valor FROM propriedade WHERE "
+                "chave='conhecimento.digital'"),
             "conflitos de auditoria": q("SELECT COUNT(*) FROM "
                                         "auditoria_conflito"),
         }

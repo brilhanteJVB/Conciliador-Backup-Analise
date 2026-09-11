@@ -16,7 +16,7 @@ CONCILIAÇÃO MEDICAMENTOSA — atendimento 20260910-001
 Paciente: Dona Marlene (caso sintético)  ·  76 anos
 Sexo: Feminino
 Farmacêutico: Farm. Ana Souza  ·  CRF-AM 12345
-Iniciado em: 2026-09-10 17:43:44   ·   Relatório gerado em: 10/09/2026 às 13:43
+Iniciado em: 2026-09-11 01:41:22   ·   Relatório gerado em: 10/09/2026 às 21:41
 Motor: conciliacao-1.0
 
 RESUMO
@@ -182,7 +182,7 @@ DIVERGÊNCIAS DE CONCILIAÇÃO
   · losartana — Dose diferente
       prescrito: 50 mg   |   relatado: 100 mg
       intencionalidade: Não determinada
-      registrado por Farm. Ana Souza em 2026-09-10 17:43:44: Paciente dobrou a dose por conta própria.
+      registrado por Farm. Ana Souza em 2026-09-11 01:41:22: Paciente dobrou a dose por conta própria.
   · losartana — Frequência diferente
       prescrito: 2x/dia   |   relatado: 1x/dia
       intencionalidade: Não determinada
@@ -213,7 +213,7 @@ LIMITAÇÕES DESTA ANÁLISE
   · 8 achado(s) vêm de extração automática ainda não revisada por farmacêutico.
 
 REVISÃO DO PROFISSIONAL
-  · Interação entre Ibuprofeno 600 mg e Varfarina 5 mg — revisado por Farm. Ana Souza em 2026-09-10 17:43:44
+  · Interação entre Ibuprofeno 600 mg e Varfarina 5 mg — revisado por Farm. Ana Souza em 2026-09-11 01:41:22
       Orientada a suspender o anti-inflamatório por conta própria e procurar o prescritor.
 
 FONTES USADAS NESTE RELATÓRIO

@@ -1,23 +1,23 @@
 {
- "gerado_em": "2026-09-10T20:59:00",
- "estado_do_projeto": "FASE 9 — CONCLUÍDA / APTO PARA EMPACOTAMENTO",
- "declaracao": "Este backup corresponde ao estado imediatamente anterior à Fase 10.",
+ "gerado_em": "2026-09-11T01:22:20",
+ "estado_do_projeto": "FASE 10 — CONCLUÍDA / EMPACOTADO",
+ "declaracao": "Este backup corresponde ao estado ao fim da Fase 10: o sistema empacotado como executável Windows.",
  "raiz": "C:\\Sistema Conciliador projeto",
  "no_backup": {
-  "arquivos": 163,
-  "bytes": 82797000,
+  "arquivos": 176,
+  "bytes": 82957903,
   "por_diretorio": {
    "(raiz)": {
     "arquivos": 3,
-    "bytes": 40795
+    "bytes": 45069
    },
    ".claude": {
     "arquivos": 1,
     "bytes": 330
    },
    "app": {
-    "arquivos": 19,
-    "bytes": 208124
+    "arquivos": 24,
+    "bytes": 247078
    },
    "auditoria": {
     "arquivos": 11,
@@ -29,11 +29,11 @@
    },
    "database": {
     "arquivos": 3,
-    "bytes": 76941381
+    "bytes": 76950608
    },
    "docs": {
-    "arquivos": 15,
-    "bytes": 326116
+    "arquivos": 18,
+    "bytes": 361153
    },
    "ml": {
     "arquivos": 56,
@@ -44,8 +44,8 @@
     "bytes": 1097161
    },
    "pipeline": {
-    "arquivos": 20,
-    "bytes": 205456
+    "arquivos": 21,
+    "bytes": 209832
    },
    "reports": {
     "arquivos": 1,
@@ -56,18 +56,18 @@
     "bytes": 149568
    },
    "scripts": {
-    "arquivos": 1,
-    "bytes": 15948
+    "arquivos": 3,
+    "bytes": 33417
    },
    "tests": {
-    "arquivos": 24,
-    "bytes": 470662
+    "arquivos": 26,
+    "bytes": 522228
    }
   }
  },
  "fora_do_backup": {
-  "arquivos": 12,
-  "bytes": 327490684,
+  "arquivos": 116,
+  "bytes": 516435709,
   "itens": [
    {
     "arquivo": "database/conciliador_backup_fase7_completa.db",
@@ -98,6 +98,20 @@
     "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
    },
    {
+    "arquivo": "conhecimento/conhecimento.db",
+    "bytes": 73453568,
+    "motivo": "banco distribuível, cópia do banco em uso com o atendimento esvaziado",
+    "alternativa": "recriado por `scripts/preparar_conhecimento.py`",
+    "impacto": "NENHUM — `database/conciliador.db` está no backup"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/conhecimento/conhecimento.db",
+    "bytes": 73453568,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
     "arquivo": "database/conciliador_backup_antes_fase5_20260909.db",
     "bytes": 20594688,
     "motivo": "fotografia de uma fase já superada (5 ou 7)",
@@ -105,11 +119,193 @@
     "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
    },
    {
+    "arquivo": "dist/SistemaConciliador/_internal/python312.dll",
+    "bytes": 6945272,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/SistemaConciliador.exe",
+    "bytes": 5286896,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/SistemaConciliador.exe",
+    "bytes": 5286896,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/libcrypto-3.dll",
+    "bytes": 5231472,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/SistemaConciliador.pkg",
+    "bytes": 4938224,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/PYZ-00.pyz",
+    "bytes": 4905728,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/sqlite3.dll",
+    "bytes": 1583608,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/base_library.zip",
+    "bytes": 1333717,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/base_library.zip",
+    "bytes": 1333717,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/unicodedata.pyd",
+    "bytes": 1140592,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/xref-SistemaConciliador.html",
+    "bytes": 941840,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/libssl-3.dll",
+    "bytes": 794992,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_decimal.pyd",
+    "bytes": 262000,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/pyexpat.pyd",
+    "bytes": 205304,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_ssl.pyd",
+    "bytes": 179432,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_lzma.pyd",
+    "bytes": 161136,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
     "arquivo": "data/aplicacao.log",
-    "bytes": 124822,
+    "bytes": 157432,
     "motivo": "log de execução: é da máquina, não do projeto",
     "alternativa": "recriado sozinho por `app/web.py` na importação",
     "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_ctypes.pyd",
+    "bytes": 127480,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_sqlite3.pyd",
+    "bytes": 126184,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/VCRUNTIME140.dll",
+    "bytes": 120400,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/Analysis-00.toc",
+    "bytes": 118959,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_bz2.pyd",
+    "bytes": 86896,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_socket.pyd",
+    "bytes": 85496,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/PYZ-00.toc",
+    "bytes": 80729,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_asyncio.pyd",
+    "bytes": 74096,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_hashlib.pyd",
+    "bytes": 68976,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_overlapped.pyd",
+    "bytes": 57336,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
    },
    {
     "arquivo": "data/preview/pg_resultados.html",
@@ -119,11 +315,39 @@
     "impacto": "NENHUM"
    },
    {
+    "arquivo": "dist/SistemaConciliador/_internal/VCRUNTIME140_1.dll",
+    "bytes": 49776,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
     "arquivo": "data/preview/pg_relatorio.html",
     "bytes": 45628,
     "motivo": "página capturada por teste para inspeção visual",
     "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
     "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_wmi.pyd",
+    "bytes": 40304,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/libffi-8.dll",
+    "bytes": 39696,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_multiprocessing.pyd",
+    "bytes": 37368,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
    },
    {
     "arquivo": "data/preview/pg_conciliacao.html",
@@ -140,6 +364,13 @@
     "impacto": "NENHUM"
    },
    {
+    "arquivo": "dist/SistemaConciliador/_internal/_queue.pyd",
+    "bytes": 33784,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
     "arquivo": "data/preview/pg_anamnese.html",
     "bytes": 33357,
     "motivo": "página capturada por teste para inspeção visual",
@@ -147,26 +378,523 @@
     "impacto": "NENHUM"
    },
    {
+    "arquivo": "dist/SistemaConciliador/_internal/select.pyd",
+    "bytes": 33136,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/localpycs/pyimod02_importers.pyc",
+    "bytes": 32130,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/_uuid.pyd",
+    "bytes": 27128,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
     "arquivo": "data/preview/pg_achado.html",
     "bytes": 23876,
     "motivo": "página capturada por teste para inspeção visual",
     "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
     "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/static/estilo.css",
+    "bytes": 15068,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/achado.html",
+    "bytes": 13892,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe/_speedups.cp312-win_amd64.pyd",
+    "bytes": 13312,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/COLLECT-00.toc",
+    "bytes": 12972,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/resultados.html",
+    "bytes": 11794,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/relatorio.html",
+    "bytes": 11330,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE",
+    "bytes": 10278,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/models/m1_1_0-logistica.json",
+    "bytes": 10250,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/anamnese.html",
+    "bytes": 8893,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/werkzeug-3.1.8.dist-info/RECORD",
+    "bytes": 8318,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/warn-SistemaConciliador.txt",
+    "bytes": 8287,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/posologia.html",
+    "bytes": 7824,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/medicamentos.html",
+    "bytes": 7071,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/conciliacao.html",
+    "bytes": 6365,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/localpycs/pyimod03_ctypes.pyc",
+    "bytes": 6146,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/localpycs/pyimod01_archive.pyc",
+    "bytes": 4842,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/docs/GUIA_INSTALACAO.md",
+    "bytes": 4837,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/METADATA",
+    "bytes": 4670,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/itens.html",
+    "bytes": 4429,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/werkzeug-3.1.8.dist-info/METADATA",
+    "bytes": 4029,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/EXE-00.toc",
+    "bytes": 4022,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/RECORD",
+    "bytes": 3729,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/base.html",
+    "bytes": 3578,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/models/espaco_features.json",
+    "bytes": 3206,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/METADATA",
+    "bytes": 3167,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/paciente.html",
+    "bytes": 3049,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe-3.0.3.dist-info/METADATA",
+    "bytes": 2764,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/click-8.5.0.dist-info/METADATA",
+    "bytes": 2567,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/click-8.5.0.dist-info/RECORD",
+    "bytes": 2533,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/inicio.html",
+    "bytes": 2383,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/PKG-00.toc",
+    "bytes": 2229,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/itsdangerous-2.2.0.dist-info/METADATA",
+    "bytes": 1924,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/RECORD",
+    "bytes": 1868,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/models/calibrador_m1.json",
+    "bytes": 1849,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador.spec",
+    "bytes": 1818,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/rotina.html",
+    "bytes": 1738,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/localpycs/pyimod04_pywin32.pyc",
+    "bytes": 1630,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/itsdangerous-2.2.0.dist-info/RECORD",
+    "bytes": 1549,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe-3.0.3.dist-info/licenses/LICENSE.txt",
+    "bytes": 1503,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/click-8.5.0.dist-info/licenses/LICENSE.txt",
+    "bytes": 1475,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/licenses/LICENSE.txt",
+    "bytes": 1475,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/itsdangerous-2.2.0.dist-info/LICENSE.txt",
+    "bytes": 1475,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/werkzeug-3.1.8.dist-info/licenses/LICENSE.txt",
+    "bytes": 1475,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/jaraco/text/Lorem ipsum.txt",
+    "bytes": 1335,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "conhecimento/conhecimento.json",
+    "bytes": 1146,
+    "motivo": "banco distribuível, cópia do banco em uso com o atendimento esvaziado",
+    "alternativa": "recriado por `scripts/preparar_conhecimento.py`",
+    "impacto": "NENHUM — `database/conciliador.db` está no backup"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/conhecimento/conhecimento.json",
+    "bytes": 1146,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe-3.0.3.dist-info/RECORD",
+    "bytes": 1104,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/app/templates/erro.html",
+    "bytes": 748,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/models/m1_1_0-boosting.json",
+    "bytes": 507,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "build/SistemaConciliador/localpycs/struct.pyc",
+    "bytes": 305,
+    "motivo": "arquivos intermediários do PyInstaller",
+    "alternativa": "recriados por `scripts/build_exe.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe-3.0.3.dist-info/WHEEL",
+    "bytes": 101,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/WHEEL",
+    "bytes": 91,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/click-8.5.0.dist-info/WHEEL",
+    "bytes": 82,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/WHEEL",
+    "bytes": 82,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/werkzeug-3.1.8.dist-info/WHEEL",
+    "bytes": 82,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/itsdangerous-2.2.0.dist-info/WHEEL",
+    "bytes": 81,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "config/sessao.chave",
+    "bytes": 64,
+    "motivo": "SEGREDO por instalação — assina o cookie de sessão",
+    "alternativa": "regenerado sozinho na próxima execução",
+    "impacto": "NENHUM — e nunca deve ser versionado"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/entry_points.txt",
+    "bytes": 40,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/top_level.txt",
+    "bytes": 19,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe-3.0.3.dist-info/top_level.txt",
+    "bytes": 11,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/click-8.5.0.dist-info/INSTALLER",
+    "bytes": 4,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/INSTALLER",
+    "bytes": 4,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/itsdangerous-2.2.0.dist-info/INSTALLER",
+    "bytes": 4,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/markupsafe-3.0.3.dist-info/INSTALLER",
+    "bytes": 4,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/werkzeug-3.1.8.dist-info/INSTALLER",
+    "bytes": 4,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/INSTALLER",
+    "bytes": 2,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/flask-3.1.3.dist-info/REQUESTED",
+    "bytes": 0,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
+   },
+   {
+    "arquivo": "dist/SistemaConciliador/_internal/setuptools/_vendor/importlib_metadata-8.7.1.dist-info/REQUESTED",
+    "bytes": 0,
+    "motivo": "executável gerado pelo build (Fase 10)",
+    "alternativa": "recriado por `scripts/build_exe.py` em ~17 s",
+    "impacto": "NENHUM — é artefato, não fonte"
    }
   ]
  },
  "arquivos_criticos": {
   "database/schema.sql": {
-   "sha256": "7f033555da20785c24bab21012eb0726edbc6a21dea88851a0fcb097078e82da",
-   "bytes": 66500
+   "sha256": "05a5ceed64a4da650e11b0a5ba28f9e5133a150758b083b8f2e18eebc9f08901",
+   "bytes": 67535
   },
   "database/conciliador.db": {
-   "sha256": "4b04ab8eb127922b233679deba6e6f0abf93e71b61dd6b0bf44eda396417d801",
-   "bytes": 76832768
+   "sha256": "0f3c81a1c2a7e006cb8036deea10da6a4efd457a9cd0c75c729eca259195acfb",
+   "bytes": 76840960
   },
   "pipeline/executar_tudo.py": {
-   "sha256": "be6367351dea57b6d72d30cecf4df7dc855898cc80f474ddf4e97c00ef498c89",
-   "bytes": 4981
+   "sha256": "cd8436c8b503b359d6788c1e7c90931917fefab036f586a0eed43ab5f2740817",
+   "bytes": 5184
   },
   "pipeline/_comum.py": {
    "sha256": "18f09f81f2e61bd69ab766b9d79d0c1e0ea51513769c33014aecd33a13139c07",
@@ -189,16 +917,16 @@
    "bytes": 24406
   },
   "app/web.py": {
-   "sha256": "73814802590eb98cf2f52f6a25f90893a231dfddb4fe347ac9310519edfc41e8",
-   "bytes": 26176
+   "sha256": "669215141ede0401e4b406b25bd676a9e0c8a20cc45868eddcf32e41e5dd8a42",
+   "bytes": 26465
   },
   "app/servicos.py": {
-   "sha256": "c93cd5b82b076ccfd5cecbfd1957cc02a58032a5d51100ea5800d525cf3e05fc",
-   "bytes": 42379
+   "sha256": "d476f806e3d7a4c455768af9537fc5b7cbc44bd903e0b5c1d06e2d0617beb397",
+   "bytes": 42622
   },
   "app/busca.py": {
-   "sha256": "64341f7a18163eac4024106bc78af85cd94259655530ae5c76e313f8822e8009",
-   "bytes": 18653
+   "sha256": "86aa740bce99450ebad8ace287f1ef2602bb1c2b69b9e52a309bbf90908b5161",
+   "bytes": 18864
   },
   "app/relatorio.py": {
    "sha256": "831e949b9bee8d50e2bade5ec5d8766625113936c2e8f691575fbd387bd0ad7c",
@@ -241,36 +969,36 @@
    "bytes": 58665
   },
   "tests/fase9_v2_independente.py": {
-   "sha256": "2eea1b01f9eb15e8392ffa82d0e60bc526bc1638bbcd8de4a165ac99850ffd3e",
-   "bytes": 29820
+   "sha256": "9634883993cdc619e02ee82f983278c0dc9e499928c78eefa7d46a0c46789002",
+   "bytes": 30101
   },
   "tests/fase9_cenarios.py": {
    "sha256": "9b95d5d7afb4e8d40da906748ba3e1174078e162f6a49367d6431040272ad8cf",
    "bytes": 34418
   },
   "tests/fase9_convergencia.py": {
-   "sha256": "47c4342d6c6aa73ae90528b540ce9c9504775472f1991e61bb91166c8f27bd16",
-   "bytes": 11871
+   "sha256": "a1e37ce0227d7b7d05c777b47eb5a2bb28d3a50c6a73fcebee89ee5e7dfd9cd8",
+   "bytes": 12555
   },
   "auditoria/05_integridade_acervo.py": {
    "sha256": "bfa8bb42de51c519827866ba57507e35e51a7363c51c0cc7cb79e1090f14d62a",
    "bytes": 8675
   },
   "auditoria/saida/acervo_sha256.json": {
-   "sha256": "8be9c1859f0c849c63a4c9c4a8d291c0bd888ae8895abb220a34e41264109bb6",
+   "sha256": "7db8672b41a432bd507d25150f880f1b5e0604f0b1d721b0826cc676f2de6589",
    "bytes": 144166
   },
   "docs/STATUS.md": {
-   "sha256": "772c68d8ab0fd8738d20034eb655e90e34ea14546315b889467c94ffd3680a75",
-   "bytes": 77208
+   "sha256": "2b0d851128d5c5bd4ca4a30402f962ce42547a0950765018acd576b487e38fba",
+   "bytes": 81789
   },
   "docs/ARQUITETURA.md": {
-   "sha256": "053ebae1bde8f3861e31fb8c9520d1a3822e174de74c5338ea927024f556aa62",
-   "bytes": 17435
+   "sha256": "c3ddfc9ea93d0ede4bb21e9ea9b98deee662191a52a293a361168536fb756172",
+   "bytes": 18103
   },
   "docs/DECISIONS.md": {
-   "sha256": "f87ac67f231ebbc68709bce5301906c632a4d919b0a7a00eb9c4c6ead94c489a",
-   "bytes": 70071
+   "sha256": "19557fc080157802adec4a8eaa9fe72eb68f00cd0613f5aca180cb4aebe7f58b",
+   "bytes": 74423
   },
   "docs/ML_FASE7.md": {
    "sha256": "c78caf44ece7c18d19f0d4cd925a4ceec3d52d0b6d86acb8d28e8260d6370df9",
@@ -281,22 +1009,66 @@
    "bytes": 22312
   },
   "docs/EMPACOTAMENTO.md": {
-   "sha256": "875a1da38fb286b19e2be0438c6a6091bce4b8774c26f0bc6120f10732385614",
-   "bytes": 7654
+   "sha256": "fec60176b1c5b9eef21cb94467e5e597fdf7dbbb25e2fe4c3361e526c31302c8",
+   "bytes": 10288
   },
   "CLAUDE.md": {
-   "sha256": "b8a55c195cde602c827ef159510070a70938c41a2d721ab16070e09bff93589d",
-   "bytes": 30644
+   "sha256": "f55804b2a6eb19ec44cd2e6218851ba83925a2fe871c6ed1c9602762962326b1",
+   "bytes": 33586
   },
   "README.md": {
-   "sha256": "929430b0776c5a93488a3047ed260ecf22d2edf636cf4add18a934c5fbbb5996",
-   "bytes": 9149
+   "sha256": "ca641e618f9cec23c6c4734d5f981f6ce2916bfbe130e8588a5a1d664f3b6359",
+   "bytes": 9915
+  },
+  "app/caminhos.py": {
+   "sha256": "5b6ae8a96ca1e68782f566d42e7fd8e16a121347f03295497bed690f97fe43f4",
+   "bytes": 5555
+  },
+  "app/instalacao.py": {
+   "sha256": "083ccb1cfd34a92d56b9a0a97030c5ff606ba33d6fcbad3a8edc0f7f4c4fdac1",
+   "bytes": 9170
+  },
+  "app/atualizacao.py": {
+   "sha256": "35825270aefea20a06a11d7fbca8d2bf3738395e59b7d69d6dc26878e6a1b9e3",
+   "bytes": 11326
+  },
+  "app/principal.py": {
+   "sha256": "aeb1bb7eea620e61c0609b6334ca275c3cb16248f5b774ef8670c610f6e69d8a",
+   "bytes": 8664
+  },
+  "app/versao.py": {
+   "sha256": "3ef84492f4c0105fbbad43745633eb87a82ef3b68d063cd4bb6ede97e7a4a00d",
+   "bytes": 3496
+  },
+  "pipeline/80_identidade.py": {
+   "sha256": "a7ac8f11ede544d7faec6d5a170f48b84b3c09b50603320181beb90a01714680",
+   "bytes": 4173
+  },
+  "scripts/build_exe.py": {
+   "sha256": "0c5b2619df9ef3fd35ef33ea834e62ef3d031fa7fad12a571d157c7b13b20839",
+   "bytes": 6477
+  },
+  "scripts/preparar_conhecimento.py": {
+   "sha256": "0f01b8d79f9d2b6feaeaa4cc065853b1b72b2c8a4519565810d25864b68cefc3",
+   "bytes": 8977
+  },
+  "tests/fase10_empacotamento.py": {
+   "sha256": "e19600c6aff49bf69f759ff6e098922c30c52e4824177118aaef054c48ed52fb",
+   "bytes": 29291
+  },
+  "tests/fase10_v2_independente.py": {
+   "sha256": "e57f5107eeb26995fa432457fa1e6912cc4fe1bef7b2aa4ee7160b04f18eefba",
+   "bytes": 21310
+  },
+  "docs/GUIA_INSTALACAO.md": {
+   "sha256": "a331beb65b06264364c3858181f8827caece13af03ff240e599f4e300416eb3c",
+   "bytes": 4837
   }
  },
  "criticos_ausentes": [],
  "banco": {
   "impressao_digital": "9e9c85ee3ffea5e0",
-  "tabelas": 44,
+  "tabelas": 45,
   "views": 15,
   "substancias": 2094,
   "substancias_com_atc": 1159,

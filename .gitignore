@@ -35,3 +35,18 @@ database/conciliador_backup_*.db
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# ------------------------------------------------------------ Fase 10
+# Artefatos de build: reconstruídos por `scripts/build_exe.py` e por
+# `scripts/preparar_conhecimento.py`. Um `.exe` de 5 MB e um banco de 70 MB
+# regerados a cada build não têm o que fazer no histórico do repositório.
+dist/
+build/
+conhecimento/
+
+# Segredo POR INSTALAÇÃO, gerado na primeira execução. Nunca versionado.
+config/sessao.chave
+
+# Cópias de segurança do banco do usuário, feitas antes de cada atualização
+# do conhecimento. São do usuário, não do projeto.
+backups/

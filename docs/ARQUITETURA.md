@@ -268,8 +268,18 @@ Numeração alinhada com a do plano do projeto. **A aplicação começa na Fase 
 | 6 | **APLICAÇÃO DO FARMACÊUTICO** | **Concluída** |
 | 7 | **Machine Learning** | **Concluída** |
 | 8 | **Testes integrados + integração do modelo** | **Concluída** |
-| 9 | **Validação do sistema inteiro** | **Concluída — APTO PARA EMPACOTAMENTO** |
-| 10 | Empacotamento `.exe` | **próxima** |
+| 9 | Validação do sistema inteiro | Concluída — apto para empacotamento |
+| 10 | **Empacotamento `.exe`** | **Concluída** |
+
+A Fase 10 entregou `SistemaConciliador.exe` (5,0 MB; pasta de 93,2 MB), que
+roda **sem Python na máquina do usuário**. Duas mudanças estruturais:
+`app/caminhos.py` separa RECURSOS (somente leitura, vêm com o programa) de
+DADOS (graváveis, do usuário, em `%LOCALAPPDATA%`), e a tabela `propriedade`
+faz o banco carregar a própria identidade — versão, impressão digital e versão
+do esquema (44 → **45 tabelas**). A atualização do conhecimento parte do banco
+novo e traz o atendimento do usuário para dentro dele, com backup e recusa
+declarada se alguma referência quebraria — **D-051** e **D-052**, detalhados em
+[EMPACOTAMENTO.md](EMPACOTAMENTO.md).
 
 A Fase 9 auditou o produto inteiro em vez de repetir o teste de cada módulo:
 dez cenários clínicos do início ao relatório, isolamento entre pacientes,

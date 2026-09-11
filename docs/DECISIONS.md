@@ -817,3 +817,92 @@ a fazê-lo. No mesmo passo, `rotulos.SUBTIPO` passou a traduzir o subtipo do
 achado, que chegava à tela como `interacao prevista` — código interno cru, sem
 acento, contra a regra de que todo vocabulário do banco é traduzido em
 `rotulos.py`.
+
+---
+
+## D-051 — Um arquivo de banco, e a separação acontece na atualização
+
+**Data:** 10/09/2026 · Fase 10.
+
+**Decisão.** O programa usa **um** arquivo SQLite, `conciliador.db`, com
+conhecimento e atendimento juntos, na pasta de dados do usuário. A separação
+entre os dois — que a Fase 9 apontou como pendência — acontece no momento da
+**atualização**, feita por `app/atualizacao.py`, e não no disco.
+
+O que é distribuído é `conhecimento/conhecimento.db`: o mesmo banco com as 16
+tabelas de atendimento **vazias**. Na primeira execução ele é copiado para a
+pasta do usuário; numa atualização, ele é o ponto de partida e os atendimentos
+do usuário são trazidos para dentro dele.
+
+**Motivo — e ele foi medido, não suposto.** A alternativa óbvia era
+`conhecimento.db` + `atendimentos.db`, com `ATTACH`. Contando as chaves
+estrangeiras do esquema:
+
+| | |
+|---|---:|
+| chaves estrangeiras que cruzam a fronteira | **8** |
+| direção | todas ATENDIMENTO → CONHECIMENTO |
+| views que cruzam a fronteira | **0** |
+
+As oito: `atendimento_medicamento.substancia_id`,
+`atendimento_medicamento.apresentacao_id`, `paciente_alergia.substancia_id`,
+`paciente_condicao.doenca_id`, `atendimento_item.item_id`,
+`conciliacao_par.substancia_id`, `achado.substancia_a_id`,
+`achado.substancia_b_id`.
+
+**O SQLite não aplica chave estrangeira entre bancos diferentes.** Separar os
+arquivos desligaria as oito — e desligaria exatamente a proteção de que a
+atualização mais precisa: descobrir que um atendimento antigo aponta para uma
+substância que a versão nova do conhecimento não tem mais. A separação em dois
+arquivos *criaria* o risco que ela deveria evitar.
+
+Com um arquivo só, `PRAGMA foreign_key_check` responde essa pergunta, e o
+resultado é uma **recusa declarada**: a atualização não acontece, o banco em
+uso não é tocado, e o usuário lê o motivo. Testado — `fase10_empacotamento.py`
+caso 7.d apaga de propósito uma substância em uso e confere que a atualização é
+recusada.
+
+**O custo, declarado.** Atualizar deixa de ser trocar um arquivo e passa a ser
+uma migração com cinco passos (conferir, backup, montar em temporário,
+verificar, trocar). É mais código do que um `copy`. É o preço de manter as oito
+chaves ligadas, e ele foi pago com os olhos abertos.
+
+**Alternativas.** (a) Dois arquivos com `ATTACH` — rejeitado pelo acima.
+(b) Um arquivo, atualizado por substituição total — rejeitado: apagaria os
+atendimentos, que é o defeito que a Fase 9 mandou corrigir. (c) Chaves
+estrangeiras removidas do esquema para viabilizar a separação — rejeitado sem
+hesitação: o projeto inteiro se apoia em invariantes estruturais, e trocar uma
+garantia do banco por uma convenção de código é andar para trás.
+
+---
+
+## D-052 — O banco carrega a própria identidade
+
+**Data:** 10/09/2026 · Fase 10.
+
+**Decisão.** Tabela nova, `propriedade`, com quatro chaves:
+`conhecimento.versao`, `conhecimento.digital`, `conhecimento.gerado_em` e
+`esquema.versao`. Preenchida pelo passo `pipeline/80_identidade.py`, ao fim de
+toda carga.
+
+**Motivo.** Um arquivo `.db` distribuído, sozinho numa máquina qualquer, tinha
+de ser capaz de responder: **de qual versão do conhecimento eu sou?** Sem isso
+um alerta já mostrado a um farmacêutico não pode mais ser atribuído à versão do
+conhecimento que o produziu — e a rastreabilidade, que o projeto defende desde
+a Fase 1, terminaria na porta do empacotamento.
+
+Em tabela, e não em arquivo `.json` ao lado, para não se separar do dado que
+descreve. Um `conhecimento.json` acompanha o pacote — mas é manifesto de
+distribuição, com sha256 do arquivo; a identidade do *conteúdo* viaja dentro.
+
+**A impressão digital é a MESMA do ML**, calculada por
+`ml/_comum.versao_dados`. Reimplementar produziria dois números que divergiriam
+no primeiro detalhe, e a rastreabilidade do modelo depende de eles serem o
+mesmo número. O passo 80 importa `ml/_comum.py` por caminho, sob outro nome —
+os dois arquivos se chamam `_comum.py`, e um `import` simples devolveria o do
+pipeline.
+
+**Impacto.** 44 → **45 tabelas**. É alteração deliberada de esquema, e as
+conferências que afirmavam 44 foram atualizadas com o motivo ao lado. A versão
+do esquema (`1.0`) é o que a atualização compara para aceitar ou recusar um
+conhecimento novo.

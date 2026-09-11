@@ -18,6 +18,27 @@ PRAGMA journal_mode = WAL;
 
 
 -- =====================================================================
+-- IDENTIDADE DO BANCO (Fase 10)
+-- Um arquivo .db sozinho, sem nada em volta, tem de saber responder: de qual
+-- versão do conhecimento eu sou? Sem isto, um banco distribuído é anônimo, e
+-- um alerta já mostrado ao farmacêutico não pode mais ser atribuído à versão
+-- do conhecimento que o produziu.
+--
+-- Fica em tabela, não em arquivo ao lado, justamente para não se separar do
+-- dado que descreve. Chaves em uso:
+--   conhecimento.versao       data da geração, no formato AAAA.MM.DD
+--   conhecimento.digital      impressão digital dos dados (a mesma do ML)
+--   conhecimento.gerado_em    carimbo completo
+--   esquema.versao            versão da estrutura das tabelas
+-- =====================================================================
+
+CREATE TABLE propriedade (
+    chave               TEXT PRIMARY KEY,
+    valor               TEXT NOT NULL,
+    atualizado_em       TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- =====================================================================
 -- CAMADA 6 — FONTES, CARGAS E EVIDÊNCIA
 -- Criada primeiro: toda afirmação clínica aponta para cá.
 -- =====================================================================

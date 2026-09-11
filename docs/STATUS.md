@@ -17,12 +17,13 @@ Uma fase só é marcada `CONCLUÍDA` quando as duas verificações passam:
 | 6 | Aplicação do farmacêutico | CONCLUÍDA |
 | 7 | Machine Learning | CONCLUÍDA — a conclusão é uma **recusa** |
 | 8 | Testes integrados + integração do modelo | CONCLUÍDA |
-| 9 | **Validação do sistema inteiro** | **CONCLUÍDA — APTO PARA EMPACOTAMENTO** |
-| 10 | Empacotamento `.exe` | **PRÓXIMA** |
+| 9 | Validação do sistema inteiro | CONCLUÍDA — apto para empacotamento |
+| 10 | **Empacotamento `.exe`** | **CONCLUÍDA** |
 
-Bateria completa: **972 conferências**, 24 arquivos de teste, exit 0. Banco com
-44 tabelas, 15 views, 73 MB. Camada de ML: 2 modelos registrados, **0 ativos**.
-Acervo: 689 arquivos, **0 modificados**.
+Bateria completa: **1.123 conferências**, 26 arquivos de teste, exit 0. Banco
+com **45 tabelas**, 15 views, 73 MB. Camada de ML: 2 modelos registrados,
+**0 ativos**. Acervo: 689 arquivos, **0 modificados**. Produto:
+`SistemaConciliador.exe`, 5,0 MB, pasta de 93,2 MB, sem exigir Python.
 
 **Apto para empacotamento não é validação clínica** — nenhum farmacêutico
 avaliou nenhum achado deste sistema — **e não é "pronto para distribuir"**: ver
@@ -1195,3 +1196,116 @@ declarado. **Nada foi otimizado** — não havia gargalo.
 - **A conferência de conteúdo inteiro do acervo só vale a partir da próxima
   execução** — esta gravou a linha de base, e o script diz isso em vez de
   contar como prova.
+
+---
+
+## FASE 10 — Empacotamento e distribuição local
+
+**STATUS:** CONCLUÍDA (10/09/2026)
+
+Decisões: **D-051 e D-052**. Documentos:
+**[EMPACOTAMENTO.md](EMPACOTAMENTO.md)** (técnico) e
+**[GUIA_INSTALACAO.md](GUIA_INSTALACAO.md)** (para quem vai usar).
+
+### LEGENDA DE TERMOS
+
+**`.exe`** — executável do Windows. **Build** — o processo de gerar a versão
+distribuível. **Runtime** — o que a aplicação precisa para rodar; aqui vai
+embutido. **`--onedir`** — empacotar como pasta, não como arquivo único.
+**Semente** — o banco de conhecimento que acompanha o programa e vira o banco
+do usuário na primeira execução. **Fail-closed** — sem configuração, não emite
+nada em vez de emitir errado.
+
+### O produto
+
+| | |
+|---|---|
+| `dist/SistemaConciliador/SistemaConciliador.exe` | **5,0 MB** |
+| pasta distribuível | **84 arquivos, 93,2 MB** |
+| método | PyInstaller `--onedir --console` |
+| Python na máquina do usuário | **não é necessário** |
+| dependência do produto | **Flask**, e só |
+| versão | aplicação 1.0.0 · esquema 1.0 · conhecimento 2026.09.10 |
+
+### As duas pendências da Fase 9, resolvidas
+
+**1. Banco gravável.** Recursos (somente leitura) e dados (graváveis) são
+lugares distintos, decididos por `app/caminhos.py`. O banco do usuário vive em
+`%LOCALAPPDATA%\ConciliadorMedicamentos`. Se a pasta não aceitar gravação, o
+programa **recusa abrir** com instrução — em vez de falhar no meio de um
+atendimento.
+
+**2. Conhecimento × atendimento.** Resolvida por medição, não por suposição:
+**8 chaves estrangeiras cruzam a fronteira** e o SQLite não aplica chave
+estrangeira entre arquivos. Separar em dois arquivos desligaria justamente a
+trava de que a atualização precisa. Logo: **um arquivo em uso**, e a separação
+acontece na **atualização** (D-051), que parte do conhecimento novo e traz o
+atendimento do usuário para dentro dele — com backup antes, verificação de
+referências e recusa declarada se alguma quebraria.
+
+### Identidade do banco (D-052)
+
+Tabela nova `propriedade`: versão do conhecimento, impressão digital
+(`9e9c85ee3ffea5e0`, a mesma do ML), carimbo e versão do esquema. Esquema
+44 → **45 tabelas** — alteração deliberada, com as conferências atualizadas.
+
+### VERIFICAÇÃO 1 — funcional (`tests/fase10_empacotamento.py`, 85 conferências)
+
+Não importa o código da aplicação: inicia o `.exe` como processo, conversa por
+HTTP, encerra, reabre. Sete eixos — primeira instalação · atendimento completo
+· persistência · conhecimento intacto · ML desligado · oito falhas controladas
+· atualização e segurança do dado.
+
+### VERIFICAÇÃO 2 — independente (`tests/fase10_v2_independente.py`, 63 conferências)
+
+Não executa o fluxo: olha os arquivos, o banco por SQLite direto, o processo e
+o ambiente. Sete caminhos — árvore do pacote · conteúdo comparado tabela a
+tabela com o de desenvolvimento · caça a caminho absoluto (inclusive **dentro**
+do executável) · **execução com PATH podado e sem variáveis de Python** ·
+isolamento de escrita · coerência das três listas que definem a fronteira ·
+o que não pode viajar no pacote.
+
+### DEFEITOS ENCONTRADOS E CORRIGIDOS — dois reais
+
+1. **O `.exe` morreu ao imprimir uma mensagem.** O console do Windows abre em
+   cp1252 e a seta "→" da mensagem *"conhecimento instalado"* estourou com
+   `UnicodeEncodeError`. Um programa cuja razão de existir é **explicar** o
+   que deu errado morria justamente quando tinha algo a dizer. Corrigido com
+   duas travas independentes: console em UTF-8 quando o Windows deixa, e
+   `errors="replace"` para que, quando não deixar, um caractere vire `?` em
+   vez de derrubar o programa.
+2. **Banco corrompido produzia um rastreamento de pilha cru.**
+   `sqlite3.connect` não lê o arquivo — abrir um `.txt` como banco passa sem
+   reclamar, e o erro só aparece na primeira consulta. Escapava como
+   `sqlite3.DatabaseError: file is not a database` na tela de um
+   farmacêutico. Agora é mensagem legível que aponta a pasta de backups.
+
+E um terceiro, no código da própria Fase 10: na **recusa** de uma atualização,
+a conexão SQLite ficava aberta, o `unlink` do arquivo temporário falhava com
+`PermissionError` e esse erro **substituía a mensagem de recusa** — o usuário
+veria um rastreamento de pilha no lugar de *"ATUALIZAÇÃO RECUSADA, nada foi
+alterado"*. Corrigido com `try/finally` que fecha antes de apagar.
+
+Mais dois falsos positivos das próprias conferências: a V2 acusou
+`RAIZ / "database"` dentro do **comentário** que explica a regra, e o autoteste
+de `busca.py` montava o caminho por conta própria (corrigido — um lugar só
+decide onde o banco fica).
+
+### REGRESSÃO
+
+**Bateria completa: 1.123 conferências, exit 0.** Nenhum teste anterior foi
+apagado. A única alteração deliberada foi a contagem de tabelas (44 → 45), com
+o motivo registrado ao lado. Convergência do pipeline: 46 conferências, ainda
+com a impressão digital `9e9c85ee3ffea5e0`.
+
+### LIMITAÇÕES DECLARADAS
+
+- **Empacotado e operacional não é clinicamente validado.** Zero achados
+  revisados por farmacêutico; nenhum modelo homologado. A frase está no
+  console a cada abertura, no guia e na interface.
+- **Não há instalador, ícone próprio nem assinatura digital.** A distribuição
+  é copiar uma pasta; o SmartScreen avisará na primeira execução.
+- **A atualização de conhecimento é por comando, não automática** — de
+  propósito: um atualizador automático não validado seria pior do que nenhum.
+- **Windows apenas.** Linux e macOS estão fora de escopo.
+- **As lacunas de dados continuam as mesmas** das fases anteriores.

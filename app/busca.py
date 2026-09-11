@@ -372,7 +372,11 @@ def buscar_item(con, termo: str = "", grupo: Optional[str] = None,
 if __name__ == "__main__":
     import sqlite3
 
-    BANCO = RAIZ / "database" / "conciliador.db"
+    # Um lugar so decide onde o banco fica — ate no autoteste. A V2 da
+    # Fase 10 caca `RAIZ / "database"` no codigo do produto justamente para
+    # que nenhum caminho de dado escape de `app/caminhos.py`.
+    import caminhos
+    BANCO = caminhos.banco()
     con = sqlite3.connect("file:%s?mode=ro" % BANCO.as_posix(), uri=True)
     falhas = []
 

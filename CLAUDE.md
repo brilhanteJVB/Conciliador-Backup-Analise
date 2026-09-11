@@ -49,7 +49,7 @@ O script para no primeiro erro e roda os testes ao final (~41 s com tudo).
 
 **Sem `--recriar` a carga é incremental, e incremental aqui quer dizer uma
 coisa precisa: reexecutar não muda nada.** Rodar o pipeline de novo sobre a
-mesma origem deixa as 44 tabelas byte a byte idênticas — `tests/teste_idempotencia.py`
+mesma origem deixa as 45 tabelas byte a byte idênticas — `tests/teste_idempotencia.py`
 tira uma fotografia, roda os 11 ETLs e compara. Use isto sempre que quiser
 revalidar o banco **sem** perder `modelo` e `predicao`, que `--recriar` apaga.
 
@@ -111,6 +111,27 @@ PYTHONIOENCODING=utf-8 "$PY" auditoria/05_integridade_acervo.py  # ~3 min, lê 2
 interrompido, a cópia guardada fica no diretório temporário que ele imprime na
 primeira linha.
 
+Gerar o executável (Fase 10) — os dois testes já rodam na bateria:
+
+```bash
+PYTHONIOENCODING=utf-8 "$PY" scripts/preparar_conhecimento.py  # o banco distribuível
+PYTHONIOENCODING=utf-8 "$PY" scripts/build_exe.py --limpar     # o .exe (~17 s)
+PYTHONIOENCODING=utf-8 "$PY" tests/fase10_empacotamento.py     # V1, 85 conferências
+PYTHONIOENCODING=utf-8 "$PY" tests/fase10_v2_independente.py   # V2, 63 conferências
+```
+
+Rodar o programa empacotado, ou diagnosticá-lo:
+
+```bash
+dist/SistemaConciliador/SistemaConciliador.exe --diagnostico
+dist/SistemaConciliador/SistemaConciliador.exe --sem-navegador --porta 5055
+dist/SistemaConciliador/SistemaConciliador.exe --atualizar-conhecimento <arquivo.db>
+```
+
+`dist/`, `build/` e `conhecimento/` **não vão para o repositório** — são
+reconstruídos por esses dois scripts. Os testes da Fase 10 **pulam alto** (exit
+0, com aviso em maiúsculas) quando o `.exe` não existe.
+
 Quadro de qualidade da conciliação (coorte de 20 pacientes sintéticos):
 
 ```bash
@@ -152,11 +173,11 @@ instaladas nesta máquina. Sem framework de teste: tudo é `python arquivo.py`.
 ```
 acervo (somente leitura)
    ↓  pipeline/  numerado, a ordem importa
-database/conciliador.db          44 tabelas, 15 views
+database/conciliador.db          45 tabelas, 15 views
    ↓  rules/     motores determinísticos          ↘  ml/  camada preditiva,
 Agenda / Achados                                     desligada por decisão
    ↓  app/       serviços + interface Flask  (Fase 6, funcionando)
-relatório → ConciliadorMedicamentos.exe   (Fase 10)
+relatório → dist/SistemaConciliador/SistemaConciliador.exe  (Fase 10, pronto)
 ```
 
 **A aplicação tem quatro camadas e nenhuma pula outra:**
@@ -378,6 +399,35 @@ fazer uma feature funcionar.**
   alerta. O uso liberado é a fila de curadoria em
   `reports/fila_curadoria_m1.csv`.
 
+- **`app/caminhos.py` é o ÚNICO lugar que decide onde um arquivo de dado
+  fica.** Nunca monte `RAIZ / "database"` fora dele — a V2 da Fase 10 caça isso
+  no código do produto. Dois lugares, e não se misturam: RECURSOS (somente
+  leitura, vêm com o programa: templates, CSS, `conhecimento.db`) e DADOS
+  (graváveis, do usuário: banco em uso, log, backups). Em desenvolvimento os
+  dois apontam para a raiz do repositório, de propósito — empacotar não pode
+  mudar o que a bateria mede.
+- **Um arquivo de banco em uso, e a separação acontece na ATUALIZAÇÃO** (D-051).
+  Oito chaves estrangeiras ligam atendimento a conhecimento, e o SQLite não
+  aplica chave estrangeira entre arquivos: separar desligaria a trava de que a
+  atualização mais precisa. `app/atualizacao.py` parte do conhecimento novo e
+  traz o atendimento para dentro dele — backup, `foreign_key_check`, recusa
+  declarada. **Nunca troque `conciliador.db` por um conhecimento novo à mão:**
+  isso apaga os atendimentos.
+- **As 16 tabelas de atendimento estão listadas em TRÊS arquivos**
+  (`app/atualizacao.py`, `scripts/preparar_conhecimento.py`,
+  `tests/fase9_convergencia.py`) e a V2 da Fase 10 confere que as três listas
+  são idênticas. Se divergirem, o backup de um lado apaga o dado do outro.
+- **O console do Windows abre em cp1252.** `app/principal.py` força UTF-8 e usa
+  `errors="replace"` antes de qualquer impressão. Sem isso um "→" numa mensagem
+  derruba o `.exe` — aconteceu, na primeira execução empacotada.
+- **`sqlite3.connect` não lê o arquivo.** Abrir um `.txt` como banco passa sem
+  reclamar; o erro só aparece na primeira consulta. Toda leitura de banco
+  desconhecido tem de envolver a consulta num `try`, ou um `DatabaseError` cru
+  chega à tela do farmacêutico.
+- **No Windows, feche a conexão ANTES de apagar o arquivo.** Um `unlink` com a
+  conexão aberta levanta `PermissionError` — e, num caminho de erro, esse erro
+  substitui a mensagem que o usuário precisava ler.
+
 - **Toda mensagem de estado da interface é presa ao atendimento que a gerou.**
   Use `web.avisar(texto, categoria, codigo)`, nunca `flash()` cru — a fila do
   Flask é da SESSÃO, e sem o código do atendimento a confirmação de um paciente
@@ -451,7 +501,7 @@ sintético. Nunca invente evidência farmacológica para montar um caso.
 ## Onde estamos
 
 Estado detalhado por fase em `docs/STATUS.md`. Decisões em
-`docs/DECISIONS.md` (50 entradas) — **consulte antes de reconstruir uma
+`docs/DECISIONS.md` (52 entradas) — **consulte antes de reconstruir uma
 justificativa**.
 
 | Fase | | Estado |
@@ -464,16 +514,16 @@ justificativa**.
 | 6 | **Aplicação do farmacêutico** | **Concluída** |
 | 7 | **Machine Learning** | **Concluída** |
 | 8 | **Testes integrados + integração do modelo** | **Concluída** |
-| 9 | **Validação do sistema inteiro** | **Concluída — apto para empacotamento** |
-| 10 | Empacotamento `.exe` | **próxima** |
+| 9 | Validação do sistema inteiro | Concluída |
+| 10 | **Empacotamento `.exe`** | **Concluída** |
 
 Carregado hoje: 2.094 substâncias · 8.935 produtos · 25.702 apresentações ·
 26.889 códigos de barras · 6.996 classes ATC · 723 regras de administração ·
 59 de separação · **112.520 interações fármaco × fármaco (94.770 pares)** ·
 289 com item · 199 com hábito · **182 contraindicações de bula** ·
 **28 papéis farmacocinéticos (FDA)** · 153.647 registros de evidência.
-**44 tabelas, 15 views, 73 MB.** Pipeline completo com as duas verificações e
-a bateria inteira (**972 conferências**): ~90 s. Números remedidos pela
+**45 tabelas, 15 views, 73 MB.** Pipeline completo com as duas verificações e
+a bateria inteira (**1.123 conferências**): ~3 min. Números remedidos pela
 Fase 9, que reconstruiu o banco do zero e comparou tabela por tabela.
 Camada de ML: **130 atributos**, 40 execuções comparadas, 2 modelos
 registrados, **0 ativos**, 600 previsões em fila de curadoria.

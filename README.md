@@ -7,12 +7,13 @@ Arquitetura própria, escrita do zero. O sistema anterior (dentro do acervo) é
 **fonte de dados, referência de resultado e teste de regressão** — não base
 estrutural (ver [DECISIONS.md](docs/DECISIONS.md) D-011).
 
-**Estado: Fase 9 concluída — apto para empacotamento.** A aplicação existe e
-conduz um atendimento inteiro, do primeiro dado ao relatório. Falta a Fase 10,
-o empacotamento em `.exe`.
+**Estado: Fase 10 concluída.** O sistema é um programa Windows que instala
+copiando uma pasta, roda **sem Python na máquina do usuário** e conduz um
+atendimento inteiro, do primeiro dado ao relatório.
 
-> **Apto para empacotar não é validação clínica.** Nenhum farmacêutico avaliou
-> nenhum achado deste sistema. O que a Fase 9 mediu é que o software faz o que
+> **Empacotado e operacional não é clinicamente validado.** Nenhum
+> farmacêutico avaliou nenhum achado deste sistema, e nenhum modelo preditivo
+> está homologado. O que as Fases 9 e 10 mediram é que o software faz o que
 > promete — não que o que ele promete seja clinicamente suficiente. Ver
 > [FASE9_VALIDACAO.md](docs/FASE9_VALIDACAO.md) §9.
 
@@ -43,17 +44,20 @@ previsto por modelo**, que existe, está costurado e está **desligado**.
 | 6 | Aplicação do farmacêutico | Concluída |
 | 7 | Machine Learning | Concluída |
 | 8 | Testes integrados + integração do modelo | Concluída |
-| 9 | **Validação do sistema inteiro** | **Concluída — apto para empacotamento** |
-| 10 | Empacotamento `.exe` | **próxima** |
+| 9 | Validação do sistema inteiro | Concluída — apto para empacotamento |
+| 10 | **Empacotamento `.exe`** | **Concluída** |
 
 Carregado: **2.094 substâncias** · 8.935 produtos · 25.702 apresentações ·
 26.889 códigos de barras · 6.996 classes ATC · 723 regras de administração ·
 59 de separação · **112.520 interações fármaco × fármaco (94.770 pares)** ·
 182 contraindicações de bula · 28 papéis farmacocinéticos ·
-153.647 registros de evidência. **44 tabelas, 15 views, 73 MB.**
+153.647 registros de evidência. **45 tabelas, 15 views, 73 MB.**
 
-Verificação: **972 conferências na bateria completa**, em 24 arquivos de teste,
-exit 0.
+Verificação: **1.123 conferências na bateria completa**, em 26 arquivos de
+teste, exit 0.
+
+Produto: `SistemaConciliador.exe` — 5,0 MB, pasta de 93,2 MB, uma dependência
+(Flask), zero caminhos absolutos.
 
 ---
 
@@ -64,12 +68,13 @@ exit 0.
 | [STATUS.md](docs/STATUS.md) | O que cada fase entregou, medido — comece por aqui |
 | [ARQUITETURA.md](docs/ARQUITETURA.md) | Camadas, pipeline, os treze módulos, estratégia de ML |
 | [APLICACAO.md](docs/APLICACAO.md) | As quatro camadas da aplicação e por que nenhuma pula outra |
-| [DECISIONS.md](docs/DECISIONS.md) | **50 decisões** com motivo e alternativas rejeitadas |
+| [DECISIONS.md](docs/DECISIONS.md) | **52 decisões** com motivo e alternativas rejeitadas |
 | [ML_FASE7.md](docs/ML_FASE7.md) | O relatório de ML — e por que a conclusão é uma recusa |
 | [ML_COMPARACAO.md](docs/ML_COMPARACAO.md) | As 40 execuções comparadas, família por família |
 | [INTEGRACAO_ML.md](docs/INTEGRACAO_ML.md) | Como uma previsão chega — ou não chega — ao farmacêutico |
 | [FASE9_VALIDACAO.md](docs/FASE9_VALIDACAO.md) | A validação do sistema inteiro, e os quatro defeitos que ela achou |
-| [EMPACOTAMENTO.md](docs/EMPACOTAMENTO.md) | O que o `.exe` vai precisar carregar |
+| [EMPACOTAMENTO.md](docs/EMPACOTAMENTO.md) | O executável: método, estrutura, atualização do conhecimento |
+| [GUIA_INSTALACAO.md](docs/GUIA_INSTALACAO.md) | **Para quem vai usar** — instalar, fazer backup, resolver problemas |
 | [ATENDIMENTO_EXEMPLO.md](docs/ATENDIMENTO_EXEMPLO.md) | Saída real do sistema, gerada por teste |
 | [LACUNAS.md](docs/LACUNAS.md) | O que os requisitos exigem e o acervo não tem |
 | [auditoria_acervo.md](docs/auditoria_acervo.md) · [MAPA_ACERVO.md](docs/MAPA_ACERVO.md) | O que existe no acervo e como se liga |
@@ -92,13 +97,14 @@ A integridade do acervo é reconferida por script: **689 arquivos, 0 modificados
 ## Estrutura
 
 ```
-pipeline/      12 ETLs numerados — a ordem importa; convergem numa passada
-database/      schema.sql — 44 tabelas, 15 views; conciliador.db
+pipeline/      13 ETLs numerados — a ordem importa; convergem numa passada
+database/      schema.sql — 45 tabelas, 15 views; conciliador.db
 rules/         motores determinísticos: horários e conciliação (13 módulos)
 app/           interface Flask + serviços + busca + relatório + rótulos
 ml/            dataset, treino, calibração, explicabilidade — FORA do caminho
 models/        artefatos e calibrador (JSON; pickle só onde inevitável)
-tests/         24 arquivos executáveis, sem framework
+tests/         26 arquivos executáveis, sem framework
+scripts/       preparar o conhecimento distribuível · gerar o .exe
 auditoria/     Fase 1 + integridade do acervo
 docs/          documentação, em português
 data/          training · aplicacao.log · preview
@@ -202,14 +208,26 @@ descreve sai em português: `Inibidor da CYP3A4`, não `CYP3A4 inhibitor`.
 
 ---
 
+## Gerar o executável
+
+```bash
+PYTHONIOENCODING=utf-8 "$PY" scripts/preparar_conhecimento.py
+PYTHONIOENCODING=utf-8 "$PY" scripts/build_exe.py --limpar
+```
+
+Produz `dist/SistemaConciliador/`. Instalar é copiar essa pasta — **não** para
+dentro de `Arquivos de Programas`, porque o programa precisa gravar. Os
+atendimentos ficam em `%LOCALAPPDATA%\ConciliadorMedicamentos` e **sobrevivem à
+reinstalação**.
+
+---
+
 ## Próximo passo
 
-**Fase 10 — empacotamento.** O inventário do que será necessário está em
-[EMPACOTAMENTO.md](docs/EMPACOTAMENTO.md). As duas pendências que não são
-cosméticas: o banco precisa ser gravável (não pode viver em `Program Files`), e
-conhecimento e atendimento estão no mesmo arquivo — atualizar o primeiro
-sobrescreveria o segundo.
+O código está completo. **A pendência que limita tudo está fora dele: zero
+anotações de farmacêutico.** Sem elas não há modelo de relevância, não há
+negativo verdadeiro, e nada pode ser homologado. O caminho é o piloto com dois
+farmacêuticos independentes sobre os mesmos casos.
 
-Fora do código, a pendência que limita tudo: **zero anotações de farmacêutico**.
-Sem elas não há modelo de relevância, não há negativo verdadeiro, e nada pode
-ser homologado.
+Do lado técnico, o que falta é acabamento de distribuição — instalador, ícone,
+assinatura digital — listado em [EMPACOTAMENTO.md](docs/EMPACOTAMENTO.md) §10.

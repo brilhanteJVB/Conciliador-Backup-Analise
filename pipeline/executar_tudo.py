@@ -35,6 +35,8 @@ ETAPAS = [
     ("pipeline/65_habitos_bula.py", "fármaco × hábito: tabagismo (bulas)"),
     ("pipeline/68_vincular_atc_pendente.py",
      "vínculo ATC — 2ª passada, pelos sinônimos INN"),
+    ("pipeline/80_identidade.py",
+     "carimbo de identidade do conhecimento (versão + impressão digital)"),
     ("pipeline/90_validacao.py", "validação estrutural"),
 ]
 
@@ -63,6 +65,10 @@ VERIFICACOES = [
     ("tests/fase9_v1_sistema.py", "sistema inteiro (Fase 9, V1 funcional)"),
     ("tests/fase9_v2_independente.py",
      "sistema inteiro (Fase 9, V2 independente)"),
+    ("tests/fase10_empacotamento.py",
+     "o executável, usado como um usuário o usaria (Fase 10, V1)"),
+    ("tests/fase10_v2_independente.py",
+     "inspeção do pacote (Fase 10, V2 independente)"),
 ]
 
 # NAO entram acima, e o motivo e o mesmo nos dois casos:

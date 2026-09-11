@@ -51,10 +51,14 @@ RAIZ = Path(__file__).resolve().parent.parent
 for _p in ("pipeline", "rules", "app"):
     sys.path.insert(0, str(RAIZ / _p))
 
+import caminhos                                     # noqa: E402
 from motor_conciliacao import conciliar_atendimento  # noqa: E402
 from motor_horarios import montar_agenda             # noqa: E402
 
-BANCO = RAIZ / "database" / "conciliador.db"
+# O caminho do banco e decidido em `app/caminhos.py`, nunca aqui: num `.exe`
+# ele fica na pasta de dados do usuario, e nao ao lado do codigo. Em
+# desenvolvimento o valor e exatamente o de sempre.
+BANCO = caminhos.banco()
 
 HORA = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
 

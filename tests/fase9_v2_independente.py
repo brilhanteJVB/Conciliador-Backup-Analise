@@ -193,8 +193,13 @@ def caminho_c(con):
         "AND name NOT LIKE 'sqlite_%' ORDER BY 1")]
     views = [r[0] for r in con.execute(
         "SELECT name FROM sqlite_master WHERE type='view' ORDER BY 1")]
-    checa("C", "44 tabelas, como a documentação afirma", len(tabelas) == 44,
+    # 45 desde a Fase 10: `propriedade` entrou para o banco saber dizer de
+    # qual versao do conhecimento ele e. Um .db distribuido, sozinho, tem de
+    # responder isso — ver D-052.
+    checa("C", "45 tabelas, como a documentação afirma", len(tabelas) == 45,
           "%d" % len(tabelas))
+    checa("C", "a tabela de identidade do banco existe",
+          "propriedade" in tabelas)
     checa("C", "15 views, como a documentação afirma", len(views) == 15,
           "%d" % len(views))
 
