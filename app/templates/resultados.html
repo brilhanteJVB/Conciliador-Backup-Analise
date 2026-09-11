@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block titulo %}Resultados — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>7. Resultados da conciliação</h1>
+<p class="subtitulo">Achados ordenados por prioridade de exibição. A
+prioridade combina a gravidade que a fonte declara com a confiança do sistema
+na afirmação — os dois eixos aparecem separados em cada achado, porque um não
+substitui o outro.</p>
+
+<!-- ============================================================= RESUMO -->
+<div class="painel-resumo">
+  {% for p in rot.ORDEM_PRIORIDADE %}
+    <div class="numero {{ p }}">
+      <div class="valor">{{ res.resumo[{'CRITICO':'criticos','ALTO':'altos','MODERADO':'moderados','BAIXO':'baixos','INFORMATIVO':'informativos'}[p]] }}</div>
+      <div class="rotulo">{{ rot.PRIORIDADE[p] }}</div>
+    </div>
+  {% endfor %}
+  <div class="numero">
+    <div class="valor">{{ res.resumo.divergencias }}</div>
+    <div class="rotulo">Divergências</div>
+  </div>
+  {% if res.resumo.achados_previstos %}
+  <div class="numero previsto">
+    <div class="valor">{{ res.resumo.achados_previstos }}</div>
+    <div class="rotulo">Previstos (sem documento)</div>
+  </div>
+  {% endif %}
+  <div class="numero">
+    <div class="valor">{{ res.resumo.informacao_insuficiente }}</div>
+    <div class="rotulo">Info. insuficiente</div>
+  </div>
+  <div class="numero">
+    <div class="valor">{{ res.resumo.nao_avaliado }}</div>
+    <div class="rotulo">Não avaliado</div>
+  </div>
+</div>
+
+<div class="nota">
+  <strong>Revisão profissional {{ 'necessária' if res.resumo.requer_revisao_profissional else 'não exigida' }}.</strong>
+  {{ res.resumo.medicamentos }} medicamento(s) analisado(s), dos quais
+  {{ res.resumo.medicamentos_reconhecidos }} com vínculo no cadastro.
+  Motor {{ res.versao_motor }}.
+  {% if not ultima %}Esta é uma prévia recalculada ao vivo — use “Analisar
+  atendimento” para gravar o resultado no histórico.{% endif %}
+</div>
+
+<!-- ============================================================ FILTROS -->
+<form method="get" class="cartao sem-impressao">
+  <h2>Filtrar</h2>
+  <div class="filtros">
+    <div class="campo">
+      <label for="f_prioridade">Prioridade</label>
+      <select id="f_prioridade" name="prioridade">
+        <option value="">todas</option>
+        {% for p in rot.ORDEM_PRIORIDADE %}
+          <option value="{{ p }}" {{ 'selected' if filtros.prioridade == p }}>{{ rot.PRIORIDADE[p] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label for="f_tipo">Tipo de achado</label>
+      <select id="f_tipo" name="tipo">
+        <option value="">todos</option>
+        {% for t in tipos %}
+          <option value="{{ t }}" {{ 'selected' if filtros.tipo == t }}>{{ rot.rotular(rot.MODULO, t) }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label for="f_item">Medicamento, condição ou item</label>
+      <input type="search" id="f_item" name="item" value="{{ filtros.item }}"
+             placeholder="parte do nome">
+    </div>
+    <div class="campo">
+      <label for="f_fonte">Fonte</label>
+      <select id="f_fonte" name="fonte">
+        <option value="">todas</option>
+        {% for f in fontes %}
+          <option value="{{ f }}" {{ 'selected' if filtros.fonte == f }}>{{ f }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label for="f_status">Situação da informação</label>
+      <select id="f_status" name="status">
+        <option value="">todas</option>
+        {% for e in estados %}
+          <option value="{{ e }}" {{ 'selected' if filtros.status == e }}>{{ rot.rotular(rot.STATUS_INFORMACAO, e) }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label for="f_revisao">Revisão</label>
+      <select id="f_revisao" name="revisao">
+        <option value="">todas</option>
+        <option value="PENDENTE" {{ 'selected' if filtros.revisao == 'PENDENTE' }}>ainda não revisados</option>
+        <option value="REVISADO" {{ 'selected' if filtros.revisao == 'REVISADO' }}>já revisados</option>
+      </select>
+    </div>
+    <div class="campo" style="flex:0 0 auto">
+      <button type="submit">Filtrar</button>
+      <a class="botao discreto" href="{{ url_for('resultados', codigo=codigo) }}">Limpar</a>
+    </div>
+  </div>
+  {% if visiveis|length != res.achados|length %}
+    <p class="dica">Mostrando {{ visiveis|length }} de {{ res.achados|length }} achados.</p>
+  {% endif %}
+</form>
+
+<!-- ============================================================ ACHADOS -->
+{% if not res.achados %}
+  <div class="cartao">
+    <h2>Nenhum achado</h2>
+    <p class="ajuda">Isso <strong>não</strong> significa ausência de risco.
+      Veja abaixo o que o sistema declara não ter conseguido avaliar.</p>
+  </div>
+{% endif %}
+
+{% for p in rot.ORDEM_PRIORIDADE %}
+  {% set lista = por_prioridade[p] %}
+  {% if lista %}
+    <div class="cartao">
+      <h2><span class="prio {{ p }}">{{ rot.PRIORIDADE[p] }}</span>
+        <span style="font-weight:400;font-size:15px">{{ lista|length }} achado(s)</span></h2>
+      <p class="ajuda">{{ rot.PRIORIDADE_EXPLICACAO[p] }}</p>
+
+      {% for a in lista %}
+        <div class="achado {{ a.prioridade }}">
+          <div>
+            <span class="chip">{{ rot.rotular(rot.MODULO, a.tipo) }}</span>
+            {% if ('ACHADO', a.grupo_chave) in anotacoes %}
+              <span class="chip forte">revisado por {{ anotacoes[('ACHADO', a.grupo_chave)].profissional }}</span>
+            {% endif %}
+          </div>
+          <h3><a href="{{ url_for('achado', codigo=codigo, chave=a.grupo_chave) }}">{{ a.titulo }}</a></h3>
+
+          <div class="eixos">
+            <div class="eixo">
+              <div class="rotulo">Gravidade da fonte</div>
+              <div class="valor">{{ rot.rotular(rot.GRAVIDADE, a.gravidade_fonte) }}</div>
+            </div>
+            <div class="eixo">
+              <div class="rotulo">Confiança do sistema</div>
+              <div class="valor">{{ rot.rotular(rot.CONFIANCA, a.confianca_sistema) }}</div>
+            </div>
+            <div class="eixo">
+              <div class="rotulo">Situação da informação</div>
+              <div class="valor">{{ rot.rotular(rot.STATUS_INFORMACAO, a.status_informacao) }}</div>
+            </div>
+          </div>
+
+          {% if a.status_informacao == 'EXTRAIDO_AUTOMATICAMENTE' %}
+            <div class="selo-extraido">
+              <strong>Extraído automaticamente, sem revisão farmacêutica.</strong>
+              {{ rot.STATUS_EXPLICACAO['EXTRAIDO_AUTOMATICAMENTE'] }}
+            </div>
+          {% elif a.status_informacao == 'PREVISTO' %}
+            <div class="selo-previsto"><strong>Previsto por modelo.</strong>
+              {{ rot.STATUS_EXPLICACAO['PREVISTO'] }}</div>
+          {% endif %}
+
+          {% if a.efeito_esperado %}<p style="margin:6px 0"><strong>Efeito esperado:</strong> {{ a.efeito_esperado }}</p>{% endif %}
+          {% if a.conduta %}<p style="margin:6px 0"><strong>Sugestão da fonte:</strong> {{ a.conduta }}</p>{% endif %}
+
+          <div class="rodape">
+            {% if a.fonte %}<span class="chip">{{ a.fonte }}</span>{% endif %}
+            <span class="chip">{{ rot.rotular(rot.CLASSIFICACAO, a.classificacao) }}</span>
+            {% if a.conflito_tipo %}<span class="chip alerta">as fontes discordam</span>{% endif %}
+            {% if a.evidencias|length > 1 %}<span class="chip">{{ a.evidencias|length }} evidências</span>{% endif %}
+            <a class="chip forte" href="{{ url_for('achado', codigo=codigo, chave=a.grupo_chave) }}"
+               style="text-decoration:none">ver detalhe e evidência →</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endfor %}
+
+<!-- ================================================== PREVISTO POR MODELO -->
+{% if previstos %}
+  <div class="cartao previsto-bloco" id="bloco-previsto">
+    <h2><span class="prio PREVISTO">PREVISTO POR MODELO</span>
+      <span style="font-weight:400;font-size:15px">{{ previstos|length }} linha(s)</span></h2>
+    <p class="ajuda"><strong>Isto não é alerta e não é interação documentada.</strong>
+      Nenhuma bula, artigo ou base do acervo afirma os pares abaixo. São
+      estimativas estatísticas de um modelo, que calcula a probabilidade de o
+      par <em>estar documentado em alguma base</em> — não a gravidade e não o
+      risco. Não contam nos indicadores de prioridade acima. Exigem
+      verificação em fonte antes de qualquer conduta.</p>
+
+    {% for a in previstos %}
+      <div class="achado previsto">
+        <div>
+          <span class="chip">{{ rot.rotular(rot.MODULO, a.tipo) }}</span>
+          <span class="chip previsto">{{ rot.STATUS_INFORMACAO['PREVISTO'] }}</span>
+          {% if ('ACHADO', a.grupo_chave) in anotacoes %}
+            <span class="chip forte">revisado por {{ anotacoes[('ACHADO', a.grupo_chave)].profissional }}</span>
+          {% endif %}
+        </div>
+        <h3><a href="{{ url_for('achado', codigo=codigo, chave=a.grupo_chave) }}">{{ a.titulo }}</a></h3>
+
+        <div class="eixos">
+          <div class="eixo">
+            <div class="rotulo">Evidência documental</div>
+            <div class="valor">nenhuma</div>
+          </div>
+          <div class="eixo">
+            <div class="rotulo">Probabilidade estimada</div>
+            <div class="valor">{{ rot.percentual_previsao(a.probabilidade_modelo) }}</div>
+          </div>
+          <div class="eixo">
+            <div class="rotulo">Confiança do sistema</div>
+            <div class="valor">{{ rot.rotular(rot.CONFIANCA, a.confianca_sistema) }}</div>
+          </div>
+          <div class="eixo">
+            <div class="rotulo">Modelo</div>
+            <div class="valor">{{ a.metodo_deteccao }}</div>
+          </div>
+        </div>
+
+        <div class="selo-previsto"><strong>Previsto por modelo.</strong>
+          {{ rot.STATUS_EXPLICACAO['PREVISTO'] }}</div>
+
+        <div class="rodape">
+          <span class="chip">{{ rot.rotular(rot.CLASSIFICACAO, a.classificacao) }}</span>
+          <span class="chip">{{ a.origem_afirmacao }}</span>
+          <a class="chip forte" href="{{ url_for('achado', codigo=codigo, chave=a.grupo_chave) }}"
+             style="text-decoration:none">ver o que o modelo pesou →</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<!-- ====================================================== NÃO AVALIADO -->
+<div class="cartao">
+  <h2>Não avaliado / informação insuficiente</h2>
+  <p class="ajuda">Ausência de alerta <strong>nunca</strong> é ausência de
+    risco. Isto é o que o sistema declara não ter conseguido avaliar, e por quê.</p>
+  {% if nao_avaliado %}
+    {% for motivo, itens in nao_avaliado.items() %}
+      <h3>{{ rot.rotular(rot.MOTIVO_NAO_AVALIADO, motivo) }}
+        <span class="chip">{{ itens|length }}</span></h3>
+      <p class="dica">{{ itens[0].detalhe }}</p>
+      <ul style="margin:4px 0 12px;padding-left:20px;font-size:13.5px">
+        {% for n in itens[:12] %}<li>{{ n.item }}</li>{% endfor %}
+        {% if itens|length > 12 %}<li class="dica">… e mais {{ itens|length - 12 }}</li>{% endif %}
+      </ul>
+    {% endfor %}
+  {% else %}
+    <p class="vazio">Nada declarado.</p>
+  {% endif %}
+</div>
+
+<!-- ========================================================= LIMITAÇÕES -->
+{% if res.limitacoes %}
+<div class="cartao">
+  <h2>Limitações desta análise</h2>
+  <ul style="padding-left:20px;font-size:14px">
+    {% for lim in res.limitacoes %}<li style="margin-bottom:5px">{{ lim }}</li>{% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<p class="sem-impressao">
+  <a class="botao" href="{{ url_for('relatorio', codigo=codigo) }}">Gerar relatório do atendimento →</a>
+</p>
+
+{% endblock %}

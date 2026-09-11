@@ -1,0 +1,301 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "n_bootstrap": 1000,
+  "teste (todos os regimes)": {
+    "n": 126555,
+    "positivos": 26004,
+    "auc": {
+      "TABELA_CLASSE_x_CLASSE": 0.703198556043877,
+      "LOGISTICA": 0.7339324712848816,
+      "FLORESTA": 0.79413609943223,
+      "GRADIENT_BOOSTING": 0.7887431180590883
+    },
+    "ic": {
+      "TABELA_CLASSE_x_CLASSE": [
+        0.6995068605799917,
+        0.7065465303903533
+      ],
+      "LOGISTICA": [
+        0.7304119113282415,
+        0.7374294326080554
+      ],
+      "FLORESTA": [
+        0.791127409092842,
+        0.7970666161254288
+      ],
+      "GRADIENT_BOOSTING": [
+        0.7856556732865685,
+        0.7917765018637096
+      ]
+    },
+    "diferencas": [
+      {
+        "a": "TABELA_CLASSE_x_CLASSE",
+        "b": "LOGISTICA",
+        "media": -0.030659592026758893,
+        "ic_baixo": -0.03435113971887998,
+        "ic_alto": -0.027068315457884632,
+        "empate": false
+      },
+      {
+        "a": "TABELA_CLASSE_x_CLASSE",
+        "b": "FLORESTA",
+        "media": -0.09085620595864426,
+        "ic_baixo": -0.09454807872451426,
+        "ic_alto": -0.08730573862831215,
+        "empate": false
+      },
+      {
+        "a": "TABELA_CLASSE_x_CLASSE",
+        "b": "GRADIENT_BOOSTING",
+        "media": -0.08549866257590573,
+        "ic_baixo": -0.08904713975388012,
+        "ic_alto": -0.08197882303678261,
+        "empate": false
+      },
+      {
+        "a": "LOGISTICA",
+        "b": "FLORESTA",
+        "media": -0.060196613931885364,
+        "ic_baixo": -0.06248749201735394,
+        "ic_alto": -0.05791664303992804,
+        "empate": false
+      },
+      {
+        "a": "LOGISTICA",
+        "b": "GRADIENT_BOOSTING",
+        "media": -0.05483907054914684,
+        "ic_baixo": -0.05692453195414432,
+        "ic_alto": -0.052738196708761904,
+        "empate": false
+      },
+      {
+        "a": "FLORESTA",
+        "b": "GRADIENT_BOOSTING",
+        "media": 0.005357543382738526,
+        "ic_baixo": 0.003752776262744545,
+        "ic_alto": 0.0069398621421685016,
+        "empate": false
+      }
+    ]
+  },
+  "teste FRIO_FRIO": {
+    "n": 10153,
+    "positivos": 2068,
+    "auc": {
+      "TABELA_CLASSE_x_CLASSE": 0.6856490336595338,
+      "LOGISTICA": 0.7146812039392862,
+      "FLORESTA": 0.7344081979547578,
+      "GRADIENT_BOOSTING": 0.739212238438544
+    },
+    "ic": {
+      "TABELA_CLASSE_x_CLASSE": [
+        0.6727455527225836,
+        0.6982913336778355
+      ],
+      "LOGISTICA": [
+        0.7024489990298917,
+        0.7266123851510008
+      ],
+      "FLORESTA": [
+        0.7222933899249872,
+        0.7460845739298004
+      ],
+      "GRADIENT_BOOSTING": [
+        0.7269746192832681,
+        0.7503755275189027
+      ]
+    },
+    "diferencas": [
+      {
+        "a": "TABELA_CLASSE_x_CLASSE",
+        "b": "LOGISTICA",
+        "media": -0.029420207861586695,
+        "ic_baixo": -0.04281734942086561,
+        "ic_alto": -0.015923852616481663,
+        "empate": false
+      },
+      {
+        "a": "TABELA_CLASSE_x_CLASSE",
+        "b": "FLORESTA",
+        "media": -0.04904183386384271,
+        "ic_baixo": -0.06262438411270962,
+        "ic_alto": -0.03493399958013802,
+        "empate": false
+      },
+      {
+        "a": "TABELA_CLASSE_x_CLASSE",
+        "b": "GRADIENT_BOOSTING",
+        "media": -0.05372417666380778,
+        "ic_baixo": -0.06584331402685926,
+        "ic_alto": -0.041113163570334184,
+        "empate": false
+      },
+      {
+        "a": "LOGISTICA",
+        "b": "FLORESTA",
+        "media": -0.019621626002256014,
+        "ic_baixo": -0.02776062693408651,
+        "ic_alto": -0.01109145126311472,
+        "empate": false
+      },
+      {
+        "a": "LOGISTICA",
+        "b": "GRADIENT_BOOSTING",
+        "media": -0.024303968802221083,
+        "ic_baixo": -0.03173346180392336,
+        "ic_alto": -0.01683591156701834,
+        "empate": false
+      },
+      {
+        "a": "FLORESTA",
+        "b": "GRADIENT_BOOSTING",
+        "media": -0.004682342799965067,
+        "ic_baixo": -0.011718844386708397,
+        "ic_alto": 0.002156550504851185,
+        "empate": true
+      }
+    ]
+  }
+}

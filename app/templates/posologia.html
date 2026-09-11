@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block titulo %}Posologia de {{ grupo.nome_relatado }} — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>Posologia — {{ grupo.nome_relatado }}</h1>
+<p class="subtitulo">
+  {% if grupo.substancias %}
+    Princípio ativo: <strong>{{ grupo.substancias | map(attribute=1) | join(' + ') }}</strong>
+    {% if grupo.substancias|length > 1 %}
+      — associação em dose fixa: o sistema analisa cada componente separadamente,
+      e esta posologia vale para todos eles.
+    {% endif %}
+  {% else %}
+    Item sem vínculo com o cadastro. A posologia é registrada, mas nenhum
+    módulo consegue avaliar este item.
+  {% endif %}
+</p>
+
+{% if detalhe %}
+<div class="cartao">
+  <h2>Apresentação escolhida</h2>
+  <table>
+    <tr><th>Produto</th><td>{{ detalhe.produto }}</td>
+        <th>Empresa</th><td>{{ detalhe.empresa or '—' }}</td></tr>
+    <tr><th>Concentração</th><td>{{ detalhe.concentracao or '—' }}</td>
+        <th>Forma</th><td>{{ detalhe.forma or '—' }}</td></tr>
+    <tr><th>Via</th><td>{{ detalhe.via or '—' }}</td>
+        <th>Embalagem</th><td>{{ detalhe.quantidade or '—' }}</td></tr>
+    <tr><th>Registro ANVISA</th><td>{{ detalhe.registro_anvisa or '—' }}</td>
+        <th>Código de barras</th><td>{{ detalhe.eans | join(', ') or '—' }}</td></tr>
+  </table>
+</div>
+{% endif %}
+
+<div class="cartao">
+  <h2>Como o paciente usa</h2>
+  <p class="ajuda">Todo campo pode ficar em branco. <strong>Em branco significa
+    “não informado”</strong> e é registrado como tal — é melhor do que um valor
+    inventado, e é comum no balcão o paciente não saber a dose.</p>
+
+  <form method="post">
+    <div class="linha-campos">
+      <div class="campo">
+        <label for="dose_valor">Dose</label>
+        <input type="text" id="dose_valor" name="dose_valor" inputmode="decimal"
+               value="{{ grupo.posologia.dose_valor if grupo.posologia and grupo.posologia.dose_valor is not none else '' }}"
+               placeholder="em branco = não sabe">
+      </div>
+      <div class="campo">
+        <label for="dose_unidade">Unidade</label>
+        <input type="text" id="dose_unidade" name="dose_unidade" list="unidades"
+               value="{{ grupo.posologia.dose_unidade if grupo.posologia else '' }}"
+               placeholder="mg, mL, comprimido...">
+        <datalist id="unidades">
+          <option value="mg"><option value="g"><option value="mcg">
+          <option value="mL"><option value="UI"><option value="comprimido">
+          <option value="cápsula"><option value="gota"><option value="jato">
+        </datalist>
+      </div>
+      <div class="campo">
+        <label for="via_administracao">Via</label>
+        <input type="text" id="via_administracao" name="via_administracao" list="vias"
+               value="{{ grupo.posologia.via_administracao if grupo.posologia else '' }}">
+        <datalist id="vias">
+          <option value="oral"><option value="sublingual"><option value="tópica">
+          <option value="inalatória"><option value="oftálmica">
+          <option value="nasal"><option value="retal"><option value="subcutânea">
+          <option value="intramuscular"><option value="intravenosa">
+        </datalist>
+      </div>
+    </div>
+
+    <div class="linha-campos">
+      <div class="campo">
+        <label for="vezes_por_dia">Vezes por dia</label>
+        <input type="number" id="vezes_por_dia" name="vezes_por_dia" min="1" max="12"
+               value="{{ grupo.posologia.vezes_por_dia if grupo.posologia and grupo.posologia.vezes_por_dia else '' }}">
+      </div>
+      <div class="campo">
+        <label for="intervalo_horas">Intervalo (horas)</label>
+        <input type="text" id="intervalo_horas" name="intervalo_horas" inputmode="decimal"
+               value="{{ grupo.posologia.intervalo_horas if grupo.posologia and grupo.posologia.intervalo_horas else '' }}"
+               placeholder="8, 12, 24...">
+      </div>
+      <div class="campo">
+        <label for="duracao_dias">Duração (dias)</label>
+        <input type="number" id="duracao_dias" name="duracao_dias" min="1"
+               value="{{ grupo.posologia.duracao_dias if grupo.posologia and grupo.posologia.duracao_dias else '' }}">
+      </div>
+    </div>
+
+    <div class="linha-campos">
+      <div class="campo">
+        <label for="data_inicio">Início <span class="opcional">(opcional)</span></label>
+        <input type="date" id="data_inicio" name="data_inicio"
+               value="{{ grupo.posologia.data_inicio if grupo.posologia else '' }}">
+      </div>
+      <div class="campo">
+        <label for="data_fim_prevista">Término previsto <span class="opcional">(opcional)</span></label>
+        <input type="date" id="data_fim_prevista" name="data_fim_prevista"
+               value="{{ grupo.posologia.data_fim_prevista if grupo.posologia else '' }}">
+        <p class="dica">Não combina com uso contínuo — escolha um dos dois.</p>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>
+        <input type="checkbox" name="uso_continuo" style="width:auto"
+               {{ 'checked' if grupo.posologia and grupo.posologia.uso_continuo }}>
+        Uso contínuo
+      </label>
+      <label style="margin-top:6px">
+        <input type="checkbox" name="se_necessario" id="se_necessario" style="width:auto"
+               {{ 'checked' if grupo.posologia and grupo.posologia.se_necessario }}>
+        Se necessário (PRN) — sem horário fixo
+      </label>
+    </div>
+
+    <div class="campo">
+      <label for="condicao_uso">Condição de uso <span class="opcional">(quando “se necessário”)</span></label>
+      <input type="text" id="condicao_uso" name="condicao_uso"
+             value="{{ grupo.posologia.condicao_uso if grupo.posologia else '' }}"
+             placeholder="se dor, se febre, se pressão alta...">
+    </div>
+
+    <h3>Horários</h3>
+    <p class="ajuda">O motor usa os horários para verificar jejum, relação com
+      refeição e separação entre medicamentos. Sem horários, ele monta a
+      agenda mesmo assim e declara o que não pôde verificar.</p>
+    <div id="horarios">
+      {% for h in grupo.horarios %}
+        <div class="linha-campos" style="margin-bottom:6px">
+          <div class="campo" style="flex:0 0 150px;margin:0">
+            <input type="time" name="horario" value="{{ h }}">
+          </div>
+        </div>
+      {% endfor %}
+      {% for _ in range(4 - grupo.horarios|length if grupo.horarios|length < 4 else 1) %}
+        <div class="linha-campos" style="margin-bottom:6px">
+          <div class="campo" style="flex:0 0 150px;margin:0">
+            <input type="time" name="horario">
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button type="button" class="discreto" onclick="mais()">+ mais um horário</button>
+
+    <div class="campo" style="margin-top:14px">
+      <label for="texto_original">Como está escrito na receita <span class="opcional">(opcional)</span></label>
+      <input type="text" id="texto_original" name="texto_original"
+             value="{{ grupo.posologia.texto_original if grupo.posologia else '' }}"
+             placeholder="o texto acompanha; o dado analisado é o estruturado acima">
+    </div>
+
+    <p style="margin-top:16px">
+      <button type="submit">Salvar posologia</button>
+      <a class="botao secundario" href="{{ url_for('medicamentos', codigo=codigo) }}">Voltar sem salvar</a>
+    </p>
+  </form>
+</div>
+
+<script>
+function mais() {
+  const caixa = document.getElementById('horarios');
+  const div = document.createElement('div');
+  div.className = 'linha-campos';
+  div.style.marginBottom = '6px';
+  div.innerHTML = '<div class="campo" style="flex:0 0 150px;margin:0">'
+                + '<input type="time" name="horario"></div>';
+  caixa.appendChild(div);
+}
+</script>
+
+{% endblock %}

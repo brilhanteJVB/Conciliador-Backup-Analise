@@ -1,0 +1,60 @@
+
+==========================================================================
+V1 — VALIDACAO DO PIPELINE DE ML
+==========================================================================
+
+--- 1. DATASET
+  [OK ] numero de pares == C(n,2)                                  457446 pares, 957 substancias
+  [OK ] todo par em ordem canonica (a<b)                           
+  [OK ] nenhum par repetido                                        
+  [OK ] positivos do .npz == pares do banco                        94770 positivos
+  [OK ] universo == substancias com >=1 interacao                  957 substancias
+  [OK ] semente gravada no dataset                                 20260909
+
+--- 2. ROTULO
+  [OK ] n_fontes>0 exatamente onde y=1                             
+  [OK ] n_fontes maximo == 2 (duas bases carregadas)               
+  [OK ] pares com 2 fontes conferem com o banco                    17750
+  [OK ] rotulo de tipo so existe entre positivos                   
+
+--- 3. SPLIT
+  [OK ] split por par cobre tudo e nao se sobrepoe                 
+  [OK ] split por par: proporcao ~70/15/15                         0.700 / 0.150 / 0.150
+  [OK ] nenhum farmaco em dois grupos                              
+  [OK ] regime de treino == os dois lados de treino                
+  [OK ] regime de teste == pelo menos um lado de teste             
+  [OK ] FRIO_FRIO == os dois lados de teste                        
+  [OK ] nenhum par de treino toca farmaco de validacao ou teste    
+
+--- 4. ATRIBUTOS
+  [OK ] largura da matriz == espaco declarado                      130 atributos
+  [OK ] atributos simetricos                                       
+  [OK ] sem NaN/infinito                                           
+  [OK ] bloco GRAFO fora do espaco publicado                       
+  [OK ] grafo do contexto vem so do treino                         661 substancias no grafo de treino
+
+--- 5. TREINO — determinismo
+  [OK ] dois treinos com a mesma semente dao a mesma previsao      maior diferenca 0.00e+00
+
+--- 6. METRICAS GRAVADAS
+  [OK ] modelo registrado no banco                                 
+  [OK ] AUC de teste recalculada == gravada                        0.787872 vs 0.787872
+  [OK ] semente gravada == semente da fase                         20260909
+  [OK ] n_features gravado == espaco atual                         
+  [OK ] espaco gravado == espaco atual                             
+  [OK ] modelo NAO esta ativo                                      status=EXPERIMENTAL
+
+--- 7. PERSISTENCIA — salvar e recarregar
+  [OK ] artefato existe                                            m1_1_0-boosting.json
+  [OK ] previsao do artefato recarregado == a do modelo em memoria maior diferenca 0.00e+00
+  [OK ] espaco_features.json existe e confere                      
+  [OK ] calibrador gravado como tabela, nao pickle                 
+
+--- 8. INFERENCIA PELO CONTRATO
+  [OK ] Preditor concorda com o modelo treinado agora              200 pares
+  [OK ] probabilidade calibrada dentro de [0,1]                    
+  [OK ] previsao e simetrica                                       
+  [OK ] contrato recusa modelo experimental                        
+
+==========================================================================
+V1 OK — o pipeline faz o que diz que faz

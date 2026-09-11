@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% block titulo %}Anamnese — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>2. Anamnese farmacêutica</h1>
+<p class="subtitulo">Condições clínicas, alergias e hábitos. Tudo por seleção —
+o texto livre existe só para o que a lista não cobre.</p>
+
+<!-- ============================================ CONDIÇÕES CLÍNICAS -->
+<div class="cartao">
+  <h2>Condições clínicas</h2>
+  <p class="ajuda">A lista traz as condições que o sistema sabe cruzar com
+    contraindicação de bula. O que não estiver aqui pode ser descrito — e o
+    sistema declara que não conseguiu verificar aquele item.</p>
+
+  {% if condicoes %}
+    {% for c in condicoes %}
+      <div class="item">
+        <div class="corpo">
+          <div class="nome">{{ c.nome or c.descricao_livre }}</div>
+          <div class="detalhe">
+            {% if c.grupo %}{{ c.grupo }}{% endif %}
+            {% if not c.doenca_id %}<span class="chip alerta">sem vínculo com o cadastro</span>{% endif %}
+            {% if c.desde %} · desde {{ c.desde }}{% endif %}
+          </div>
+        </div>
+        <div class="acoes">
+          <form method="post" action="{{ url_for('del_condicao', codigo=codigo, cid=c.id) }}">
+            <button class="discreto" type="submit">Remover</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="vazio">Nenhuma condição registrada.</p>
+  {% endif %}
+
+  <h3>Acrescentar</h3>
+  <form method="post" action="{{ url_for('add_condicao', codigo=codigo) }}">
+    <div class="linha-campos">
+      <div class="campo" style="flex:2">
+        <label for="doenca_id">Escolher da lista</label>
+        <select id="doenca_id" name="doenca_id">
+          <option value="">— selecione —</option>
+          {% for grupo, opcoes in grupos_condicao.items() %}
+            <optgroup label="{{ grupo }}">
+              {% for o in opcoes %}
+                <option value="{{ o.id }}">{{ o.nome }}</option>
+              {% endfor %}
+            </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="campo">
+        <label for="desde">Desde <span class="opcional">(opcional)</span></label>
+        <input type="date" id="desde" name="desde">
+      </div>
+      <div class="campo" style="flex:0 0 auto">
+        <label>&nbsp;</label>
+        <button type="submit">Acrescentar</button>
+      </div>
+    </div>
+    <div class="campo">
+      <label for="descricao_livre">Ou descrever, se não estiver na lista</label>
+      <input type="text" id="descricao_livre" name="descricao_livre"
+             placeholder="o sistema declarará que não pôde verificar esta condição">
+    </div>
+  </form>
+</div>
+
+<!-- ============================================================ ALERGIAS -->
+<div class="cartao">
+  <h2>Alergias</h2>
+  <p class="ajuda">Alergia à substância em uso é o único achado que o sistema
+    classifica como <strong>crítico</strong> por regra — e quem sustenta o
+    alerta é o relato do paciente, não uma fonte externa. Por isso vale
+    registrar inclusive a ausência.</p>
+
+  {% if alergias %}
+    {% for a in alergias %}
+      <div class="item">
+        <div class="corpo">
+          <div class="nome">{{ a.substancia or a.descricao_livre }}</div>
+          <div class="detalhe">
+            {% if a.reacao %}reação: {{ a.reacao }} · {% endif %}
+            {{ rot.rotular(rot.GRAVIDADE, a.gravidade) if a.gravidade in rot.GRAVIDADE else a.gravidade|lower }}
+            {% if not a.substancia_id %}<span class="chip alerta">sem vínculo — não será verificada</span>{% endif %}
+          </div>
+        </div>
+        <div class="acoes">
+          <form method="post" action="{{ url_for('del_alergia', codigo=codigo, aid=a.id) }}">
+            <button class="discreto" type="submit">Remover</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="vazio">Nenhuma alergia registrada.</p>
+  {% endif %}
+
+  <h3>Acrescentar</h3>
+  <form method="post" action="{{ url_for('add_alergia', codigo=codigo) }}">
+    <div class="campo">
+      <label for="alergia_busca">Princípio ativo</label>
+      <input type="search" id="alergia_busca" autocomplete="off"
+             placeholder="digite ao menos duas letras — ex.: dipirona, penicilina">
+      <input type="hidden" name="substancia_id" id="alergia_id">
+      <div id="alergia_lista"></div>
+      <p class="dica" id="alergia_escolhido"></p>
+    </div>
+    <div class="linha-campos">
+      <div class="campo">
+        <label for="reacao">Reação relatada <span class="opcional">(opcional)</span></label>
+        <input type="text" id="reacao" name="reacao"
+               placeholder="urticária, edema, falta de ar...">
+      </div>
+      <div class="campo">
+        <label for="gravidade">Gravidade da reação</label>
+        <select id="gravidade" name="gravidade">
+          {% for valor, nome in gravidades %}
+            <option value="{{ valor }}" {{ 'selected' if valor == 'NAO_INFORMADA' }}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="campo">
+      <label for="alergia_livre">Ou descrever, se não encontrar</label>
+      <input type="text" id="alergia_livre" name="descricao_livre"
+             placeholder="o sistema declarará que não pôde verificar esta alergia">
+    </div>
+    <button type="submit">Acrescentar alergia</button>
+  </form>
+</div>
+
+<!-- ============================================================= HÁBITOS -->
+<div class="cartao">
+  <h2>Hábitos</h2>
+  <p class="ajuda">Tabaco, álcool e cafeína têm regra própria no banco.
+    <strong>Não informado</strong> é diferente de <strong>nunca</strong>: o
+    primeiro faz o sistema declarar que não avaliou, o segundo faz ele não
+    alertar.</p>
+  <form method="post" action="{{ url_for('salvar_habitos', codigo=codigo) }}">
+    <table>
+      <thead><tr><th>Hábito</th><th style="width:210px">Situação</th>
+                 <th>Quantidade</th><th>Frequência</th></tr></thead>
+      <tbody>
+      {% for chave, nome in lista_habitos %}
+        {% set atual = habitos.get(chave, {}) %}
+        <tr>
+          <td>{{ nome }}</td>
+          <td>
+            <select name="situacao_{{ chave }}">
+              {% for valor, rotulo in situacoes %}
+                <option value="{{ valor }}"
+                  {{ 'selected' if atual.get('situacao') == valor or (not atual and valor == 'NAO_INFORMADO') }}>
+                  {{ rotulo }}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td><input type="text" name="quantidade_{{ chave }}"
+                     value="{{ atual.get('quantidade') or '' }}"
+                     placeholder="ex.: 10 cigarros"></td>
+          <td><input type="text" name="frequencia_{{ chave }}"
+                     value="{{ atual.get('frequencia') or '' }}"
+                     placeholder="ex.: diário"></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" style="margin-top:12px">Salvar hábitos</button>
+  </form>
+</div>
+
+<p><a class="botao" href="{{ url_for('medicamentos', codigo=codigo) }}">Ir para medicamentos →</a></p>
+
+<script>
+(function () {
+  const campo = document.getElementById('alergia_busca');
+  const lista = document.getElementById('alergia_lista');
+  const oculto = document.getElementById('alergia_id');
+  const escolhido = document.getElementById('alergia_escolhido');
+  if (!campo) return;
+  let atraso = null;
+  campo.addEventListener('input', function () {
+    oculto.value = ''; escolhido.textContent = '';
+    clearTimeout(atraso);
+    const termo = campo.value.trim();
+    if (termo.length < 2) { lista.innerHTML = ''; return; }
+    atraso = setTimeout(function () {
+      fetch('{{ url_for("api_substancia") }}?q=' + encodeURIComponent(termo))
+        .then(r => r.json())
+        .then(function (itens) {
+          lista.innerHTML = '';
+          itens.forEach(function (i) {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'discreto';
+            b.style.cssText = 'display:block;width:100%;text-align:left;margin-top:4px';
+            b.innerHTML = '<strong>' + i.rotulo + '</strong> <span style="color:#5a6472">'
+                        + (i.detalhe || '') + '</span>';
+            b.onclick = function () {
+              oculto.value = i.id; campo.value = i.rotulo; lista.innerHTML = '';
+              escolhido.textContent = 'Selecionado: ' + i.rotulo;
+            };
+            lista.appendChild(b);
+          });
+          if (!itens.length) { lista.innerHTML = '<p class="dica">Nada encontrado. Use o campo de descrição abaixo.</p>'; }
+        })
+        .catch(function () { lista.innerHTML = '<p class="dica">A busca falhou. Use o campo de descrição abaixo.</p>'; });
+    }, 220);
+  });
+})();
+</script>
+
+{% endblock %}

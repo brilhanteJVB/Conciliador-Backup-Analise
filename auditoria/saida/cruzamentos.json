@@ -1,0 +1,91 @@
+{
+ "ancora": {
+  "substancias_br_ativas": 2153,
+  "substancias_br_todas_situacoes": 4760
+ },
+ "fontes": {
+  "db_drug_interactions.csv": {
+   "substancias_distintas_na_fonte": 1694,
+   "substancias_que_existem_no_BR": 673,
+   "pct_da_fonte_aproveitavel": 39.7,
+   "substancias_BR_cobertas": 673,
+   "pct_do_BR_coberto": 31.3
+  },
+  "Drug-disease/drugsInfo.csv": {
+   "substancias_distintas_na_fonte": 1399,
+   "substancias_que_existem_no_BR": 583,
+   "pct_da_fonte_aproveitavel": 41.7,
+   "substancias_BR_cobertas": 583,
+   "pct_do_BR_coberto": 27.1
+  },
+  "Drug to Food interactions Dataset.json": {
+   "substancias_distintas_na_fonte": 1409,
+   "substancias_que_existem_no_BR": 600,
+   "pct_da_fonte_aproveitavel": 42.6,
+   "substancias_BR_cobertas": 600,
+   "pct_do_BR_coberto": 27.9
+  },
+  "Drug finder db w_o brands - deepseek_csv_20250915_dff2b8.csv": {
+   "substancias_distintas_na_fonte": 717,
+   "substancias_que_existem_no_BR": 462,
+   "pct_da_fonte_aproveitavel": 64.4,
+   "substancias_BR_cobertas": 462,
+   "pct_do_BR_coberto": 21.5
+  },
+  "medicine_dataset.csv": {
+   "substancias_distintas_na_fonte": 219115,
+   "substancias_que_existem_no_BR": 0,
+   "pct_da_fonte_aproveitavel": 0.0,
+   "substancias_BR_cobertas": 0,
+   "pct_do_BR_coberto": 0.0
+  },
+  "fontes_novas/05_atc_classes/WHO_ATC-DDD_2026-04-25.csv": {
+   "substancias_distintas_na_fonte": 5972,
+   "substancias_que_existem_no_BR": 1102,
+   "pct_da_fonte_aproveitavel": 18.5,
+   "substancias_BR_cobertas": 1102,
+   "pct_do_BR_coberto": 51.2
+  },
+  "fontes_novas/08_iuphar_gtopdb/ligands.csv": {
+   "substancias_distintas_na_fonte": 13330,
+   "substancias_que_existem_no_BR": 846,
+   "pct_da_fonte_aproveitavel": 6.3,
+   "substancias_BR_cobertas": 846,
+   "pct_do_BR_coberto": 39.3
+  },
+  "DDInter/ (8 arquivos)": {
+   "substancias_distintas_na_fonte": 1794,
+   "substancias_que_existem_no_BR": 776,
+   "pct_da_fonte_aproveitavel": 43.3,
+   "substancias_BR_cobertas": 776,
+   "pct_do_BR_coberto": 36.0,
+   "niveis_de_gravidade": {
+    "Moderate": 130367,
+    "Major": 33896,
+    "Minor": 10938,
+    "Unknown": 47182
+   }
+  }
+ },
+ "pares": {
+  "db_drug_interactions": {
+   "registros": 191541,
+   "pares_unicos_apos_normalizar": 190045,
+   "pares_BRxBR": 43928,
+   "pct_BRxBR": 23.1,
+   "gradua_gravidade": false
+  },
+  "DDInter": {
+   "pares_unicos_apos_normalizar": 149878,
+   "pares_BRxBR": 50072,
+   "pct_BRxBR": 33.4,
+   "gradua_gravidade": true
+  },
+  "sobreposicao": {
+   "pares_em_ambas": 38892,
+   "so_em_db_drug_interactions": 151153,
+   "so_em_DDInter": 110986,
+   "uniao_BRxBR": 79418
+  }
+ }
+}

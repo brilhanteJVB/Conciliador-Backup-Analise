@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block titulo %}Atendimentos — Conciliador de Medicamentos{% endblock %}
+{% block conteudo %}
+
+<h1>Atendimento farmacêutico</h1>
+<p class="subtitulo">Conciliação medicamentosa de balcão. O sistema detecta,
+compara, organiza e explica — a decisão clínica permanece com o profissional.</p>
+
+<div class="cartao">
+  <h2>Iniciar novo atendimento</h2>
+  <p class="ajuda">Só o nome do paciente é obrigatório para começar. O resto
+    pode ser preenchido durante o atendimento.</p>
+  <form method="post" action="{{ url_for('novo') }}">
+    <div class="linha-campos">
+      <div class="campo" style="flex:2">
+        <label for="nome">Nome do paciente</label>
+        <input type="text" id="nome" name="nome" required autofocus
+               autocomplete="off" placeholder="Nome como o paciente se apresenta">
+      </div>
+      <div class="campo">
+        <label for="farmaceutico">Farmacêutico <span class="opcional">(opcional)</span></label>
+        <input type="text" id="farmaceutico" name="farmaceutico" autocomplete="off">
+      </div>
+      <div class="campo" style="flex:.6">
+        <label for="crf">CRF <span class="opcional">(opcional)</span></label>
+        <input type="text" id="crf" name="crf" autocomplete="off">
+      </div>
+      <div class="campo" style="flex:0 0 auto">
+        <label>&nbsp;</label>
+        <button type="submit">Iniciar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="cartao">
+  <h2>Atendimentos registrados</h2>
+  {% if atendimentos %}
+    <table>
+      <thead>
+        <tr><th>Código</th><th>Paciente</th><th>Iniciado</th>
+            <th>Medicamentos</th><th>Achados</th><th>Situação</th><th></th></tr>
+      </thead>
+      <tbody>
+      {% for a in atendimentos %}
+        <tr>
+          <td><strong>{{ a.codigo }}</strong></td>
+          <td>{{ a.nome }}</td>
+          <td>{{ a.iniciado_em }}</td>
+          <td>{{ a.n_medicamentos or 0 }}</td>
+          <td>{{ a.n_achados if a.n_achados is not none else '—' }}</td>
+          <td>{{ 'Concluído' if a.situacao == 'CONCLUIDO' else 'Em andamento' }}</td>
+          <td><a class="botao discreto" href="{{ url_for('paciente', codigo=a.codigo) }}">Abrir</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="vazio">Nenhum atendimento registrado ainda.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

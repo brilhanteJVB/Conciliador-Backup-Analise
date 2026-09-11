@@ -1,0 +1,210 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "semente": 20260909,
+  "universo": {
+    "substancias": 957,
+    "pares": 457446,
+    "positivos": 94770,
+    "prevalencia": 0.2071719940714314
+  },
+  "split_por_par": {
+    "treino": {
+      "n": 320212,
+      "positivos": 66444
+    },
+    "validacao": {
+      "n": 68617,
+      "positivos": 14233
+    },
+    "teste": {
+      "n": 68617,
+      "positivos": 14093
+    }
+  },
+  "split_por_farmaco": {
+    "farmacos": {
+      "treino": 669,
+      "validacao": 145,
+      "teste": 143
+    },
+    "pares": {
+      "treino": {
+        "n": 223446,
+        "positivos": 46480
+      },
+      "validacao": {
+        "n": 107445,
+        "positivos": 22286
+      },
+      "teste": {
+        "n": 126555,
+        "positivos": 26004
+      }
+    },
+    "teste_quente_frio": {
+      "n": 116402,
+      "positivos": 23936
+    },
+    "teste_frio_frio": {
+      "n": 10153,
+      "positivos": 2068
+    }
+  },
+  "pareado_grau": {
+    "positivos": 67443,
+    "negativos": 67443,
+    "positivos_descartados": 27327,
+    "bins": 10
+  },
+  "controle_negativo": {
+    "n": 5000,
+    "com_grau_zero": 4115
+  },
+  "alvo_secundario_tipo": {
+    "com_rotulo": 52261,
+    "pk": 27874,
+    "pd": 24387
+  },
+  "arquivo": "C:\\Sistema Conciliador projeto\\data\\training\\dataset_m1.npz"
+}

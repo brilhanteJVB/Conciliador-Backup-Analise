@@ -1,0 +1,286 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "volume": {
+    "linhas": 112520,
+    "pares": 94770,
+    "substancias": 2094,
+    "substancias_com_aresta": 957,
+    "linhas_por_par": 1.187295557665928
+  },
+  "multiplicidade": {
+    "distribuicao": {
+      "1": 77020,
+      "2": 17750
+    },
+    "por_fonte": [
+      {
+        "id": 7,
+        "nome": "DDInter",
+        "confiabilidade": "ALTA",
+        "linhas": 58323
+      },
+      {
+        "id": 8,
+        "nome": "db_drug_interactions",
+        "confiabilidade": "MEDIA",
+        "linhas": 54197
+      }
+    ],
+    "duplicata_exata": 0,
+    "pares_com_duas_fontes": 17750
+  },
+  "simetria": {
+    "violacoes": 0,
+    "auto_par": 0
+  },
+  "grafo": {
+    "grau_zero": 1137,
+    "conectadas": 957,
+    "grau_medio_todas": 90.51575931232092,
+    "grau_medio_conectadas": 198.0564263322884,
+    "grau_mediano": 178,
+    "grau_max": 629,
+    "pares_possiveis": 457446,
+    "pares_observados": 94770,
+    "densidade": 0.2071719940714314,
+    "componentes": 1,
+    "maior_componente": 957
+  },
+  "cobertura_atributo": {
+    "codigo ATC": {
+      "todas": 1159,
+      "conectadas": 909
+    },
+    "canal de dispensacao (tarja)": {
+      "todas": 1450,
+      "conectadas": 811
+    },
+    "CAS": {
+      "todas": 1505,
+      "conectadas": 945
+    },
+    "numero DCB": {
+      "todas": 1757,
+      "conectadas": 949
+    },
+    "indice terapeutico estreito=1": {
+      "todas": 0,
+      "conectadas": 0
+    },
+    "na RENAME=1": {
+      "todas": 0,
+      "conectadas": 0
+    },
+    "papel farmacocinetico (CYP)": {
+      "todas": 22,
+      "conectadas": 22
+    },
+    "alvo molecular": {
+      "todas": 0,
+      "conectadas": 0
+    },
+    "regra de administracao": {
+      "todas": 620,
+      "conectadas": 534
+    },
+    "interacao com doenca": {
+      "todas": 102,
+      "conectadas": 9
+    },
+    "interacao com item": {
+      "todas": 196,
+      "conectadas": 187
+    },
+    "reacao adversa": {
+      "todas": 0,
+      "conectadas": 0
+    }
+  },
+  "atc": {
+    "niveis_tamanho": {
+      "7": 1159
+    },
+    "codigos5_compartilhados": 0,
+    "classes_por_nivel": {
+      "1": 14,
+      "2": 83,
+      "3": 181,
+      "4": 446
+    }
+  },
+  "temporal": {
+    "datas": [
+      "2026-09-10"
+    ],
+    "viavel": false,
+    "motivo": "fonte nao publica data de documentacao"
+  },
+  "colunas_circulares": [
+    {
+      "coluna": "interacao_substancia.tipo",
+      "motivo": "PK/PD sai de regex sobre a descricao da propria interacao"
+    },
+    {
+      "coluna": "interacao_substancia.gravidade",
+      "motivo": "graduacao da propria afirmacao de interacao"
+    },
+    {
+      "coluna": "interacao_substancia.mecanismo",
+      "motivo": "traduzido da descricao da interacao"
+    },
+    {
+      "coluna": "interacao_substancia.efeito_esperado",
+      "motivo": "traduzido da descricao da interacao"
+    },
+    {
+      "coluna": "interacao_substancia.descricao_original",
+      "motivo": "e o texto do rotulo"
+    },
+    {
+      "coluna": "achado.prioridade",
+      "motivo": "calculada pelas nossas proprias regras a partir do rotulo"
+    }
+  ],
+  "unidade": "par_canonico_de_substancias"
+}

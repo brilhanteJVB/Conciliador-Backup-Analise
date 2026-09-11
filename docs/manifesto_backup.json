@@ -1,0 +1,334 @@
+{
+ "gerado_em": "2026-09-10T20:59:00",
+ "estado_do_projeto": "FASE 9 — CONCLUÍDA / APTO PARA EMPACOTAMENTO",
+ "declaracao": "Este backup corresponde ao estado imediatamente anterior à Fase 10.",
+ "raiz": "C:\\Sistema Conciliador projeto",
+ "no_backup": {
+  "arquivos": 163,
+  "bytes": 82797000,
+  "por_diretorio": {
+   "(raiz)": {
+    "arquivos": 3,
+    "bytes": 40795
+   },
+   ".claude": {
+    "arquivos": 1,
+    "bytes": 330
+   },
+   "app": {
+    "arquivos": 19,
+    "bytes": 208124
+   },
+   "auditoria": {
+    "arquivos": 11,
+    "bytes": 1694222
+   },
+   "data": {
+    "arquivos": 1,
+    "bytes": 715367
+   },
+   "database": {
+    "arquivos": 3,
+    "bytes": 76941381
+   },
+   "docs": {
+    "arquivos": 15,
+    "bytes": 326116
+   },
+   "ml": {
+    "arquivos": 56,
+    "bytes": 804183
+   },
+   "models": {
+    "arquivos": 5,
+    "bytes": 1097161
+   },
+   "pipeline": {
+    "arquivos": 20,
+    "bytes": 205456
+   },
+   "reports": {
+    "arquivos": 1,
+    "bytes": 127687
+   },
+   "rules": {
+    "arquivos": 3,
+    "bytes": 149568
+   },
+   "scripts": {
+    "arquivos": 1,
+    "bytes": 15948
+   },
+   "tests": {
+    "arquivos": 24,
+    "bytes": 470662
+   }
+  }
+ },
+ "fora_do_backup": {
+  "arquivos": 12,
+  "bytes": 327490684,
+  "itens": [
+   {
+    "arquivo": "database/conciliador_backup_fase7_completa.db",
+    "bytes": 77012992,
+    "motivo": "fotografia de uma fase já superada (5 ou 7)",
+    "alternativa": "permanece no disco local, em `database/`, intocada",
+    "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
+   },
+   {
+    "arquivo": "database/conciliador_backup_antes_incremental.db",
+    "bytes": 76603392,
+    "motivo": "fotografia de uma fase já superada (5 ou 7)",
+    "alternativa": "permanece no disco local, em `database/`, intocada",
+    "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
+   },
+   {
+    "arquivo": "database/conciliador_backup_antes_fase7_20260909.db",
+    "bytes": 76464128,
+    "motivo": "fotografia de uma fase já superada (5 ou 7)",
+    "alternativa": "permanece no disco local, em `database/`, intocada",
+    "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
+   },
+   {
+    "arquivo": "database/conciliador_backup_antes_fase7_schema.db",
+    "bytes": 76464128,
+    "motivo": "fotografia de uma fase já superada (5 ou 7)",
+    "alternativa": "permanece no disco local, em `database/`, intocada",
+    "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
+   },
+   {
+    "arquivo": "database/conciliador_backup_antes_fase5_20260909.db",
+    "bytes": 20594688,
+    "motivo": "fotografia de uma fase já superada (5 ou 7)",
+    "alternativa": "permanece no disco local, em `database/`, intocada",
+    "impacto": "NENHUM — o que restaura a Fase 9 é `database/conciliador.db`, que está versionado"
+   },
+   {
+    "arquivo": "data/aplicacao.log",
+    "bytes": 124822,
+    "motivo": "log de execução: é da máquina, não do projeto",
+    "alternativa": "recriado sozinho por `app/web.py` na importação",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "data/preview/pg_resultados.html",
+    "bytes": 55430,
+    "motivo": "página capturada por teste para inspeção visual",
+    "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "data/preview/pg_relatorio.html",
+    "bytes": 45628,
+    "motivo": "página capturada por teste para inspeção visual",
+    "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "data/preview/pg_conciliacao.html",
+    "bytes": 34326,
+    "motivo": "página capturada por teste para inspeção visual",
+    "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "data/preview/pg_medicamentos.html",
+    "bytes": 33917,
+    "motivo": "página capturada por teste para inspeção visual",
+    "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "data/preview/pg_anamnese.html",
+    "bytes": 33357,
+    "motivo": "página capturada por teste para inspeção visual",
+    "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
+    "impacto": "NENHUM"
+   },
+   {
+    "arquivo": "data/preview/pg_achado.html",
+    "bytes": 23876,
+    "motivo": "página capturada por teste para inspeção visual",
+    "alternativa": "recriada por `tests/verificacao_aplicacao.py`",
+    "impacto": "NENHUM"
+   }
+  ]
+ },
+ "arquivos_criticos": {
+  "database/schema.sql": {
+   "sha256": "7f033555da20785c24bab21012eb0726edbc6a21dea88851a0fcb097078e82da",
+   "bytes": 66500
+  },
+  "database/conciliador.db": {
+   "sha256": "4b04ab8eb127922b233679deba6e6f0abf93e71b61dd6b0bf44eda396417d801",
+   "bytes": 76832768
+  },
+  "pipeline/executar_tudo.py": {
+   "sha256": "be6367351dea57b6d72d30cecf4df7dc855898cc80f474ddf4e97c00ef498c89",
+   "bytes": 4981
+  },
+  "pipeline/_comum.py": {
+   "sha256": "18f09f81f2e61bd69ab766b9d79d0c1e0ea51513769c33014aecd33a13139c07",
+   "bytes": 10725
+  },
+  "pipeline/normalizacao.py": {
+   "sha256": "e03c5beea07897997281c067bab2fc38e0ea9b4f0694eed2073ec82048a30da5",
+   "bytes": 14999
+  },
+  "rules/motor_conciliacao.py": {
+   "sha256": "efbd9eb423c830a02b207a38f1f201df10771727cdf4eb4b4ac31df6150a7a47",
+   "bytes": 96070
+  },
+  "rules/motor_horarios.py": {
+   "sha256": "3825361270104e62d444128be6be135c37b0eecf142eb67c8d8041cc3cc96402",
+   "bytes": 29092
+  },
+  "rules/_prioridade.py": {
+   "sha256": "8221ac39b166e4435fb4eadd704579846b7b6d0d7048270d54dc5565c7c7f3f2",
+   "bytes": 24406
+  },
+  "app/web.py": {
+   "sha256": "73814802590eb98cf2f52f6a25f90893a231dfddb4fe347ac9310519edfc41e8",
+   "bytes": 26176
+  },
+  "app/servicos.py": {
+   "sha256": "c93cd5b82b076ccfd5cecbfd1957cc02a58032a5d51100ea5800d525cf3e05fc",
+   "bytes": 42379
+  },
+  "app/busca.py": {
+   "sha256": "64341f7a18163eac4024106bc78af85cd94259655530ae5c76e313f8822e8009",
+   "bytes": 18653
+  },
+  "app/relatorio.py": {
+   "sha256": "831e949b9bee8d50e2bade5ec5d8766625113936c2e8f691575fbd387bd0ad7c",
+   "bytes": 11377
+  },
+  "app/rotulos.py": {
+   "sha256": "73f50bcab1821f3a32e0046b96b939fd6831b8f0dec37c0dddf87e27b72805b5",
+   "bytes": 11377
+  },
+  "ml/_features.py": {
+   "sha256": "d871c81d3acdb5d31247d7d00b0b1a0e01d19aedc75f0e48ff0957a67b5f4baa",
+   "bytes": 14674
+  },
+  "ml/_comum.py": {
+   "sha256": "9712ee68c5b1d1bedd8f99c5f7077470fe4d68dd8b7ec1c4ff8422ea7399311c",
+   "bytes": 7075
+  },
+  "ml/70_predizer.py": {
+   "sha256": "185c060077ef41c6652f175a900db24bc198bc88400bea0cca231fa39dd35215",
+   "bytes": 15443
+  },
+  "models/espaco_features.json": {
+   "sha256": "a442afc9381e7e8e7209b8473dc20d04daa38e3941dd794046a1dca8ae9e1f50",
+   "bytes": 3206
+  },
+  "models/calibrador_m1.json": {
+   "sha256": "7cab0faa4c197da169d995c34f287591a6859a90623aca743a8c0d1c20888af2",
+   "bytes": 1849
+  },
+  "models/m1_1_0-boosting.json": {
+   "sha256": "c6761ca587ffb73adf4e93937cf8a7ab4c04180451465d0b03933a8b6c10f831",
+   "bytes": 507
+  },
+  "tests/teste_regressao.py": {
+   "sha256": "368a785c190f3bef99a267539f6808795e1b639e584fe93f3acaad04438d4c93",
+   "bytes": 23957
+  },
+  "tests/fase9_v1_sistema.py": {
+   "sha256": "106f6e851855a15f1ef53d264f2cb033c2184586f684e4214b81bdbf508b837f",
+   "bytes": 58665
+  },
+  "tests/fase9_v2_independente.py": {
+   "sha256": "2eea1b01f9eb15e8392ffa82d0e60bc526bc1638bbcd8de4a165ac99850ffd3e",
+   "bytes": 29820
+  },
+  "tests/fase9_cenarios.py": {
+   "sha256": "9b95d5d7afb4e8d40da906748ba3e1174078e162f6a49367d6431040272ad8cf",
+   "bytes": 34418
+  },
+  "tests/fase9_convergencia.py": {
+   "sha256": "47c4342d6c6aa73ae90528b540ce9c9504775472f1991e61bb91166c8f27bd16",
+   "bytes": 11871
+  },
+  "auditoria/05_integridade_acervo.py": {
+   "sha256": "bfa8bb42de51c519827866ba57507e35e51a7363c51c0cc7cb79e1090f14d62a",
+   "bytes": 8675
+  },
+  "auditoria/saida/acervo_sha256.json": {
+   "sha256": "8be9c1859f0c849c63a4c9c4a8d291c0bd888ae8895abb220a34e41264109bb6",
+   "bytes": 144166
+  },
+  "docs/STATUS.md": {
+   "sha256": "772c68d8ab0fd8738d20034eb655e90e34ea14546315b889467c94ffd3680a75",
+   "bytes": 77208
+  },
+  "docs/ARQUITETURA.md": {
+   "sha256": "053ebae1bde8f3861e31fb8c9520d1a3822e174de74c5338ea927024f556aa62",
+   "bytes": 17435
+  },
+  "docs/DECISIONS.md": {
+   "sha256": "f87ac67f231ebbc68709bce5301906c632a4d919b0a7a00eb9c4c6ead94c489a",
+   "bytes": 70071
+  },
+  "docs/ML_FASE7.md": {
+   "sha256": "c78caf44ece7c18d19f0d4cd925a4ceec3d52d0b6d86acb8d28e8260d6370df9",
+   "bytes": 44258
+  },
+  "docs/FASE9_VALIDACAO.md": {
+   "sha256": "e648b001093b073b98f590aea9c6da724584c5dfaf3eec5b524c94e0e5df145d",
+   "bytes": 22312
+  },
+  "docs/EMPACOTAMENTO.md": {
+   "sha256": "875a1da38fb286b19e2be0438c6a6091bce4b8774c26f0bc6120f10732385614",
+   "bytes": 7654
+  },
+  "CLAUDE.md": {
+   "sha256": "b8a55c195cde602c827ef159510070a70938c41a2d721ab16070e09bff93589d",
+   "bytes": 30644
+  },
+  "README.md": {
+   "sha256": "929430b0776c5a93488a3047ed260ecf22d2edf636cf4add18a934c5fbbb5996",
+   "bytes": 9149
+  }
+ },
+ "criticos_ausentes": [],
+ "banco": {
+  "impressao_digital": "9e9c85ee3ffea5e0",
+  "tabelas": 44,
+  "views": 15,
+  "substancias": 2094,
+  "substancias_com_atc": 1159,
+  "interacoes": 112520,
+  "evidencias": 153647,
+  "cargas": 12,
+  "modelos": [
+   {
+    "nome": "m1_existencia_interacao",
+    "versao": "1.0-boosting",
+    "algoritmo": "GRADIENT_BOOSTING",
+    "status": "EXPERIMENTAL",
+    "ativo": 0,
+    "semente": 20260909,
+    "versao_dados": "9e9c85ee3ffea5e0",
+    "limiar": null
+   },
+   {
+    "nome": "m1_existencia_interacao",
+    "versao": "1.0-logistica",
+    "algoritmo": "LOGISTICA",
+    "status": "EXPERIMENTAL",
+    "ativo": 0,
+    "semente": 20260909,
+    "versao_dados": "9e9c85ee3ffea5e0",
+    "limiar": null
+   }
+  ],
+  "modelos_ativos": 0,
+  "predicoes": 600,
+  "atendimentos": 0,
+  "pacientes": 0,
+  "integridade": "ok"
+ }
+}

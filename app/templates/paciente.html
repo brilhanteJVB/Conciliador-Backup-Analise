@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block titulo %}Paciente — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>1. Paciente</h1>
+<p class="subtitulo">Só o que o sistema realmente usa. A idade entra no
+contexto dos achados; peso e altura ficam registrados para uso clínico do
+profissional.</p>
+
+<div class="cartao">
+  <form method="post">
+    <div class="campo">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" required autocomplete="off"
+             value="{{ at.nome or '' }}">
+    </div>
+
+    <div class="linha-campos">
+      <div class="campo">
+        <label for="data_nascimento">Data de nascimento
+          <span class="opcional">(opcional)</span></label>
+        <input type="date" id="data_nascimento" name="data_nascimento"
+               value="{{ at.data_nascimento or '' }}">
+        <p class="dica">A idade é calculada, nunca digitada.</p>
+      </div>
+      <div class="campo">
+        <label for="sexo">Sexo <span class="opcional">(quando clinicamente relevante)</span></label>
+        <select id="sexo" name="sexo">
+          {% for valor, nome in [('NAO_INFORMADO','Não informado'),('F','Feminino'),('M','Masculino'),('OUTRO','Outro')] %}
+            <option value="{{ valor }}" {{ 'selected' if at.sexo == valor }}>{{ nome }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="campo">
+        <label for="peso_kg">Peso (kg) <span class="opcional">(opcional)</span></label>
+        <input type="text" id="peso_kg" name="peso_kg" inputmode="decimal"
+               value="{{ at.peso_kg or '' }}" placeholder="deixe em branco se não souber">
+      </div>
+      <div class="campo">
+        <label for="altura_cm">Altura (cm) <span class="opcional">(opcional)</span></label>
+        <input type="text" id="altura_cm" name="altura_cm" inputmode="numeric"
+               value="{{ at.altura_cm or '' }}" placeholder="deixe em branco se não souber">
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="contato">Contato <span class="opcional">(opcional — só se houver retorno combinado)</span></label>
+      <input type="text" id="contato" name="contato" value="{{ at.contato or '' }}">
+    </div>
+
+    <div class="campo">
+      <label for="observacao">Observação <span class="opcional">(opcional)</span></label>
+      <textarea id="observacao" name="observacao">{{ at.observacao or '' }}</textarea>
+    </div>
+
+    <h3>Responsável pelo atendimento</h3>
+    <div class="linha-campos">
+      <div class="campo" style="flex:2">
+        <label for="farmaceutico">Farmacêutico</label>
+        <input type="text" id="farmaceutico" name="farmaceutico"
+               value="{{ at.farmaceutico or '' }}">
+        <p class="dica">É o nome que assina a revisão dos achados.</p>
+      </div>
+      <div class="campo">
+        <label for="crf">CRF</label>
+        <input type="text" id="crf" name="crf" value="{{ at.crf or '' }}">
+      </div>
+    </div>
+
+    <button type="submit">Salvar e ir para a anamnese</button>
+  </form>
+</div>
+
+{% endblock %}

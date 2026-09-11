@@ -1,0 +1,221 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "problema_a": {
+    "origem_rotulo": "FONTE",
+    "tipo": "binario_simetrico",
+    "positivos": 94770,
+    "universo": 457446,
+    "negativos_presumidos": 362676,
+    "prevalencia": 0.2071719940714314,
+    "viavel": true,
+    "limitacao": "negativo presumido (PU learning)"
+  },
+  "problema_b": {
+    "origem_rotulo": "HUMANO",
+    "anotacoes": 0,
+    "profissionais": 0,
+    "viavel": false,
+    "motivo": "anotacao_profissional vazia (0 linhas)",
+    "necessario_estimado": "400 a 1.000 anotacoes, 2 avaliadores"
+  },
+  "problema_c1_gravidade": {
+    "origem_rotulo": "FONTE",
+    "pares_graduados": 38459,
+    "pares_sem_gravidade": 56311,
+    "pares_graduados_por_duas_fontes": 0,
+    "conflitos_medidos": 0,
+    "viavel": false,
+    "motivo": "65,8%% das linhas sem graduacao e um unico graduador; consistencia entre fontes imensuravel"
+  },
+  "problema_c2_tipo": {
+    "origem_rotulo": "SISTEMA_REGEX",
+    "pares_com_tipo": 52261,
+    "distribuicao": {
+      "FARMACOCINETICA": 27874,
+      "FARMACODINAMICA": 24387
+    },
+    "conflito_entre_fontes": 0,
+    "viavel": true,
+    "papel": "alvo secundario",
+    "limitacao": "rotulo derivado por regex de UMA fonte, confiabilidade MEDIA"
+  },
+  "problema_c3_descartados": [
+    {
+      "alvo": "prioridade",
+      "origem_rotulo": "SISTEMA",
+      "rotulos": 0,
+      "motivo": "calculada por rules/_prioridade.py; treinar nela mede fidelidade ao nosso codigo, nao verdade clinica. Proibido pela especificacao §3."
+    },
+    {
+      "alvo": "classificacao de risco",
+      "origem_rotulo": "—",
+      "rotulos": 0,
+      "motivo": "e a gravidade com outro nome; cai com C1."
+    },
+    {
+      "alvo": "mecanismo",
+      "origem_rotulo": "FONTE (texto livre)",
+      "rotulos": 0,
+      "motivo": "texto livre sem vocabulario controlado. Nao ha classe fechada para prever; seria geracao de texto, nao classificacao."
+    },
+    {
+      "alvo": "efeito clinico",
+      "origem_rotulo": "FONTE (texto livre)",
+      "rotulos": 54183,
+      "motivo": "mesmo caso do mecanismo."
+    },
+    {
+      "alvo": "necessidade de revisao",
+      "origem_rotulo": "SISTEMA",
+      "rotulos": 0,
+      "motivo": "todas as 112.520 linhas estao PENDENTE. Zero variacao no alvo."
+    },
+    {
+      "alvo": "reacao adversa",
+      "origem_rotulo": "VigiMed",
+      "rotulos": 0,
+      "motivo": "VigiMed nao carregado neste projeto. M4 fica fora da Fase 7."
+    }
+  ]
+}

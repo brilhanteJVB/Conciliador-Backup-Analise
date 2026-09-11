@@ -1,0 +1,19 @@
+
+==========================================================================
+REGISTRO DO MODELO — Fase 7
+==========================================================================
+  espaco de atributos gravado                                     130 models/espaco_features.json
+
+--- 1.0-boosting  (melhor metrica)
+  familia                                              GRADIENT_BOOSTING 
+  AUC teste / FRIO_FRIO                                0.7887 / 0.7392 
+  formato do artefato                                  SKLEARN_PICKLE 
+  tamanho do artefato                                         1.08 MB 
+    AVISO: artefato depende da versao 1.9.0 do scikit-learn; para empacotamento em .exe isso e uma amarra, e esta declarado
+Traceback (most recent call last):
+  File "C:\Sistema Conciliador projeto\ml\60_registrar_modelo.py", line 168, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Sistema Conciliador projeto\ml\60_registrar_modelo.py", line 126, in main
+    con.execute("DELETE FROM modelo WHERE nome=? AND versao=?",
+sqlite3.IntegrityError: FOREIGN KEY constraint failed

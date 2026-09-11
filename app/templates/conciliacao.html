@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block titulo %}Conciliação — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>6. Conciliação medicamentosa</h1>
+<p class="subtitulo">Comparação entre o que foi prescrito e o que o paciente
+relata usar. <strong>Diferença não é erro:</strong> o sistema classifica a
+situação e nunca a intenção — quem decide se foi um erro de conciliação é o
+profissional, com nome registrado.</p>
+
+<!-- ========================================================= AS LISTAS -->
+<div class="cartao">
+  <h2>As listas, lado a lado</h2>
+  <div class="linha-campos" style="align-items:flex-start">
+    <div style="flex:1;min-width:250px">
+      <h3>Prescrito <span class="chip">{{ prescritos|length }}</span></h3>
+      {% if prescritos %}
+        {% for g in prescritos %}
+          <div class="item"><div class="corpo">
+            <div class="nome">{{ g.nome_relatado }}</div>
+            <div class="detalhe">{{ g.resumo_posologia() }}</div>
+          </div></div>
+        {% endfor %}
+      {% else %}
+        <p class="vazio">Nenhuma receita registrada. Sem as duas listas não há
+          divergência a apurar — só a farmacoterapia relatada, que os demais
+          módulos analisam normalmente.</p>
+      {% endif %}
+    </div>
+    <div style="flex:1;min-width:250px">
+      <h3>Relatado pelo paciente <span class="chip">{{ relatados|length }}</span></h3>
+      {% if relatados %}
+        {% for g in relatados %}
+          <div class="item"><div class="corpo">
+            <div class="nome">{{ g.nome_relatado }}</div>
+            <div class="detalhe">{{ g.resumo_posologia() }}</div>
+          </div></div>
+        {% endfor %}
+      {% else %}
+        <p class="vazio">Nada relatado.</p>
+      {% endif %}
+    </div>
+    {% if anteriores %}
+    <div style="flex:1;min-width:250px">
+      <h3>Uso anterior <span class="chip">{{ anteriores|length }}</span></h3>
+      {% for g in anteriores %}
+        <div class="item"><div class="corpo">
+          <div class="nome">{{ g.nome_relatado }}</div>
+          <div class="detalhe">{{ g.resumo_posologia() }}</div>
+        </div></div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ===================================================== O PAREAMENTO -->
+<div class="cartao">
+  <h2>Resultado do pareamento</h2>
+  {% if pares %}
+    {% for p in pares %}
+      {% set par = p.par %}
+      <div class="achado {{ 'INFORMATIVO' if par.situacao == 'CONCILIADO' else 'MODERADO' }}">
+        <div>
+          <span class="chip {{ 'forte' if par.situacao == 'CONCILIADO' }}">
+            {{ rot.rotular(rot.SITUACAO_PAR, par.situacao) }}</span>
+          {% if par.tipo_divergencia %}
+            <span class="chip">{{ rot.rotular(rot.TIPO_DIVERGENCIA, par.tipo_divergencia) }}</span>
+          {% endif %}
+        </div>
+        <h3>{{ par.nome_exibicao }}</h3>
+        {% if par.valor_prescrito or par.valor_relatado %}
+          <table style="max-width:520px">
+            <tr><th style="width:110px">Prescrito</th><td>{{ par.valor_prescrito or '—' }}</td></tr>
+            <tr><th>Relatado</th><td>{{ par.valor_relatado or '—' }}</td></tr>
+          </table>
+        {% endif %}
+        <p style="margin:8px 0 0">{{ par.detalhe }}</p>
+
+        {% if par.situacao != 'CONCILIADO' %}
+          <div class="eixos">
+            <div class="eixo">
+              <div class="rotulo">Intencionalidade</div>
+              <div class="valor">{{ rot.rotular(rot.INTENCIONALIDADE, par.intencionalidade) }}</div>
+              <div class="nota-eixo">Só um profissional identificado pode decidir.</div>
+            </div>
+            {% if p.anotacao %}
+            <div class="eixo">
+              <div class="rotulo">Registrado por</div>
+              <div class="valor">{{ p.anotacao.profissional }}</div>
+              <div class="nota-eixo">{{ p.anotacao.registrado_em }}</div>
+            </div>
+            {% endif %}
+          </div>
+          {% if p.anotacao and p.anotacao.observacao %}
+            <p class="dica"><strong>Observação:</strong> {{ p.anotacao.observacao }}</p>
+          {% endif %}
+
+          <details class="sem-impressao" style="margin-top:8px">
+            <summary style="cursor:pointer">Registrar avaliação desta divergência</summary>
+            <form method="post" action="{{ url_for('registrar_divergencia', codigo=codigo) }}"
+                  style="margin-top:10px">
+              <input type="hidden" name="chave" value="{{ p.chave }}">
+              <div class="linha-campos">
+                <div class="campo">
+                  <label>Esta diferença foi…</label>
+                  <select name="intencionalidade">
+                    <option value="">Não determinar agora</option>
+                    <option value="INTENCIONAL">Intencional (ajuste conhecido)</option>
+                    <option value="NAO_INTENCIONAL">Erro de conciliação</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label>Profissional</label>
+                  <input type="text" name="profissional" value="{{ at.farmaceutico or '' }}"
+                         placeholder="obrigatório para registrar" required>
+                </div>
+                <div class="campo" style="flex:0 0 130px">
+                  <label>CRF</label>
+                  <input type="text" name="crf" value="{{ at.crf or '' }}">
+                </div>
+              </div>
+              <div class="campo">
+                <label>Observação</label>
+                <input type="text" name="observacao" placeholder="o que foi apurado com o paciente">
+              </div>
+              <button type="submit">Registrar</button>
+            </form>
+          </details>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="vazio">Nenhum pareamento a mostrar. Registre a receita na lista
+      “Prescrito” e o que o paciente usa na lista “Relatado” para que a
+      conciliação tenha o que comparar.</p>
+  {% endif %}
+</div>
+
+{% for n in res.nao_avaliado %}
+  {% if n.motivo == 'SEM_CORRESPONDENCIA_ENTRE_LISTAS' %}
+    <div class="nota">
+      <strong>Sem lista prescrita.</strong>{{ n.detalhe }}
+    </div>
+  {% endif %}
+{% endfor %}
+
+<p><a class="botao" href="{{ url_for('resultados', codigo=codigo) }}">Ver resultados da análise →</a></p>
+
+{% endblock %}

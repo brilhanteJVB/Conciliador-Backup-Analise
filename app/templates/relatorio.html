@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% block titulo %}Relatório do atendimento {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<div class="sem-impressao" style="margin-bottom:14px">
+  <button onclick="window.print()">Imprimir</button>
+  <a class="botao secundario" href="{{ url_for('relatorio_texto', codigo=codigo) }}">Versão em texto</a>
+  <a class="botao secundario" href="{{ url_for('resultados', codigo=codigo) }}">Voltar aos resultados</a>
+  {% if at.situacao == 'CONCLUIDO' %}
+    <form method="post" action="{{ url_for('reabrir', codigo=codigo) }}" style="display:inline">
+      <button class="secundario" type="submit">Reabrir atendimento</button>
+    </form>
+  {% else %}
+    <form method="post" action="{{ url_for('concluir', codigo=codigo) }}" style="display:inline">
+      <button class="secundario" type="submit">Concluir atendimento</button>
+    </form>
+  {% endif %}
+</div>
+
+<div class="documento">
+  <h1>Conciliação medicamentosa</h1>
+  <div class="identificacao">
+    <div><strong>Atendimento:</strong> {{ at.codigo }}</div>
+    <div><strong>Data:</strong> {{ at.iniciado_em }}</div>
+    <div><strong>Paciente:</strong> {{ at.nome }}</div>
+    <div><strong>Idade:</strong> {{ at.idade ~ ' anos' if at.idade is not none else 'não informada' }}</div>
+    <div><strong>Sexo:</strong> {{ rot.rotular(rot.SEXO, at.sexo) }}</div>
+    <div><strong>Farmacêutico:</strong> {{ at.farmaceutico or 'não informado' }}{% if at.crf %} — {{ at.crf }}{% endif %}</div>
+    <div><strong>Relatório gerado em:</strong> {{ dados.gerado_em }}</div>
+    <div><strong>Motor:</strong> {{ dados.versao_motor }}</div>
+  </div>
+
+  <!-- =========================================================== RESUMO -->
+  <h2>Resumo</h2>
+  <table style="max-width:520px">
+    <tr><td>Medicamentos analisados</td><td><strong>{{ dados.resumo.medicamentos }}</strong></td></tr>
+    <tr><td>Achados</td><td><strong>{{ dados.resumo.achados }}</strong></td></tr>
+    {% if dados.resumo.achados_previstos %}
+    <tr><td>Previstos por modelo (sem documento)</td>
+        <td><strong>{{ dados.resumo.achados_previstos }}</strong></td></tr>
+    {% endif %}
+    <tr><td style="padding-left:24px">críticos</td><td>{{ dados.resumo.criticos }}</td></tr>
+    <tr><td style="padding-left:24px">altos</td><td>{{ dados.resumo.altos }}</td></tr>
+    <tr><td style="padding-left:24px">moderados</td><td>{{ dados.resumo.moderados }}</td></tr>
+    <tr><td style="padding-left:24px">baixos</td><td>{{ dados.resumo.baixos }}</td></tr>
+    <tr><td style="padding-left:24px">informativos</td><td>{{ dados.resumo.informativos }}</td></tr>
+    <tr><td>Divergências de conciliação</td><td>{{ dados.resumo.divergencias }}</td></tr>
+    <tr><td>Informações insuficientes</td><td>{{ dados.resumo.informacao_insuficiente }}</td></tr>
+    <tr><td>Itens não avaliados</td><td>{{ dados.resumo.nao_avaliado }}</td></tr>
+    <tr><td>Revisão profissional necessária</td>
+        <td><strong>{{ 'SIM' if dados.resumo.requer_revisao_profissional else 'NÃO' }}</strong></td></tr>
+  </table>
+
+  <!-- ==================================================== FARMACOTERAPIA -->
+  <h2>Farmacoterapia</h2>
+  <table>
+    <thead><tr><th>Medicamento</th><th>Lista</th><th>Posologia</th>
+               <th>Princípio ativo</th></tr></thead>
+    <tbody>
+    {% for g in dados.medicamentos %}
+      <tr>
+        <td>{{ g.nome_relatado }}
+          {% if not g.reconhecido %}<br><span class="chip alerta">não reconhecido</span>{% endif %}</td>
+        <td>{{ dict(dados.listas if dados.listas is defined else []).get(g.lista, g.lista) if false else g.lista|lower|replace('_',' ') }}</td>
+        <td>{{ g.resumo_posologia() }}</td>
+        <td>{{ g.substancias | map(attribute=1) | join(' + ') or '—' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  {% if dados.condicoes or dados.alergias %}
+    <h2>Anamnese</h2>
+    <p><strong>Condições clínicas:</strong>
+      {% if dados.condicoes %}
+        {{ dados.condicoes | map(attribute='nome') | select | join(', ') }}
+        {% for c in dados.condicoes if not c.nome %}{{ c.descricao_livre }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% else %}nenhuma registrada{% endif %}
+    </p>
+    <p><strong>Alergias:</strong>
+      {% if dados.alergias %}
+        {% for a in dados.alergias %}{{ a.substancia or a.descricao_livre }}{% if a.reacao %} ({{ a.reacao }}){% endif %}{% if not loop.last %}; {% endif %}{% endfor %}
+      {% else %}nenhuma registrada{% endif %}
+    </p>
+    {% if dados.itens %}
+      <p><strong>Alimentos, plantas e suplementos:</strong>
+        {% for i in dados.itens %}{{ i.nome or i.nome_relatado }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+    {% endif %}
+  {% endif %}
+
+  <!-- ========================================================== ACHADOS -->
+  <h2>Achados</h2>
+  {% if not dados.achados %}
+    <p>Nenhum achado. <strong>Isso não significa ausência de risco</strong> —
+      veja a seção do que não foi avaliado.</p>
+  {% endif %}
+  {% for p in dados.ordem_prioridade %}
+    {% set lista = dados.achados_por_prioridade.get(p, []) %}
+    {% if lista %}
+      <h3><span class="prio {{ p }}">{{ rot.PRIORIDADE[p] }}</span> — {{ lista|length }}</h3>
+      {% for a in lista %}
+        <div class="achado {{ a.prioridade }}">
+          <strong>{{ a.titulo }}</strong>
+          <div class="detalhe" style="font-size:13px;color:#5a6472;margin:3px 0 6px">
+            {{ rot.rotular(rot.MODULO, a.tipo) }}
+            · gravidade da fonte: {{ rot.rotular(rot.GRAVIDADE, a.gravidade_fonte) }}
+            · confiança do sistema: {{ rot.rotular(rot.CONFIANCA, a.confianca_sistema) }}
+            · {{ rot.rotular(rot.STATUS_INFORMACAO, a.status_informacao) }}
+          </div>
+          {% if a.efeito_esperado %}<div><strong>Efeito esperado:</strong> {{ a.efeito_esperado }}</div>{% endif %}
+          {% if a.mecanismo %}<div><strong>Mecanismo:</strong> {{ a.mecanismo }}</div>{% endif %}
+          {% if a.conduta %}<div><strong>Sugestão da fonte:</strong> {{ a.conduta }}</div>{% endif %}
+          <div style="font-size:13px;margin-top:5px">{{ a.explicacao }}</div>
+          {% if a.fonte %}<div style="font-size:12.5px;color:#5a6472">Fonte: {{ a.fonte }}</div>{% endif %}
+          {% if a.status_informacao == 'EXTRAIDO_AUTOMATICAMENTE' %}
+            <div class="selo-extraido" style="margin:6px 0 0">
+              Extraído automaticamente, <strong>sem revisão farmacêutica</strong>.</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  <!-- ================================================ PREVISTO POR MODELO -->
+  {% if dados.achados_previstos %}
+    <h2>Previsto por modelo — <span style="font-weight:400">não é interação documentada</span></h2>
+    <div class="sem-evidencia">
+      <strong>Nenhuma fonte do acervo afirma os pares abaixo.</strong> São
+      estimativas estatísticas da probabilidade de o par <em>estar
+      documentado</em> em alguma base — não da gravidade e não do risco. Não
+      entram na contagem por prioridade e exigem verificação em fonte antes de
+      qualquer conduta.
+    </div>
+    {% for a in dados.achados_previstos %}
+      <div class="achado previsto">
+        <strong>{{ a.titulo }}</strong>
+        <div class="detalhe" style="font-size:13px;color:#5a6472;margin:3px 0 6px">
+          evidência documental: <strong>nenhuma</strong>
+          · probabilidade estimada: {{ rot.percentual_previsao(a.probabilidade_modelo) }}
+          · confiança do sistema: {{ rot.rotular(rot.CONFIANCA, a.confianca_sistema) }}
+          · modelo: {{ a.metodo_deteccao }}
+          · {{ a.origem_afirmacao }}
+        </div>
+        <div style="font-size:13px;margin-top:5px">{{ a.explicacao }}</div>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- ===================================================== DIVERGÊNCIAS -->
+  <h2>Divergências de conciliação</h2>
+  {% if dados.divergencias %}
+    <table>
+      <thead><tr><th>Item</th><th>Tipo</th><th>Prescrito</th><th>Relatado</th>
+                 <th>Intencionalidade</th></tr></thead>
+      <tbody>
+      {% for d in dados.divergencias %}
+        <tr>
+          <td>{{ d.par.nome_exibicao }}</td>
+          <td>{{ rot.rotular(rot.TIPO_DIVERGENCIA, d.par.tipo_divergencia) }}</td>
+          <td>{{ d.par.valor_prescrito or '—' }}</td>
+          <td>{{ d.par.valor_relatado or '—' }}</td>
+          <td>{{ rot.rotular(rot.INTENCIONALIDADE, d.par.intencionalidade) }}
+            {% if d.anotacao %}<br><span style="font-size:12px;color:#5a6472">
+              {{ d.anotacao.profissional }}, {{ d.anotacao.registrado_em }}</span>{% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Nenhuma divergência apurada.</p>
+  {% endif %}
+  {% if dados.conciliados %}
+    <p style="font-size:13.5px"><strong>Conciliados sem divergência:</strong>
+      {{ dados.conciliados | map(attribute='nome_exibicao') | join(', ') }}</p>
+  {% endif %}
+
+  <!-- ==================================================== NÃO AVALIADO -->
+  <h2>O que o sistema não avaliou</h2>
+  {% if dados.nao_avaliado %}
+    {% for motivo, itens in dados.nao_avaliado.items() %}
+      <p style="margin:8px 0 3px"><strong>{{ rot.rotular(rot.MOTIVO_NAO_AVALIADO, motivo) }}</strong>
+        ({{ itens|length }})</p>
+      <p style="font-size:13px;color:#5a6472;margin:0 0 4px">{{ itens[0].detalhe }}</p>
+      <ul style="margin:0 0 10px;padding-left:22px;font-size:13.5px">
+        {% for n in itens[:10] %}<li>{{ n.item }}</li>{% endfor %}
+        {% if itens|length > 10 %}<li>… e mais {{ itens|length - 10 }}</li>{% endif %}
+      </ul>
+    {% endfor %}
+  {% else %}
+    <p>Nada declarado.</p>
+  {% endif %}
+
+  {% if dados.limitacoes %}
+    <h2>Limitações desta análise</h2>
+    <ul style="font-size:14px">
+      {% for lim in dados.limitacoes %}<li>{{ lim }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- ======================================================== REVISÃO -->
+  {% if dados.revisados %}
+    <h2>Revisão do profissional</h2>
+    {% for a, an in dados.revisados %}
+      <p style="margin:6px 0">
+        <strong>{{ a.titulo }}</strong> —
+        {{ an.situacao.replace('_',' ')|lower }} por {{ an.profissional }}{% if an.crf %} ({{ an.crf }}){% endif %},
+        {{ an.registrado_em }}.
+        {% if an.observacao %}<br><em>{{ an.observacao }}</em>{% endif %}
+      </p>
+    {% endfor %}
+  {% endif %}
+
+  <!-- ========================================================== FONTES -->
+  <h2>Fontes usadas</h2>
+  {% if dados.fontes %}
+    <ul style="font-size:13.5px">
+      {% for fonte, n in dados.fontes.items() %}
+        <li>{{ fonte }} — {{ n }} evidência(s)</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhuma fonte externa sustentou achado neste atendimento.</p>
+  {% endif %}
+
+  <div class="rodape-doc">
+    Este relatório é apoio à decisão farmacêutica. O sistema detecta, compara,
+    organiza, alerta, sugere e explica — <strong>não altera prescrição, não
+    suspende nem substitui medicamento, não modifica dose ou horário</strong>.
+    Toda decisão terapêutica permanece com o profissional.
+    <br>Conciliador de Medicamentos · motor {{ dados.versao_motor }} ·
+    atendimento {{ at.codigo }}.
+  </div>
+</div>
+
+{% endblock %}

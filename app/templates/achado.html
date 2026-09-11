@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block titulo %}{{ achado.titulo }} — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<p class="sem-impressao"><a href="{{ url_for('resultados', codigo=codigo) }}">← voltar aos resultados</a></p>
+
+<div class="achado {{ achado.prioridade }}" style="border-left-width:7px">
+  <div>
+    <span class="prio {{ achado.prioridade }}">{{ rot.PRIORIDADE[achado.prioridade] }}</span>
+    <span class="chip">{{ rot.rotular(rot.MODULO, achado.tipo) }}</span>
+    <span class="chip">{{ rot.rotular(rot.SUBTIPO, achado.subtipo,
+                          achado.subtipo.replace('_',' ')|lower) }}</span>
+  </div>
+  <h1 style="margin:8px 0">{{ achado.titulo }}</h1>
+
+  <!-- ================================================= O QUE FOI ENCONTRADO -->
+  <h3>O que foi encontrado</h3>
+  <table style="max-width:640px">
+    <tr><th style="width:170px">Item A</th><td>{{ achado.item_a }}</td></tr>
+    {% if achado.item_b %}
+      <tr><th>{{ rot.rotular(rot.ALVO_TIPO, achado.alvo_tipo)|capitalize }}</th>
+          <td>{{ achado.item_b }}</td></tr>
+    {% endif %}
+    {% if achado.efeito_esperado %}
+      <tr><th>Efeito esperado</th><td>{{ achado.efeito_esperado }}</td></tr>
+    {% endif %}
+    {% if achado.mecanismo %}
+      <tr><th>Mecanismo</th><td>{{ achado.mecanismo }}</td></tr>
+    {% endif %}
+    {% if achado.conduta %}
+      <tr><th>Sugestão da fonte</th><td>{{ achado.conduta }}</td></tr>
+    {% endif %}
+    {% if achado.descricao_fonte %}
+      <tr><th>Texto original da fonte</th>
+          <td style="font-size:13px;color:#5a6472">{{ achado.descricao_fonte }}</td></tr>
+    {% endif %}
+  </table>
+
+  <!-- ============================================= OS EIXOS, SEPARADOS -->
+  <h3>Como ler este achado</h3>
+  <p class="ajuda">Gravidade e confiança são <strong>coisas diferentes</strong>.
+    Um achado pode ser potencialmente grave e ter confiança baixa — e isso não
+    é contradição: é o retrato honesto do que a fonte diz e do que o sistema
+    consegue garantir.</p>
+  <div class="eixos">
+    <div class="eixo">
+      <div class="rotulo">Gravidade da fonte</div>
+      <div class="valor">{{ rot.rotular(rot.GRAVIDADE, achado.gravidade_fonte) }}</div>
+      <div class="nota-eixo">O que a fonte diz sobre o dano possível.</div>
+    </div>
+    <div class="eixo">
+      <div class="rotulo">Confiança do sistema</div>
+      <div class="valor">{{ rot.rotular(rot.CONFIANCA, achado.confianca_sistema) }}</div>
+      <div class="nota-eixo">{{ rot.CONFIANCA_EXPLICACAO[achado.confianca_sistema] }}</div>
+    </div>
+    <div class="eixo">
+      <div class="rotulo">Prioridade de exibição</div>
+      <div class="valor">{{ rot.PRIORIDADE[achado.prioridade] }}</div>
+      <div class="nota-eixo">Combina as duas com o contexto do paciente.</div>
+    </div>
+    <div class="eixo">
+      <div class="rotulo">Natureza da afirmação</div>
+      <div class="valor">{{ rot.rotular(rot.NATUREZA, achado.natureza) }}</div>
+    </div>
+    <div class="eixo">
+      <div class="rotulo">Neste paciente</div>
+      <div class="valor">{{ rot.rotular(rot.CLASSIFICACAO, achado.classificacao) }}</div>
+    </div>
+    <div class="eixo">
+      <div class="rotulo">Nível de evidência</div>
+      <div class="valor">{{ rot.rotular(rot.NIVEL_EVIDENCIA, achado.nivel_evidencia) }}</div>
+    </div>
+  </div>
+
+  {% if achado.status_informacao == 'EXTRAIDO_AUTOMATICAMENTE' %}
+    <div class="selo-extraido">
+      <strong>Situação da informação:
+        {{ rot.STATUS_INFORMACAO['EXTRAIDO_AUTOMATICAMENTE'] }}.</strong>
+      {{ rot.STATUS_EXPLICACAO['EXTRAIDO_AUTOMATICAMENTE'] }}
+    </div>
+  {% elif achado.status_informacao == 'PREVISTO' %}
+    <div class="selo-previsto">
+      <strong>Situação da informação:
+        {{ rot.STATUS_INFORMACAO['PREVISTO'] }}.</strong>
+      {{ rot.STATUS_EXPLICACAO['PREVISTO'] }}
+      {% if achado.probabilidade_modelo is not none %}
+        Probabilidade estimada pelo modelo:
+        {{ rot.percentual_previsao(achado.probabilidade_modelo) }}.
+        {% if rot.probabilidade_saturada(achado.probabilidade_modelo) %}
+          O valor está no teto da tabela de calibração — isso quer dizer que,
+          na validação, todos os pares desta faixa estavam documentados, e
+          <strong>não</strong> que a interação seja certa. O valor exato está
+          no painel de rastreabilidade abaixo.
+        {% endif %}
+      {% endif %}
+    </div>
+  {% else %}
+    <p><strong>Situação da informação:</strong>
+      {{ rot.rotular(rot.STATUS_INFORMACAO, achado.status_informacao) }} —
+      {{ rot.STATUS_EXPLICACAO.get(achado.status_informacao, '') }}</p>
+  {% endif %}
+
+  {% if achado.conflito_tipo %}
+    <div class="nota">
+      <strong>As fontes discordam sobre {{ achado.conflito_tipo|lower }}.</strong>
+      O sistema não escolheu nenhuma delas. As duas leituras estão listadas
+      abaixo, e a ordenação usou a mais grave — que é a única escolha cujo
+      risco não é assimétrico.
+    </div>
+  {% endif %}
+
+  <!-- ================================================== POR QUE APARECEU -->
+  <h3>Por que este achado apareceu</h3>
+  <p>{{ achado.explicacao }}</p>
+  <div class="evidencia">
+    <div class="cabeca"><span class="fonte-nome">Cadeia de detecção</span></div>
+    {% for elo in cadeia %}
+      <div style="margin-bottom:3px">{{ elo }}</div>
+    {% endfor %}
+  </div>
+
+  {% if achado.contexto_paciente %}
+    <p><strong>Contexto do paciente considerado:</strong> {{ achado.contexto_paciente }}</p>
+  {% endif %}
+  <p><strong>Por que esta prioridade:</strong> {{ achado.justificativa_prioridade }}</p>
+
+  <!-- ================================================ PREVISÃO DE MODELO -->
+  {% if achado.natureza == 'PREVISTO' %}
+    <div class="sem-evidencia">
+      <strong>Não há evidência documental para este par.</strong> Nenhuma bula,
+      artigo ou base do acervo afirma esta interação. O que existe abaixo é o
+      registro de uma previsão estatística — e previsão não é fonte.
+    </div>
+    {% if previsao %}
+      <div class="painel-modelo">
+        <div class="titulo-modelo">Rastreabilidade da previsão</div>
+        <dl>
+          <dt>Origem do achado</dt><dd>MODELO</dd>
+          <dt>Modelo</dt><dd>{{ previsao.modelo_nome }}</dd>
+          <dt>Versão</dt><dd>{{ previsao.modelo_versao }} ({{ previsao.algoritmo }})</dd>
+          <dt>Probabilidade bruta</dt><dd>{{ '%.4f'|format(previsao.probabilidade) }}</dd>
+          {% if previsao.probabilidade_calibrada is not none %}
+            <dt>Probabilidade calibrada</dt><dd>{{ '%.4f'|format(previsao.probabilidade_calibrada) }}</dd>
+          {% endif %}
+          <dt>Limiar de alerta do modelo</dt><dd>{{ '%.2f'|format(previsao.limiar_alerta) }}</dd>
+          <dt>Atributos</dt><dd>{{ previsao.n_features }}</dd>
+          <dt>Protocolo de validação</dt><dd>{{ previsao.protocolo_validacao }}</dd>
+          <dt>Versão dos dados</dt><dd>{{ previsao.versao_dados }}</dd>
+          <dt>Semente</dt><dd>{{ previsao.semente }}</dd>
+          <dt>Registrada em</dt><dd>{{ previsao.criado_em }}</dd>
+          <dt>Situação da previsão</dt>
+          <dd>{{ rot.rotular(rot.STATUS_PREDICAO, previsao.status_predicao) }}
+            {% if previsao.revisado_por %} — {{ previsao.revisado_por }}{% endif %}</dd>
+          <dt>Evidência documental</dt><dd>ausente</dd>
+        </dl>
+      </div>
+
+      {% if previsao.fatores %}
+        <div class="painel-modelo">
+          <div class="titulo-modelo">O que o modelo pesou</div>
+          <p class="ajuda" style="margin-top:0">Contribuição <strong>aproximada</strong>,
+            calculada recalculando a previsão com um atributo por vez no valor
+            de referência. Não é SHAP, e <strong>não é mecanismo
+            farmacológico</strong>: descreve o que o modelo viu, não o que
+            acontece no organismo.</p>
+          <dl>
+            {% for f in previsao.fatores %}
+              <dt>{{ f.atributo }}</dt>
+              <dd>{{ '%+.3f'|format(f.efeito) }} (valor {{ f.valor }})</dd>
+            {% endfor %}
+          </dl>
+        </div>
+      {% endif %}
+
+      <div class="selo-previsto"><strong>Limitações declaradas do modelo.</strong>
+        {{ previsao.limitacoes }}</div>
+    {% else %}
+      <div class="sem-evidencia">
+        <strong>A previsão que originou esta linha não está mais liberada.</strong>
+        O modelo pode ter sido desativado ou a previsão recusada por um
+        farmacêutico. O número não é exibido sem a sua procedência.
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <!-- ========================================================= EVIDÊNCIA -->
+  <h3>Evidência ({{ achado.evidencias|length }})</h3>
+  {% if achado.evidencias %}
+    {% for e in achado.evidencias %}
+      <div class="evidencia">
+        <div class="cabeca">
+          <span class="fonte-nome">{{ e.fonte }}</span>
+          <span class="chip {{ 'alerta' if e.papel == 'DIVERGE' }}">{{ rot.rotular(rot.PAPEL_EVIDENCIA, e.papel) }}</span>
+          {% if e.gravidade_declarada %}
+            <span class="chip">declara gravidade {{ rot.rotular(rot.GRAVIDADE, e.gravidade_declarada)|lower }}</span>
+          {% endif %}
+        </div>
+        <dl>
+          {% if e.tipo_fonte %}<dt>Tipo de fonte</dt><dd>{{ e.tipo_fonte|lower }}</dd>{% endif %}
+          {% if e.confiabilidade_fonte %}<dt>Confiabilidade da fonte</dt><dd>{{ e.confiabilidade_fonte|lower }}</dd>{% endif %}
+          {% if e.documento %}<dt>Documento</dt><dd>{{ e.documento }}</dd>{% endif %}
+          <dt>Origem no banco</dt><dd>{{ e.origem_afirmacao }}</dd>
+          {% if e.nivel_evidencia %}<dt>Nível de evidência</dt><dd>{{ rot.rotular(rot.NIVEL_EVIDENCIA, e.nivel_evidencia) }}</dd>{% endif %}
+          {% if e.metodo_extracao %}<dt>Método de extração</dt><dd>{{ rot.rotular(rot.METODO_EXTRACAO, e.metodo_extracao) }}</dd>{% endif %}
+          {% if e.confianca_extracao %}<dt>Confiança da extração</dt><dd>{{ rot.rotular(rot.CONFIANCA_EXTRACAO, e.confianca_extracao) }}</dd>{% endif %}
+          {% if e.mecanismo %}<dt>Mecanismo</dt><dd>{{ e.mecanismo }}</dd>{% endif %}
+          {% if e.conduta %}<dt>Conduta da fonte</dt><dd>{{ e.conduta }}</dd>{% endif %}
+        </dl>
+        {% if e.trecho %}
+          <div class="trecho">{{ e.trecho }}</div>
+        {% endif %}
+        {% if e.descricao_original and e.descricao_original != e.efeito_esperado %}
+          <div class="trecho">{{ e.descricao_original }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="vazio">Este achado não tem evidência de fonte externa — foi
+      calculado sobre os dados deste atendimento.</p>
+  {% endif %}
+
+  {% if agrupados %}
+    <h3>Outras detecções do mesmo problema ({{ agrupados|length }})</h3>
+    <p class="ajuda">O mesmo problema foi encontrado por mais de um caminho.
+      Aparece como um alerta só, e nenhuma evidência foi descartada.</p>
+    {% for g in agrupados %}
+      <div class="evidencia">
+        <div class="cabeca">
+          <span class="fonte-nome">{{ g.titulo }}</span>
+          <span class="chip">{{ rot.rotular(rot.MODULO, g.tipo) }}</span>
+        </div>
+        <p style="margin:4px 0">{{ g.explicacao }}</p>
+        <dl><dt>Método de detecção</dt><dd>{{ g.metodo_deteccao }}</dd></dl>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<!-- ====================================================== REVISÃO -->
+<div class="cartao sem-impressao">
+  <h2>Revisão profissional</h2>
+  {% if achado.requer_revisao_profissional %}
+    <p class="ajuda">Este achado exige conferência. Registrar a revisão
+      <strong>não</strong> altera prioridade, gravidade nem confiança — apenas
+      documenta que uma pessoa olhou, quem e quando.</p>
+  {% else %}
+    <p class="ajuda">Este achado é orientação a repassar, e não exige revisão.
+      O registro fica disponível mesmo assim.</p>
+  {% endif %}
+
+  {% if anotacao %}
+    <div class="nota">
+      <strong>{{ anotacao.situacao.replace('_',' ')|capitalize }} por {{ anotacao.profissional }}{% if anotacao.crf %} ({{ anotacao.crf }}){% endif %}</strong>
+      em {{ anotacao.registrado_em }}.
+      {% if anotacao.observacao %}<br>{{ anotacao.observacao }}{% endif %}
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{ url_for('revisar_achado', codigo=codigo) }}">
+    <input type="hidden" name="chave" value="{{ achado.grupo_chave }}">
+    <div class="linha-campos">
+      <div class="campo">
+        <label for="situacao">Situação</label>
+        <select id="situacao" name="situacao">
+          <option value="REVISADO">Revisado</option>
+          <option value="NAO_APLICAVEL">Não se aplica a este paciente</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="profissional">Profissional</label>
+        <input type="text" id="profissional" name="profissional" required
+               value="{{ anotacao.profissional if anotacao else (at.farmaceutico or '') }}">
+      </div>
+      <div class="campo" style="flex:0 0 130px">
+        <label for="crf">CRF</label>
+        <input type="text" id="crf" name="crf"
+               value="{{ anotacao.crf if anotacao else (at.crf or '') }}">
+      </div>
+    </div>
+    <div class="campo">
+      <label for="observacao">Observação profissional</label>
+      <textarea id="observacao" name="observacao"
+                placeholder="o que foi apurado, o que foi orientado ao paciente">{{ anotacao.observacao if anotacao else '' }}</textarea>
+    </div>
+    <button type="submit">Registrar revisão</button>
+  </form>
+</div>
+
+{% endblock %}

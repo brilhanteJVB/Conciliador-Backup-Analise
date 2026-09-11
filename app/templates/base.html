@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Conciliador de Medicamentos{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+
+<header class="topo">
+  <span class="marca"><a href="{{ url_for('inicio') }}" style="text-decoration:none;color:inherit">Conciliador de Medicamentos</a></span>
+  {% if at is defined %}
+    <span class="paciente">{{ at.nome }}</span>
+    <span class="meta">
+      {% if at.idade is not none %}{{ at.idade }} anos · {% endif %}
+      {{ rot.rotular(rot.SEXO, at.sexo) }} ·
+      atendimento {{ at.codigo }}
+      {% if at.situacao == 'CONCLUIDO' %}<strong>· concluído</strong>{% endif %}
+    </span>
+    <span class="direita sem-impressao">
+      <a class="botao secundario" href="{{ url_for('relatorio', codigo=codigo) }}">Relatório</a>
+    </span>
+  {% endif %}
+</header>
+
+{% if at is defined %}
+<nav class="etapas sem-impressao">
+  {% for chave, nome in passos %}
+    <a href="{{ url_for(chave, codigo=codigo) }}" class="{{ 'ativa' if etapa == chave }}">
+      {{ nome }}
+      {% if chave == 'medicamentos' and n_medicamentos %}<span class="contagem">{{ n_medicamentos }}</span>{% endif %}
+      {% if chave == 'anamnese' and (n_condicoes or n_alergias) %}<span class="contagem">{{ n_condicoes + n_alergias }}</span>{% endif %}
+      {% if chave == 'itens' and n_itens %}<span class="contagem">{{ n_itens }}</span>{% endif %}
+    </a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+<div class="pagina">
+  <main>
+    {# Mensagem de OUTRO atendimento nao aparece aqui: `mensagens_da_tela`
+       separa o que e desta tela e devolve o resto para a fila. Ver
+       `web.avisar` — defeito achado pela Fase 9. #}
+    {% for categoria, texto in mensagens_da_tela(codigo|default(None)) %}
+      <div class="mensagem {{ categoria }}">{{ texto }}</div>
+    {% endfor %}
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  {% if at is defined and etapa != 'relatorio' %}
+  <aside class="sem-impressao">
+    <div class="cartao">
+      <h2>Analisar</h2>
+      <p class="ajuda">A análise chama o motor de conciliação e não altera
+        nada da terapia do paciente.</p>
+      {% if pode_analisar %}
+        <form method="post" action="{{ url_for('analisar', codigo=codigo) }}">
+          <button type="submit" class="grande" style="width:100%">Analisar atendimento</button>
+        </form>
+      {% else %}
+        <p class="vazio">Acrescente ao menos um medicamento para poder analisar.</p>
+      {% endif %}
+      {% if ultima %}
+        <p class="dica" style="margin-top:10px">
+          Última análise: {{ ultima.executada_em }} · {{ ultima.n_achados }} achado(s)
+          · motor {{ ultima.versao_motor }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="cartao">
+      <h2>O que ainda falta</h2>
+      {% if pendencias %}
+        <p class="ajuda">Nada aqui impede a análise (exceto a falta de
+          medicamentos). São dados que, se informados, deixam o resultado
+          mais completo.</p>
+        <ul class="pendencias" style="padding-left:18px;margin:0">
+          {% for area, texto in pendencias %}
+            <li><span class="area">{{ area }}</span><br>{{ texto }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="ajuda" style="margin:0">Nenhuma pendência: o atendimento
+          tem todos os dados que o sistema sabe aproveitar.</p>
+      {% endif %}
+    </div>
+  </aside>
+  {% endif %}
+</div>
+
+</body>
+</html>

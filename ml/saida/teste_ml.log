@@ -1,0 +1,66 @@
+==========================================================================
+REGRESSAO — GARANTIAS DE ML
+==========================================================================
+
+ML NUNCA ATRIBUI GRAVIDADE
+  [OK ] nenhuma predicao com gravidade sugerida                    
+  [OK ] o banco recusa gravidade sugerida por modelo               IntegrityError
+
+PREVISAO NAO SE DISFARCA DE FATO
+  [OK ] nenhum achado com natureza PREVISTO no banco               modelo EXPERIMENTAL: nenhuma previsao virou achado
+  [OK ] nenhum achado com origem MODELO                            
+  [OK ] todo achado existente e de REGRA                           0 achados
+  [OK ] nenhum achado de REGRA carrega probabilidade de modelo     
+  [OK ] PREVISTO sempre aponta para uma linha de predicao          
+  [OK ] previsao nao entra em vw_interacao_liberada                a view que chega ao farmaceutico nao le a tabela de previsao
+
+MODELO NAO E TROCADO EM SILENCIO
+  [OK ] no maximo um modelo ativo por problema                     
+  [OK ] nenhum modelo ativo hoje                                   2 modelos registrados, todos inativos
+  [OK ] todo modelo declara semente, versao de dados e espaco de atributos 
+  [OK ] todo modelo declara limitacoes em texto                    
+  [OK ] nenhum modelo ativo sem estar homologado                   
+
+PREVISAO GRAVADA NASCE NAO REVISADA
+  [OK ] ha previsoes gravadas para curadoria                       600 linhas
+  [OK ] todas NAO_REVISADA                                         
+  [OK ] nenhuma revisada sem quem revisou                          
+  [OK ] toda previsao aponta para um modelo existente              
+  [OK ] todo par de previsao em ordem canonica                     
+
+O ESPACO DE ATRIBUTOS NAO DIVERGE
+  [OK ] models/espaco_features.json existe                         
+  [OK ] espaco em disco == espaco calculado agora                  130 atributos
+  [OK ] espaco gravado no modelo 1.0-boosting confere              
+  [OK ] espaco gravado no modelo 1.0-logistica confere             
+  [OK ] nenhum atributo derivado da tabela de interacao            
+  [OK ] nenhum atributo de grafo no espaco publicado               grafo excluido por vazamento medido em 20_treinar
+
+O CONTRATO RECUSA MODELO NAO HOMOLOGADO
+  [OK ] par de teste realmente nao documentado                     anfotericina B x anifrolumabe
+  [OK ] contrato_achado recusa modelo EXPERIMENTAL                 
+  [OK ] previsao em [0,1]                                          0.0322
+  [OK ] previsao simetrica                                         
+  [OK ] o texto da tela contem 'PREVISÃO'                          
+  [OK ] o texto da tela contem 'Nenhuma bula'                      
+  [OK ] o texto da tela contem 'farmacêutico'                      
+  [OK ] o texto nao afirma mecanismo                               
+
+OS MOTORES NAO DEPENDEM DE ML
+  [OK ] rules/motor_conciliacao.py nao importa nada de ml/         
+  [OK ] rules/motor_horarios.py nao importa nada de ml/            
+  [OK ] rules/_prioridade.py nao importa nada de ml/               
+  [OK ] app/servicos.py nao importa nada de ml/                    
+  [OK ] app/web.py nao importa nada de ml/                         
+  [OK ] app/relatorio.py nao importa nada de ml/                   
+  [OK ] app/busca.py nao importa nada de ml/                       
+  [OK ] nenhum modelo e carregado no caminho deterministico        
+
+A INTERFACE JA SABE MOSTRAR PREVISTO
+  [OK ] app/templates/achado.html trata status PREVISTO            
+  [OK ] app/templates/resultados.html trata status PREVISTO        
+  [OK ] rotulos.py tem texto em pt-BR para PREVISTO                
+  [OK ] o texto de PREVISTO nega evidencia publicada               
+
+==========================================================================
+NENHUMA REGRESSAO — as garantias de ML continuam de pe

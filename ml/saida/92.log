@@ -1,0 +1,59 @@
+
+==========================================================================
+V2 — VERIFICACAO INDEPENDENTE DA FASE 7
+==========================================================================
+
+--- 1. DATASET RECONTADO POR SQL PROPRIO (sem ler o .npz)
+  [OK ] substancias do universo                                    SQL 957  npz 957
+  [OK ] positivos                                                  SQL 94770  npz 94770
+  [OK ] pares totais                                               combinatoria 457446  npz 457446
+  [OK ] cada positivo da amostra existe no banco                   301 pares conferidos
+  [OK ] nenhum negativo da amostra existe no banco                 301 pares conferidos
+
+--- 2. METRICAS REIMPLEMENTADAS EM NUMPY PURO
+  [OK ] AUC: Mann-Whitney proprio == sklearn                       0.78787203 vs 0.78787203
+  [OK ] PR-AUC: trapezio proprio ~ average_precision               0.537701 vs 0.537714 (metodos diferentes por definicao)
+  [OK ] Brier proprio == sklearn                                   0.13007391 vs 0.13007391
+  [OK ] ECE proprio == do pipeline                                 0.02349978 vs 0.02349978
+  [OK ] AUC de preditor constante == 0,5                           
+  [OK ] AUC do rotulo perfeito == 1,0                              
+
+--- 3. ROTULO CONFRONTADO COM O SISTEMA ANTERIOR (acervo, outro banco)
+  [OK ] chaves normalizadas em comum entre os dois bancos          2068 chaves
+      pares (chave x chave) no sistema anterior: 108032
+      pares (chave x chave) neste sistema:       93940
+      em comum:                                  92900
+  [OK ] >=90% dos pares deste sistema estao no anterior            98.9%
+      so neste sistema: 1040   so no anterior: 15132
+  [OK ] divergencia explicavel (<15% de cada lado)                 as duas cargas usam recortes de substancia diferentes
+
+--- 4. CACA AO VAZAMENTO — forca bruta
+  [OK ] nenhum par de teste dentro do treino                       interseccao 0
+  [OK ] nenhum par de teste INVERTIDO dentro do treino             
+  [OK ] nenhum par de treino toca farmaco de teste                 143 farmacos de teste
+  [OK ] nenhum farmaco de teste no grafo de atributos              
+  [OK ] atributos de grafo sao zero em todo par FRIO_FRIO          2000 pares conferidos
+  [OK ] nenhum par com a mesma substancia nos dois lados           
+
+--- 5. SPLIT CONFERIDO POR COMBINATORIA
+  [OK ] grupos somam o universo                                    669 + 145 + 143 = 957
+  [OK ] pares de treino == C(n_treino,2)                           223446 == 223446
+  [OK ] pares FRIO_FRIO == C(n_teste,2)                            10153 == 10153
+  [OK ] pares QUENTE_FRIO == n_teste x (n_treino+n_val)            116402 == 116402
+
+--- 6. ARTEFATO JSON RECALCULADO A MAO (sem scikit-learn)
+  [OK ] artefato da logistica e JSON                               m1_1_0-logistica.json
+  [OK ] tipo declarado e JSON puro                                 LOGISTICA_JSON
+  [OK ] dimensoes conferem com o espaco de atributos               130 coeficientes
+  [OK ] conta feita a mao == scikit-learn (dentro do float32)      maior diferenca 1.21e-07 em 300 pares (eps float32 = 1,19e-07)
+  [OK ] a ordenacao das 300 previsoes e identica                   diferenca numerica nao muda nenhuma decisao por limiar
+  [OK ] nenhuma probabilidade fora de [0,1]                        
+
+--- 7. SANIDADE — documentado pontua mais alto que sorteado
+      media dos positivos de teste ... 0.3702
+      media dos pares sorteados ...... 0.0894
+  [OK ] positivos pontuam mais que sorteados                       
+  [OK ] separacao documentado x sorteado com AUC > 0,80            0.8740
+
+==========================================================================
+V2 OK — seis caminhos independentes concordam com o pipeline

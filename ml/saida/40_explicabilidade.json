@@ -1,0 +1,504 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "importancia_permutacao": [
+    {
+      "atributo": "adm_lados_com_regra",
+      "queda_auc": 0.056428625552072176,
+      "desvio": 0.0020693745905065565,
+      "em_portugues": "quantos lados tem regra de administracao"
+    },
+    {
+      "atributo": "produtos_log_min",
+      "queda_auc": 0.03739864894441288,
+      "desvio": 0.001283527219415332,
+      "em_portugues": "quantidade de apresentacoes do menos comercializado"
+    },
+    {
+      "atributo": "produtos_log_max",
+      "queda_auc": 0.027864652107324694,
+      "desvio": 0.0003869852482591914,
+      "em_portugues": "quantidade de apresentacoes do mais comercializado"
+    },
+    {
+      "atributo": "atc_grupo1_N",
+      "queda_auc": 0.013386064324148683,
+      "desvio": 0.00027800326791952237,
+      "em_portugues": "1 dos farmacos e(sao) do grupo anatomico N (Sistema nervoso)"
+    },
+    {
+      "atributo": "tarja_desconhecida_lados",
+      "queda_auc": 0.012197889773937617,
+      "desvio": 4.248823456775532e-05,
+      "em_portugues": "tarja desconhecida lados em 1 lado(s)"
+    },
+    {
+      "atributo": "atc_grupo2_A16",
+      "queda_auc": 0.009283206329605184,
+      "desvio": 0.0018018638142553926,
+      "em_portugues": "um dos farmacos e do subgrupo A16 (Outros produtos de trato alimentar e metabolismo)"
+    },
+    {
+      "atributo": "atc_grupo1_C",
+      "queda_auc": 0.00892927161557866,
+      "desvio": 0.00016987461993935683,
+      "em_portugues": "1 dos farmacos e(sao) do grupo anatomico C (Sistema cardiovascular)"
+    },
+    {
+      "atributo": "tarja_MIP",
+      "queda_auc": 0.007402837386020285,
+      "desvio": 0.00018824745062250874,
+      "em_portugues": "tarja mip em 1 lado(s)"
+    },
+    {
+      "atributo": "atc_grupo1_L",
+      "queda_auc": 0.00644336807792234,
+      "desvio": 0.0003525306355254129,
+      "em_portugues": "1 dos farmacos e(sao) do grupo anatomico L (Agentes antineoplásicos e imunomoduladores)"
+    },
+    {
+      "atributo": "atc_n1_igual",
+      "queda_auc": 0.005748588157854136,
+      "desvio": 0.00012624094300096582,
+      "em_portugues": "mesmo grupo anatomico"
+    },
+    {
+      "atributo": "pk_lados_com_papel",
+      "queda_auc": 0.004762869502102178,
+      "desvio": 0.00017665802838591217,
+      "em_portugues": "quantos lados tem papel CYP conhecido"
+    },
+    {
+      "atributo": "atc_grupo2_G03",
+      "queda_auc": 0.004562632963026725,
+      "desvio": 0.00024979712696332967,
+      "em_portugues": "um dos farmacos e do subgrupo G03 (Hormônios sexuais e moduladores do sistema genital)"
+    },
+    {
+      "atributo": "atc_grupo2_A11",
+      "queda_auc": 0.004482891345471196,
+      "desvio": 0.00025931070634594263,
+      "em_portugues": "um dos farmacos e do subgrupo A11 (Vitaminas)"
+    },
+    {
+      "atributo": "atc_grupo2_J01",
+      "queda_auc": 0.004025078965903724,
+      "desvio": 0.0006624170818364009,
+      "em_portugues": "um dos farmacos e do subgrupo J01 (Antibacterianos para uso sistêmico)"
+    },
+    {
+      "atributo": "atc_grupo2_L01",
+      "queda_auc": 0.0039022686806687115,
+      "desvio": 0.0001348902902911606,
+      "em_portugues": "um dos farmacos e do subgrupo L01 (Agentes antineoplásicos)"
+    },
+    {
+      "atributo": "atc_grupo2_M01",
+      "queda_auc": 0.003838759169390175,
+      "desvio": 0.00028422472410401657,
+      "em_portugues": "um dos farmacos e do subgrupo M01 (Anti-inflamatórios e antirreumáticos)"
+    },
+    {
+      "atributo": "atc_grupo2_N01",
+      "queda_auc": 0.003796266551699623,
+      "desvio": 0.00044295525698329335,
+      "em_portugues": "um dos farmacos e do subgrupo N01 (Anestésicos)"
+    },
+    {
+      "atributo": "atc_lados_com_codigo",
+      "queda_auc": 0.0037214146607941942,
+      "desvio": 3.478342481898907e-05,
+      "em_portugues": "quantos lados tem classificacao ATC"
+    },
+    {
+      "atributo": "atc_grupo1_S",
+      "queda_auc": 0.003312257294147599,
+      "desvio": 0.00074542267434035,
+      "em_portugues": "1 dos farmacos e(sao) do grupo anatomico S (Órgãos dos sentidos)"
+    },
+    {
+      "atributo": "atc_grupo2_B05",
+      "queda_auc": 0.0032768581292276964,
+      "desvio": 0.0003374502583241025,
+      "em_portugues": "um dos farmacos e do subgrupo B05 (Substitutos do sangue e soluções de perfusão)"
+    }
+  ],
+  "importancia_por_bloco": {
+    "ATC": 0.15587978789669993,
+    "REG": 0.09267736484825138,
+    "ADM": 0.06401460776141175,
+    "PK": 0.005497259557164587
+  },
+  "coeficientes_logistica": [
+    {
+      "atributo": "adm_lados_com_regra",
+      "coeficiente": 1.3814589977264404,
+      "direcao": "aumenta",
+      "em_portugues": "quantos lados tem regra de administracao"
+    },
+    {
+      "atributo": "adm_tipo_INDIFERENTE_ALIMENTO",
+      "coeficiente": -0.8175267577171326,
+      "direcao": "reduz",
+      "em_portugues": "regra de administracao indiferente alimento em 1 lado(s)"
+    },
+    {
+      "atributo": "adm_tipo_COM_ALIMENTO",
+      "coeficiente": -0.4760285019874573,
+      "direcao": "reduz",
+      "em_portugues": "regra de administracao com alimento em 1 lado(s)"
+    },
+    {
+      "atributo": "adm_tipo_JEJUM",
+      "coeficiente": -0.36813658475875854,
+      "direcao": "reduz",
+      "em_portugues": "regra de administracao jejum em 1 lado(s)"
+    },
+    {
+      "atributo": "atc_grupo2_A16",
+      "coeficiente": -0.30567753314971924,
+      "direcao": "reduz",
+      "em_portugues": "um dos farmacos e do subgrupo A16 (Outros produtos de trato alimentar e metabolismo)"
+    },
+    {
+      "atributo": "atc_grupo2_M09",
+      "coeficiente": -0.2594994008541107,
+      "direcao": "reduz",
+      "em_portugues": "um dos farmacos e do subgrupo M09 (Outros medicamentos para distúrbios do sistema musculoesquelético)"
+    },
+    {
+      "atributo": "atc_grupo2_A01",
+      "coeficiente": 0.22265394032001495,
+      "direcao": "aumenta",
+      "em_portugues": "um dos farmacos e do subgrupo A01 (Preparações estomatológicas)"
+    },
+    {
+      "atributo": "produtos_log_min",
+      "coeficiente": 0.22146464884281158,
+      "direcao": "aumenta",
+      "em_portugues": "quantidade de apresentacoes do menos comercializado"
+    },
+    {
+      "atributo": "atc_n1_igual",
+      "coeficiente": 0.19906282424926758,
+      "direcao": "aumenta",
+      "em_portugues": "mesmo grupo anatomico"
+    },
+    {
+      "atributo": "produtos_log_soma",
+      "coeficiente": 0.17829345166683197,
+      "direcao": "aumenta",
+      "em_portugues": "quantidade de apresentacoes no mercado (soma)"
+    },
+    {
+      "atributo": "atc_grupo2_A11",
+      "coeficiente": -0.14787515997886658,
+      "direcao": "reduz",
+      "em_portugues": "um dos farmacos e do subgrupo A11 (Vitaminas)"
+    },
+    {
+      "atributo": "adm_tipo_APOS_ALIMENTO",
+      "coeficiente": -0.14647334814071655,
+      "direcao": "reduz",
+      "em_portugues": "regra de administracao apos alimento em 1 lado(s)"
+    },
+    {
+      "atributo": "atc_grupo2_D02",
+      "coeficiente": -0.1449938416481018,
+      "direcao": "reduz",
+      "em_portugues": "um dos farmacos e do subgrupo D02 (Emolientes e protetores)"
+    },
+    {
+      "atributo": "lados_com_dcb",
+      "coeficiente": -0.14421135187149048,
+      "direcao": "reduz",
+      "em_portugues": "quantos lados tem numero DCB"
+    },
+    {
+      "atributo": "atc_grupo2_N05",
+      "coeficiente": 0.13411638140678406,
+      "direcao": "aumenta",
+      "em_portugues": "um dos farmacos e do subgrupo N05 (psicolépticos)"
+    },
+    {
+      "atributo": "atc_grupo2_R02",
+      "coeficiente": -0.11856367439031601,
+      "direcao": "reduz",
+      "em_portugues": "um dos farmacos e do subgrupo R02 (Preparações de THROAT)"
+    }
+  ],
+  "exemplos": [
+    {
+      "substancia_a": "fluoxetina",
+      "substancia_b": "paroxetina",
+      "probabilidade": 0.9945148328567643,
+      "rotulo": 1,
+      "contribuicoes": [
+        {
+          "atributo": "pk_mesmo_sistema",
+          "valor": 1.0,
+          "efeito": 0.022193714498433548,
+          "em_portugues": "os dois atuam na mesma enzima CYP"
+        },
+        {
+          "atributo": "produtos_log_max",
+          "valor": 3.610917806625366,
+          "efeito": 0.007852751163574867,
+          "em_portugues": "quantidade de apresentacoes do mais comercializado"
+        },
+        {
+          "atributo": "atc_n3_igual",
+          "valor": 1.0,
+          "efeito": 0.006653871880193618,
+          "em_portugues": "mesmo subgrupo farmacologico"
+        },
+        {
+          "atributo": "produtos_log_min",
+          "valor": 3.5835189819335938,
+          "efeito": 0.005972303934394074,
+          "em_portugues": "quantidade de apresentacoes do menos comercializado"
+        },
+        {
+          "atributo": "adm_lados_com_regra",
+          "valor": 2.0,
+          "efeito": 0.00515273206971667,
+          "em_portugues": "quantos lados tem regra de administracao"
+        },
+        {
+          "atributo": "pk_lados_com_papel",
+          "valor": 2.0,
+          "efeito": 0.004151546613571755,
+          "em_portugues": "quantos lados tem papel CYP conhecido"
+        }
+      ]
+    },
+    {
+      "substancia_a": "acetilcisteína",
+      "substancia_b": "retinol",
+      "probabilidade": 0.00024594535885704664,
+      "rotulo": 0,
+      "contribuicoes": [
+        {
+          "atributo": "atc_grupo2_A11",
+          "valor": 1.0,
+          "efeito": -0.0028585453035767446,
+          "em_portugues": "um dos farmacos e do subgrupo A11 (Vitaminas)"
+        },
+        {
+          "atributo": "atc_grupo2_R05",
+          "valor": 1.0,
+          "efeito": -0.0021342761324518716,
+          "em_portugues": "um dos farmacos e do subgrupo R05 (Preparações de COUGH e COLD)"
+        },
+        {
+          "atributo": "produtos_log_max",
+          "valor": 3.526360511779785,
+          "efeito": -0.00042990801548195166,
+          "em_portugues": "quantidade de apresentacoes do mais comercializado"
+        },
+        {
+          "atributo": "produtos_log_min",
+          "valor": 2.890371799468994,
+          "efeito": -0.00029928529330409037,
+          "em_portugues": "quantidade de apresentacoes do menos comercializado"
+        },
+        {
+          "atributo": "tarja_desconhecida_lados",
+          "valor": 1.0,
+          "efeito": -0.0002750307617693837,
+          "em_portugues": "tarja desconhecida lados em 1 lado(s)"
+        },
+        {
+          "atributo": "tarja_MIP",
+          "valor": 1.0,
+          "efeito": -0.00026520605797752126,
+          "em_portugues": "tarja mip em 1 lado(s)"
+        }
+      ]
+    },
+    {
+      "substancia_a": "doxilamina",
+      "substancia_b": "prednisolona",
+      "probabilidade": 0.4999959711855729,
+      "rotulo": 0,
+      "contribuicoes": [
+        {
+          "atributo": "produtos_log_max",
+          "valor": 3.9889841079711914,
+          "efeito": 0.28021473484118076,
+          "em_portugues": "quantidade de apresentacoes do mais comercializado"
+        },
+        {
+          "atributo": "produtos_log_min",
+          "valor": 1.0986123085021973,
+          "efeito": 0.188638297394709,
+          "em_portugues": "quantidade de apresentacoes do menos comercializado"
+        },
+        {
+          "atributo": "atc_grupo2_A01",
+          "valor": 1.0,
+          "efeito": 0.18276708432703487,
+          "em_portugues": "um dos farmacos e do subgrupo A01 (Preparações estomatológicas)"
+        },
+        {
+          "atributo": "tarja_MIP",
+          "valor": 1.0,
+          "efeito": 0.06876231635111957,
+          "em_portugues": "tarja mip em 1 lado(s)"
+        },
+        {
+          "atributo": "atc_grupo2_R06",
+          "valor": 1.0,
+          "efeito": 0.02913565846493754,
+          "em_portugues": "um dos farmacos e do subgrupo R06 (Anti-histamínicos para uso sistêmico)"
+        },
+        {
+          "atributo": "adm_tipo_INDIFERENTE_ALIMENTO",
+          "valor": 0.0,
+          "efeito": -0.02446937728085835,
+          "em_portugues": "regra de administracao indiferente alimento em 0 lado(s)"
+        }
+      ]
+    }
+  ]
+}

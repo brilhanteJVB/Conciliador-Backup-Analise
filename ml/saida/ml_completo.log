@@ -1,0 +1,1300 @@
+
+==========================================================================
+>> ml/_features.py  —  autoteste do espaco de atributos
+==========================================================================
+AUTOTESTE DO ESPACO DE ATRIBUTOS
+  atributos no espaco completo: 137
+    bloco ATC    102 atributos
+    bloco REG     10 atributos
+    bloco ADM     11 atributos
+    bloco PK       7 atributos
+    bloco GRAFO    7 atributos
+  simetria: 400 pares, construir(a,b) == construir(b,a)  OK
+  largura da matriz == len(espaco())  OK
+  nenhum NaN/infinito  OK
+  grafo vazio -> bloco GRAFO todo zero  OK
+  substancia de grau zero -> atributos de grafo zerados  OK
+  nenhum atributo usa ATC de 5o nivel  OK
+  nenhum atributo derivado da tabela de interacao  OK
+
+AUTOTESTE OK — 137 atributos, todos simetricos.
+   (0.3s)
+
+==========================================================================
+>> ml/01_auditoria_dataset.py  —  auditoria do dataset
+==========================================================================
+
+==========================================================================
+AUDITORIA DO DATASET DE INTERACAO FARMACO x FARMACO
+==========================================================================
+Banco: database/conciliador.db   impressao: 9e9c85ee3ffea5e0
+
+--- 1. VOLUME — linha nao e observacao
+  linhas em interacao_substancia                              112.520 
+  pares distintos (a<b)                                        94.770 
+  linhas por par (media)                                         1.19 
+  substancias no banco                                          2.094 
+  substancias com >=1 interacao                                   957 (45,7%)
+
+  A inflacao vem de duas fontes afirmando o mesmo par. O dataset
+  tem 94.770 observacoes de par, nao 112.520.
+
+--- 2. MULTIPLICIDADE E DUPLICIDADE
+  pares afirmados por 1 fonte(s)                               77.020 (81,3%)
+  pares afirmados por 2 fonte(s)                               17.750 (18,7%)
+
+  fonte 7 — DDInter (ALTA)                                     58.323 
+  fonte 8 — db_drug_interactions (MEDIA)                       54.197 
+  duplicata exata (mesmo par, mesma fonte)                          0 <- UNIQUE(a,b,fonte_id) impede
+
+--- 3. SIMETRIA E DIRECIONALIDADE
+  linhas violando a<b (par invertido)                               0 <- CHECK do esquema impede
+
+  SIMETRICAS (par canonico, uma linha):
+    farmaco x farmaco     — "A interage com B" == "B interage com A".
+                            A ordem em que o paciente tomou nao muda o par.
+  ASSIMETRICAS (nao viram par canonico, e nao entram neste dataset):
+    papel_farmacocinetico — "A inibe CYP3A4" e "B e substrato de CYP3A4" sao
+                            papeis diferentes; a direcao do efeito depende de
+                            qual e qual. Vira ATRIBUTO do lado, nao rotulo.
+    regra_separacao       — tem lado que deve ser adiado.
+    interacao_doenca      — farmaco -> doenca, nunca o contrario.
+  CONSEQUENCIA: o alvo de existencia e simetrico, logo os atributos de par tem
+  de ser simetricos tambem (soma, ou-logico, min/max), nunca "valor de A" e
+  "valor de B" em posicoes fixas — isso ensinaria a ordem do id.
+
+--- 4. GRAFO DE INTERACAO — a medicao que decide sobre GNN
+  substancias com grau ZERO                                     1.137 (54,3%)  <- ponto cego
+  substancias com grau >= 1                                       957 (45,7%)
+  grau medio (todas as substancias)                              90.5 
+  grau medio (so as conectadas)                                 198.1 
+  grau mediano (conectadas)                                       178 
+  grau maximo                                                     629 
+  pares possiveis entre as conectadas                         457.446 
+  pares observados                                             94.770 
+  DENSIDADE do subgrafo conectado                              20,72% 
+  componentes conexas (entre as conectadas)                         1 
+  maior componente                                                957 (100,0% das conectadas)
+
+  LEITURA: o grafo e dois objetos colados. Entre as 957 conectadas ele e DENSO
+  (20,7% de todos os pares possiveis ja e aresta) e tem uma componente unica —
+  ha pouca estrutura de vizinhanca a explorar, porque quase todo mundo e
+  vizinho de quase todo mundo. E ha 1137 substancias com grau zero, onde um
+  modelo que propaga por aresta nao tem o que propagar. Essas 1137 sao
+  exatamente as que motivam o projeto: o farmaceutico consulta o sistema
+  justamente sobre o que nao esta na base.
+
+--- 5. COBERTURA DE ATRIBUTO — o teto do que se pode aprender
+  codigo ATC                                                    1.159 (55,3% de todas | 95,0% das conectadas)
+  canal de dispensacao (tarja)                                  1.450 (69,2% de todas | 84,7% das conectadas)
+  CAS                                                           1.505 (71,9% de todas | 98,7% das conectadas)
+  numero DCB                                                    1.757 (83,9% de todas | 99,2% das conectadas)
+  indice terapeutico estreito=1                                     0 (0,0% de todas | 0,0% das conectadas)
+  na RENAME=1                                                       0 (0,0% de todas | 0,0% das conectadas)
+  papel farmacocinetico (CYP)                                      22 (1,1% de todas | 2,3% das conectadas)
+  alvo molecular                                                    0 (0,0% de todas | 0,0% das conectadas)
+  regra de administracao                                          620 (29,6% de todas | 55,8% das conectadas)
+  interacao com doenca                                            102 (4,9% de todas | 0,9% das conectadas)
+  interacao com item                                              196 (9,4% de todas | 19,5% das conectadas)
+  reacao adversa                                                    0 (0,0% de todas | 0,0% das conectadas)
+
+  O que sobra como atributo REAL: a hierarquia ATC (95,0% das conectadas), a
+  tarja e o numero de produtos ativos. CYP cobre 22 substancias e alvo
+  molecular NENHUMA — a camada IUPHAR nao foi carregada neste projeto.
+  Estrutura quimica (fingerprint, descritor molecular) nao existe no acervo:
+  ha CAS, que e identificador, nao estrutura. Nao ha como calcular
+  similaridade estrutural sem carregar fonte nova.
+
+--- 6. GRANULARIDADE DO ATC — por que o 5o nivel nao pode ser atributo
+  substancias com codigo de 7 caracteres                        1.159 
+  codigos ATC de 5o nivel com >1 substancia                         0 
+  classes distintas no nivel 1 (1 chars)                           14 
+  classes distintas no nivel 2 (3 chars)                           83 
+  classes distintas no nivel 3 (4 chars)                          181 
+  classes distintas no nivel 4 (5 chars)                          446 
+
+  Todo codigo gravado e de 5o nivel e nenhum e compartilhado por duas
+  substancias: o 5o nivel E a substancia. Usa-lo como atributo categorico
+  seria entregar o id ao modelo. Os niveis 1 a 4 sao classe de verdade e
+  entram; o 5o fica fora. (Mesmo motivo de D-028 para duplicidade.)
+  LIMITACAO: a coluna guarda UM codigo por substancia; farmaco com mais de uma
+  indicacao ATC perde os outros. E limite do esquema atual, nao do modelo.
+
+--- 7. EIXO TEMPORAL — split por data e possivel?
+  datas distintas de importacao                                     1 ['2026-09-10']
+  colunas de data na tabela de interacao                            0 
+
+  NAO. Todas as cargas sao do mesmo dia e nenhuma das duas fontes publica a
+  data em que a interacao foi documentada. Split temporal fica declarado como
+  IMPOSSIVEL com os dados atuais — nao substituido por proxy.
+
+--- 8. COLUNAS QUE NAO PODEM SER ATRIBUTO (circularidade)
+  interacao_substancia.tipo                  PK/PD sai de regex sobre a descricao da propria interacao
+  interacao_substancia.gravidade             graduacao da propria afirmacao de interacao
+  interacao_substancia.mecanismo             traduzido da descricao da interacao
+  interacao_substancia.efeito_esperado       traduzido da descricao da interacao
+  interacao_substancia.descricao_original    e o texto do rotulo
+  achado.prioridade                          calculada pelas nossas proprias regras a partir do rotulo
+
+  Registro: no sistema ANTERIOR o vetor farmacodinamico era extraido de
+  db_drug_interactions.csv — o mesmo arquivo que dava o rotulo. A ablacao
+  "SEM PD" custava 0,0428 de AUC. Neste projeto essa coluna nao existe: os
+  atributos vem de WHO ATC, CMED e FDA, fontes que nao afirmam interacao
+  nenhuma. A circularidade foi resolvida por construcao. A ablacao sera feita
+  igual, sobre os atributos de GRAFO, que tem o mesmo problema por outro
+  caminho: grau e contagem de rotulos positivos disfarcada de atributo.
+
+--- 9. UNIDADE DO DATASET — decisao
+  Unidade escolhida: O PAR CANONICO DE SUBSTANCIAS (a<b), uma linha por par.
+
+  Por que nao a linha de interacao: 112.520 linhas viram 94.770 pares porque duas
+  fontes afirmam o mesmo par. Treinar nas linhas daria peso 2 a 17.750 pares
+  (18,7% deles) e peso 1 ao resto — o modelo aprenderia "este par aparece em
+  duas bases", que e propriedade da compilacao, nao farmacologia.
+
+  Por que nao o achado: achado depende de paciente. Existencia de interacao e
+  propriedade do par; misturar contexto de paciente num alvo que pretende ser
+  geral e exatamente o que a especificacao §12 proibe.
+
+  O numero de fontes que afirmam o par NAO e descartado: vira o rotulo
+  auxiliar `n_fontes`, usado para medir concordancia entre bases e para o
+  teste de robustez do rotulo — nunca como atributo de entrada.
+
+Gravado: ml/saida/01_auditoria_dataset.json
+   (0.9s)
+
+==========================================================================
+>> ml/02_auditoria_rotulos.py  —  auditoria dos rotulos
+==========================================================================
+
+==========================================================================
+AUDITORIA DOS ROTULOS DISPONIVEIS
+==========================================================================
+
+--- PROBLEMA A — existe interacao documentada entre A e B?
+  origem_rotulo: FONTE       tipo: binario, simetrico
+  positivos (par afirmado por >=1 fonte)                       94.770 
+  universo de pares entre substancias cobertas                457.446 
+  negativos PRESUMIDOS (nao afirmados)                        362.676 
+  prevalencia de positivo no universo                           20,7% 
+  desconhecidos (par com substancia de grau zero)           1.733.925 <- sem rotulo de nenhum tipo
+
+  O NEGATIVO NAO E OBSERVADO, E PRESUMIDO. Nenhuma das duas bases publica
+  "estes dois nao interagem": elas listam o que afirmam. Ausencia de linha
+  significa uma de tres coisas, e o dado nao distingue:
+     (a) as duas foram estudadas juntas e nao interagem;
+     (b) nunca foram estudadas juntas;
+     (c) interagem e a base ainda nao registrou.
+  Isto e aprendizado com positivos e nao-rotulados (PU). O rotulo negativo
+  usado aqui e "NAO AFIRMADO POR ESTAS DUAS BASES", e o relatorio da fase diz
+  isso com estas palavras. A consequencia pratica: o modelo estima
+  probabilidade de o par ESTAR DOCUMENTADO, nao de o par ser perigoso.
+
+  MITIGACAO ADOTADA (nao resolve, limita o dano):
+   1. o universo exclui substancia de grau zero — pares onde a ausencia
+      certamente e falta de cobertura, nao ausencia de interacao;
+   2. amostragem de negativo tambem em versao PAREADA POR GRAU, para medir
+      quanto do desempenho e artefato de popularidade;
+   3. controle negativo explicito com pares sorteados ao acaso.
+
+  VEREDITO A: VIAVEL
+  94.770 positivos e universo de 457.446 pares. Viavel, com a natureza PU declarada.
+
+--- PROBLEMA B — o alerta merece destaque ao profissional?
+  origem_rotulo: HUMANO     tipo: binario
+  linhas em anotacao_profissional                                   0 
+  farmaceuticos distintos                                           0 
+  achados gravados no banco (todos os atendimentos)                 0 
+  achados com anotacao                                              0 
+  achados com anotacao de 2+ profissionais (consenso)               0 
+  anotacoes com alvo=ACHADO                                         0 
+  anotacoes com alvo=DIVERGENCIA                                    0 
+
+  A TABELA EXISTE E ESTA VAZIA. A estrutura de rotulo humano foi construida
+  (chave estavel, assinatura, CHECK de intencionalidade), mas nenhum
+  farmaceutico anotou nada ainda. Zero e zero: nao ha o que treinar, nao ha o
+  que estimar, e nao ha extrapolacao honesta a partir de zero exemplos.
+
+  O QUE NAO SERA FEITO, e por que:
+   - usar `prioridade` como proxy de relevancia: prioridade e calculada pelas
+     nossas regras. O modelo aprenderia a reproduzir `_prioridade.py`, e a
+     metrica mediria fidelidade ao nosso proprio codigo, nao utilidade
+     clinica. A especificacao §3 proibe explicitamente.
+   - marcar como relevante o que tem gravidade MAIOR: e a mesma circularidade
+     com outro nome.
+   - simular anotacoes: inventaria evidencia clinica.
+  QUANTAS ANOTACOES SERIAM NECESSARIAS (analise de poder):
+  prevalencia 50%, precisao +-10 pontos                            97 anotacoes
+  prevalencia 50%, precisao +-15 pontos                            43 anotacoes
+  prevalencia 30%, precisao +-10 pontos                            81 anotacoes
+    Para um modelo de relevancia com validacao cruzada por avaliador seriam
+    necessarias na ordem de 400 a 1.000 anotacoes de 2 farmaceuticos
+    independentes. Hoje: 0. A distancia nao e de codigo, e de gente.
+
+  VEREDITO B: INVIAVEL
+  Zero anotacoes humanas. A estrutura de rotulo esta pronta; o rotulo nao existe. Nao sera treinado.
+
+--- PROBLEMA C1 — gravidade (auditoria obrigatoria antes de descartar)
+  origem_rotulo: FONTE      tipo: ordinal (MAIOR/MODERADA/MENOR)
+  DDInter / MODERADA                                           28.027 
+  DDInter / NAO_DETERMINADA                                    19.864 
+  DDInter / MAIOR                                               8.106 
+  DDInter / MENOR                                               2.326 
+  db_drug_interactions / NAO_DETERMINADA                       54.197 
+
+  pares com ALGUMA gravidade graduada                          38.459 (40,6% dos pares)
+  pares SEM gravidade em nenhuma fonte                         56.311 (59,4%)
+
+    pares graduados como MODERADA                              28.027 (72,9% dos graduados)
+    pares graduados como MAIOR                                  8.106 (21,1% dos graduados)
+    pares graduados como MENOR                                  2.326 (6,0% dos graduados)
+
+  pares graduados por DUAS fontes                                   0 
+  linhas em vw_conflito_gravidade                                   0 
+
+  vw_conflito_gravidade devolve 0, e NAO por concordancia entre as bases: uma
+  das duas nao gradua nada. Nao ha como medir consistencia de graduacao neste
+  acervo, porque so existe um graduador. Um alvo ordinal cuja consistencia e
+  estruturalmente imensuravel nao tem como ser validado.
+
+  DECISAO: mantida D-015 — gravidade nao sera alvo de ML. Nao por preferencia
+  de arquitetura, por ausencia e imensurabilidade do rotulo. Treinar nos 38.459
+  pares graduados ensinaria o critério de quem graduou aqueles, e o modelo
+  seria aplicado exatamente onde esse critério nao existe.
+  Tratar NAO_DETERMINADA como classe propria tambem esta descartado: "nao sei"
+  nao e grau de gravidade, e o modelo passaria a prever ausencia de
+  informacao — o que e util para priorizar curadoria, e nao e gravidade.
+
+  VEREDITO C1 gravidade: INVIAVEL
+  Confirma D-015 com numero: 38.459 de 94.770 pares graduados, e apenas uma das duas fontes gradua.
+
+--- PROBLEMA C2 — tipo da interacao (farmacocinetica x farmacodinamica)
+  origem_rotulo: SISTEMA (regex sobre texto da fonte)   tipo: binario
+  DDInter / NAO_DETERMINADO                                    58.323 
+  db_drug_interactions / FARMACOCINETICA                       27.874 
+  db_drug_interactions / FARMACODINAMICA                       24.387 
+  db_drug_interactions / NAO_DETERMINADO                        1.936 
+
+  pares com tipo determinado                                   52.261 (55,1% dos pares)
+    FARMACOCINETICA                                            27.874 (53,3%)
+    FARMACODINAMICA                                            24.387 (46,7%)
+  pares com tipo divergente entre fontes                            0 
+
+  O tipo existe para 52.261 pares e vem TODO de uma fonte so: o DDInter nao
+  publica descricao nenhuma, logo nao ha texto de onde extrair tipo. Todos os
+  52.261 vem de db_drug_interactions, a fonte de confiabilidade MEDIA, por
+  expressao regular sobre texto em ingles.
+
+  E um alvo tecnicamente treinavel e clinicamente de segunda ordem: saber que
+  a interacao e farmacocinetica nao muda a conduta de balcao tanto quanto
+  saber que ela existe. Sera treinado como ALVO SECUNDARIO, com o rotulo
+  marcado EXTRAIDO_AUTOMATICAMENTE e a limitacao no relatorio — nunca
+  apresentado como se um farmaceutico tivesse classificado.
+
+  VEREDITO C2 tipo: VIAVEL
+  52.261 pares rotulados, mas rotulo derivado por regex de uma unica fonte. Entra como alvo secundario, declarado.
+
+--- PROBLEMA C3 — os outros alvos cogitados pela especificacao
+
+  PRIORIDADE   [origem: SISTEMA]
+    rotulos disponiveis                                             0 
+    calculada por rules/_prioridade.py; treinar nela mede fidelidade ao nosso codigo, nao verdade clinica. Proibido pela especificacao §3.
+
+  CLASSIFICACAO DE RISCO   [origem: —]
+    rotulos disponiveis                                             0 
+    e a gravidade com outro nome; cai com C1.
+
+  MECANISMO   [origem: FONTE (texto livre)]
+    rotulos disponiveis                                             0 
+    texto livre sem vocabulario controlado. Nao ha classe fechada para prever; seria geracao de texto, nao classificacao.
+
+  EFEITO CLINICO   [origem: FONTE (texto livre)]
+    rotulos disponiveis                                        54.183 
+    mesmo caso do mecanismo.
+
+  NECESSIDADE DE REVISAO   [origem: SISTEMA]
+    rotulos disponiveis                                             0 
+    todas as 112.520 linhas estao PENDENTE. Zero variacao no alvo.
+
+  REACAO ADVERSA   [origem: VigiMed]
+    rotulos disponiveis                                             0 
+    VigiMed nao carregado neste projeto. M4 fica fora da Fase 7.
+
+--- RESUMO — o que a Fase 7 vai treinar
+
+  ALVO PRINCIPAL   A — existencia de interacao documentada
+                       94.770 positivos · rotulo de FONTE · binario simetrico
+                       limitacao: negativo presumido (PU)
+
+  ALVO SECUNDARIO  C2 — tipo farmacocinetico x farmacodinamico
+                       52.261 pares · rotulo de SISTEMA (regex) · declarado
+
+  NAO TREINADOS    B  relevancia do alerta ...... 0 rotulos humanos
+                   C1 gravidade ................. rotulo ausente na fonte
+                   C3 prioridade ................ circular com nosso codigo
+                      mecanismo / efeito ........ texto livre, sem classes
+                      necessidade de revisao .... alvo sem variacao
+                      reacao adversa ............ fonte nao carregada
+
+  Dois alvos treinados, seis recusados com numero ao lado. A recusa
+  documentada e resultado da fase, nao falha dela.
+
+Gravado: ml/saida/02_auditoria_rotulos.json
+   (2.3s)
+
+==========================================================================
+>> ml/10_dataset.py  —  dataset e splits
+==========================================================================
+
+==========================================================================
+DATASET E SPLITS — ALVO A (existe interacao documentada?)
+==========================================================================
+
+--- 1. UNIVERSO
+  substancias no universo                                         957 
+  pares possiveis                                             457.446 
+  positivos                                                    94.770 
+  negativos presumidos                                        362.676 
+  prevalencia                                                   20,7% 
+  linhas montadas                                             457.446 
+  positivos conferidos na matriz                               94.770 
+
+--- 2. SPLIT POR PAR — ambos os lados conhecidos (otimista)
+  treino                                                      320.212 positivos 66.444 (20,8%)
+  validacao                                                    68.617 positivos 14.233 (20,7%)
+  teste                                                        68.617 positivos 14.093 (20,5%)
+
+--- 3. SPLIT POR FARMACO — o protocolo duro
+  farmacos em treino                                              669 grau medio 199
+  farmacos em validacao                                           145 grau medio 197
+  farmacos em teste                                               143 grau medio 196
+
+  treino (os dois lados de treino)                            223.446 positivos 46.480 (20,8%)
+  validacao (envolve farmaco de validacao)                    107.445 positivos 22.286 (20,7%)
+  teste (envolve farmaco de teste)                            126.555 positivos 26.004 (20,5%)
+
+    teste QUENTE_FRIO (um lado inedito)                       116.402 positivos 23.936 (20,6%)
+    teste FRIO_FRIO (dois lados ineditos)                      10.153 positivos 2.068 (20,4%)
+
+  Com o sorteio estratificado por decil de grau as tres prevalencias ficam
+  proximas, o que e o objetivo: assim a diferenca de metrica entre QUENTE e
+  FRIO mede o regime, e nao a mudanca de prevalencia. Mesmo assim toda
+  metrica dependente de prevalencia (PR-AUC, precisao) e reportada com a
+  prevalencia do proprio regime ao lado.
+
+--- 4. SUBCONJUNTO PAREADO POR GRAU — mede o artefato de popularidade
+  positivos mantidos (com par de grau equivalente)             67.443 
+  negativos pareados por grau                                  67.443 
+  positivos descartados por falta de par                       27.327 (celula de grau saturada de positivo)
+  prevalencia no subconjunto                                    50,0% 
+  grau medio dos positivos do subconjunto                         270 
+  grau medio dos negativos do subconjunto                         266 
+
+  Como se le este subconjunto: nele, saber o grau dos dois farmacos nao ajuda
+  mais a acertar, porque positivo e negativo tem grau parecido por construcao.
+  Se a AUC cair muito aqui, o desempenho no universo era popularidade.
+
+--- 5. CONTROLE NEGATIVO — pares ao acaso (§20)
+  pares de controle sorteados                                   5.000 
+    destes, com pelo menos um lado de grau zero                 4.115 (82,3%)
+
+  Controle sorteado entre TODAS as 2.094 substancias, inclusive as de grau
+  zero, e sem nenhum par positivo. Nenhum modelo e treinado nele: serve para
+  medir se a probabilidade sai alta indiscriminadamente.
+
+--- 6. ALVO SECUNDARIO C2 — tipo PK x PD (so entre os positivos)
+  pares com rotulo de tipo                                     52.261 
+    FARMACOCINETICA                                            27.874 
+    FARMACODINAMICA                                            24.387 
+  positivos sem tipo (DDInter sem descricao)                   42.509 
+
+--- 7. GRAVADO
+  arquivo                                              data\training\dataset_m1.npz 
+  tamanho                                                      0.7 MB 
+
+Gravado: ml/saida/10_dataset.json
+   (4.6s)
+
+==========================================================================
+>> ml/20_treinar.py  —  comparacao das 10 familias (LENTO)
+==========================================================================
+
+==========================================================================
+COMPARACAO DAS FAMILIAS — ALVO A (existe interacao documentada?)
+==========================================================================
+Pares: 457.446   positivos: 94.770   prevalencia: 0.207
+
+--- SPLIT POR_PAR
+    treino                                                    320.212 positivos 66444
+    validacao                                                  68.617 positivos 14233
+    teste                                                      68.617 positivos 14093
+    arestas no grafo de atributos                              66.444 (so positivas de treino)
+    substancias com grau>0 nesse grafo                            944 
+
+  configuracao COMPLETO — 137 atributos
+    matriz (457446, 137) construida em 20.3s
+  PREVALENCIA / teste                AUC 0,5000  PR-AUC 0,2054 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (0.0s)
+  REGRA_ATC_N2 / teste               AUC 0,5177  PR-AUC 0,2164 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (0.1s)
+  TABELA_CLASSE_x_CLASSE / teste     AUC 0,7337  PR-AUC 0,4532 (piso 0,205)  F1 0,466  rec 0,588  esp 0,758  (0.3s)
+  LOGISTICA / teste                  AUC 0,9238  PR-AUC 0,7921 (piso 0,205)  F1 0,714  rec 0,727  esp 0,920  (5.2s)
+  LOGISTICA_PESO_BALANCEADO / teste  AUC 0,9251  PR-AUC 0,7905 (piso 0,205)  F1 0,714  rec 0,754  esp 0,907  (3.1s)
+  ARVORE / teste                     AUC 0,9175  PR-AUC 0,7745 (piso 0,205)  F1 0,702  rec 0,736  esp 0,907  (5.0s)
+  FLORESTA / teste                   AUC 0,9442  PR-AUC 0,8425 (piso 0,205)  F1 0,751  rec 0,759  esp 0,932  (42.8s)
+  GRADIENT_BOOSTING / teste          AUC 0,9385  PR-AUC 0,8289 (piso 0,205)  F1 0,739  rec 0,740  esp 0,932  (21.4s)
+  SVM_LINEAR / teste                 AUC 0,9233  PR-AUC 0,7923 (piso 0,205)  F1 0,711  rec 0,742  esp 0,911  (10.5s)
+  GRAFO_ADAMIC_ADAR / teste          AUC 0,9074  PR-AUC 0,7593 (piso 0,205)  F1 0,681  rec 0,687  esp 0,914  (6.5s)
+
+  configuracao SEM_GRAFO — 130 atributos
+    matriz (457446, 130) construida em 7.6s
+  LOGISTICA / teste                  AUC 0,7622  PR-AUC 0,4748 (piso 0,205)  F1 0,484  rec 0,614  esp 0,762  (2.5s)
+  LOGISTICA_PESO_BALANCEADO / teste  AUC 0,7627  PR-AUC 0,4712 (piso 0,205)  F1 0,485  rec 0,647  esp 0,736  (2.4s)
+  ARVORE / teste                     AUC 0,7199  PR-AUC 0,4190 (piso 0,205)  F1 0,443  rec 0,736  esp 0,590  (3.7s)
+  FLORESTA / teste                   AUC 0,8610  PR-AUC 0,6554 (piso 0,205)  F1 0,607  rec 0,676  esp 0,857  (41.4s)
+  GRADIENT_BOOSTING / teste          AUC 0,8599  PR-AUC 0,6655 (piso 0,205)  F1 0,608  rec 0,647  esp 0,876  (33.4s)
+  SVM_LINEAR / teste                 AUC 0,7593  PR-AUC 0,4724 (piso 0,205)  F1 0,480  rec 0,644  esp 0,731  (2.0s)
+
+--- SPLIT POR_FARMACO
+    treino                                                    223.446 positivos 46480
+    validacao                                                 107.445 positivos 22286
+    teste                                                     126.555 positivos 26004
+    arestas no grafo de atributos                              46.480 (so positivas de treino)
+    substancias com grau>0 nesse grafo                            661 
+
+  configuracao COMPLETO — 137 atributos
+    matriz (457446, 137) construida em 24.3s
+  PREVALENCIA / teste                AUC 0,5000  PR-AUC 0,2055 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (0.0s)
+     `-> FRIO_FRIO                   AUC 0,5000  PR-AUC 0,2037 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  REGRA_ATC_N2 / teste               AUC 0,5219  PR-AUC 0,2194 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (0.1s)
+     `-> FRIO_FRIO                   AUC 0,5279  PR-AUC 0,2219 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  TABELA_CLASSE_x_CLASSE / teste     AUC 0,7032  PR-AUC 0,4251 (piso 0,205)  F1 0,447  rec 0,590  esp 0,728  (0.2s)
+     `-> FRIO_FRIO                   AUC 0,6856  PR-AUC 0,4055 (piso 0,204)  F1 0,426  rec 0,555  esp 0,732
+  LOGISTICA / teste                  AUC 0,3416  PR-AUC 0,1664 (piso 0,205)  F1 0,340  rec 0,998  esp 0,000  (3.6s)
+     `-> FRIO_FRIO                   AUC 0,4313  PR-AUC 0,2076 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  LOGISTICA_PESO_BALANCEADO / teste  AUC 0,3416  PR-AUC 0,1642 (piso 0,205)  F1 0,340  rec 0,998  esp 0,000  (1.8s)
+     `-> FRIO_FRIO                   AUC 0,4362  PR-AUC 0,1959 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  ARVORE / teste                     AUC 0,4949  PR-AUC 0,2052 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (5.5s)
+     `-> FRIO_FRIO                   AUC 0,4912  PR-AUC 0,2037 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  FLORESTA / teste                   AUC 0,6679  PR-AUC 0,3486 (piso 0,205)  F1 0,406  rec 0,658  esp 0,591  (26.9s)
+     `-> FRIO_FRIO                   AUC 0,6157  PR-AUC 0,2889 (piso 0,204)  F1 0,366  rec 0,622  esp 0,547
+  GRADIENT_BOOSTING / teste          AUC 0,5460  PR-AUC 0,2340 (piso 0,205)  F1 0,340  rec 0,997  esp 0,001  (25.4s)
+     `-> FRIO_FRIO                   AUC 0,5457  PR-AUC 0,2169 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  SVM_LINEAR / teste                 AUC 0,3397  PR-AUC 0,1640 (piso 0,205)  F1 0,340  rec 0,997  esp 0,000  (7.5s)
+     `-> FRIO_FRIO                   AUC 0,4072  PR-AUC 0,1914 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  GRAFO_ADAMIC_ADAR / teste          AUC 0,5000  PR-AUC 0,2055 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (6.1s)
+     `-> FRIO_FRIO                   AUC 0,5000  PR-AUC 0,2037 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+
+  configuracao SEM_GRAFO — 130 atributos
+    matriz (457446, 130) construida em 8.7s
+  LOGISTICA / teste                  AUC 0,7339  PR-AUC 0,4424 (piso 0,205)  F1 0,457  rec 0,601  esp 0,733  (2.0s)
+     `-> FRIO_FRIO                   AUC 0,7147  PR-AUC 0,4192 (piso 0,204)  F1 0,440  rec 0,554  esp 0,753
+  LOGISTICA_PESO_BALANCEADO / teste  AUC 0,7345  PR-AUC 0,4406 (piso 0,205)  F1 0,456  rec 0,585  esp 0,746  (2.1s)
+     `-> FRIO_FRIO                   AUC 0,7153  PR-AUC 0,4187 (piso 0,204)  F1 0,439  rec 0,540  esp 0,765
+  ARVORE / teste                     AUC 0,7153  PR-AUC 0,4073 (piso 0,205)  F1 0,435  rec 0,492  esp 0,801  (2.3s)
+     `-> FRIO_FRIO                   AUC 0,7141  PR-AUC 0,4072 (piso 0,204)  F1 0,432  rec 0,479  esp 0,811
+  FLORESTA / teste                   AUC 0,7941  PR-AUC 0,5480 (piso 0,205)  F1 0,517  rec 0,634  esp 0,788  (26.7s)
+     `-> FRIO_FRIO                   AUC 0,7344  PR-AUC 0,4610 (piso 0,204)  F1 0,450  rec 0,548  esp 0,773
+  GRADIENT_BOOSTING / teste          AUC 0,7887  PR-AUC 0,5353 (piso 0,205)  F1 0,513  rec 0,634  esp 0,783  (25.6s)
+     `-> FRIO_FRIO                   AUC 0,7392  PR-AUC 0,4451 (piso 0,204)  F1 0,460  rec 0,556  esp 0,780
+  SVM_LINEAR / teste                 AUC 0,7328  PR-AUC 0,4388 (piso 0,205)  F1 0,456  rec 0,618  esp 0,717  (2.8s)
+     `-> FRIO_FRIO                   AUC 0,7139  PR-AUC 0,4142 (piso 0,204)  F1 0,441  rec 0,574  esp 0,737
+
+  configuracao SO_ATC — 102 atributos
+    matriz (457446, 102) construida em 4.3s
+  LOGISTICA / teste                  AUC 0,6777  PR-AUC 0,3614 (piso 0,205)  F1 0,408  rec 0,598  esp 0,655  (1.4s)
+     `-> FRIO_FRIO                   AUC 0,6668  PR-AUC 0,3486 (piso 0,204)  F1 0,397  rec 0,574  esp 0,664
+  GRADIENT_BOOSTING / teste          AUC 0,7154  PR-AUC 0,4290 (piso 0,205)  F1 0,434  rec 0,669  esp 0,635  (24.1s)
+     `-> FRIO_FRIO                   AUC 0,6921  PR-AUC 0,3988 (piso 0,204)  F1 0,411  rec 0,624  esp 0,638
+
+  configuracao SO_GRAFO — 7 atributos
+    matriz (457446, 7) construida em 10.2s
+  LOGISTICA / teste                  AUC 0,3468  PR-AUC 0,1677 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (0.6s)
+     `-> FRIO_FRIO                   AUC 0,5000  PR-AUC 0,2037 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+  GRADIENT_BOOSTING / teste          AUC 0,4501  PR-AUC 0,1890 (piso 0,205)  F1 0,341  rec 1,000  esp 0,000  (6.0s)
+     `-> FRIO_FRIO                   AUC 0,5000  PR-AUC 0,2037 (piso 0,204)  F1 0,338  rec 1,000  esp 0,000
+
+  configuracao SO_REG — 10 atributos
+    matriz (457446, 10) construida em 2.5s
+  LOGISTICA / teste                  AUC 0,6258  PR-AUC 0,3144 (piso 0,205)  F1 0,374  rec 0,592  esp 0,592  (0.1s)
+     `-> FRIO_FRIO                   AUC 0,5957  PR-AUC 0,2949 (piso 0,204)  F1 0,347  rec 0,534  esp 0,604
+  GRADIENT_BOOSTING / teste          AUC 0,6526  PR-AUC 0,3475 (piso 0,205)  F1 0,389  rec 0,519  esp 0,703  (6.1s)
+     `-> FRIO_FRIO                   AUC 0,6218  PR-AUC 0,3043 (piso 0,204)  F1 0,358  rec 0,450  esp 0,728
+
+  configuracao SEM_POPULARIDADE — 120 atributos
+    matriz (457446, 120) construida em 7.1s
+  LOGISTICA / teste                  AUC 0,7179  PR-AUC 0,4257 (piso 0,205)  F1 0,442  rec 0,630  esp 0,685  (1.7s)
+     `-> FRIO_FRIO                   AUC 0,7033  PR-AUC 0,4140 (piso 0,204)  F1 0,423  rec 0,587  esp 0,696
+  GRADIENT_BOOSTING / teste          AUC 0,7608  PR-AUC 0,5018 (piso 0,205)  F1 0,484  rec 0,703  esp 0,690  (20.0s)
+     `-> FRIO_FRIO                   AUC 0,7252  PR-AUC 0,4495 (piso 0,204)  F1 0,460  rec 0,660  esp 0,691
+
+40 execucoes gravadas em ml/saida/20_resultados.json
+   (609.8s)
+
+==========================================================================
+>> ml/25_robustez.py  —  robustez, controle negativo, precisao no topo
+==========================================================================
+
+==========================================================================
+ROBUSTEZ DO ALVO A
+==========================================================================
+
+--- 1. PAREADO POR GRAU — quanto do acerto era popularidade?
+  pares no subconjunto                                        134.886 prevalencia 50,0%
+    treino                                                     65.635 prevalencia 50,3%
+    validacao                                                  31.747 prevalencia 49,8%
+    teste                                                      37.504 prevalencia 49,7%
+
+  LOGISTICA          COMPLETO    AUC 0.5052   PR-AUC 0.5038 (piso 0.497)
+  GRADIENT_BOOSTING  COMPLETO    AUC 0.6061   PR-AUC 0.6077 (piso 0.497)
+  LOGISTICA          SEM_GRAFO   AUC 0.6002   PR-AUC 0.6017 (piso 0.497)
+  GRADIENT_BOOSTING  SEM_GRAFO   AUC 0.7238   PR-AUC 0.7332 (piso 0.497)
+
+  Como ler: no universo inteiro, com atributos SEM_GRAFO, o gradient boosting
+  faz AUC 0,79. Aqui, com grau neutralizado, o numero que sobra e o que o
+  modelo sabe de farmacologia. A diferenca entre os dois e o tamanho do
+  artefato de popularidade.
+
+--- 2. CONTROLE NEGATIVO — 5.000 pares ao acaso (§20)
+  probabilidade media — positivos do teste                      0.371 
+  probabilidade media — negativos do teste                      0.147 
+  probabilidade media — controle ao acaso                       0.087 
+    controle acima de 0.5                                          62 (1,2% dos 5.000)
+    controle acima de 0.7                                           8 (0,2% dos 5.000)
+    controle acima de 0.9                                           0 (0,0% dos 5.000)
+  pares de controle com pelo menos um lado sem ATC              3.594 (71,9%)
+
+  O controle nao tem rotulo verdadeiro — sao pares nao afirmados, e nao pares
+  provadamente inertes. Serve para uma pergunta so: a probabilidade sai alta
+  indiscriminadamente? Se a media do controle ficasse perto da media dos
+  positivos, o modelo estaria dizendo sim para tudo.
+
+--- 3. ROTULO MAIS DURO — positivo so quando as DUAS fontes afirmam
+  positivos com este criterio                                  17.750 (contra 94770 do criterio normal)
+  prevalencia                                                    3,9% 
+  pares afirmados por UMA fonte, removidos do universo         77.020 <- nao viram negativo: a outra base pode nao te-los examinado
+  universo restante                                           380.426 
+
+  LOGISTICA          SEM_GRAFO   AUC 0.7992   PR-AUC 0.2166 (piso 0.044)
+  GRADIENT_BOOSTING  SEM_GRAFO   AUC 0.8581   PR-AUC 0.3492 (piso 0.044)
+
+--- 4. PONTO CEGO — em quantas substancias o modelo consegue opinar?
+  substancias no banco                                          2.094 
+  com ATC (atributo principal)                                  1.159 (55,3%)
+  sem ATC — modelo opina so pelos atributos fracos                935 (44,7%)
+  sem ATC E sem nenhuma interacao conhecida                       887 (42,4%)  <- cegueira dupla
+
+  Para essas o sistema continua tendo o que dizer — pelas regras
+  deterministicas e pela declaracao de nao-cobertura — mas o modelo nao
+  acrescenta nada, e a interface tem de dizer isso em vez de exibir uma
+  probabilidade baseada em quase nenhum atributo.
+
+--- 5. PRECISAO NO TOPO — o unico regime em que previsao viraria alerta
+  Um modelo com AUC 0,74 nao serve para rastrear tudo. Pode servir para
+  apontar POUCOS pares com alta confianca. A pergunta e: entre os N pares de
+  maior probabilidade, quantos sao mesmo afirmados por fonte?
+
+  regime FRIO_FRIO (10153 pares, prevalencia 20,4%):
+    top 0.1% (10 pares)                                precisao 0.900   recall 0.004   limiar 0.953 
+    top 0.5% (50 pares)                                precisao 0.780   recall 0.019   limiar 0.877 
+    top 1.0% (101 pares)                               precisao 0.802   recall 0.039   limiar 0.837 
+    top 5.0% (507 pares)                               precisao 0.631   recall 0.155   limiar 0.621 
+    top 10.0% (1015 pares)                             precisao 0.520   recall 0.255   limiar 0.492 
+    linha de base (acaso)                              precisao 0.204 
+
+  Leitura para a decisao de implantacao: se a precisao no topo nao for
+  claramente maior que a prevalencia, um alerta previsto acrescentaria mais
+  ruido que informacao, e a resposta correta e nao exibi-lo como alerta.
+
+Gravado: ml/saida/25_robustez.json
+   (148.2s)
+
+==========================================================================
+>> ml/45_significancia.py  —  bootstrap pareado das diferencas
+==========================================================================
+
+==========================================================================
+SIGNIFICANCIA DA DIFERENCA ENTRE FAMILIAS
+==========================================================================
+  treinado: TABELA_CLASSE_x_CLASSE
+  treinado: LOGISTICA
+  treinado: FLORESTA
+  treinado: GRADIENT_BOOSTING
+
+--- teste (todos os regimes)
+  pares                                                       126.555 positivos 26004
+
+  familia                         AUC   IC 95%
+  TABELA_CLASSE_x_CLASSE       0.7032   [0.6995 ; 0.7065]
+  LOGISTICA                    0.7339   [0.7304 ; 0.7374]
+  FLORESTA                     0.7941   [0.7911 ; 0.7971]
+  GRADIENT_BOOSTING            0.7887   [0.7857 ; 0.7918]
+
+  DIFERENCAS PAREADAS (A - B), IC 95%:
+  TABELA_CLASSE_x_CLASSE   - LOGISTICA                -0.0307  [-0.0344 ; -0.0271]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - FLORESTA                 -0.0909  [-0.0945 ; -0.0873]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - GRADIENT_BOOSTING        -0.0855  [-0.0890 ; -0.0820]  diferenca estabelecida
+  LOGISTICA                - FLORESTA                 -0.0602  [-0.0625 ; -0.0579]  diferenca estabelecida
+  LOGISTICA                - GRADIENT_BOOSTING        -0.0548  [-0.0569 ; -0.0527]  diferenca estabelecida
+  FLORESTA                 - GRADIENT_BOOSTING        +0.0054  [+0.0038 ; +0.0069]  diferenca estabelecida
+
+--- teste FRIO_FRIO
+  pares                                                        10.153 positivos 2068
+
+  familia                         AUC   IC 95%
+  TABELA_CLASSE_x_CLASSE       0.6856   [0.6727 ; 0.6983]
+  LOGISTICA                    0.7147   [0.7024 ; 0.7266]
+  FLORESTA                     0.7344   [0.7223 ; 0.7461]
+  GRADIENT_BOOSTING            0.7392   [0.7270 ; 0.7504]
+
+  DIFERENCAS PAREADAS (A - B), IC 95%:
+  TABELA_CLASSE_x_CLASSE   - LOGISTICA                -0.0294  [-0.0428 ; -0.0159]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - FLORESTA                 -0.0490  [-0.0626 ; -0.0349]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - GRADIENT_BOOSTING        -0.0537  [-0.0658 ; -0.0411]  diferenca estabelecida
+  LOGISTICA                - FLORESTA                 -0.0196  [-0.0278 ; -0.0111]  diferenca estabelecida
+  LOGISTICA                - GRADIENT_BOOSTING        -0.0243  [-0.0317 ; -0.0168]  diferenca estabelecida
+  FLORESTA                 - GRADIENT_BOOSTING        -0.0047  [-0.0117 ; +0.0022]  EMPATE (IC contem zero)
+
+  COMO ISTO ENTRA NA DECISAO: onde o intervalo da diferenca contem zero, a
+  vantagem nao esta estabelecida com este tamanho de amostra, e a
+  especificacao §1 manda preferir a familia mais simples. Onde nao contem, a
+  diferenca e real e precisa ser pesada contra custo e interpretabilidade —
+  nao adotada automaticamente.
+
+Gravado: ml/saida/45_significancia.json
+   (232.5s)
+
+==========================================================================
+>> ml/30_calibracao.py  —  calibracao
+==========================================================================
+
+==========================================================================
+CALIBRACAO — split POR_FARMACO, atributos SEM_GRAFO
+==========================================================================
+
+--- LOGISTICA
+  CRU        teste  ECE / Brier / AUC                  0.0231 / 0.1427 / 0.7339 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0036 / 0.1421 / 0.7339 
+  PLATT      teste  ECE / Brier / AUC                  0.0147 / 0.1428 / 0.7339 
+
+--- FLORESTA
+  CRU        teste  ECE / Brier / AUC                  0.0115 / 0.1285 / 0.7941 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0183 / 0.1286 / 0.7941 
+  PLATT      teste  ECE / Brier / AUC                  0.0269 / 0.1295 / 0.7941 
+
+--- GRADIENT_BOOSTING
+  CRU        teste  ECE / Brier / AUC                  0.0223 / 0.1302 / 0.7887 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0118 / 0.1298 / 0.7887 
+  PLATT      teste  ECE / Brier / AUC                  0.0328 / 0.1311 / 0.7887 
+
+--- TABELA_CLASSE_x_CLASSE
+  CRU        teste  ECE / Brier / AUC                  0.0165 / 0.1453 / 0.7032 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0157 / 0.1448 / 0.7030 
+  PLATT      teste  ECE / Brier / AUC                  0.0175 / 0.1449 / 0.7032 
+
+--- CURVA DE CONFIABILIDADE — GRADIENT_BOOSTING (teste)
+  faixa               n    prob. media     freq. real  desvio
+  0.0-0.1         57296          0.046          0.067  -0.021
+  0.1-0.2         26492          0.143          0.175  -0.032
+  0.2-0.3         14496          0.246          0.253  -0.007
+  0.3-0.4          9107          0.347          0.342  +0.005
+  0.4-0.5          6490          0.448          0.413  +0.035
+  0.5-0.6          4880          0.547          0.511  +0.036
+  0.6-0.7          3451          0.646          0.608  +0.039
+  0.7-0.8          2309          0.747          0.726  +0.021
+  0.8-0.9          1532          0.844          0.851  -0.007
+  0.9-1.0           502          0.933          0.944  -0.012
+
+  Depois da calibracao isotonica:
+  0.0-0.1         48304          0.051          0.058  -0.007
+  0.1-0.2         30021          0.143          0.151  -0.008
+  0.2-0.3         18273          0.247          0.238  +0.008
+  0.3-0.4         10537          0.349          0.331  +0.018
+  0.4-0.5          6018          0.441          0.409  +0.032
+  0.5-0.6          6544          0.552          0.508  +0.045
+  0.6-0.7          2293          0.644          0.630  +0.014
+  0.7-0.8          2655          0.753          0.726  +0.028
+  0.8-0.9          1294          0.846          0.849  -0.002
+  0.9-1.0           616          0.946          0.937  +0.009
+
+--- ESCOLHA DO CALIBRADOR
+  CRU                                                  ECE 0.0223  Brier 0.1302  AUC 0.7887  (frio-frio ECE 0.0488) 
+  ISOTONICA                                            ECE 0.0118  Brier 0.1298  AUC 0.7887  (frio-frio ECE 0.0361) 
+  PLATT                                                ECE 0.0328  Brier 0.1311  AUC 0.7887  (frio-frio ECE 0.0406) 
+
+  Calibrador escolhido: ISOTONICA (menor ECE no teste).
+
+  A calibracao nao muda a ordenacao (isotonica e Platt sao monotonas), logo a
+  AUC nao muda. Ela muda o NUMERO que aparece na tela — que e exatamente o que
+  o farmaceutico le. Por isso ela e obrigatoria antes de exibir qualquer
+  probabilidade, e nao um refinamento opcional.
+
+Gravado: ml/saida/30_calibracao.json e models/calibrador_m1.json
+   (77.5s)
+
+==========================================================================
+>> ml/40_explicabilidade.py  —  explicabilidade
+==========================================================================
+
+==========================================================================
+EXPLICABILIDADE — modelo SEM_GRAFO, split POR_FARMACO
+==========================================================================
+
+--- 1. IMPORTANCIA POR PERMUTACAO — gradient boosting (validacao)
+  atributo                                  queda de AUC ao embaralhar
+  adm_lados_com_regra                          0.0564  (+-0.0021)
+  produtos_log_min                             0.0374  (+-0.0013)
+  produtos_log_max                             0.0279  (+-0.0004)
+  atc_grupo1_N                                 0.0134  (+-0.0003)
+  tarja_desconhecida_lados                     0.0122  (+-0.0000)
+  atc_grupo2_A16                               0.0093  (+-0.0018)
+  atc_grupo1_C                                 0.0089  (+-0.0002)
+  tarja_MIP                                    0.0074  (+-0.0002)
+  atc_grupo1_L                                 0.0064  (+-0.0004)
+  atc_n1_igual                                 0.0057  (+-0.0001)
+  pk_lados_com_papel                           0.0048  (+-0.0002)
+  atc_grupo2_G03                               0.0046  (+-0.0002)
+  atc_grupo2_A11                               0.0045  (+-0.0003)
+  atc_grupo2_J01                               0.0040  (+-0.0007)
+  atc_grupo2_L01                               0.0039  (+-0.0001)
+  atc_grupo2_M01                               0.0038  (+-0.0003)
+  atc_grupo2_N01                               0.0038  (+-0.0004)
+  atc_lados_com_codigo                         0.0037  (+-0.0000)
+  atc_grupo1_S                                 0.0033  (+-0.0007)
+  atc_grupo2_B05                               0.0033  (+-0.0003)
+
+  bloco ATC (classe farmacologica)                             0.1559 
+  bloco REG (mercado e tarja)                                  0.0927 
+  bloco ADM (regra de administracao)                           0.0640 
+  bloco PK (papel CYP)                                         0.0055 
+
+--- 2. COEFICIENTES — regressao logistica (direcao e tamanho)
+  adm_lados_com_regra                          +1.381  (aumenta a chance estimada)
+  adm_tipo_INDIFERENTE_ALIMENTO                -0.818  (reduz a chance estimada)
+  adm_tipo_COM_ALIMENTO                        -0.476  (reduz a chance estimada)
+  adm_tipo_JEJUM                               -0.368  (reduz a chance estimada)
+  atc_grupo2_A16                               -0.306  (reduz a chance estimada)
+  atc_grupo2_M09                               -0.259  (reduz a chance estimada)
+  atc_grupo2_A01                               +0.223  (aumenta a chance estimada)
+  produtos_log_min                             +0.221  (aumenta a chance estimada)
+  atc_n1_igual                                 +0.199  (aumenta a chance estimada)
+  produtos_log_soma                            +0.178  (aumenta a chance estimada)
+  atc_grupo2_A11                               -0.148  (reduz a chance estimada)
+  adm_tipo_APOS_ALIMENTO                       -0.146  (reduz a chance estimada)
+  atc_grupo2_D02                               -0.145  (reduz a chance estimada)
+  lados_com_dcb                                -0.144  (reduz a chance estimada)
+  atc_grupo2_N05                               +0.134  (aumenta a chance estimada)
+  atc_grupo2_R02                               -0.119  (reduz a chance estimada)
+
+--- 3. EXPLICACAO POR PREVISAO — ocultacao uma-a-uma
+
+  fluoxetina  x  paroxetina
+    probabilidade estimada: 0.995   |   rotulo real: afirmado por fonte
+    o modelo pesou:
+      [+0.022] os dois atuam na mesma enzima CYP
+      [+0.008] quantidade de apresentacoes do mais comercializado
+      [+0.007] mesmo subgrupo farmacologico
+      [+0.006] quantidade de apresentacoes do menos comercializado
+      [+0.005] quantos lados tem regra de administracao
+      [+0.004] quantos lados tem papel CYP conhecido
+
+  acetilcisteína  x  retinol
+    probabilidade estimada: 0.000   |   rotulo real: nao afirmado
+    o modelo pesou:
+      [-0.003] um dos farmacos e do subgrupo A11 (Vitaminas)
+      [-0.002] um dos farmacos e do subgrupo R05 (Preparações de COUGH e COLD)
+      [-0.000] quantidade de apresentacoes do mais comercializado
+      [-0.000] quantidade de apresentacoes do menos comercializado
+      [-0.000] tarja desconhecida lados em 1 lado(s)
+      [-0.000] tarja mip em 1 lado(s)
+
+  doxilamina  x  prednisolona
+    probabilidade estimada: 0.500   |   rotulo real: nao afirmado
+    o modelo pesou:
+      [+0.280] quantidade de apresentacoes do mais comercializado
+      [+0.189] quantidade de apresentacoes do menos comercializado
+      [+0.183] um dos farmacos e do subgrupo A01 (Preparações estomatológicas)
+      [+0.069] tarja mip em 1 lado(s)
+      [+0.029] um dos farmacos e do subgrupo R06 (Anti-histamínicos para uso sistêmico)
+      [-0.024] regra de administracao indiferente alimento em 0 lado(s)
+
+  LEITURA OBRIGATORIA JUNTO COM O NUMERO: nenhuma linha acima e mecanismo.
+  "os dois sao do subgrupo C09" explica o que o MODELO viu; nao afirma que
+  ha interacao farmacologica, nem qual seria. Se houver mecanismo conhecido,
+  ele vem da fonte pelo caminho deterministico e aparece no achado
+  DOCUMENTADO — nunca daqui.
+
+Gravado: ml/saida/40_explicabilidade.json
+   (321.7s)
+
+==========================================================================
+>> ml/50_comparacao.py  —  tabela de comparacao e decisao
+==========================================================================
+
+==========================================================================
+COMPARACAO DAS FAMILIAS — TABELA UNICA
+==========================================================================
+  familia                    configuracao      split             AUC   PR-AUC FRIO_FRIO     seg
+  PREVALENCIA                COMPLETO          POR_PAR        0,5000   0,2054         —     0.0
+  REGRA_ATC_N2               COMPLETO          POR_PAR        0,5177   0,2164         —     0.1
+  TABELA_CLASSE_x_CLASSE     COMPLETO          POR_PAR        0,7337   0,4532         —     0.3
+  LOGISTICA                  COMPLETO          POR_PAR        0,9238   0,7921         —     5.2
+  LOGISTICA_PESO_BALANCEADO  COMPLETO          POR_PAR        0,9251   0,7905         —     3.1
+  ARVORE                     COMPLETO          POR_PAR        0,9175   0,7745         —     5.0
+  FLORESTA                   COMPLETO          POR_PAR        0,9442   0,8425         —    42.8
+  GRADIENT_BOOSTING          COMPLETO          POR_PAR        0,9385   0,8289         —    21.4
+  SVM_LINEAR                 COMPLETO          POR_PAR        0,9233   0,7923         —    10.5
+  GRAFO_ADAMIC_ADAR          COMPLETO          POR_PAR        0,9074   0,7593         —     6.5
+  LOGISTICA                  SEM_GRAFO         POR_PAR        0,7622   0,4748         —     2.5
+  LOGISTICA_PESO_BALANCEADO  SEM_GRAFO         POR_PAR        0,7627   0,4712         —     2.4
+  ARVORE                     SEM_GRAFO         POR_PAR        0,7199   0,4190         —     3.7
+  FLORESTA                   SEM_GRAFO         POR_PAR        0,8610   0,6554         —    41.4
+  GRADIENT_BOOSTING          SEM_GRAFO         POR_PAR        0,8599   0,6655         —    33.4
+  SVM_LINEAR                 SEM_GRAFO         POR_PAR        0,7593   0,4724         —     2.0
+  PREVALENCIA                COMPLETO          POR_FARMACO    0,5000   0,2055    0,5000     0.0
+  REGRA_ATC_N2               COMPLETO          POR_FARMACO    0,5219   0,2194    0,5279     0.1
+  TABELA_CLASSE_x_CLASSE     COMPLETO          POR_FARMACO    0,7032   0,4251    0,6856     0.2
+  LOGISTICA                  COMPLETO          POR_FARMACO    0,3416   0,1664    0,4313     3.6
+  LOGISTICA_PESO_BALANCEADO  COMPLETO          POR_FARMACO    0,3416   0,1642    0,4362     1.8
+  ARVORE                     COMPLETO          POR_FARMACO    0,4949   0,2052    0,4912     5.5
+  FLORESTA                   COMPLETO          POR_FARMACO    0,6679   0,3486    0,6157    26.9
+  GRADIENT_BOOSTING          COMPLETO          POR_FARMACO    0,5460   0,2340    0,5457    25.4
+  SVM_LINEAR                 COMPLETO          POR_FARMACO    0,3397   0,1640    0,4072     7.5
+  GRAFO_ADAMIC_ADAR          COMPLETO          POR_FARMACO    0,5000   0,2055    0,5000     6.1
+  LOGISTICA                  SEM_GRAFO         POR_FARMACO    0,7339   0,4424    0,7147     2.0
+  LOGISTICA_PESO_BALANCEADO  SEM_GRAFO         POR_FARMACO    0,7345   0,4406    0,7153     2.1
+  ARVORE                     SEM_GRAFO         POR_FARMACO    0,7153   0,4073    0,7141     2.3
+  FLORESTA                   SEM_GRAFO         POR_FARMACO    0,7941   0,5480    0,7344    26.7
+  GRADIENT_BOOSTING          SEM_GRAFO         POR_FARMACO    0,7887   0,5353    0,7392    25.6
+  SVM_LINEAR                 SEM_GRAFO         POR_FARMACO    0,7328   0,4388    0,7139     2.8
+  LOGISTICA                  SO_ATC            POR_FARMACO    0,6777   0,3614    0,6668     1.4
+  GRADIENT_BOOSTING          SO_ATC            POR_FARMACO    0,7154   0,4290    0,6921    24.1
+  LOGISTICA                  SO_GRAFO          POR_FARMACO    0,3468   0,1677    0,5000     0.6
+  GRADIENT_BOOSTING          SO_GRAFO          POR_FARMACO    0,4501   0,1890    0,5000     6.0
+  LOGISTICA                  SO_REG            POR_FARMACO    0,6258   0,3144    0,5957     0.1
+  GRADIENT_BOOSTING          SO_REG            POR_FARMACO    0,6526   0,3475    0,6218     6.1
+  LOGISTICA                  SEM_POPULARIDADE  POR_FARMACO    0,7179   0,4257    0,7033     1.7
+  GRADIENT_BOOSTING          SEM_POPULARIDADE  POR_FARMACO    0,7608   0,5018    0,7252    20.0
+
+--- O REGIME QUE DECIDE — teste FRIO_FRIO, split POR_FARMACO
+  familia                    configuracao         AUC ff PR-AUC ff      seg
+  GRADIENT_BOOSTING          SEM_GRAFO            0,7392    0,4451     25.6
+  FLORESTA                   SEM_GRAFO            0,7344    0,4610     26.7
+  GRADIENT_BOOSTING          SEM_POPULARIDADE     0,7252    0,4495     20.0
+  LOGISTICA_PESO_BALANCEADO  SEM_GRAFO            0,7153    0,4187      2.1
+  LOGISTICA                  SEM_GRAFO            0,7147    0,4192      2.0
+  ARVORE                     SEM_GRAFO            0,7141    0,4072      2.3
+  SVM_LINEAR                 SEM_GRAFO            0,7139    0,4142      2.8
+  LOGISTICA                  SEM_POPULARIDADE     0,7033    0,4140      1.7
+  GRADIENT_BOOSTING          SO_ATC               0,6921    0,3988     24.1
+  TABELA_CLASSE_x_CLASSE     COMPLETO             0,6856    0,4055      0.2
+  LOGISTICA                  SO_ATC               0,6668    0,3486      1.4
+  GRADIENT_BOOSTING          SO_REG               0,6218    0,3043      6.1
+  FLORESTA                   COMPLETO             0,6157    0,2889     26.9
+  LOGISTICA                  SO_REG               0,5957    0,2949      0.1
+
+--- APLICACAO DA REGRA DE DESEMPATE
+  melhor AUC FRIO_FRIO: GRADIENT_BOOSTING / SEM_GRAFO = 0,7392
+  dentro da faixa de empate (0.02 de AUC): 3 configuracoes
+    - GRADIENT_BOOSTING / SEM_GRAFO  (AUC ff 0,7392)
+    - GRADIENT_BOOSTING / SEM_POPULARIDADE  (AUC ff 0,7252)
+    - FLORESTA / SEM_GRAFO  (AUC ff 0,7344)
+  mais simples entre as empatadas: GRADIENT_BOOSTING / SEM_GRAFO
+
+--- ABLACOES — de onde vem o desempenho
+  familia              configuracao        AUC teste    AUC ff
+  LOGISTICA            COMPLETO               0,3416    0,4313
+  LOGISTICA            SEM_GRAFO              0,7339    0,7147
+  LOGISTICA            SO_ATC                 0,6777    0,6668
+  LOGISTICA            SO_REG                 0,6258    0,5957
+  LOGISTICA            SEM_POPULARIDADE       0,7179    0,7033
+  LOGISTICA            SO_GRAFO               0,3468    0,5000
+  GRADIENT_BOOSTING    COMPLETO               0,5460    0,5457
+  GRADIENT_BOOSTING    SEM_GRAFO              0,7887    0,7392
+  GRADIENT_BOOSTING    SO_ATC                 0,7154    0,6921
+  GRADIENT_BOOSTING    SO_REG                 0,6526    0,6218
+  GRADIENT_BOOSTING    SEM_POPULARIDADE       0,7608    0,7252
+  GRADIENT_BOOSTING    SO_GRAFO               0,4501    0,5000
+
+--- ROBUSTEZ
+  pareado por grau  LOGISTICA            COMPLETO   AUC 0,5052  PR-AUC 0,5038
+  pareado por grau  GRADIENT_BOOSTING    COMPLETO   AUC 0,6061  PR-AUC 0,6077
+  pareado por grau  LOGISTICA            SEM_GRAFO  AUC 0,6002  PR-AUC 0,6017
+  pareado por grau  GRADIENT_BOOSTING    SEM_GRAFO  AUC 0,7238  PR-AUC 0,7332
+  controle ao acaso: media 0.087  (positivos do teste 0.371, negativos 0.147)
+  rotulo de 2 fontes LOGISTICA            AUC 0,7992  PR-AUC 0,2166
+  rotulo de 2 fontes GRADIENT_BOOSTING    AUC 0,8581  PR-AUC 0,3492
+
+--- CALIBRACAO
+  LOGISTICA                ECE cru 0,0231 -> isotonica 0,0036   Brier 0,1427 -> 0,1421
+  FLORESTA                 ECE cru 0,0115 -> isotonica 0,0183   Brier 0,1285 -> 0,1286
+  GRADIENT_BOOSTING        ECE cru 0,0223 -> isotonica 0,0118   Brier 0,1302 -> 0,1298
+  TABELA_CLASSE_x_CLASSE   ECE cru 0,0165 -> isotonica 0,0157   Brier 0,1453 -> 0,1448
+
+Gravado: ml/saida/50_comparacao.json e docs/ML_COMPARACAO.md
+   (0.3s)
+
+==========================================================================
+>> ml/60_registrar_modelo.py  —  registro do modelo no banco
+==========================================================================
+
+==========================================================================
+REGISTRO DO MODELO — Fase 7
+==========================================================================
+  espaco de atributos gravado                                     130 models/espaco_features.json
+
+--- 1.0-boosting  (melhor metrica)
+  familia                                              GRADIENT_BOOSTING 
+  AUC teste / FRIO_FRIO                                0.7887 / 0.7392 
+  formato do artefato                                  SKLEARN_PICKLE 
+  tamanho do artefato                                         1.08 MB 
+    AVISO: artefato depende da versao 1.9.0 do scikit-learn; para empacotamento em .exe isso e uma amarra, e esta declarado
+
+--- 1.0-logistica  (referencia interpretavel)
+  familia                                                   LOGISTICA 
+  AUC teste / FRIO_FRIO                                0.7339 / 0.7147 
+  formato do artefato                                  LOGISTICA_JSON 
+  tamanho do artefato                                         0.01 MB 
+
+--- ESTADO NO BANCO
+  m1_existencia_interacao 1.0-boosting                 GRADIENT_BOOSTING  status=EXPERIMENTAL  ativo=0 
+  m1_existencia_interacao 1.0-logistica                LOGISTICA  status=EXPERIMENTAL  ativo=0 
+
+  NENHUM MODELO ATIVO. `ativo=0` e `status='EXPERIMENTAL'` sao a forma de o
+  banco dizer que o modelo foi medido e NAO foi liberado para gerar alerta ao
+  farmaceutico. O indice unico do esquema impede que dois fiquem ativos para o
+  mesmo problema, e o CHECK impede ativar um que nao esteja homologado —
+  homologar exige decisao humana registrada, nao um UPDATE distraido.
+
+Gravado: ml/saida/60_registro.json
+   (51.2s)
+
+==========================================================================
+>> ml/80_fila_curadoria.py  —  fila de curadoria priorizada
+==========================================================================
+
+==========================================================================
+FILA DE CURADORIA — modelo m1_existencia_interacao 1.0-boosting (status EXPERIMENTAL)
+==========================================================================
+  substancias com ATC                                           1.159 
+    destas, ja com alguma interacao afirmada                      909 
+    destas, sem nenhuma interacao afirmada                        250 <- o ponto cego
+  pares possiveis entre substancias com ATC                   671.061 
+
+--- PONTUANDO OS PARES NAO DOCUMENTADOS
+  pares candidatos (nao documentados)                         581.201 
+    40000 / 581201
+    80000 / 581201
+    120000 / 581201
+    160000 / 581201
+    200000 / 581201
+    240000 / 581201
+    280000 / 581201
+    320000 / 581201
+    360000 / 581201
+    400000 / 581201
+    440000 / 581201
+    480000 / 581201
+    520000 / 581201
+    560000 / 581201
+    581201 / 581201
+  probabilidade calibrada — media                              0.1477 
+    acima de 0,90                                                 243 
+    acima de 0,80                                               1.171 
+    acima de 0,50                                              21.881 (3,8% dos candidatos)
+
+--- FILA A_PONTO_CEGO
+  candidatos nesta fila                                       258.375 
+  substancias distintas na fila                                   175 (teto de 8 pares por substancia)
+  probabilidade do 1o colocado                                  1.000 
+  probabilidade do 300o colocado                                0.777 
+
+  os 10 primeiros:
+    1.000  aripiprazol                      x levomepromazina                 
+    1.000  clozapina                        x levomepromazina                 
+    1.000  fibrinolisina                    x clopidogrel                     
+    1.000  buspirona                        x levomepromazina                 
+    1.000  quetiapina                       x levomepromazina                 
+    1.000  haloperidol                      x levomepromazina                 
+    1.000  fibrinolisina                    x varfarina                       
+    1.000  levomepromazina                  x paliperidona                    
+    1.000  fibrinolisina                    x rivaroxabana                    
+    1.000  levomepromazina                  x lurasidona                      
+
+--- FILA B_LACUNA_DE_FONTE
+  candidatos nesta fila                                       322.826 
+  substancias distintas na fila                                   222 (teto de 8 pares por substancia)
+  probabilidade do 1o colocado                                  0.996 
+  probabilidade do 300o colocado                                0.792 
+
+  os 10 primeiros:
+    0.996  mometasona                       x prednisolona                    
+    0.995  esomeprazol                      x metronidazol                    
+    0.980  esomeprazol                      x prednisolona                    
+    0.965  dexametasona                     x esomeprazol                     
+    0.964  dexametasona                     x mometasona                      
+    0.957  desvenlafaxina                   x metronidazol                    
+    0.955  etoricoxibe                      x metronidazol                    
+    0.949  clioquinol                       x lemborexante                    
+    0.947  clioquinol                       x periciazina                     
+    0.937  prednisolona                     x trazodona                       
+
+--- GRAVADO
+  linhas no CSV                                                   600 reports\fila_curadoria_m1.csv
+  linhas em `predicao`                                            600 status NAO_REVISADA
+  achados gerados                                                   0 <- modelo EXPERIMENTAL, contrato recusa
+
+  COMO ESTA FILA E USADA: um farmaceutico pega o topo, procura a interacao na
+  literatura e registra o que achou. Cada linha verificada vira rotulo humano
+  — o insumo que hoje nao existe (anotacao_profissional esta vazia) e sem o
+  qual o modelo de RELEVANCIA (problema B) nao pode ser treinado. A fila e,
+  portanto, tambem o caminho para sair da limitacao central desta fase.
+
+Gravado: ml/saida/80_fila_curadoria.json
+   (39.0s)
+
+
+##########################################################################
+# VERIFICACAO — V1, V2 e regressao
+##########################################################################
+
+==========================================================================
+>> ml/70_predizer.py  —  contrato de previsao (autoteste)
+==========================================================================
+
+==========================================================================
+AUTOTESTE DO CONTRATO DE PREVISAO
+==========================================================================
+  modelo m1_existencia_interacao 1.0-boosting (GRADIENT_BOOSTING), status EXPERIMENTAL
+  espaco de atributos confere: 130 nomes
+  todas as probabilidades em [0,1]  OK
+  prever(a,b) == prever(b,a)  OK
+  contrato_achado recusa modelo EXPERIMENTAL  OK
+  espaco atual identico ao gravado  OK
+  banco recusa gravidade sugerida pelo modelo  OK
+
+AUTOTESTE OK
+   (3.9s)
+
+==========================================================================
+>> ml/91_v1_pipeline.py  —  V1 — validacao do pipeline
+==========================================================================
+
+==========================================================================
+V1 — VALIDACAO DO PIPELINE DE ML
+==========================================================================
+
+--- 1. DATASET
+  [OK ] numero de pares == C(n,2)                                  457446 pares, 957 substancias
+  [OK ] todo par em ordem canonica (a<b)                           
+  [OK ] nenhum par repetido                                        
+  [OK ] positivos do .npz == pares do banco                        94770 positivos
+  [OK ] universo == substancias com >=1 interacao                  957 substancias
+  [OK ] semente gravada no dataset                                 20260909
+
+--- 2. ROTULO
+  [OK ] n_fontes>0 exatamente onde y=1                             
+  [OK ] n_fontes maximo == 2 (duas bases carregadas)               
+  [OK ] pares com 2 fontes conferem com o banco                    17750
+  [OK ] rotulo de tipo so existe entre positivos                   
+
+--- 3. SPLIT
+  [OK ] split por par cobre tudo e nao se sobrepoe                 
+  [OK ] split por par: proporcao ~70/15/15                         0.700 / 0.150 / 0.150
+  [OK ] nenhum farmaco em dois grupos                              
+  [OK ] regime de treino == os dois lados de treino                
+  [OK ] regime de teste == pelo menos um lado de teste             
+  [OK ] FRIO_FRIO == os dois lados de teste                        
+  [OK ] nenhum par de treino toca farmaco de validacao ou teste    
+
+--- 4. ATRIBUTOS
+  [OK ] largura da matriz == espaco declarado                      130 atributos
+  [OK ] atributos simetricos                                       
+  [OK ] sem NaN/infinito                                           
+  [OK ] bloco GRAFO fora do espaco publicado                       
+  [OK ] grafo do contexto vem so do treino                         661 substancias no grafo de treino
+
+--- 5. TREINO — determinismo
+  [OK ] dois treinos com a mesma semente dao a mesma previsao      maior diferenca 0.00e+00
+
+--- 6. METRICAS GRAVADAS
+  [OK ] modelo registrado no banco                                 
+  [OK ] o ARTEFATO publicado reproduz a AUC gravada                0.788743 vs 0.788743
+  [OK ] um treino novo reproduz a AUC gravada                      0.788743 vs 0.788743
+  [OK ] semente gravada == semente da fase                         20260909
+  [OK ] n_features gravado == espaco atual                         
+  [OK ] espaco gravado == espaco atual                             
+  [OK ] modelo NAO esta ativo                                      status=EXPERIMENTAL
+
+--- 7. PERSISTENCIA — salvar e recarregar
+  [OK ] artefato existe                                            m1_1_0-boosting.json
+  [OK ] previsao do artefato recarregado == a do modelo em memoria maior diferenca 0.00e+00
+  [OK ] espaco_features.json existe e confere                      
+  [OK ] calibrador gravado como tabela, nao pickle                 
+
+--- 8. INFERENCIA PELO CONTRATO
+  [OK ] Preditor concorda com o modelo treinado agora              200 pares
+  [OK ] probabilidade calibrada dentro de [0,1]                    
+  [OK ] previsao e simetrica                                       
+  [OK ] contrato recusa modelo experimental                        
+
+==========================================================================
+V1 OK — o pipeline faz o que diz que faz
+   (77.7s)
+
+==========================================================================
+>> ml/92_v2_independente.py  —  V2 — verificacao independente
+==========================================================================
+
+==========================================================================
+V2 — VERIFICACAO INDEPENDENTE DA FASE 7
+==========================================================================
+
+--- 1. DATASET RECONTADO POR SQL PROPRIO (sem ler o .npz)
+  [OK ] substancias do universo                                    SQL 957  npz 957
+  [OK ] positivos                                                  SQL 94770  npz 94770
+  [OK ] pares totais                                               combinatoria 457446  npz 457446
+  [OK ] cada positivo da amostra existe no banco                   301 pares conferidos
+  [OK ] nenhum negativo da amostra existe no banco                 301 pares conferidos
+
+--- 2. METRICAS REIMPLEMENTADAS EM NUMPY PURO
+  [OK ] AUC: Mann-Whitney proprio == sklearn                       0.78874312 vs 0.78874312
+  [OK ] PR-AUC: trapezio proprio ~ average_precision               0.535304 vs 0.535317 (metodos diferentes por definicao)
+  [OK ] Brier proprio == sklearn                                   0.13016408 vs 0.13016408
+  [OK ] ECE proprio == do pipeline                                 0.02228126 vs 0.02228126
+  [OK ] AUC de preditor constante == 0,5                           
+  [OK ] AUC do rotulo perfeito == 1,0                              
+
+--- 3. ROTULO CONFRONTADO COM O SISTEMA ANTERIOR (acervo, outro banco)
+  [OK ] chaves normalizadas em comum entre os dois bancos          2068 chaves
+      pares (chave x chave) no sistema anterior: 108032
+      pares (chave x chave) neste sistema:       93940
+      em comum:                                  92900
+  [OK ] >=90% dos pares deste sistema estao no anterior            98.9%
+      so neste sistema: 1040   so no anterior: 15132
+  [OK ] divergencia explicavel (<15% de cada lado)                 as duas cargas usam recortes de substancia diferentes
+
+--- 4. CACA AO VAZAMENTO — forca bruta
+  [OK ] nenhum par de teste dentro do treino                       interseccao 0
+  [OK ] nenhum par de teste INVERTIDO dentro do treino             
+  [OK ] nenhum par de treino toca farmaco de teste                 143 farmacos de teste
+  [OK ] nenhum farmaco de teste no grafo de atributos              
+  [OK ] atributos de grafo sao zero em todo par FRIO_FRIO          2000 pares conferidos
+  [OK ] nenhum par com a mesma substancia nos dois lados           
+
+--- 5. SPLIT CONFERIDO POR COMBINATORIA
+  [OK ] grupos somam o universo                                    669 + 145 + 143 = 957
+  [OK ] pares de treino == C(n_treino,2)                           223446 == 223446
+  [OK ] pares FRIO_FRIO == C(n_teste,2)                            10153 == 10153
+  [OK ] pares QUENTE_FRIO == n_teste x (n_treino+n_val)            116402 == 116402
+
+--- 6. ARTEFATO JSON RECALCULADO A MAO (sem scikit-learn)
+  [OK ] artefato da logistica e JSON                               m1_1_0-logistica.json
+  [OK ] tipo declarado e JSON puro                                 LOGISTICA_JSON
+  [OK ] dimensoes conferem com o espaco de atributos               130 coeficientes
+  [OK ] conta feita a mao == scikit-learn (dentro do float32)      maior diferenca 1.19e-07 em 300 pares (eps float32 = 1,19e-07)
+  [OK ] a ordenacao das 300 previsoes e identica                   diferenca numerica nao muda nenhuma decisao por limiar
+  [OK ] nenhuma probabilidade fora de [0,1]                        
+
+--- 7. SANIDADE — documentado pontua mais alto que sorteado
+      media dos positivos de teste ... 0.3710
+      media dos pares sorteados ...... 0.0874
+  [OK ] positivos pontuam mais que sorteados                       
+  [OK ] separacao documentado x sorteado com AUC > 0,80            0.8794
+
+==========================================================================
+V2 OK — seis caminhos independentes concordam com o pipeline
+   (57.2s)
+
+==========================================================================
+>> tests/teste_ml.py  —  regressao das garantias de ML
+==========================================================================
+==========================================================================
+REGRESSAO — GARANTIAS DE ML
+==========================================================================
+
+ML NUNCA ATRIBUI GRAVIDADE
+  [OK ] nenhuma predicao com gravidade sugerida                    
+  [OK ] o banco recusa gravidade sugerida por modelo               IntegrityError
+
+PREVISAO NAO SE DISFARCA DE FATO
+  [OK ] nenhum achado com natureza PREVISTO no banco               modelo EXPERIMENTAL: nenhuma previsao virou achado
+  [OK ] nenhum achado com origem MODELO                            
+  [OK ] todo achado existente e de REGRA                           0 achados
+  [OK ] nenhum achado de REGRA carrega probabilidade de modelo     
+  [OK ] PREVISTO sempre aponta para uma linha de predicao          
+  [OK ] previsao nao entra em vw_interacao_liberada                a view que chega ao farmaceutico nao le a tabela de previsao
+
+A VIEW E A UNICA PORTA (Fase 8)
+  [OK ] vw_predicao_liberada existe                                
+  [OK ] a view exige 'm.ativo = 1'                                 
+  [OK ] a view exige "m.status = 'HOMOLOGADO'"                     
+  [OK ] a view exige 'm.limiar_alerta IS NOT NULL'                 
+  [OK ] a view exige 'NOT EXISTS'                                  
+  [OK ] a view exige 'REVISADA_RECUSADA'                           
+  [OK ] sem modelo ativo, a view devolve zero                      
+  [OK ] nenhum achado previsto no banco de producao                
+  [OK ] o motor le a view de previsao                              
+  [OK ] o motor NAO consulta a tabela `predicao` direto            
+  [OK ] a previsao entra com prioridade de teto INFORMATIVO        
+
+A TELA SEPARA DOCUMENTADO DE PREVISTO (Fase 8)
+  [OK ] a tela tem bloco proprio para previsto                     
+  [OK ] o bloco declara que nao e alerta nem interacao documentada 
+  [OK ] a rota separa as duas listas antes de renderizar           
+  [OK ] o relatorio separa previsto dos achados                    
+  [OK ] o detalhe tem painel de rastreabilidade do modelo          
+  [OK ] o detalhe declara ausencia de evidencia documental         
+
+MODELO NAO E TROCADO EM SILENCIO
+  [OK ] no maximo um modelo ativo por problema                     
+  [OK ] nenhum modelo ativo hoje                                   2 modelos registrados, todos inativos
+  [OK ] todo modelo declara semente, versao de dados e espaco de atributos 
+  [OK ] todo modelo declara limitacoes em texto                    
+  [OK ] nenhum modelo ativo sem estar homologado                   
+
+PREVISAO GRAVADA NASCE NAO REVISADA
+  [OK ] ha previsoes gravadas para curadoria                       600 linhas
+  [OK ] todas NAO_REVISADA                                         
+  [OK ] nenhuma revisada sem quem revisou                          
+  [OK ] toda previsao aponta para um modelo existente              
+  [OK ] todo par de previsao em ordem canonica                     
+
+O ESPACO DE ATRIBUTOS NAO DIVERGE
+  [OK ] models/espaco_features.json existe                         
+  [OK ] espaco em disco == espaco calculado agora                  130 atributos
+  [OK ] espaco gravado no modelo 1.0-boosting confere              
+  [OK ] espaco gravado no modelo 1.0-logistica confere             
+  [OK ] nenhum atributo derivado da tabela de interacao            
+  [OK ] nenhum atributo de grafo no espaco publicado               grafo excluido por vazamento medido em 20_treinar
+
+O CONTRATO RECUSA MODELO NAO HOMOLOGADO
+  [OK ] par de teste realmente nao documentado                     anfotericina B x anifrolumabe
+  [OK ] contrato_achado recusa modelo EXPERIMENTAL                 
+  [OK ] previsao em [0,1]                                          0.0308
+  [OK ] previsao simetrica                                         
+  [OK ] o texto da tela contem 'PREVISÃO'                          
+  [OK ] o texto da tela contem 'Nenhuma bula'                      
+  [OK ] o texto da tela contem 'farmacêutico'                      
+  [OK ] o texto nao afirma mecanismo                               
+
+OS MOTORES NAO DEPENDEM DE ML
+  [OK ] rules/motor_conciliacao.py nao importa nada de ml/         
+  [OK ] rules/motor_horarios.py nao importa nada de ml/            
+  [OK ] rules/_prioridade.py nao importa nada de ml/               
+  [OK ] app/servicos.py nao importa nada de ml/                    
+  [OK ] app/web.py nao importa nada de ml/                         
+  [OK ] app/relatorio.py nao importa nada de ml/                   
+  [OK ] app/busca.py nao importa nada de ml/                       
+  [OK ] nenhum modelo e carregado no caminho deterministico        4 arquivos conferidos
+
+A INTERFACE JA SABE MOSTRAR PREVISTO
+  [OK ] app/templates/achado.html trata status PREVISTO            
+  [OK ] app/templates/resultados.html trata status PREVISTO        
+  [OK ] rotulos.py tem texto em pt-BR para PREVISTO                
+  [OK ] o texto de PREVISTO nega evidencia publicada               
+
+==========================================================================
+NENHUMA REGRESSAO — as garantias de ML continuam de pe
+   (3.8s)
+
+==========================================================================
+FASE 7 COMPLETA — medida, verificada duas vezes e sem regressao

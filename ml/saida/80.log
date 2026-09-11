@@ -1,0 +1,79 @@
+
+==========================================================================
+FILA DE CURADORIA — modelo m1_existencia_interacao 1.0-boosting (status EXPERIMENTAL)
+==========================================================================
+  substancias com ATC                                           1.159 
+    destas, ja com alguma interacao afirmada                      909 
+    destas, sem nenhuma interacao afirmada                        250 <- o ponto cego
+  pares possiveis entre substancias com ATC                   671.061 
+
+--- PONTUANDO OS PARES NAO DOCUMENTADOS
+  pares candidatos (nao documentados)                         581.201 
+    40000 / 581201
+    80000 / 581201
+    120000 / 581201
+    160000 / 581201
+    200000 / 581201
+    240000 / 581201
+    280000 / 581201
+    320000 / 581201
+    360000 / 581201
+    400000 / 581201
+    440000 / 581201
+    480000 / 581201
+    520000 / 581201
+    560000 / 581201
+    581201 / 581201
+  probabilidade calibrada — media                              0.1473 
+    acima de 0,90                                                 129 
+    acima de 0,80                                               1.569 
+    acima de 0,50                                              17.160 (3,0% dos candidatos)
+
+--- FILA A_PONTO_CEGO
+  candidatos nesta fila                                       258.375 
+  substancias distintas na fila                                   177 (teto de 8 pares por substancia)
+  probabilidade do 1o colocado                                  1.000 
+  probabilidade do 300o colocado                                0.806 
+
+  os 10 primeiros:
+    1.000  clorpromazina                    x levomepromazina                 
+    1.000  clozapina                        x levomepromazina                 
+    1.000  fibrinolisina                    x clopidogrel                     
+    1.000  aripiprazol                      x levomepromazina                 
+    1.000  buspirona                        x levomepromazina                 
+    1.000  haloperidol                      x levomepromazina                 
+    1.000  levomepromazina                  x olanzapina                      
+    1.000  levomepromazina                  x paliperidona                    
+    1.000  quetiapina                       x levomepromazina                 
+    1.000  fibrinolisina                    x varfarina                       
+
+--- FILA B_LACUNA_DE_FONTE
+  candidatos nesta fila                                       322.826 
+  substancias distintas na fila                                   223 (teto de 8 pares por substancia)
+  probabilidade do 1o colocado                                  0.996 
+  probabilidade do 300o colocado                                0.825 
+
+  os 10 primeiros:
+    0.996  mometasona                       x prednisolona                    
+    0.995  esomeprazol                      x metronidazol                    
+    0.980  esomeprazol                      x prednisolona                    
+    0.965  dexametasona                     x esomeprazol                     
+    0.964  dexametasona                     x mometasona                      
+    0.957  desvenlafaxina                   x metronidazol                    
+    0.955  etoricoxibe                      x metronidazol                    
+    0.949  clioquinol                       x lemborexante                    
+    0.946  clioquinol                       x periciazina                     
+    0.934  fluconazol                       x neomicina                       
+
+--- GRAVADO
+  linhas no CSV                                                   600 reports\fila_curadoria_m1.csv
+  linhas em `predicao`                                            600 status NAO_REVISADA
+  achados gerados                                                   0 <- modelo EXPERIMENTAL, contrato recusa
+
+  COMO ESTA FILA E USADA: um farmaceutico pega o topo, procura a interacao na
+  literatura e registra o que achou. Cada linha verificada vira rotulo humano
+  — o insumo que hoje nao existe (anotacao_profissional esta vazia) e sem o
+  qual o modelo de RELEVANCIA (problema B) nao pode ser treinado. A fila e,
+  portanto, tambem o caminho para sair da limitacao central desta fase.
+
+Gravado: ml/saida/80_fila_curadoria.json

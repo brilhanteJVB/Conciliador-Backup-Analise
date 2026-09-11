@@ -1,0 +1,68 @@
+
+==========================================================================
+DATASET E SPLITS — ALVO A (existe interacao documentada?)
+==========================================================================
+
+--- 1. UNIVERSO
+  substancias no universo                                         957 
+  pares possiveis                                             457.446 
+  positivos                                                    94.770 
+  negativos presumidos                                        362.676 
+  prevalencia                                                   20,7% 
+  linhas montadas                                             457.446 
+  positivos conferidos na matriz                               94.770 
+
+--- 2. SPLIT POR PAR — ambos os lados conhecidos (otimista)
+  treino                                                      320.212 positivos 66.444 (20,8%)
+  validacao                                                    68.617 positivos 14.233 (20,7%)
+  teste                                                        68.617 positivos 14.093 (20,5%)
+
+--- 3. SPLIT POR FARMACO — o protocolo duro
+  farmacos em treino                                              669 grau medio 199
+  farmacos em validacao                                           145 grau medio 197
+  farmacos em teste                                               143 grau medio 196
+
+  treino (os dois lados de treino)                            223.446 positivos 46.480 (20,8%)
+  validacao (envolve farmaco de validacao)                    107.445 positivos 22.286 (20,7%)
+  teste (envolve farmaco de teste)                            126.555 positivos 26.004 (20,5%)
+
+    teste QUENTE_FRIO (um lado inedito)                       116.402 positivos 23.936 (20,6%)
+    teste FRIO_FRIO (dois lados ineditos)                      10.153 positivos 2.068 (20,4%)
+
+  Com o sorteio estratificado por decil de grau as tres prevalencias ficam
+  proximas, o que e o objetivo: assim a diferenca de metrica entre QUENTE e
+  FRIO mede o regime, e nao a mudanca de prevalencia. Mesmo assim toda
+  metrica dependente de prevalencia (PR-AUC, precisao) e reportada com a
+  prevalencia do proprio regime ao lado.
+
+--- 4. SUBCONJUNTO PAREADO POR GRAU — mede o artefato de popularidade
+  positivos mantidos (com par de grau equivalente)             67.443 
+  negativos pareados por grau                                  67.443 
+  positivos descartados por falta de par                       27.327 (celula de grau saturada de positivo)
+  prevalencia no subconjunto                                    50,0% 
+  grau medio dos positivos do subconjunto                         270 
+  grau medio dos negativos do subconjunto                         266 
+
+  Como se le este subconjunto: nele, saber o grau dos dois farmacos nao ajuda
+  mais a acertar, porque positivo e negativo tem grau parecido por construcao.
+  Se a AUC cair muito aqui, o desempenho no universo era popularidade.
+
+--- 5. CONTROLE NEGATIVO — pares ao acaso (§20)
+  pares de controle sorteados                                   5.000 
+    destes, com pelo menos um lado de grau zero                 4.153 (83,1%)
+
+  Controle sorteado entre TODAS as 2.094 substancias, inclusive as de grau
+  zero, e sem nenhum par positivo. Nenhum modelo e treinado nele: serve para
+  medir se a probabilidade sai alta indiscriminadamente.
+
+--- 6. ALVO SECUNDARIO C2 — tipo PK x PD (so entre os positivos)
+  pares com rotulo de tipo                                     52.261 
+    FARMACOCINETICA                                            27.874 
+    FARMACODINAMICA                                            24.387 
+  positivos sem tipo (DDInter sem descricao)                   42.509 
+
+--- 7. GRAVADO
+  arquivo                                              data\training\dataset_m1.npz 
+  tamanho                                                      0.7 MB 
+
+Gravado: ml/saida/10_dataset.json

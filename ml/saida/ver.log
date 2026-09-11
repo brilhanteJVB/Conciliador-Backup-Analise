@@ -1,0 +1,226 @@
+
+
+##########################################################################
+# VERIFICACAO — V1, V2 e regressao
+##########################################################################
+
+==========================================================================
+>> ml/70_predizer.py  —  contrato de previsao (autoteste)
+==========================================================================
+
+==========================================================================
+AUTOTESTE DO CONTRATO DE PREVISAO
+==========================================================================
+  modelo m1_existencia_interacao 1.0-boosting (GRADIENT_BOOSTING), status EXPERIMENTAL
+  espaco de atributos confere: 130 nomes
+  todas as probabilidades em [0,1]  OK
+  prever(a,b) == prever(b,a)  OK
+  contrato_achado recusa modelo EXPERIMENTAL  OK
+  espaco atual identico ao gravado  OK
+  banco recusa gravidade sugerida pelo modelo  OK
+
+AUTOTESTE OK
+   (3.9s)
+
+==========================================================================
+>> ml/91_v1_pipeline.py  —  V1 — validacao do pipeline
+==========================================================================
+
+==========================================================================
+V1 — VALIDACAO DO PIPELINE DE ML
+==========================================================================
+
+--- 1. DATASET
+  [OK ] numero de pares == C(n,2)                                  457446 pares, 957 substancias
+  [OK ] todo par em ordem canonica (a<b)                           
+  [OK ] nenhum par repetido                                        
+  [OK ] positivos do .npz == pares do banco                        94770 positivos
+  [OK ] universo == substancias com >=1 interacao                  957 substancias
+  [OK ] semente gravada no dataset                                 20260909
+
+--- 2. ROTULO
+  [OK ] n_fontes>0 exatamente onde y=1                             
+  [OK ] n_fontes maximo == 2 (duas bases carregadas)               
+  [OK ] pares com 2 fontes conferem com o banco                    17750
+  [OK ] rotulo de tipo so existe entre positivos                   
+
+--- 3. SPLIT
+  [OK ] split por par cobre tudo e nao se sobrepoe                 
+  [OK ] split por par: proporcao ~70/15/15                         0.700 / 0.150 / 0.150
+  [OK ] nenhum farmaco em dois grupos                              
+  [OK ] regime de treino == os dois lados de treino                
+  [OK ] regime de teste == pelo menos um lado de teste             
+  [OK ] FRIO_FRIO == os dois lados de teste                        
+  [OK ] nenhum par de treino toca farmaco de validacao ou teste    
+
+--- 4. ATRIBUTOS
+  [OK ] largura da matriz == espaco declarado                      130 atributos
+  [OK ] atributos simetricos                                       
+  [OK ] sem NaN/infinito                                           
+  [OK ] bloco GRAFO fora do espaco publicado                       
+  [OK ] grafo do contexto vem so do treino                         661 substancias no grafo de treino
+
+--- 5. TREINO — determinismo
+  [OK ] dois treinos com a mesma semente dao a mesma previsao      maior diferenca 0.00e+00
+
+--- 6. METRICAS GRAVADAS
+  [OK ] modelo registrado no banco                                 
+  [OK ] AUC de teste recalculada == gravada                        0.788743 vs 0.788743
+  [OK ] semente gravada == semente da fase                         20260909
+  [OK ] n_features gravado == espaco atual                         
+  [OK ] espaco gravado == espaco atual                             
+  [OK ] modelo NAO esta ativo                                      status=EXPERIMENTAL
+
+--- 7. PERSISTENCIA — salvar e recarregar
+  [OK ] artefato existe                                            m1_1_0-boosting.json
+  [OK ] previsao do artefato recarregado == a do modelo em memoria maior diferenca 0.00e+00
+  [OK ] espaco_features.json existe e confere                      
+  [OK ] calibrador gravado como tabela, nao pickle                 
+
+--- 8. INFERENCIA PELO CONTRATO
+  [OK ] Preditor concorda com o modelo treinado agora              200 pares
+  [OK ] probabilidade calibrada dentro de [0,1]                    
+  [OK ] previsao e simetrica                                       
+  [OK ] contrato recusa modelo experimental                        
+
+==========================================================================
+V1 OK — o pipeline faz o que diz que faz
+   (92.0s)
+
+==========================================================================
+>> ml/92_v2_independente.py  —  V2 — verificacao independente
+==========================================================================
+
+==========================================================================
+V2 — VERIFICACAO INDEPENDENTE DA FASE 7
+==========================================================================
+
+--- 1. DATASET RECONTADO POR SQL PROPRIO (sem ler o .npz)
+  [OK ] substancias do universo                                    SQL 957  npz 957
+  [OK ] positivos                                                  SQL 94770  npz 94770
+  [OK ] pares totais                                               combinatoria 457446  npz 457446
+  [OK ] cada positivo da amostra existe no banco                   301 pares conferidos
+  [OK ] nenhum negativo da amostra existe no banco                 301 pares conferidos
+
+--- 2. METRICAS REIMPLEMENTADAS EM NUMPY PURO
+  [OK ] AUC: Mann-Whitney proprio == sklearn                       0.78874312 vs 0.78874312
+  [OK ] PR-AUC: trapezio proprio ~ average_precision               0.535304 vs 0.535317 (metodos diferentes por definicao)
+  [OK ] Brier proprio == sklearn                                   0.13016408 vs 0.13016408
+  [OK ] ECE proprio == do pipeline                                 0.02228126 vs 0.02228126
+  [OK ] AUC de preditor constante == 0,5                           
+  [OK ] AUC do rotulo perfeito == 1,0                              
+
+--- 3. ROTULO CONFRONTADO COM O SISTEMA ANTERIOR (acervo, outro banco)
+  [OK ] chaves normalizadas em comum entre os dois bancos          2068 chaves
+      pares (chave x chave) no sistema anterior: 108032
+      pares (chave x chave) neste sistema:       93940
+      em comum:                                  92900
+  [OK ] >=90% dos pares deste sistema estao no anterior            98.9%
+      so neste sistema: 1040   so no anterior: 15132
+  [OK ] divergencia explicavel (<15% de cada lado)                 as duas cargas usam recortes de substancia diferentes
+
+--- 4. CACA AO VAZAMENTO — forca bruta
+  [OK ] nenhum par de teste dentro do treino                       interseccao 0
+  [OK ] nenhum par de teste INVERTIDO dentro do treino             
+  [OK ] nenhum par de treino toca farmaco de teste                 143 farmacos de teste
+  [OK ] nenhum farmaco de teste no grafo de atributos              
+  [OK ] atributos de grafo sao zero em todo par FRIO_FRIO          2000 pares conferidos
+  [OK ] nenhum par com a mesma substancia nos dois lados           
+
+--- 5. SPLIT CONFERIDO POR COMBINATORIA
+  [OK ] grupos somam o universo                                    669 + 145 + 143 = 957
+  [OK ] pares de treino == C(n_treino,2)                           223446 == 223446
+  [OK ] pares FRIO_FRIO == C(n_teste,2)                            10153 == 10153
+  [OK ] pares QUENTE_FRIO == n_teste x (n_treino+n_val)            116402 == 116402
+
+--- 6. ARTEFATO JSON RECALCULADO A MAO (sem scikit-learn)
+  [OK ] artefato da logistica e JSON                               m1_1_0-logistica.json
+  [OK ] tipo declarado e JSON puro                                 LOGISTICA_JSON
+  [OK ] dimensoes conferem com o espaco de atributos               130 coeficientes
+  [OK ] conta feita a mao == scikit-learn (dentro do float32)      maior diferenca 1.19e-07 em 300 pares (eps float32 = 1,19e-07)
+  [OK ] a ordenacao das 300 previsoes e identica                   diferenca numerica nao muda nenhuma decisao por limiar
+  [OK ] nenhuma probabilidade fora de [0,1]                        
+
+--- 7. SANIDADE — documentado pontua mais alto que sorteado
+      media dos positivos de teste ... 0.3710
+      media dos pares sorteados ...... 0.0874
+  [OK ] positivos pontuam mais que sorteados                       
+  [OK ] separacao documentado x sorteado com AUC > 0,80            0.8794
+
+==========================================================================
+V2 OK — seis caminhos independentes concordam com o pipeline
+   (46.9s)
+
+==========================================================================
+>> tests/teste_ml.py  —  regressao das garantias de ML
+==========================================================================
+==========================================================================
+REGRESSAO — GARANTIAS DE ML
+==========================================================================
+
+ML NUNCA ATRIBUI GRAVIDADE
+  [OK ] nenhuma predicao com gravidade sugerida                    
+  [OK ] o banco recusa gravidade sugerida por modelo               IntegrityError
+
+PREVISAO NAO SE DISFARCA DE FATO
+  [OK ] nenhum achado com natureza PREVISTO no banco               modelo EXPERIMENTAL: nenhuma previsao virou achado
+  [OK ] nenhum achado com origem MODELO                            
+  [OK ] todo achado existente e de REGRA                           0 achados
+  [OK ] nenhum achado de REGRA carrega probabilidade de modelo     
+  [OK ] PREVISTO sempre aponta para uma linha de predicao          
+  [OK ] previsao nao entra em vw_interacao_liberada                a view que chega ao farmaceutico nao le a tabela de previsao
+
+MODELO NAO E TROCADO EM SILENCIO
+  [OK ] no maximo um modelo ativo por problema                     
+  [OK ] nenhum modelo ativo hoje                                   2 modelos registrados, todos inativos
+  [OK ] todo modelo declara semente, versao de dados e espaco de atributos 
+  [OK ] todo modelo declara limitacoes em texto                    
+  [OK ] nenhum modelo ativo sem estar homologado                   
+
+PREVISAO GRAVADA NASCE NAO REVISADA
+  [OK ] ha previsoes gravadas para curadoria                       600 linhas
+  [OK ] todas NAO_REVISADA                                         
+  [OK ] nenhuma revisada sem quem revisou                          
+  [OK ] toda previsao aponta para um modelo existente              
+  [OK ] todo par de previsao em ordem canonica                     
+
+O ESPACO DE ATRIBUTOS NAO DIVERGE
+  [OK ] models/espaco_features.json existe                         
+  [OK ] espaco em disco == espaco calculado agora                  130 atributos
+  [OK ] espaco gravado no modelo 1.0-boosting confere              
+  [OK ] espaco gravado no modelo 1.0-logistica confere             
+  [OK ] nenhum atributo derivado da tabela de interacao            
+  [OK ] nenhum atributo de grafo no espaco publicado               grafo excluido por vazamento medido em 20_treinar
+
+O CONTRATO RECUSA MODELO NAO HOMOLOGADO
+  [OK ] par de teste realmente nao documentado                     anfotericina B x anifrolumabe
+  [OK ] contrato_achado recusa modelo EXPERIMENTAL                 
+  [OK ] previsao em [0,1]                                          0.0308
+  [OK ] previsao simetrica                                         
+  [OK ] o texto da tela contem 'PREVISÃO'                          
+  [OK ] o texto da tela contem 'Nenhuma bula'                      
+  [OK ] o texto da tela contem 'farmacêutico'                      
+  [OK ] o texto nao afirma mecanismo                               
+
+OS MOTORES NAO DEPENDEM DE ML
+  [OK ] rules/motor_conciliacao.py nao importa nada de ml/         
+  [OK ] rules/motor_horarios.py nao importa nada de ml/            
+  [OK ] rules/_prioridade.py nao importa nada de ml/               
+  [OK ] app/servicos.py nao importa nada de ml/                    
+  [OK ] app/web.py nao importa nada de ml/                         
+  [OK ] app/relatorio.py nao importa nada de ml/                   
+  [OK ] app/busca.py nao importa nada de ml/                       
+  [OK ] nenhum modelo e carregado no caminho deterministico        
+
+A INTERFACE JA SABE MOSTRAR PREVISTO
+  [OK ] app/templates/achado.html trata status PREVISTO            
+  [OK ] app/templates/resultados.html trata status PREVISTO        
+  [OK ] rotulos.py tem texto em pt-BR para PREVISTO                
+  [OK ] o texto de PREVISTO nega evidencia publicada               
+
+==========================================================================
+NENHUMA REGRESSAO — as garantias de ML continuam de pe
+   (3.9s)
+
+==========================================================================
+FASE 7 COMPLETA — medida, verificada duas vezes e sem regressao

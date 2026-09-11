@@ -1,0 +1,73 @@
+
+==========================================================================
+ROBUSTEZ DO ALVO A
+==========================================================================
+
+--- 1. PAREADO POR GRAU — quanto do acerto era popularidade?
+  pares no subconjunto                                        134.886 prevalencia 50,0%
+    treino                                                     65.635 prevalencia 50,3%
+    validacao                                                  31.747 prevalencia 49,8%
+    teste                                                      37.504 prevalencia 49,7%
+
+  LOGISTICA          COMPLETO    AUC 0.5021   PR-AUC 0.5024 (piso 0.497)
+  GRADIENT_BOOSTING  COMPLETO    AUC 0.6092   PR-AUC 0.6107 (piso 0.497)
+  LOGISTICA          SEM_GRAFO   AUC 0.6000   PR-AUC 0.6016 (piso 0.497)
+  GRADIENT_BOOSTING  SEM_GRAFO   AUC 0.7221   PR-AUC 0.7319 (piso 0.497)
+
+  Como ler: no universo inteiro, com atributos SEM_GRAFO, o gradient boosting
+  faz AUC 0,79. Aqui, com grau neutralizado, o numero que sobra e o que o
+  modelo sabe de farmacologia. A diferenca entre os dois e o tamanho do
+  artefato de popularidade.
+
+--- 2. CONTROLE NEGATIVO — 5.000 pares ao acaso (§20)
+  probabilidade media — positivos do teste                      0.370 
+  probabilidade media — negativos do teste                      0.146 
+  probabilidade media — controle ao acaso                       0.088 
+    controle acima de 0.5                                          59 (1,2% dos 5.000)
+    controle acima de 0.7                                           9 (0,2% dos 5.000)
+    controle acima de 0.9                                           0 (0,0% dos 5.000)
+  pares de controle com pelo menos um lado sem ATC              3.615 (72,3%)
+
+  O controle nao tem rotulo verdadeiro — sao pares nao afirmados, e nao pares
+  provadamente inertes. Serve para uma pergunta so: a probabilidade sai alta
+  indiscriminadamente? Se a media do controle ficasse perto da media dos
+  positivos, o modelo estaria dizendo sim para tudo.
+
+--- 3. ROTULO MAIS DURO — positivo so quando as DUAS fontes afirmam
+  positivos com este criterio                                  17.750 (contra 94770 do criterio normal)
+  prevalencia                                                    3,9% 
+  pares afirmados por UMA fonte, removidos do universo         77.020 <- nao viram negativo: a outra base pode nao te-los examinado
+  universo restante                                           380.426 
+
+  LOGISTICA          SEM_GRAFO   AUC 0.7990   PR-AUC 0.2170 (piso 0.044)
+  GRADIENT_BOOSTING  SEM_GRAFO   AUC 0.8614   PR-AUC 0.3554 (piso 0.044)
+
+--- 4. PONTO CEGO — em quantas substancias o modelo consegue opinar?
+  substancias no banco                                          2.094 
+  com ATC (atributo principal)                                  1.153 (55,1%)
+  sem ATC — modelo opina so pelos atributos fracos                941 (44,9%)
+  sem ATC E sem nenhuma interacao conhecida                       887 (42,4%)  <- cegueira dupla
+
+  Para essas o sistema continua tendo o que dizer — pelas regras
+  deterministicas e pela declaracao de nao-cobertura — mas o modelo nao
+  acrescenta nada, e a interface tem de dizer isso em vez de exibir uma
+  probabilidade baseada em quase nenhum atributo.
+
+--- 5. PRECISAO NO TOPO — o unico regime em que previsao viraria alerta
+  Um modelo com AUC 0,74 nao serve para rastrear tudo. Pode servir para
+  apontar POUCOS pares com alta confianca. A pergunta e: entre os N pares de
+  maior probabilidade, quantos sao mesmo afirmados por fonte?
+
+  regime FRIO_FRIO (10153 pares, prevalencia 20,4%):
+    top 0.1% (10 pares)                                precisao 1.000   recall 0.005   limiar 0.934 
+    top 0.5% (50 pares)                                precisao 0.820   recall 0.020   limiar 0.877 
+    top 1.0% (101 pares)                               precisao 0.772   recall 0.038   limiar 0.835 
+    top 5.0% (507 pares)                               precisao 0.631   recall 0.155   limiar 0.618 
+    top 10.0% (1015 pares)                             precisao 0.524   recall 0.257   limiar 0.486 
+    linha de base (acaso)                              precisao 0.204 
+
+  Leitura para a decisao de implantacao: se a precisao no topo nao for
+  claramente maior que a prevalencia, um alerta previsto acrescentaria mais
+  ruido que informacao, e a resposta correta e nao exibi-lo como alerta.
+
+Gravado: ml/saida/25_robustez.json

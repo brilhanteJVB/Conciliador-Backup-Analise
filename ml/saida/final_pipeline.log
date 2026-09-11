@@ -1,0 +1,36 @@
+PIPELINE DO CONCILIADOR — carga incremental
+
+========================================================================
+>> pipeline/10_fontes.py  —  catálogo de fontes
+========================================================================
+
+FONTES
+  inseridas agora                              0
+  ja existentes                                19
+  total no banco                               19
+  REGULATORIA                                  6
+  GOVERNAMENTAL                                4
+  BASE_CIENTIFICA                              4
+  COMPILACAO                                   3
+  CURADORIA                                    1
+  BULA                                         1
+   (0.1s)
+
+========================================================================
+>> pipeline/20_substancias.py  —  substâncias (ANVISA + DCB)
+========================================================================
+Lendo DCB (IN 462)...
+  12736 denominacoes -> 10667 esqueletos (2069 variantes de sal colapsadas)
+Lendo cadastro ANVISA...
+  43441 registros; 3614 esqueletos distintos; 2094 com produto ativo
+Traceback (most recent call last):
+  File "C:\Sistema Conciliador projeto\pipeline\20_substancias.py", line 252, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Sistema Conciliador projeto\pipeline\20_substancias.py", line 183, in main
+    cur = con.execute(
+          ^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: substancia.nome_dcb
+   (3.3s)
+
+PIPELINE INTERROMPIDO em pipeline/20_substancias.py

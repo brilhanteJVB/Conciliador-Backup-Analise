@@ -1,0 +1,50 @@
+
+==========================================================================
+SIGNIFICANCIA DA DIFERENCA ENTRE FAMILIAS
+==========================================================================
+  treinado: TABELA_CLASSE_x_CLASSE
+  treinado: LOGISTICA
+  treinado: FLORESTA
+  treinado: GRADIENT_BOOSTING
+
+--- teste (todos os regimes)
+  pares                                                       126.555 positivos 26004
+
+  familia                         AUC   IC 95%
+  TABELA_CLASSE_x_CLASSE       0.7029   [0.6992 ; 0.7063]
+  LOGISTICA                    0.7339   [0.7304 ; 0.7374]
+  FLORESTA                     0.7935   [0.7907 ; 0.7965]
+  GRADIENT_BOOSTING            0.7879   [0.7848 ; 0.7908]
+
+  DIFERENCAS PAREADAS (A - B), IC 95%:
+  TABELA_CLASSE_x_CLASSE   - LOGISTICA                -0.0309  [-0.0347 ; -0.0273]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - FLORESTA                 -0.0906  [-0.0943 ; -0.0869]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - GRADIENT_BOOSTING        -0.0849  [-0.0883 ; -0.0815]  diferenca estabelecida
+  LOGISTICA                - FLORESTA                 -0.0596  [-0.0620 ; -0.0573]  diferenca estabelecida
+  LOGISTICA                - GRADIENT_BOOSTING        -0.0540  [-0.0562 ; -0.0518]  diferenca estabelecida
+  FLORESTA                 - GRADIENT_BOOSTING        +0.0056  [+0.0041 ; +0.0071]  diferenca estabelecida
+
+--- teste FRIO_FRIO
+  pares                                                        10.153 positivos 2068
+
+  familia                         AUC   IC 95%
+  TABELA_CLASSE_x_CLASSE       0.6867   [0.6738 ; 0.6992]
+  LOGISTICA                    0.7144   [0.7022 ; 0.7264]
+  FLORESTA                     0.7342   [0.7222 ; 0.7458]
+  GRADIENT_BOOSTING            0.7382   [0.7260 ; 0.7495]
+
+  DIFERENCAS PAREADAS (A - B), IC 95%:
+  TABELA_CLASSE_x_CLASSE   - LOGISTICA                -0.0281  [-0.0416 ; -0.0148]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - FLORESTA                 -0.0478  [-0.0614 ; -0.0343]  diferenca estabelecida
+  TABELA_CLASSE_x_CLASSE   - GRADIENT_BOOSTING        -0.0516  [-0.0638 ; -0.0388]  diferenca estabelecida
+  LOGISTICA                - FLORESTA                 -0.0197  [-0.0277 ; -0.0115]  diferenca estabelecida
+  LOGISTICA                - GRADIENT_BOOSTING        -0.0235  [-0.0309 ; -0.0160]  diferenca estabelecida
+  FLORESTA                 - GRADIENT_BOOSTING        -0.0038  [-0.0102 ; +0.0027]  EMPATE (IC contem zero)
+
+  COMO ISTO ENTRA NA DECISAO: onde o intervalo da diferenca contem zero, a
+  vantagem nao esta estabelecida com este tamanho de amostra, e a
+  especificacao §1 manda preferir a familia mais simples. Onde nao contem, a
+  diferenca e real e precisa ser pesada contra custo e interpretabilidade —
+  nao adotada automaticamente.
+
+Gravado: ml/saida/45_significancia.json

@@ -1,0 +1,140 @@
+{
+ "n_arquivos": 689,
+ "por_decisao": [
+  {
+   "decisao": "USAR",
+   "arquivos": 419,
+   "bytes": 770425390,
+   "MB": 734.7,
+   "exemplos": [
+    "Drug to Food interactions Dataset.json",
+    "TA_CONSULTA_MEDICAMENTOS.CSV",
+    "lista-de-medicamentos-ean-marco-2026.pdf",
+    "analise_dados/scripts/01_inventario.py",
+    "analise_dados/scripts/02_analise.py",
+    "analise_dados/scripts/03_cobertura.py"
+   ]
+  },
+  {
+   "decisao": "USAR_PARCIAL",
+   "arquivos": 152,
+   "bytes": 87189105,
+   "MB": 83.2,
+   "exemplos": [
+    "Drug finder db w_o brands - deepseek_csv_20250915_dff2b8.csv",
+    "db_drug_interactions.csv",
+    "fontes_novas/01_anvisa_bulario/pdf/acebrofilina.pdf",
+    "fontes_novas/01_anvisa_bulario/pdf/acetato_de_atosibana.pdf",
+    "fontes_novas/01_anvisa_bulario/pdf/acetato_de_clormadinona.pdf",
+    "fontes_novas/01_anvisa_bulario/pdf/acetato_de_leuprorrelina.pdf"
+   ]
+  },
+  {
+   "decisao": "APOIO",
+   "arquivos": 64,
+   "bytes": 29135603,
+   "MB": 27.8,
+   "exemplos": [
+    "DDI 2.0.json",
+    "DDI Database.json",
+    "analise_dados/inventario.csv",
+    "analise_dados/saida/analise_raw.json",
+    "analise_dados/saida/cobertura_raw.json",
+    "analise_dados/saida/inventario_raw.json"
+   ]
+  },
+  {
+   "decisao": "DOCUMENTACAO",
+   "arquivos": 33,
+   "bytes": 695244,
+   "MB": 0.7,
+   "exemplos": [
+    "ABRIR_NO_VSCODE.md",
+    "CLAUDE.md",
+    "analise_dados/01_inventario_arquivos.md",
+    "analise_dados/02_analise_utilidade.md",
+    "analise_dados/03_gap_analysis.md",
+    "analise_dados/04_referencias_cientificas.md"
+   ]
+  },
+  {
+   "decisao": "REDUNDANTE",
+   "arquivos": 15,
+   "bytes": 1190146238,
+   "MB": 1135.0,
+   "exemplos": [
+    "Drug to Food interactions Dataset.xsl",
+    "banco/conciliador_backup_antes_a3_20260831.db",
+    "banco/conciliador_backup_antes_a5_20260831.db",
+    "banco/conciliador_backup_antes_aval_discrepancia_20260904.db",
+    "banco/conciliador_backup_antes_c_20260831.db",
+    "banco/conciliador_backup_antes_calibracao_2026-09-03.db"
+   ]
+  },
+  {
+   "decisao": "DESCARTAR",
+   "arquivos": 5,
+   "bytes": 90344026,
+   "MB": 86.2,
+   "exemplos": [
+    "conciliador.code-workspace",
+    "medicine_dataset.csv",
+    ".claude/launch.json",
+    "banco/curadoria/~$ferencial_teorico.md",
+    "Drug-disease/mapping.csv"
+   ]
+  },
+  {
+   "decisao": "SISTEMA_PRONTO",
+   "arquivos": 1,
+   "bytes": 100065280,
+   "MB": 95.4,
+   "exemplos": [
+    "banco/conciliador.db"
+   ]
+  }
+ ],
+ "por_categoria": {
+  "fonte primaria BR/bula (texto)": 300,
+  "fonte primaria BR/bula (PDF)": 150,
+  "experimento de ML": 38,
+  "documentacao de metodo": 25,
+  "sistema/ETL": 25,
+  "sistema/motor+interface": 15,
+  "sistema/backup": 14,
+  "sistema/ML": 11,
+  "fonte internacional/interacao": 9,
+  "curadoria humana": 9,
+  "fonte primaria BR/politica": 8,
+  "fonte primaria BR/consumo": 8,
+  "saida de analise": 6,
+  "codigo de analise": 5,
+  "codigo de coleta": 5,
+  "documentacao de fonte": 5,
+  "fonte primaria BR/bula": 5,
+  "fonte primaria BR/nomenclatura": 5,
+  "dicionario de dados/manual": 4,
+  "fonte primaria/classificacao": 4,
+  "fonte primaria/alvo molecular": 4,
+  "documentacao": 3,
+  "fonte primaria BR/mercado": 3,
+  "fonte primaria BR/farmacovigilancia": 3,
+  "compilacao secundaria/interacao": 2,
+  "fonte internacional/alimento": 2,
+  "fonte primaria BR/registro": 2,
+  "configuracao de ambiente": 2,
+  "sistema/DDL": 2,
+  "fonte internacional/doenca": 2,
+  "texto auxiliar": 2,
+  "fonte primaria/regulatoria": 2,
+  "compilacao secundaria/monografia": 1,
+  "fonte primaria BR/EAN": 1,
+  "fonte internacional/mercado indiano": 1,
+  "auditoria anterior": 1,
+  "sistema/banco construido": 1,
+  "sistema/banco congelado": 1,
+  "lixo temporario": 1,
+  "fonte internacional/farmacologia": 1,
+  "fonte primaria BR/restricao": 1
+ }
+}

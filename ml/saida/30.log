@@ -1,0 +1,63 @@
+
+==========================================================================
+CALIBRACAO — split POR_FARMACO, atributos SEM_GRAFO
+==========================================================================
+
+--- LOGISTICA
+  CRU        teste  ECE / Brier / AUC                  0.0231 / 0.1427 / 0.7339 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0050 / 0.1422 / 0.7339 
+  PLATT      teste  ECE / Brier / AUC                  0.0154 / 0.1429 / 0.7339 
+
+--- FLORESTA
+  CRU        teste  ECE / Brier / AUC                  0.0125 / 0.1288 / 0.7935 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0199 / 0.1289 / 0.7935 
+  PLATT      teste  ECE / Brier / AUC                  0.0267 / 0.1297 / 0.7935 
+
+--- GRADIENT_BOOSTING
+  CRU        teste  ECE / Brier / AUC                  0.0235 / 0.1301 / 0.7879 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0137 / 0.1297 / 0.7879 
+  PLATT      teste  ECE / Brier / AUC                  0.0317 / 0.1310 / 0.7879 
+
+--- TABELA_CLASSE_x_CLASSE
+  CRU        teste  ECE / Brier / AUC                  0.0165 / 0.1453 / 0.7029 
+  ISOTONICA  teste  ECE / Brier / AUC                  0.0162 / 0.1449 / 0.7028 
+  PLATT      teste  ECE / Brier / AUC                  0.0174 / 0.1449 / 0.7029 
+
+--- CURVA DE CONFIABILIDADE — GRADIENT_BOOSTING (teste)
+  faixa               n    prob. media     freq. real  desvio
+  0.0-0.1         57669          0.046          0.069  -0.023
+  0.1-0.2         26412          0.144          0.175  -0.031
+  0.2-0.3         14374          0.246          0.255  -0.009
+  0.3-0.4          8955          0.347          0.337  +0.010
+  0.4-0.5          6592          0.448          0.408  +0.040
+  0.5-0.6          4842          0.547          0.518  +0.030
+  0.6-0.7          3322          0.647          0.606  +0.041
+  0.7-0.8          2367          0.746          0.735  +0.012
+  0.8-0.9          1539          0.844          0.862  -0.018
+  0.9-1.0           483          0.933          0.957  -0.023
+
+  Depois da calibracao isotonica:
+  0.0-0.1         50307          0.054          0.061  -0.007
+  0.1-0.2         28689          0.144          0.156  -0.012
+  0.2-0.3         17785          0.248          0.238  +0.010
+  0.3-0.4         11092          0.346          0.329  +0.017
+  0.4-0.5          7363          0.456          0.420  +0.036
+  0.5-0.6          2463          0.553          0.531  +0.022
+  0.6-0.7          4486          0.645          0.594  +0.051
+  0.7-0.8          2047          0.764          0.726  +0.038
+  0.8-0.9          1937          0.849          0.856  -0.007
+  0.9-1.0           386          0.948          0.956  -0.008
+
+--- ESCOLHA DO CALIBRADOR
+  CRU                                                  ECE 0.0235  Brier 0.1301  AUC 0.7879  (frio-frio ECE 0.0544) 
+  ISOTONICA                                            ECE 0.0137  Brier 0.1297  AUC 0.7879  (frio-frio ECE 0.0404) 
+  PLATT                                                ECE 0.0317  Brier 0.1310  AUC 0.7879  (frio-frio ECE 0.0424) 
+
+  Calibrador escolhido: ISOTONICA (menor ECE no teste).
+
+  A calibracao nao muda a ordenacao (isotonica e Platt sao monotonas), logo a
+  AUC nao muda. Ela muda o NUMERO que aparece na tela — que e exatamente o que
+  o farmaceutico le. Por isso ela e obrigatoria antes de exibir qualquer
+  probabilidade, e nao um refinamento opcional.
+
+Gravado: ml/saida/30_calibracao.json e models/calibrador_m1.json

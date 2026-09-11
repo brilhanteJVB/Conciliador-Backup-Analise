@@ -1,0 +1,19 @@
+{
+  "modelo": "m1_existencia_interacao",
+  "versao": "1.0-boosting",
+  "familia": "GRADIENT_BOOSTING",
+  "blocos": [
+    "ATC",
+    "REG",
+    "ADM",
+    "PK"
+  ],
+  "n_features": 130,
+  "semente": 20260909,
+  "versao_dados": "9e9c85ee3ffea5e0",
+  "treinado_em": "2026-09-10",
+  "tipo": "SKLEARN_PICKLE",
+  "sklearn": "1.9.0",
+  "pickle": "m1_1_0-boosting.pkl",
+  "aviso": "artefato depende da versao 1.9.0 do scikit-learn; para empacotamento em .exe isso e uma amarra, e esta declarado"
+}

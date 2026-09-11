@@ -1,0 +1,165 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "modelos": [
+    {
+      "versao": "1.0-boosting",
+      "familia": "GRADIENT_BOOSTING",
+      "artefato": "m1_1_0-boosting.json",
+      "tipo": "SKLEARN_PICKLE",
+      "bytes": 1081349,
+      "auc_teste": 0.7887431180590883,
+      "auc_frio_frio": 0.739212238438544
+    },
+    {
+      "versao": "1.0-logistica",
+      "familia": "LOGISTICA",
+      "artefato": "m1_1_0-logistica.json",
+      "tipo": "LOGISTICA_JSON",
+      "bytes": 10250,
+      "auc_teste": 0.7339324712848816,
+      "auc_frio_frio": 0.7146812039392862
+    }
+  ],
+  "limitacoes": "1) O rotulo negativo e PRESUMIDO: as fontes listam o que afirmam e nunca afirmam ausencia. O modelo estima probabilidade de o par ESTAR DOCUMENTADO nas bases carregadas, nao de o par ser perigoso. 2) Medido em split por farmaco; no regime em que os dois farmacos sao ineditos a AUC e 0,74, com recall de 0,53 no ponto de F1 maximo — insuficiente para rastrear. 3) So opina com alguma base nas 1.153 substancias que tem codigo ATC; para as outras 941 os atributos sao fracos. 4) Nao gradua gravidade e nao substitui fonte: previsao nunca vira evidencia documental. 5) Validacao COMPUTACIONAL apenas. Nenhum farmaceutico avaliou nenhuma previsao deste modelo."
+}

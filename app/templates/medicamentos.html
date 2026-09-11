@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block titulo %}Medicamentos — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>3. Medicamentos</h1>
+<p class="subtitulo">Busque por princípio ativo, marca ou código de barras.
+A <strong>lista</strong> de cada item é o que torna a conciliação possível: o
+mesmo fármaco na prescrição e no relato são dois registros, e parear os dois é
+o ato de conciliar.</p>
+
+<!-- ============================================================== BUSCA -->
+<div class="cartao">
+  <h2>Acrescentar medicamento</h2>
+  <form method="get">
+    <div class="linha-campos">
+      <div class="campo" style="flex:3">
+        <label for="q">Buscar</label>
+        <input type="search" id="q" name="q" value="{{ termo }}" autofocus
+               autocomplete="off"
+               placeholder="dipirona · Novalgina · 7891234567890">
+        <p class="dica">Código de barras é o caminho mais confiável: é
+          determinístico e traz a apresentação exata.</p>
+      </div>
+      <div class="campo" style="flex:0 0 auto">
+        <label>&nbsp;</label>
+        <button type="submit">Buscar</button>
+      </div>
+    </div>
+  </form>
+
+  {% if termo %}
+    {% if resultados %}
+      <h3>{{ resultados|length }} resultado(s) para “{{ termo }}”</h3>
+      {% for r in resultados %}
+        <form method="post" action="{{ url_for('add_medicamento', codigo=codigo) }}"
+              class="resultado-busca">
+          <div class="corpo">
+            <div class="nome">{{ r.rotulo }}</div>
+            <div class="detalhe">{{ r.detalhe }}</div>
+            <div style="margin-top:4px">
+              <span class="chip {{ 'forte' if r.confianca == 'ALTA' }}">
+                {{ {'EAN':'código de barras','NOME_EXATO':'nome exato','NOME_APROXIMADO':'nome aproximado','MANUAL':'sem vínculo'}.get(r.reconhecimento, r.reconhecimento) }}
+              </span>
+              <span class="chip">confiança {{ rot.rotular(rot.CONFIANCA, r.confianca)|lower }}</span>
+              {% if r.substancias|length > 1 %}
+                <span class="chip alerta">associação: {{ r.substancias|length }} princípios ativos</span>
+              {% endif %}
+              {% if not r.substancias %}
+                <span class="chip alerta">sem princípio ativo no cadastro</span>
+              {% endif %}
+            </div>
+          </div>
+          <input type="hidden" name="escolha" value="{{ r.chave }}">
+          <input type="hidden" name="nome_relatado" value="{{ r.rotulo }}{% if r.concentracao %} {{ r.concentracao }}{% endif %}">
+          <div class="campo" style="margin:0;min-width:170px">
+            <label>Lista</label>
+            <select name="lista">
+              {% for valor, nome in listas %}
+                <option value="{{ valor }}" {{ 'selected' if valor == 'RELATADA' }}>{{ nome }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="campo" style="margin:0;min-width:170px">
+            <label>Origem do uso</label>
+            <select name="origem">
+              {% for valor, nome in origens %}
+                <option value="{{ valor }}">{{ nome }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit">Adicionar</button>
+        </form>
+      {% endfor %}
+    {% else %}
+      <div class="nota">
+        <strong>Nada encontrado para “{{ termo }}”.</strong>
+        Você pode registrar assim mesmo, abaixo. O item entra como
+        <em>não reconhecido</em>, e o sistema declara no relatório que nenhum
+        módulo conseguiu avaliá-lo — em vez de ignorá-lo em silêncio.
+      </div>
+      <form method="post" action="{{ url_for('add_medicamento', codigo=codigo) }}">
+        <div class="linha-campos">
+          <div class="campo" style="flex:2">
+            <label>Nome como o paciente informou</label>
+            <input type="text" name="nome_relatado" value="{{ termo }}" required>
+          </div>
+          <div class="campo">
+            <label>Lista</label>
+            <select name="lista">
+              {% for valor, nome in listas %}<option value="{{ valor }}">{{ nome }}</option>{% endfor %}
+            </select>
+          </div>
+          <div class="campo">
+            <label>Origem</label>
+            <select name="origem">
+              {% for valor, nome in origens %}<option value="{{ valor }}">{{ nome }}</option>{% endfor %}
+            </select>
+          </div>
+          <div class="campo" style="flex:0 0 auto">
+            <label>&nbsp;</label>
+            <button type="submit" class="secundario">Registrar assim mesmo</button>
+          </div>
+        </div>
+      </form>
+    {% endif %}
+  {% endif %}
+</div>
+
+<!-- ======================================================== FARMACOTERAPIA -->
+<div class="cartao">
+  <h2>Farmacoterapia deste atendimento</h2>
+  {% if medicamentos %}
+    {% for lista_chave, lista_nome in listas %}
+      {% set grupo_lista = medicamentos | selectattr('lista', 'equalto', lista_chave) | list %}
+      {% if grupo_lista %}
+        <h3>{{ lista_nome }} <span class="chip">{{ grupo_lista|length }}</span></h3>
+        {% for g in grupo_lista %}
+          <div class="item">
+            <div class="corpo">
+              <div class="nome">
+                {{ g.nome_relatado }}
+                {% if not g.reconhecido %}
+                  <span class="chip alerta">não reconhecido — nenhum módulo avalia</span>
+                {% endif %}
+              </div>
+              <div class="detalhe">
+                {{ g.resumo_posologia() }}
+                {% if g.substancias %}
+                  <br>princípio ativo: {{ g.substancias | map(attribute=1) | join(' + ') }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="acoes">
+              <a class="botao discreto" href="{{ url_for('posologia', codigo=codigo, grupo_id=g.grupo_id) }}">
+                {{ 'Editar posologia' if g.tem_posologia else 'Informar posologia' }}</a>
+              <form method="post" action="{{ url_for('mover_medicamento', codigo=codigo, grupo_id=g.grupo_id) }}">
+                <select name="lista" onchange="this.form.submit()" style="width:auto;font-size:13px;padding:4px">
+                  {% for valor, nome in listas %}
+                    <option value="{{ valor }}" {{ 'selected' if valor == g.lista }}>{{ nome }}</option>
+                  {% endfor %}
+                </select>
+              </form>
+              <form method="post" action="{{ url_for('del_medicamento', codigo=codigo, grupo_id=g.grupo_id) }}"
+                    onsubmit="return confirm('Remover {{ g.nome_relatado }} deste atendimento?')">
+                <button class="discreto" type="submit">Remover</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <p class="vazio">Nenhum medicamento registrado. Use a busca acima.</p>
+  {% endif %}
+</div>
+
+<p><a class="botao" href="{{ url_for('rotina', codigo=codigo) }}">Ir para a rotina →</a></p>
+
+{% endblock %}

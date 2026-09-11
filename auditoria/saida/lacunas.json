@@ -1,0 +1,59 @@
+{
+ "drugbank_food": {
+  "farmacos": 1423,
+  "com_texto": 1423,
+  "diretivas_detectadas": {
+   "sem_restricao": 610,
+   "evitar_alcool": 323,
+   "com_alimento": 315,
+   "evitar_toranja": 194,
+   "jejum": 177,
+   "separar_cations": 93,
+   "com_agua": 56,
+   "evitar_laticinio": 27,
+   "evitar_vitamina_k": 6
+  },
+  "cobertura_alguma_diretiva": 1262
+ },
+ "bulas_anvisa": {
+  "bulas": 150,
+  "com_secao_posologia": 147,
+  "diretivas_na_bula_inteira": {
+   "nao_partir": 51,
+   "com_alimento": 24,
+   "intervalo_horas": 12,
+   "jejum": 11,
+   "antes_refeicao": 4
+  },
+  "diretivas_dentro_da_posologia": {
+   "nao_partir": 37,
+   "com_alimento": 11,
+   "jejum": 5,
+   "intervalo_horas": 4,
+   "antes_refeicao": 2
+  }
+ },
+ "intervalo_separacao": {
+  "registros_analisados": 191541,
+  "com_intervalo_explicito": 0,
+  "pct": 0.0,
+  "horas_citadas": {},
+  "exemplos": []
+ },
+ "posologia_estruturada": {
+  "drug_finder": {
+   "linhas": 718,
+   "tem_Strength": 718,
+   "tem_Dosage_Form": 718,
+   "tem_Route": 718,
+   "tem_frequencia": 0,
+   "observacao": "traz concentracao e via, NAO traz frequencia nem horario"
+  }
+ },
+ "reacao_adversa": {
+  "vigimed_reacoes": 1093739,
+  "vinculo_verificado_pct": 94,
+  "terminologia": "MedDRA em portugues (LLT/PT/HLT/HLGT/SOC)",
+  "observacao": "notificacao espontanea: exige desproporcionalidade, nao contagem"
+ }
+}

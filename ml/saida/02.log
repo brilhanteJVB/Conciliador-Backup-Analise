@@ -1,0 +1,174 @@
+
+==========================================================================
+AUDITORIA DOS ROTULOS DISPONIVEIS
+==========================================================================
+
+--- PROBLEMA A — existe interacao documentada entre A e B?
+  origem_rotulo: FONTE       tipo: binario, simetrico
+  positivos (par afirmado por >=1 fonte)                       94.770 
+  universo de pares entre substancias cobertas                457.446 
+  negativos PRESUMIDOS (nao afirmados)                        362.676 
+  prevalencia de positivo no universo                           20,7% 
+  desconhecidos (par com substancia de grau zero)           1.733.925 <- sem rotulo de nenhum tipo
+
+  O NEGATIVO NAO E OBSERVADO, E PRESUMIDO. Nenhuma das duas bases publica
+  "estes dois nao interagem": elas listam o que afirmam. Ausencia de linha
+  significa uma de tres coisas, e o dado nao distingue:
+     (a) as duas foram estudadas juntas e nao interagem;
+     (b) nunca foram estudadas juntas;
+     (c) interagem e a base ainda nao registrou.
+  Isto e aprendizado com positivos e nao-rotulados (PU). O rotulo negativo
+  usado aqui e "NAO AFIRMADO POR ESTAS DUAS BASES", e o relatorio da fase diz
+  isso com estas palavras. A consequencia pratica: o modelo estima
+  probabilidade de o par ESTAR DOCUMENTADO, nao de o par ser perigoso.
+
+  MITIGACAO ADOTADA (nao resolve, limita o dano):
+   1. o universo exclui substancia de grau zero — pares onde a ausencia
+      certamente e falta de cobertura, nao ausencia de interacao;
+   2. amostragem de negativo tambem em versao PAREADA POR GRAU, para medir
+      quanto do desempenho e artefato de popularidade;
+   3. controle negativo explicito com pares sorteados ao acaso.
+
+  VEREDITO A: VIAVEL
+  94.770 positivos e universo de 457.446 pares. Viavel, com a natureza PU declarada.
+
+--- PROBLEMA B — o alerta merece destaque ao profissional?
+  origem_rotulo: HUMANO     tipo: binario
+  linhas em anotacao_profissional                                   0 
+  farmaceuticos distintos                                           0 
+  achados gravados no banco (todos os atendimentos)                 0 
+  achados com anotacao                                              0 
+  achados com anotacao de 2+ profissionais (consenso)               0 
+  anotacoes com alvo=ACHADO                                         0 
+  anotacoes com alvo=DIVERGENCIA                                    0 
+
+  A TABELA EXISTE E ESTA VAZIA. A estrutura de rotulo humano foi construida
+  (chave estavel, assinatura, CHECK de intencionalidade), mas nenhum
+  farmaceutico anotou nada ainda. Zero e zero: nao ha o que treinar, nao ha o
+  que estimar, e nao ha extrapolacao honesta a partir de zero exemplos.
+
+  O QUE NAO SERA FEITO, e por que:
+   - usar `prioridade` como proxy de relevancia: prioridade e calculada pelas
+     nossas regras. O modelo aprenderia a reproduzir `_prioridade.py`, e a
+     metrica mediria fidelidade ao nosso proprio codigo, nao utilidade
+     clinica. A especificacao §3 proibe explicitamente.
+   - marcar como relevante o que tem gravidade MAIOR: e a mesma circularidade
+     com outro nome.
+   - simular anotacoes: inventaria evidencia clinica.
+  QUANTAS ANOTACOES SERIAM NECESSARIAS (analise de poder):
+  prevalencia 50%, precisao +-10 pontos                            97 anotacoes
+  prevalencia 50%, precisao +-15 pontos                            43 anotacoes
+  prevalencia 30%, precisao +-10 pontos                            81 anotacoes
+    Para um modelo de relevancia com validacao cruzada por avaliador seriam
+    necessarias na ordem de 400 a 1.000 anotacoes de 2 farmaceuticos
+    independentes. Hoje: 0. A distancia nao e de codigo, e de gente.
+
+  VEREDITO B: INVIAVEL
+  Zero anotacoes humanas. A estrutura de rotulo esta pronta; o rotulo nao existe. Nao sera treinado.
+
+--- PROBLEMA C1 — gravidade (auditoria obrigatoria antes de descartar)
+  origem_rotulo: FONTE      tipo: ordinal (MAIOR/MODERADA/MENOR)
+  DDInter / MODERADA                                           28.027 
+  DDInter / NAO_DETERMINADA                                    19.864 
+  DDInter / MAIOR                                               8.106 
+  DDInter / MENOR                                               2.326 
+  db_drug_interactions / NAO_DETERMINADA                       54.197 
+
+  pares com ALGUMA gravidade graduada                          38.459 (40,6% dos pares)
+  pares SEM gravidade em nenhuma fonte                         56.311 (59,4%)
+
+    pares graduados como MODERADA                              28.027 (72,9% dos graduados)
+    pares graduados como MAIOR                                  8.106 (21,1% dos graduados)
+    pares graduados como MENOR                                  2.326 (6,0% dos graduados)
+
+  pares graduados por DUAS fontes                                   0 
+  linhas em vw_conflito_gravidade                                   0 
+
+  vw_conflito_gravidade devolve 0, e NAO por concordancia entre as bases: uma
+  das duas nao gradua nada. Nao ha como medir consistencia de graduacao neste
+  acervo, porque so existe um graduador. Um alvo ordinal cuja consistencia e
+  estruturalmente imensuravel nao tem como ser validado.
+
+  DECISAO: mantida D-015 — gravidade nao sera alvo de ML. Nao por preferencia
+  de arquitetura, por ausencia e imensurabilidade do rotulo. Treinar nos 38.459
+  pares graduados ensinaria o critério de quem graduou aqueles, e o modelo
+  seria aplicado exatamente onde esse critério nao existe.
+  Tratar NAO_DETERMINADA como classe propria tambem esta descartado: "nao sei"
+  nao e grau de gravidade, e o modelo passaria a prever ausencia de
+  informacao — o que e util para priorizar curadoria, e nao e gravidade.
+
+  VEREDITO C1 gravidade: INVIAVEL
+  Confirma D-015 com numero: 38.459 de 94.770 pares graduados, e apenas uma das duas fontes gradua.
+
+--- PROBLEMA C2 — tipo da interacao (farmacocinetica x farmacodinamica)
+  origem_rotulo: SISTEMA (regex sobre texto da fonte)   tipo: binario
+  DDInter / NAO_DETERMINADO                                    58.323 
+  db_drug_interactions / FARMACOCINETICA                       27.874 
+  db_drug_interactions / FARMACODINAMICA                       24.387 
+  db_drug_interactions / NAO_DETERMINADO                        1.936 
+
+  pares com tipo determinado                                   52.261 (55,1% dos pares)
+    FARMACOCINETICA                                            27.874 (53,3%)
+    FARMACODINAMICA                                            24.387 (46,7%)
+  pares com tipo divergente entre fontes                            0 
+
+  O tipo existe para 52.261 pares e vem TODO de uma fonte so: o DDInter nao
+  publica descricao nenhuma, logo nao ha texto de onde extrair tipo. Todos os
+  52.261 vem de db_drug_interactions, a fonte de confiabilidade MEDIA, por
+  expressao regular sobre texto em ingles.
+
+  E um alvo tecnicamente treinavel e clinicamente de segunda ordem: saber que
+  a interacao e farmacocinetica nao muda a conduta de balcao tanto quanto
+  saber que ela existe. Sera treinado como ALVO SECUNDARIO, com o rotulo
+  marcado EXTRAIDO_AUTOMATICAMENTE e a limitacao no relatorio — nunca
+  apresentado como se um farmaceutico tivesse classificado.
+
+  VEREDITO C2 tipo: VIAVEL
+  52.261 pares rotulados, mas rotulo derivado por regex de uma unica fonte. Entra como alvo secundario, declarado.
+
+--- PROBLEMA C3 — os outros alvos cogitados pela especificacao
+
+  PRIORIDADE   [origem: SISTEMA]
+    rotulos disponiveis                                             0 
+    calculada por rules/_prioridade.py; treinar nela mede fidelidade ao nosso codigo, nao verdade clinica. Proibido pela especificacao §3.
+
+  CLASSIFICACAO DE RISCO   [origem: —]
+    rotulos disponiveis                                             0 
+    e a gravidade com outro nome; cai com C1.
+
+  MECANISMO   [origem: FONTE (texto livre)]
+    rotulos disponiveis                                             0 
+    texto livre sem vocabulario controlado. Nao ha classe fechada para prever; seria geracao de texto, nao classificacao.
+
+  EFEITO CLINICO   [origem: FONTE (texto livre)]
+    rotulos disponiveis                                        54.183 
+    mesmo caso do mecanismo.
+
+  NECESSIDADE DE REVISAO   [origem: SISTEMA]
+    rotulos disponiveis                                             0 
+    todas as 112.520 linhas estao PENDENTE. Zero variacao no alvo.
+
+  REACAO ADVERSA   [origem: VigiMed]
+    rotulos disponiveis                                             0 
+    VigiMed nao carregado neste projeto. M4 fica fora da Fase 7.
+
+--- RESUMO — o que a Fase 7 vai treinar
+
+  ALVO PRINCIPAL   A — existencia de interacao documentada
+                       94.770 positivos · rotulo de FONTE · binario simetrico
+                       limitacao: negativo presumido (PU)
+
+  ALVO SECUNDARIO  C2 — tipo farmacocinetico x farmacodinamico
+                       52.261 pares · rotulo de SISTEMA (regex) · declarado
+
+  NAO TREINADOS    B  relevancia do alerta ...... 0 rotulos humanos
+                   C1 gravidade ................. rotulo ausente na fonte
+                   C3 prioridade ................ circular com nosso codigo
+                      mecanismo / efeito ........ texto livre, sem classes
+                      necessidade de revisao .... alvo sem variacao
+                      reacao adversa ............ fonte nao carregada
+
+  Dois alvos treinados, seis recusados com numero ao lado. A recusa
+  documentada e resultado da fase, nao falha dela.
+
+Gravado: ml/saida/02_auditoria_rotulos.json

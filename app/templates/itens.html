@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block titulo %}Alimentos, plantas e suplementos — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>5. Alimentos, chás e suplementos</h1>
+<p class="subtitulo">Três seções separadas de propósito: cada uma alimenta um
+módulo diferente da análise. Só entram aqui os itens que o banco sabe cruzar
+com algum medicamento.</p>
+
+{% if registrados %}
+<div class="cartao">
+  <h2>Registrado neste atendimento</h2>
+  {% for r in registrados %}
+    <div class="item">
+      <div class="corpo">
+        <div class="nome">{{ r.nome or r.nome_relatado }}</div>
+        <div class="detalhe">
+          {{ rot.rotular(rot.TIPO_ITEM, r.tipo) if r.tipo else 'sem vínculo com o cadastro' }}
+          · {{ dict(frequencias).get(r.frequencia, r.frequencia)|lower }}
+          {% if r.horario_habitual %} · costuma consumir às {{ r.horario_habitual }}{% endif %}
+          {% if not r.item_id %}<span class="chip alerta">não reconhecido — não será verificado</span>{% endif %}
+        </div>
+      </div>
+      <div class="acoes">
+        <form method="post" action="{{ url_for('del_item', codigo=codigo, rid=r.id) }}">
+          <button class="discreto" type="submit">Remover</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% set secoes = [
+     ('ALIMENTO',   'Alimentos e bebidas',
+      'Toranja, leite e derivados, folhosos verdes, sal, alimentos ricos em fibra.'),
+     ('PLANTA',     'Chás e plantas medicinais',
+      'Erva-de-são-joão, alcaçuz e outras plantas com interação registrada.'),
+     ('SUPLEMENTO', 'Suplementos, vitaminas e minerais',
+      'Cálcio, ferro, magnésio, potássio, zinco, alumínio.')] %}
+
+{% for grupo, titulo, ajuda in secoes %}
+<div class="cartao">
+  <h2>{{ titulo }}</h2>
+  <p class="ajuda">{{ ajuda }} Clique para acrescentar.</p>
+  <div class="grade-itens">
+    {% for o in catalogo[grupo] %}
+      <form method="post" action="{{ url_for('add_item', codigo=codigo) }}">
+        <input type="hidden" name="item_id" value="{{ o.id }}">
+        <input type="hidden" name="frequencia" value="NAO_INFORMADA">
+        <button type="submit" {{ 'disabled' if o.id in ja }}>
+          {{ o.nome }}
+          {% if o.id in ja %}<br><span class="dica">já registrado</span>{% endif %}
+        </button>
+      </form>
+    {% endfor %}
+  </div>
+  {% if not catalogo[grupo] %}
+    <p class="vazio">Nenhum item deste tipo no cadastro.</p>
+  {% endif %}
+</div>
+{% endfor %}
+
+<div class="cartao">
+  <h2>Detalhar frequência e horário</h2>
+  <p class="ajuda">O horário importa: uma separação de quelação só é
+    verificável se o sistema souber a que horas o paciente toma o suplemento.
+    Acrescente aqui com os detalhes, ou pelos botões acima e depois refaça o
+    registro com o horário.</p>
+  <form method="post" action="{{ url_for('add_item', codigo=codigo) }}">
+    <div class="linha-campos">
+      <div class="campo" style="flex:2">
+        <label for="item_id">Item</label>
+        <select id="item_id" name="item_id">
+          <option value="">— selecione —</option>
+          {% for grupo, titulo, _a in secoes %}
+            <optgroup label="{{ titulo }}">
+              {% for o in catalogo[grupo] %}
+                <option value="{{ o.id }}">{{ o.nome }}</option>
+              {% endfor %}
+            </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="campo">
+        <label for="frequencia">Frequência</label>
+        <select id="frequencia" name="frequencia">
+          {% for valor, nome in frequencias %}<option value="{{ valor }}">{{ nome }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="campo" style="flex:0 0 150px">
+        <label for="horario_habitual">Horário habitual</label>
+        <input type="time" id="horario_habitual" name="horario_habitual">
+      </div>
+      <div class="campo" style="flex:0 0 auto">
+        <label>&nbsp;</label>
+        <button type="submit">Acrescentar</button>
+      </div>
+    </div>
+    <div class="campo">
+      <label for="nome_relatado">Ou descrever um item que não está na lista</label>
+      <input type="text" id="nome_relatado" name="nome_relatado"
+             placeholder="o sistema declarará que não pôde verificar este item">
+    </div>
+  </form>
+</div>
+
+<p><a class="botao" href="{{ url_for('conciliacao', codigo=codigo) }}">Ir para a conciliação →</a></p>
+
+{% endblock %}

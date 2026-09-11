@@ -1,0 +1,37 @@
+# Cache e artefatos do interpretador
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Log de execucao da aplicacao: e da MAQUINA, nao do projeto. Recriado sozinho
+# por `app/web.py` na importacao.
+data/aplicacao.log
+
+# Paginas capturadas por teste para inspecao visual. Recriadas por
+# `tests/verificacao_aplicacao.py`; nao fazem parte do produto.
+data/preview/
+
+# CADA BACKUP HISTORICO DO BANCO ESTA REGISTRADO, COM MOTIVO, EM
+# docs/MANIFESTO_BACKUP.md — nenhum foi descartado em silencio.
+#
+# Sao fotografias de fases JA SUPERADAS (5 e 7), somando ~312 MB de binario.
+# Nao fazem parte do estado da Fase 9 e nao sao necessarios para restaura-lo:
+# o que restaura a Fase 9 e `database/conciliador.db`, que ESTA versionado.
+# Continuam no disco local, intocados.
+database/conciliador_backup_*.db
+
+# Bancos temporarios de teste (os testes trabalham em copia, em %TEMP%)
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store

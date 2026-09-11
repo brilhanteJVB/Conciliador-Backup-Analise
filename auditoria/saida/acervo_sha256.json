@@ -1,0 +1,3454 @@
+{
+ "gerado_em": "2026-09-10T12:23:27.474566+00:00",
+ "origem": "C:\\Conteudos banco de dados tcc",
+ "algoritmo": "sha256 do conteudo inteiro",
+ "n_arquivos": 689,
+ "bytes_totais": 2268000886,
+ "arquivos": {
+  "ABRIR_NO_VSCODE.md": {
+   "tamanho": 5029,
+   "modificado": "2026-09-04 11:42",
+   "sha256": "2bfff9a5e8ba8c3080fdfc1e74a54bdfa745d63382391399021eb6dfa6a87344"
+  },
+  "CLAUDE.md": {
+   "tamanho": 18002,
+   "modificado": "2026-09-04 00:28",
+   "sha256": "699ea31a51bc67bce575770fb78b7376c93f4f91ca2b60a4ed368e4a93d25e57"
+  },
+  "conciliador.code-workspace": {
+   "tamanho": 8289,
+   "modificado": "2026-09-04 11:39",
+   "sha256": "4643126e17184a767fcbe9a58219002e3cccae5a315107c6a511ae978272899e"
+  },
+  "db_drug_interactions.csv": {
+   "tamanho": 22081193,
+   "modificado": "2026-08-24 20:07",
+   "sha256": "95d8399aa9c7479001f90400fbd91c6260cbfe517b22d5153a2b031f39b11328"
+  },
+  "DDI 2.0.json": {
+   "tamanho": 59212,
+   "modificado": "2026-08-24 20:07",
+   "sha256": "a1e331c7ee059a939de6e5aa6f70a4b1f71450ac2ff932ad809a2e291b903488"
+  },
+  "DDI Database.json": {
+   "tamanho": 84306,
+   "modificado": "2026-08-24 20:09",
+   "sha256": "9e2493370fcca3024c30e8f23553d6ce48707487fad261cdd21ee2ca80c836ec"
+  },
+  "Drug finder db w_o brands - deepseek_csv_20250915_dff2b8.csv": {
+   "tamanho": 234091,
+   "modificado": "2026-08-24 22:58",
+   "sha256": "acdd13e17a5b9633fa0b7d3fa016089046ca8c3dfde018cfd99dd6c36c9517fb"
+  },
+  "Drug to Food interactions Dataset.json": {
+   "tamanho": 602302,
+   "modificado": "2026-08-24 21:04",
+   "sha256": "8078106b88873f4e8c8b6656cf933a933d9fc29b6c8bf3427f6b81ec3ee9b17c"
+  },
+  "Drug to Food interactions Dataset.xsl": {
+   "tamanho": 602302,
+   "modificado": "2026-08-24 21:19",
+   "sha256": "8078106b88873f4e8c8b6656cf933a933d9fc29b6c8bf3427f6b81ec3ee9b17c"
+  },
+  "lista-de-medicamentos-ean-marco-2026.pdf": {
+   "tamanho": 432710,
+   "modificado": "2026-09-08 08:06",
+   "sha256": "5d9f7fb05d3cefef54960db4ba80f454cb3a7be26168c8e6a67e1ba27372ec94"
+  },
+  "medicine_dataset.csv": {
+   "tamanho": 89406712,
+   "modificado": "2026-08-24 21:38",
+   "sha256": "d4eafe39da664bd96b66930b8630be697b4cc9fa0d03638d523f5d84343b5ae1"
+  },
+  "TA_CONSULTA_MEDICAMENTOS.CSV": {
+   "tamanho": 17864169,
+   "modificado": "2026-08-27 09:39",
+   "sha256": "58b85f02b54fc703e0cca35f9ea1ef9f07c2151facaf77d041fdf1bc09673a59"
+  },
+  ".claude/launch.json": {
+   "tamanho": 262,
+   "modificado": "2026-08-31 13:48",
+   "sha256": "3d89d845a2d5d698f11b1df464bbd54308169d15f768561e595315f28dc68658"
+  },
+  "analise_dados/01_inventario_arquivos.md": {
+   "tamanho": 46490,
+   "modificado": "2026-08-28 17:43",
+   "sha256": "0c52d1dad334d4e7b3b0e87a98e666acc951d05316d3c66bb38d5eab4a304dbc"
+  },
+  "analise_dados/02_analise_utilidade.md": {
+   "tamanho": 23165,
+   "modificado": "2026-08-28 17:53",
+   "sha256": "993f4c2acffb0d7e5740ec55786e792f6a736670fd60231d49a2644ba9bb344d"
+  },
+  "analise_dados/03_gap_analysis.md": {
+   "tamanho": 17390,
+   "modificado": "2026-08-28 20:47",
+   "sha256": "ce61ac0a9aacf4f8d2a5dd5cb118cccfce62b38d60d53089f99bcefdccb5da5f"
+  },
+  "analise_dados/04_referencias_cientificas.md": {
+   "tamanho": 20204,
+   "modificado": "2026-08-28 17:49",
+   "sha256": "2e89c9267bb230bba95854f1b92bba81cf761aa23236c800def6487fb2310943"
+  },
+  "analise_dados/05_avaliacao_machine_learning.md": {
+   "tamanho": 13718,
+   "modificado": "2026-08-28 17:51",
+   "sha256": "783e2049c03d760554cf02d5ec545e819b35bf6d3ec74ebbced10b553f9f4052"
+  },
+  "analise_dados/06_recomendacao_final.md": {
+   "tamanho": 15642,
+   "modificado": "2026-08-28 17:53",
+   "sha256": "d7c6cd7dccfbde91d4030e249f1093baa20455a2d35d4f1896821381a53c4b34"
+  },
+  "analise_dados/07_arquitetura_banco.md": {
+   "tamanho": 11829,
+   "modificado": "2026-08-28 20:45",
+   "sha256": "50c7521ad08f189e1f54fb5c6aa68108f96c88d6617fbc7d56c0cb7a9b501917"
+  },
+  "analise_dados/08_metodo_machine_learning.md": {
+   "tamanho": 14906,
+   "modificado": "2026-08-28 20:47",
+   "sha256": "05ac3baa28757d3fca392a709e1bb9d7e7717fa80bed80d2ebd16b6488d482ea"
+  },
+  "analise_dados/09_protocolo_evidencia.md": {
+   "tamanho": 11490,
+   "modificado": "2026-08-28 20:50",
+   "sha256": "efbc714827d5cc2cb53f944816cfbbf6fe63680adca36cb8aebbc6edea072ad5"
+  },
+  "analise_dados/10_curadoria_modulo_tabaco.md": {
+   "tamanho": 11025,
+   "modificado": "2026-08-28 22:21",
+   "sha256": "4da14804956bd973b1aeec5e655d27f78f5a94d24b920a7827c57466f95e82b3"
+  },
+  "analise_dados/11_ficha_paciente_e_motor.md": {
+   "tamanho": 9655,
+   "modificado": "2026-08-29 00:47",
+   "sha256": "e2dbe3ac597f0f33089778ff61160f228e9a70f902c77994ba418402909e245e"
+  },
+  "analise_dados/12_curadoria_modulos_2_4_e_interface.md": {
+   "tamanho": 7425,
+   "modificado": "2026-08-29 01:40",
+   "sha256": "ecf0eec54987c0f9fa048374339be2fa652bb72d413a3cb11f3d9428157e1ddd"
+  },
+  "analise_dados/13_analise_noharm.md": {
+   "tamanho": 11237,
+   "modificado": "2026-08-31 11:38",
+   "sha256": "e3df0f0b016ba7e32dbf36050696a25f835f5a5d3fead4acee38fe28b869c27d"
+  },
+  "analise_dados/14_estrategia_publicacao.md": {
+   "tamanho": 16657,
+   "modificado": "2026-08-31 12:17",
+   "sha256": "bd11b41f40fcc5df77df07c248f154dd3ce8b73a13f049bd94a0d3ff0c89df41"
+  },
+  "analise_dados/15_evolucao_do_sistema.md": {
+   "tamanho": 15052,
+   "modificado": "2026-08-31 12:38",
+   "sha256": "40fec3458abf32270d0bf5ee351d93ff089e664de29d2bed21e21b28b6d2713f"
+  },
+  "analise_dados/16_carga_ean_e_roteiro.md": {
+   "tamanho": 24206,
+   "modificado": "2026-08-31 16:41",
+   "sha256": "35201159ccc2e3474b9c6d54cd943281c47a0094686f3d3b29726001bb17ad89"
+  },
+  "analise_dados/17_estrategia_avaliacao_e_ml.md": {
+   "tamanho": 10609,
+   "modificado": "2026-08-31 17:39",
+   "sha256": "620d1dec9476e932543362b28d0d41e286ba02b8efd4ab184b945bb293905049"
+  },
+  "analise_dados/18_caderno_casos.md": {
+   "tamanho": 199857,
+   "modificado": "2026-09-04 00:26",
+   "sha256": "ac3e17e1b68d1bc04f786bc81adaab34e38a7c3129470e044aaaff2993e9cd7b"
+  },
+  "analise_dados/19_atendimento_farmaceutico.md": {
+   "tamanho": 9887,
+   "modificado": "2026-09-01 10:04",
+   "sha256": "daaec56732dccab886ff52640d6209ce4fe9b406fa881753034def54b85a60bc"
+  },
+  "analise_dados/20_arquitetura_ml_mecanistica.md": {
+   "tamanho": 47511,
+   "modificado": "2026-09-03 09:25",
+   "sha256": "bfce707f93ec13d79c956a27d696413ee8e9d1f63ec215644b1aeaad51c890db"
+  },
+  "analise_dados/21_comparacao_familias_ml.md": {
+   "tamanho": 13954,
+   "modificado": "2026-09-03 13:41",
+   "sha256": "ae1cd5df7f3a6a6cb2e9b19f420162360381cb7a7b1769758ffbdb1bf13bb85d"
+  },
+  "analise_dados/22_teste_curadoria_farmaceuticos.md": {
+   "tamanho": 29129,
+   "modificado": "2026-09-04 00:27",
+   "sha256": "9dd055aa221076e0d4958d939ac248aa614279ab66e3b29d4c1bfa48610cf95f"
+  },
+  "analise_dados/23_auditoria_interface_e_executavel.md": {
+   "tamanho": 20849,
+   "modificado": "2026-09-08 00:49",
+   "sha256": "280f7bf934b62b34cd327e2e90892e9acb38c6557641023dabd0a5625520d4c7"
+  },
+  "analise_dados/24_carga_ean_gov_e_testes_de_interacao.md": {
+   "tamanho": 17846,
+   "modificado": "2026-09-08 08:34",
+   "sha256": "8659126304662244b27b3f6d28479e6b28993de06864cb7c195cd516383e3051"
+  },
+  "analise_dados/25_inventario_farmacologico_e_lacunas.md": {
+   "tamanho": 19032,
+   "modificado": "2026-09-08 19:07",
+   "sha256": "0e525fd4a59a6231f4f95c2b634bd60f5a80accd2bb8e01006cc0ae55fad8a7d"
+  },
+  "analise_dados/inventario.csv": {
+   "tamanho": 55150,
+   "modificado": "2026-08-28 17:43",
+   "sha256": "547e7658bf0c6ea0ee47fde487ffdc798636e9456663b2209505394c3a9734bb"
+  },
+  "analise_dados/saida/analise_raw.json": {
+   "tamanho": 15964,
+   "modificado": "2026-08-28 17:35",
+   "sha256": "5a9523a0be82f7650c4a10e6e9542e89a7fc2488643687ce02ba7ae923676636"
+  },
+  "analise_dados/saida/cobertura_raw.json": {
+   "tamanho": 41912,
+   "modificado": "2026-08-28 17:39",
+   "sha256": "f77c922afd833fac2721a0ef38a4d28aa079cf9501168c23858c6e08380fb978"
+  },
+  "analise_dados/saida/inventario_raw.json": {
+   "tamanho": 56167,
+   "modificado": "2026-08-28 17:28",
+   "sha256": "c9a14b03c6fd29986dc05777040e68e19a00644149fb2c45e3dbe50e05da7b99"
+  },
+  "analise_dados/saida/pares_ff_brasil.csv": {
+   "tamanho": 5785643,
+   "modificado": "2026-08-28 17:35",
+   "sha256": "3f518121a4baa98a6d23f12a2c9ba85b18776cf91e60deb77e0673dfaf21d0da"
+  },
+  "analise_dados/saida/substancias_br_ativas.csv": {
+   "tamanho": 83763,
+   "modificado": "2026-08-28 17:35",
+   "sha256": "a5e187b0c6a75649bda528e7a948c58a3ab1650d0edfca7065269809939dc6ed"
+  },
+  "analise_dados/saida/substancias_br_match.csv": {
+   "tamanho": 146322,
+   "modificado": "2026-08-28 17:39",
+   "sha256": "489bdfdb5830db618c468680fa43d9805e604c9e48cdec5a5837c3984375d871"
+  },
+  "analise_dados/scripts/01_inventario.py": {
+   "tamanho": 9735,
+   "modificado": "2026-08-28 17:28",
+   "sha256": "87e744d46d5159baf1d76614c908a8137114a082e797bbff09e8792581f68e00"
+  },
+  "analise_dados/scripts/02_analise.py": {
+   "tamanho": 21364,
+   "modificado": "2026-08-28 17:34",
+   "sha256": "cc6ee786a4dca09982c96d3762a6509c66ddd56bc43d398c97dd2b71f28d5e8d"
+  },
+  "analise_dados/scripts/03_cobertura.py": {
+   "tamanho": 11425,
+   "modificado": "2026-08-28 17:38",
+   "sha256": "4486c46f3f75775da7996dea395a5401467a141f0ac0899a9fd1d38417cf5d52"
+  },
+  "analise_dados/scripts/04_gera_inventario.py": {
+   "tamanho": 11774,
+   "modificado": "2026-08-28 17:43",
+   "sha256": "517ca311b2bea4fc0d05445794281b0635b0f8dddbda0ef8bea93d6b9d752d4f"
+  },
+  "analise_dados/scripts/lib_norm.py": {
+   "tamanho": 12902,
+   "modificado": "2026-08-28 17:32",
+   "sha256": "429b0585d56ee0cce1467c4f87fca0a5e1692987eeb51be2566abb71667ebe23"
+  },
+  "banco/conciliador.db": {
+   "tamanho": 100065280,
+   "modificado": "2026-09-08 10:09",
+   "sha256": "1c09acd4f5cead64f5b76b2a3e3e47760e649b136e4d6f705e4767218f1fbadb"
+  },
+  "banco/conciliador_backup_antes_a3_20260831.db": {
+   "tamanho": 76644352,
+   "modificado": "2026-08-31 13:52",
+   "sha256": "63587696713cd005c27af6b7561666f47b380a332150f65905366f45752832fe"
+  },
+  "banco/conciliador_backup_antes_a5_20260831.db": {
+   "tamanho": 76685312,
+   "modificado": "2026-08-31 15:35",
+   "sha256": "e4a31226a3a071e24721e233f126e056ce785893724e6b9ab556de3999b217fe"
+  },
+  "banco/conciliador_backup_antes_aval_discrepancia_20260904.db": {
+   "tamanho": 100007936,
+   "modificado": "2026-09-04 00:19",
+   "sha256": "bf7318c528e2eba746e3bf0211acb07e5208f6df9672251ecfdc1c4845b1d8a7"
+  },
+  "banco/conciliador_backup_antes_calibracao_2026-09-03.db": {
+   "tamanho": 92196864,
+   "modificado": "2026-09-03 09:09",
+   "sha256": "f22d2596566b61544dce26a96bd5265a8c944559fe7a009a36415999b4cf2fb1"
+  },
+  "banco/conciliador_backup_antes_c_20260831.db": {
+   "tamanho": 76787712,
+   "modificado": "2026-08-31 16:30",
+   "sha256": "b43657a4402ec9239ef561cc3eb18690fc17c9cc84771a510d7ab98089a4e204"
+  },
+  "banco/conciliador_backup_antes_d_20260831.db": {
+   "tamanho": 77766656,
+   "modificado": "2026-08-31 17:31",
+   "sha256": "0da15fc8366ecdf1cfd5024d1530ed6e413ad13ca6c092b16bdce6a9dd3e90e7"
+  },
+  "banco/conciliador_backup_antes_ean_20260831.db": {
+   "tamanho": 61440000,
+   "modificado": "2026-08-31 13:31",
+   "sha256": "6e3378fd1e6b14cac93d9bd7292e8cbf7d41c1a1c1e2287c681bd2ca8dea039b"
+  },
+  "banco/conciliador_backup_antes_ean_farmacia_popular_20260908.db": {
+   "tamanho": 100028416,
+   "modificado": "2026-09-08 08:27",
+   "sha256": "924ff234c192c4599939d281b27e091077720cac0abc3f90fd01c14a6b8a7daf"
+  },
+  "banco/conciliador_backup_antes_etl27_2026-09-02.db": {
+   "tamanho": 85229568,
+   "modificado": "2026-09-02 16:07",
+   "sha256": "171826a0cd609766d888b17332a0d45ecb1b80cff8109cd71ba798a5a3df66de"
+  },
+  "banco/conciliador_backup_antes_etl28_2026-09-02.db": {
+   "tamanho": 87486464,
+   "modificado": "2026-09-02 17:18",
+   "sha256": "a1ae52d9c7a44a4ce55c4e827e75cb4034b071a7019ae1874ff7c8f643d3ddd7"
+  },
+  "banco/conciliador_backup_antes_fila_gravidade_20260903.db": {
+   "tamanho": 99151872,
+   "modificado": "2026-09-03 21:41",
+   "sha256": "b2c1c159b3fa4c59ca4430c014b70a826ba817d826dbfba5cd520ffc9e5ea48f"
+  },
+  "banco/conciliador_backup_antes_limpeza_auditoria_20260908.db": {
+   "tamanho": 100024320,
+   "modificado": "2026-09-08 00:45",
+   "sha256": "75e6f6e71723f53cd971b610339c399808725738e38b7db1f362a5ab78e16b2d"
+  },
+  "banco/conciliador_backup_antes_limpeza_teste_2026-09-01.db": {
+   "tamanho": 78045184,
+   "modificado": "2026-09-01 09:36",
+   "sha256": "fcd380c62dde3817d6c036d47ee1b664775044b2eeade5917a11fc01bf49152e"
+  },
+  "banco/conciliador_backup_antes_ml_atc_2026-09-01.db": {
+   "tamanho": 78049280,
+   "modificado": "2026-09-01 19:14",
+   "sha256": "9a1d3633fb63cde683041cd93ae50e53db78850ab775271dfcc49d3973718a9d"
+  },
+  "banco/conciliador_piloto_congelado_20260904.db": {
+   "tamanho": 100024320,
+   "modificado": "2026-09-04 00:26",
+   "sha256": "f710dd46449659685acf59d3cbe097b7b654f5cf21ce4d0f78fb78f317669176"
+  },
+  "banco/README.md": {
+   "tamanho": 7160,
+   "modificado": "2026-08-29 01:41",
+   "sha256": "46b0221455b4a189a094b0433ffbae5b4727c85023b983672501da2d4aaa307b"
+  },
+  "banco/schema.sql": {
+   "tamanho": 23421,
+   "modificado": "2026-08-28 22:18",
+   "sha256": "4000894bda05db1b2db6785fa183f80362150c01cf0e728c7c66fe00acbdfa05"
+  },
+  "banco/schema_paciente.sql": {
+   "tamanho": 12978,
+   "modificado": "2026-08-29 00:41",
+   "sha256": "7a79d131a5ebc8e1e1898058593db5c802668ceb0c61c17fa84e49223347512e"
+  },
+  "banco/app/30_demo_pacientes.py": {
+   "tamanho": 9549,
+   "modificado": "2026-08-29 00:43",
+   "sha256": "af80b1586035cfe7bf27007741837ad30ddb938b81d2d22ea967052327938b1c"
+  },
+  "banco/app/31_demo_discrepancias.py": {
+   "tamanho": 7558,
+   "modificado": "2026-08-31 15:38",
+   "sha256": "5937647cac6896d5c0a94936dbdaa328b12dde7a79a26de4c395e8f0f0df680e"
+  },
+  "banco/app/32_gerar_casos.py": {
+   "tamanho": 10486,
+   "modificado": "2026-08-31 18:08",
+   "sha256": "b7694d5ebd28eba181104c6e2712fad275a8e78442f613ff1a1c7b55bd94bc64"
+  },
+  "banco/app/33_caderno_de_casos.py": {
+   "tamanho": 17759,
+   "modificado": "2026-08-31 18:10",
+   "sha256": "22bb038f418a42f0359f19ffc22094826db4b49357c1f25b3c2d8be843267c27"
+  },
+  "banco/app/34_verificar_rotas.py": {
+   "tamanho": 6799,
+   "modificado": "2026-09-04 11:38",
+   "sha256": "ffd315658ba5fef7396c2e97bb2f004340b3fe1cb397a59dbe23b49ea55aa232"
+  },
+  "banco/app/36_testes_interacao_farmacia_popular.py": {
+   "tamanho": 9935,
+   "modificado": "2026-09-08 08:30",
+   "sha256": "415fa3c502c5f1daba0f1b808c414b5086803cec78bb65dc69709de678f7cb2f"
+  },
+  "banco/app/motor_conciliacao.py": {
+   "tamanho": 86598,
+   "modificado": "2026-09-04 00:18",
+   "sha256": "6ab04e78326073c0f743bdf687a961a57777e76f0807fd4a4df9d2e7f30e2626"
+  },
+  "banco/app/relatorio.py": {
+   "tamanho": 4169,
+   "modificado": "2026-08-29 00:43",
+   "sha256": "4097eb325bd074f4e584b9a689470b641e3f36d5a7fc1f756c4857e01b3ec871"
+  },
+  "banco/app/web.py": {
+   "tamanho": 148680,
+   "modificado": "2026-09-04 00:21",
+   "sha256": "d96f109d062847cf892309205d9491881db5f1cb099be57aeedc5bef887d50bc"
+  },
+  "banco/app/_arquetipos.py": {
+   "tamanho": 22985,
+   "modificado": "2026-08-31 18:07",
+   "sha256": "6856d3b9f5293053004e1cff73d63b9c520ebd3c6a3467a98fe83be786787dfe"
+  },
+  "banco/app/_concordancia.py": {
+   "tamanho": 13569,
+   "modificado": "2026-09-04 00:21",
+   "sha256": "35a8afd1bab0e0c5203dca1c64cabd190605be459407bf1a06235a74de791388"
+  },
+  "banco/app/_traducao.py": {
+   "tamanho": 19081,
+   "modificado": "2026-09-04 00:17",
+   "sha256": "8c479e10d6971c6f3289274d786c11e26254c0dd7647f760f74eee312780a02b"
+  },
+  "banco/app/saida/conciliacao_DEMO-001.txt": {
+   "tamanho": 11574,
+   "modificado": "2026-08-29 01:39",
+   "sha256": "09a2dbcf10aeb2c04192055f17dbaf19e7d651c3b4e46833bc575d8e400f3bd8"
+  },
+  "banco/app/saida/conciliacao_DEMO-002.txt": {
+   "tamanho": 4257,
+   "modificado": "2026-08-29 01:39",
+   "sha256": "6d3710614a09045e1f6730f911c6547a1c8940b3c568dc04aa270c22cd3d77fe"
+  },
+  "banco/app/saida/conciliacao_DEMO-003.txt": {
+   "tamanho": 5924,
+   "modificado": "2026-08-29 01:39",
+   "sha256": "91a8d45dde8cef9f924b28b9b5dc46c66d798b8268724741683df58c76f08f09"
+  },
+  "banco/curadoria/buscas_pendentes.csv": {
+   "tamanho": 869643,
+   "modificado": "2026-08-29 01:36",
+   "sha256": "4577f561f89de06d731840203095da4e4e1a848532b9e76a5469ab61fd5830fe"
+  },
+  "banco/curadoria/ean_farmacia_popular.csv": {
+   "tamanho": 65313,
+   "modificado": "2026-09-08 08:27",
+   "sha256": "f54bcd412e5345375ed46c0ff303333bd32ad8a6f61dbff16c02ca640270737e"
+  },
+  "banco/curadoria/gravidade_indeterminada.csv": {
+   "tamanho": 62137,
+   "modificado": "2026-09-03 21:50",
+   "sha256": "29e38e289add55b669ebdd2570824f9dd70c0483889e9b814f366ad34fa0825d"
+  },
+  "banco/curadoria/inventario_farmacologico.csv": {
+   "tamanho": 419723,
+   "modificado": "2026-09-08 19:05",
+   "sha256": "2448411f65bc88f824e48e2e72eee144e1e3beff1d7f55f0d5b6dbe609e3ee26"
+  },
+  "banco/curadoria/inventario_suplemento_pesquisado.json": {
+   "tamanho": 14924,
+   "modificado": "2026-09-08 19:03",
+   "sha256": "d998cce2a40a583c057ab025cbc858d6ad595d0d2fbb1ec8dae5d2eacd784165"
+  },
+  "banco/curadoria/modulo_tabaco_curado.csv": {
+   "tamanho": 35145,
+   "modificado": "2026-08-29 01:34",
+   "sha256": "5f229a6dbafa6849e031310720b605d05a85f00d9a8b4cedacc0a59539147451"
+  },
+  "banco/curadoria/modulo_tabaco_rejeitados.csv": {
+   "tamanho": 29876,
+   "modificado": "2026-08-29 01:34",
+   "sha256": "2810cf2baf81891d08ba5ffb3ababcd4cb0dad2297117421ea36f54e7e59e8d7"
+  },
+  "banco/curadoria/referencial_teorico.md": {
+   "tamanho": 12922,
+   "modificado": "2026-08-29 01:34",
+   "sha256": "e0b76fb13ff989b81720b85824924c182c4dcd03c7b00730bab0a6d6fa54de91"
+  },
+  "banco/curadoria/referencias_verificadas.csv": {
+   "tamanho": 8459,
+   "modificado": "2026-08-29 01:34",
+   "sha256": "362314d427aab54ebd82eb000c58619fcb3d04e4552870c8455c4e2f9bc47849"
+  },
+  "banco/curadoria/~$ferencial_teorico.md": {
+   "tamanho": 162,
+   "modificado": "2026-09-01 00:43",
+   "sha256": "786d1c8ec2a4d3ac7b1bd3c8773e92754a8c3f6e53006c2f4ec3b840dc867f5e"
+  },
+  "banco/etl/10_carga_base.py": {
+   "tamanho": 14259,
+   "modificado": "2026-09-03 21:51",
+   "sha256": "a80571b092fc0fbf4720a8ae2dc92dd8cb3b14e417129a5fe1a5e696daa368dd"
+  },
+  "banco/etl/11_carga_interacoes.py": {
+   "tamanho": 7714,
+   "modificado": "2026-08-28 20:24",
+   "sha256": "fa76d41af229a6f551ee40c938ac489d4c86145d8e218d75e00795146fe39f9a"
+  },
+  "banco/etl/12_carga_habito_alimento_doenca.py": {
+   "tamanho": 13852,
+   "modificado": "2026-08-28 20:26",
+   "sha256": "ed92613d50416d598f25b80a1efe3ea1309a640f57787f029d1716889f28b3f8"
+  },
+  "banco/etl/13_evidencia_e_curadoria.py": {
+   "tamanho": 16289,
+   "modificado": "2026-08-28 20:28",
+   "sha256": "65ef5f9fafecf2face463ecb02c03a22dd025de3a76248a78eea2cd86e80ea28"
+  },
+  "banco/etl/14_motor_inferencia.py": {
+   "tamanho": 11126,
+   "modificado": "2026-08-28 20:30",
+   "sha256": "20659af05cf7140126a581189ea843f8cd7fe63e005ead5f80d783d4bfa24df0"
+  },
+  "banco/etl/15_validacao.py": {
+   "tamanho": 9051,
+   "modificado": "2026-08-28 22:19",
+   "sha256": "366b288429182c7fadc30799e2814a964f78318818741bdeff830ab023e755b6"
+  },
+  "banco/etl/16_gera_buscas_evidencia.py": {
+   "tamanho": 9455,
+   "modificado": "2026-08-28 20:48",
+   "sha256": "2da050ac411b1a9a4b511de6ec45a2d8f4cff0a224551a47a1a04e7549e75c7c"
+  },
+  "banco/etl/17_importa_curadoria.py": {
+   "tamanho": 7626,
+   "modificado": "2026-08-28 20:49",
+   "sha256": "1a1fe34fd11ff03ddb38812d8eed7c63331a42c039e579c256b505f6a78f3223"
+  },
+  "banco/etl/18_curadoria_tabaco.py": {
+   "tamanho": 24972,
+   "modificado": "2026-08-29 00:45",
+   "sha256": "c4ee1a29e8c3f94c6602b646586034a5047bbb663c7fc0e7212c7a86cacd3f60"
+  },
+  "banco/etl/19_exporta_referencial.py": {
+   "tamanho": 6679,
+   "modificado": "2026-08-28 22:20",
+   "sha256": "2712db8040788cd6f10f3887b8ead211d4781029c1966ea9e7267f514799ce2c"
+  },
+  "banco/etl/20_curadoria_alimento.py": {
+   "tamanho": 19242,
+   "modificado": "2026-08-29 01:33",
+   "sha256": "18e2f18051a502a8dfea74ef210028a9e51fae87be105d1637ac46f040a6a923"
+  },
+  "banco/etl/21_curadoria_alcool.py": {
+   "tamanho": 12700,
+   "modificado": "2026-08-29 01:33",
+   "sha256": "16b564ef465697c912e184e7569b69fb9beab1b33bb48f0a98990b0d04f4f7e9"
+  },
+  "banco/etl/22_carga_apresentacao_ean.py": {
+   "tamanho": 11894,
+   "modificado": "2026-08-31 13:50",
+   "sha256": "def1ceaed3b6fa424b9dedab5dc8aec4127c3ccdaeb61858b9a4bda78f9694c3"
+  },
+  "banco/etl/23_schema_listas_discrepancias.py": {
+   "tamanho": 10180,
+   "modificado": "2026-08-31 13:52",
+   "sha256": "16d38ee0ebed075d7896ee330bafa0de9ce95571cceb7c15d8cbab89766aaa41"
+  },
+  "banco/etl/24_carga_atc_cas_rename.py": {
+   "tamanho": 8840,
+   "modificado": "2026-08-31 16:33",
+   "sha256": "64bd51962ccaf94e45143d7fb4f3aef5cdd3d1791dc38f89ff5a0b6a7dc5409c"
+  },
+  "banco/etl/25_ajuste_organico_e_dose.py": {
+   "tamanho": 7069,
+   "modificado": "2026-08-31 16:37",
+   "sha256": "6dee395979c1e88b878ae6102b6cbb5af7f2913d355c9a11b4499d7dcf20c08d"
+  },
+  "banco/etl/26_schema_padrao_ouro.py": {
+   "tamanho": 6403,
+   "modificado": "2026-08-31 17:31",
+   "sha256": "02513d4d8455024816a896efa1c54b1c862ff8eb0bd14e2821be965dc03ee7f8"
+  },
+  "banco/etl/27_pk_recuperacao_e_fda.py": {
+   "tamanho": 11432,
+   "modificado": "2026-09-02 16:07",
+   "sha256": "6b6d59865dfbe73bceb9e69321fd15217ab19a3099912966e334feae77b6f8fb"
+  },
+  "banco/etl/28_alvo_farmacologico.py": {
+   "tamanho": 14994,
+   "modificado": "2026-09-02 17:18",
+   "sha256": "c1399f2a725718dac91f8a84c2248a2208b4db4047a1274e8a56e73b605be586"
+  },
+  "banco/etl/29_fila_gravidade_indeterminada.py": {
+   "tamanho": 11874,
+   "modificado": "2026-09-03 21:42",
+   "sha256": "770e80bc452f2ae28770ba9d15e716091714444be66e91bf23ff333e77f556a6"
+  },
+  "banco/etl/30_corrige_canal_dispensacao.py": {
+   "tamanho": 9792,
+   "modificado": "2026-09-03 21:51",
+   "sha256": "def4543c0bcfe06771ddc49daf5eb995bf20d7861cbb9ac6003961740507a06c"
+  },
+  "banco/etl/31_schema_avaliacao_discrepancia.py": {
+   "tamanho": 6049,
+   "modificado": "2026-09-04 00:20",
+   "sha256": "0e891f538e2d6ca95fc34e28e7167b46583450e23a0357e0ec8eb15c01c2f32d"
+  },
+  "banco/etl/35_carga_ean_farmacia_popular.py": {
+   "tamanho": 14077,
+   "modificado": "2026-09-08 08:27",
+   "sha256": "85b91d78e3a7b714df436fe86e34c232f4d5977c0a70ed40a78e6466d49027b8"
+  },
+  "banco/etl/37_inventario_farmacologico.py": {
+   "tamanho": 13189,
+   "modificado": "2026-09-08 19:05",
+   "sha256": "ebc14d21446dcd3c831515d7fc7e19508e4582268a27f5747a3e6797cf34c2af"
+  },
+  "banco/etl/_mapa_chaves.json": {
+   "tamanho": 72064,
+   "modificado": "2026-08-29 01:34",
+   "sha256": "91bfa8f18de7910dad67586122c8ddb47d786e0e79f321e21d9a27327bc32a4c"
+  },
+  "banco/ml/20_dataset_ml.py": {
+   "tamanho": 6058,
+   "modificado": "2026-09-03 09:02",
+   "sha256": "2a02c9ab18c2403eb7fa65736f403b928eb639de11d9551364229c5fa2ff9ac2"
+  },
+  "banco/ml/21_treino_avaliacao.py": {
+   "tamanho": 13342,
+   "modificado": "2026-09-02 17:19",
+   "sha256": "a4def68f457990e18772c31665e1e040bfe02970388173ca1bb2d8fb4267ce6a"
+  },
+  "banco/ml/22_predicao.py": {
+   "tamanho": 7553,
+   "modificado": "2026-09-03 09:09",
+   "sha256": "baba4c9f6a7707d2ed9a1a2c100498e7fa419666ee9c93ff2fc1ec7e78497a08"
+  },
+  "banco/ml/23_validacao_externa.py": {
+   "tamanho": 18398,
+   "modificado": "2026-09-03 09:11",
+   "sha256": "718f3cb9280ee8f2ce1482d6f2b0571cbfecb3d14ff3a8382678840a302de3f1"
+  },
+  "banco/ml/_features.py": {
+   "tamanho": 13124,
+   "modificado": "2026-09-02 17:19",
+   "sha256": "e393badbcf96e4e7c83f1c58ed5bfcbdef5d02cd3de2426e9eb8384d54af789c"
+  },
+  "banco/ml/dados/calibrador.json": {
+   "tamanho": 2597,
+   "modificado": "2026-09-03 09:13",
+   "sha256": "31f6da2b9a6a4f34c3588fa9daa0e5d002e814a62132df374a2b58269ea54c51"
+  },
+  "banco/ml/dados/dataset.npz": {
+   "tamanho": 3019632,
+   "modificado": "2026-09-03 09:03",
+   "sha256": "959b2c5d63c665fed9c1c217118aada2ff0f215c4cb0682d8f960776e2cb22af"
+  },
+  "banco/ml/dados/espaco_features.json": {
+   "tamanho": 7071,
+   "modificado": "2026-09-03 09:03",
+   "sha256": "2a7f1c203ef96f4d3b5154fa774475ac770bbd8d508732179c3744e0e88fd412"
+  },
+  "banco/ml/dados/metricas.json": {
+   "tamanho": 908,
+   "modificado": "2026-09-02 17:22",
+   "sha256": "280a6f5a454d14d47e64db959c66e464393acc888be3a93da90797339ac67319"
+  },
+  "banco/ml/dados/teste_farmaco_idx.npy": {
+   "tamanho": 52960,
+   "modificado": "2026-09-02 17:22",
+   "sha256": "78da5314ae4741610616ed689652a62bf60866867afdbeab54daf934780f2a76"
+  },
+  "banco/ml/dados/validacao_externa.json": {
+   "tamanho": 3668,
+   "modificado": "2026-09-03 09:13",
+   "sha256": "27507878e925bc28102302f8910514d0e20c9e2aa365751a611aa302fbda52c0"
+  },
+  "DDInter/ddinter_downloads_code_A.csv": {
+   "tamanho": 3343434,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "a22ca451d2b755ca2331886f7e00540c86f555f9f55704a59a19c691251f52e0"
+  },
+  "DDInter/ddinter_downloads_code_B.csv": {
+   "tamanho": 867726,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "76de5115a55587f0e822e1096b684fd3ddde058fbefcbb19896df58820ace130"
+  },
+  "DDInter/ddinter_downloads_code_D.csv": {
+   "tamanho": 1520704,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "c0627ec39965dbe27829e4934cd20d71eb079f4e373287678737bba9423a306a"
+  },
+  "DDInter/ddinter_downloads_code_H.csv": {
+   "tamanho": 705088,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "f0f925f0ba1ee68c4668d3e7a6732719b34623b22a0f5d017f9090e59f63c88e"
+  },
+  "DDInter/ddinter_downloads_code_L.csv": {
+   "tamanho": 3885702,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "f54f4486cc00344f8c86508c31c2ca3fad6d1d37ec3af5bcf609b4bbda5507ef"
+  },
+  "DDInter/ddinter_downloads_code_P.csv": {
+   "tamanho": 317460,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "83f8c0edb20d09ef29b8500b48f9623e208379525688ade9e70a7df2d8749d55"
+  },
+  "DDInter/ddinter_downloads_code_R.csv": {
+   "tamanho": 1793766,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "1c39c3d4a6e41659b7a988538d7f363867592abc6f41a815de8746f6e2150574"
+  },
+  "DDInter/ddinter_downloads_code_V.csv": {
+   "tamanho": 700777,
+   "modificado": "2026-08-24 20:57",
+   "sha256": "353973fb300453946aea95733e8fb52338e4b59426d2ce6ca318363d4f84f10a"
+  },
+  "Drug-disease/diseasesInfo.csv": {
+   "tamanho": 564300,
+   "modificado": "2026-08-25 00:05",
+   "sha256": "3d11d07755053d553bfebee87fb4ccbbd97c4aa5024c57733d97071e8f6669f3"
+  },
+  "Drug-disease/drugsInfo.csv": {
+   "tamanho": 3916737,
+   "modificado": "2026-08-25 00:05",
+   "sha256": "96e9ccfb3772d8af8da14060c9ca17d4c81cf9390728ebfef8bb5fb722ee0b65"
+  },
+  "Drug-disease/mapping.csv": {
+   "tamanho": 928601,
+   "modificado": "2026-08-25 00:05",
+   "sha256": "7a028446c898b118db4fe9d068bf39092a6e3079e14e80c8daffed769c108ff8"
+  },
+  "ferramentas/consulta.py": {
+   "tamanho": 4006,
+   "modificado": "2026-09-04 11:40",
+   "sha256": "98c042ea8113f9e45bd175b313c98674ac02e81c84f3fc5df9fbe4a6bb27daf0"
+  },
+  "ferramentas/exemplos.sql": {
+   "tamanho": 1611,
+   "modificado": "2026-09-04 11:40",
+   "sha256": "579faff281fecb6f18fad5bcc40da85adfecda43ce288d0ec642cb546e3b4ef7"
+  },
+  "fontes_novas/COBERTURA.md": {
+   "tamanho": 2499,
+   "modificado": "2026-08-31 09:59",
+   "sha256": "b364086a488f101a964dad0c2c898bf6ed4a9b429f70e0ebd90dda5084031435"
+  },
+  "fontes_novas/medir_cobertura.py": {
+   "tamanho": 4541,
+   "modificado": "2026-08-31 09:58",
+   "sha256": "01ffbec06cf452fe80847d6ce1c14b70e19ac0eccb4519e81533d525948682a2"
+  },
+  "fontes_novas/README.md": {
+   "tamanho": 8519,
+   "modificado": "2026-08-31 10:01",
+   "sha256": "730b8c2da86d821c9bde7d4d06387b9a14f6aaaa07e17dc376e5293e56445c5b"
+  },
+  "fontes_novas/01_anvisa_bulario/baixar_bulas.py": {
+   "tamanho": 9300,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3360f5d58d1e4ed33d4c39fdb96ee880aaf15336f027403247eb802700a12a6d"
+  },
+  "fontes_novas/01_anvisa_bulario/falhas.txt": {
+   "tamanho": 624,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "1d43a6411dc48959658e450cfcc01fd03a4a95eb5d3d5d2efab3933b0604ae07"
+  },
+  "fontes_novas/01_anvisa_bulario/lacunas.txt": {
+   "tamanho": 9690,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "21a9a78a5ffa352619eb05a0e296696d351df62de80360bf481637b9c7475612"
+  },
+  "fontes_novas/01_anvisa_bulario/manifesto_bulas.csv": {
+   "tamanho": 23882,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "e2cff5784e5a5b958ba1ff9cc78fd27d96f9402d8cf5dcb1554e329ecc3d9071"
+  },
+  "fontes_novas/01_anvisa_bulario/README.md": {
+   "tamanho": 5695,
+   "modificado": "2026-08-31 09:54",
+   "sha256": "848dccb780db0942a326dce7f1a2e3860246551602975fe226cab9a0f6decdaa"
+  },
+  "fontes_novas/01_anvisa_bulario/reextrair_secoes.py": {
+   "tamanho": 2688,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b903ae469d6274aacf486fa174a9aed734e920396919ed8c80f09634e21b7d1e"
+  },
+  "fontes_novas/01_anvisa_bulario/registros_faltantes.csv": {
+   "tamanho": 4882,
+   "modificado": "2026-08-31 09:44",
+   "sha256": "9475de27367940eb0e73df7f35be3446ab8686be4b0ec0aebce1d3375bdf699d"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes_bulas.csv": {
+   "tamanho": 2282516,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "d908552fe038c70c1dfe5bef0b00c506761b5feadaf7fa295d940b9fd69032a2"
+  },
+  "fontes_novas/01_anvisa_bulario/TA_CONSULTA_BULA_DOCUMENTO.CSV": {
+   "tamanho": 14292854,
+   "modificado": "2026-08-31 09:32",
+   "sha256": "e14e9e497b53ccc4cf2c26f76ebe06990ec1a270032c114cb566871ade10a935"
+  },
+  "fontes_novas/01_anvisa_bulario/TA_CONSULTA_BULA_PRODUTO.CSV": {
+   "tamanho": 1665050,
+   "modificado": "2026-08-31 09:32",
+   "sha256": "6decbc84ef2f7066d2f5752c062c68c2ac0b614c47d7a973e5e7baeef730557f"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acebrofilina.pdf": {
+   "tamanho": 308906,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "a73c8c6c6d115be8b91e931a4c32d8bd39d3cde8a70f2bf70307a400afe6eb5c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acetato_de_atosibana.pdf": {
+   "tamanho": 819008,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "e31f6be6c47ebc82c6186639237d81733ac77a9a3ee3d07e2c6ac36d0ba2b8b7"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acetato_de_clormadinona.pdf": {
+   "tamanho": 1236522,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "4741021bae333d8267240a0a3725a05edbffa78a5e9f202353fd17094aadfd29"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acetato_de_leuprorrelina.pdf": {
+   "tamanho": 1233942,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "c32ba9b5e04e95651f57684a4ca07ddbfaa467d50dfc6ee4c6698bdb75f5b923"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acetato_de_racealfatocoferol.pdf": {
+   "tamanho": 316834,
+   "modificado": "2026-08-31 09:44",
+   "sha256": "1280eab82fba45dc1f428d6fd01662a24ceaad837950bb33cbae425fc4a11298"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acetato_de_sodio_tri_hidratado.pdf": {
+   "tamanho": 317921,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "8a36fc4771592f1346e02c6a2365a496edaa8106ebad4eb75d8fcc5db42374cf"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acido_epsilon_aminocaproico.pdf": {
+   "tamanho": 765478,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "1a409c8ed5424ba2ea4fe72ca83d4529756abd8ebc91538622288785d3a89cff"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acido_fitico.pdf": {
+   "tamanho": 787164,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "fa08ee39b6ed606b6e6cfa8fa14ba5cacf1b85f44ebd061a4cb93449384475a3"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acido_gamaminobutirico.pdf": {
+   "tamanho": 178360,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "a81e101bd78017727ad7030ce63ef1545cd4c7c70466aec020b9bed1face28a0"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acido_medronico.pdf": {
+   "tamanho": 379675,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "940972608a9a98bafe31e2b589ef4b590929771e667df83127558e0ff4974204"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/acido_ursodesoxicolico.pdf": {
+   "tamanho": 427284,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "4ac0f296362c44dc5ce1faf09e4a552c94c21a00854c9ddc1148f1d9ada951f0"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/actaea_racemosa_l.pdf": {
+   "tamanho": 610752,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "43b66456877e9623affaf9c102f128f41ff34dcd9aefcb8a320c850ccd3400d4"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/aesculus_hippocastanum_l.pdf": {
+   "tamanho": 402486,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "e5bdb9480cdfa24ce9b61bee2767c97b583c23d99ebd3008ae579c36ae125fa5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alanilglutamina.pdf": {
+   "tamanho": 252871,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "703b92367f8bd32830df665609d807d57256400c7e20aef47a3e42d94cf510a3"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/albumina_humana.pdf": {
+   "tamanho": 866350,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "3f7b4412f60019cb02cea2f493546d1870e3793df43cbfb17a671fcb79c210db"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alfa1antitripsina.pdf": {
+   "tamanho": 403181,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "3cccc51ea6dd08b917d0b357e74fd74124f4eb4c76b379fd3d6685dccfac4700"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alfaepoetina.pdf": {
+   "tamanho": 379655,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "d95a983e830d2737b8a8357cab9ddee6061a20f8a0112ce55b49745c07ae63b0"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alfaestradiol.pdf": {
+   "tamanho": 735841,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "e649e83f7a9bd3d7dc87c325f8305b1f671b35ba8b9be1a49421a6c77a1c32c5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alfafolitropina.pdf": {
+   "tamanho": 1001460,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "d7414924fe13daa72b7c564a18b0a4e59363884587b3fbc4456c528869ff081d"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alfainterferona_2b.pdf": {
+   "tamanho": 297196,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "6d017c6fdc0eaa64b2cb93f242706dc3a97b0f7f5e00517627bccbc7164c0b0e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/alfaoctocogue.pdf": {
+   "tamanho": 548002,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "e22362f6210010a7a670ab7bb5debcd06df49a0f19ae95128a582f461a30be32"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/algestona_acetofenida.pdf": {
+   "tamanho": 381328,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "50d9ef18779429779d52938c1593acc81c43a129bcde6f70c590732d565a9719"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/antigeno_de_superficie_da_hepatite_b.pdf": {
+   "tamanho": 544331,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "e6142abc14a7d77b04f2826fc625471947c4aaf0206204ff172f8e28558a2dd8"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/arnica_montana_l.pdf": {
+   "tamanho": 218100,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "d2f9149d5d2f1f9cc0cb2e78f42545a01ba9936b163f5680693c92b7607e3abe"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/axetilcefuroxima.pdf": {
+   "tamanho": 521672,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "2ce37af3b0a13412aa07f4be1f168878ff3f4a255011327663491f2d95fbc990"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/benfotiamina.pdf": {
+   "tamanho": 203257,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "72bcac1436c7aaaad8854a371b0407628470c758ee82b25d7e229356ebd8b5c7"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/benzoilmetronidazol.pdf": {
+   "tamanho": 455569,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "d9f2f83db7d64f5fe4b9fbffe44416cb22102317ae9753943d644bc5425d277e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/borago_officinalis_l.pdf": {
+   "tamanho": 84004,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "5e67b49cc8547fd802e363d95d2112cca2b41bc6c9971b4222c2504433f8362b"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/bromoprida.pdf": {
+   "tamanho": 307812,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "4fcdf7bb4c17fcc23f7ec173bbb4a1f5bb996eb14280c2e7b7ca0929d298fcc5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/carbamazepina.pdf": {
+   "tamanho": 521244,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "f47dd2e2cce49921ae89bd3e739424468a5618896f04d2cc0c77c920f2ae0318"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/carmelose_sodica.pdf": {
+   "tamanho": 412494,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "1fcfb2dddf9849247682ab2157039b1432bd2c967da86d5d330cbd60d07965d2"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ciprofibrato.pdf": {
+   "tamanho": 562955,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "1a7126b213af67b7de89856b632ed51340ab102e4c230f6c7ce12ea2f32da82c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/citrato_de_potassio_monoidratado.pdf": {
+   "tamanho": 432278,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "7ad3577f8deee3bba0a7827acb0ac923e3c0c7eb82412133a9f822acd8e25700"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/citrato_de_sodio_di_hidratado.pdf": {
+   "tamanho": 261296,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "5ff0e2a2161c2574cabe4dbc1a1dd72823e32c8f5bd0ac85813886d0757334d5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/clonixinato_de_lisina.pdf": {
+   "tamanho": 221790,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "ded66da2332cb9f3dc70f840af877b5328fd3722ac22f97b990d62c2ba41ac3e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_amorolfina.pdf": {
+   "tamanho": 262128,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "b79b264f7ad7b64f86ef7414b48f0e7183063092107a072609947ae697426f47"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_bromexina.pdf": {
+   "tamanho": 188998,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "0c31ec7bc05212ab686e80a07ea27767a03f925965ff1f0d4252c713006fafc0"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_clobutinol.pdf": {
+   "tamanho": 643363,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "c1966697fba8bc22911766c1772bf3fe7ceb321e110c7a35aa40ed0d4818ab2e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_dapoxetina.pdf": {
+   "tamanho": 372818,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "23882339236ddcbc93a26b70c641256f4d88ff84829d3951f445b73d2578785d"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_lisina.pdf": {
+   "tamanho": 650686,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "84b2dc8dc42b63026aba3d01d587f5633a50f76823baaf6dc1d2551766a5074f"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_mebeverina.pdf": {
+   "tamanho": 373915,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "59c25f16c40426e7d1d675cf39a2575341765399e1b3e08f791d2f9fff1081ce"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cloridrato_de_oxomemazina.pdf": {
+   "tamanho": 138497,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "4ac7b9f33f860392e20def067945aa08af799148bd1b7e6ccff17dc0c0af6bdd"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/clozapina.pdf": {
+   "tamanho": 645058,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "f0a97ab4131ccebd7583465f2c079fe16ac0829a3e615386835295f0cb782871"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/colagenase.pdf": {
+   "tamanho": 454847,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "07c22d4ad9aaa709be7d4a79a8df32d3cb4fa46b77469cb42ddca42ec65db5f4"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cordia_verbenacea_dc.pdf": {
+   "tamanho": 509097,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "38ba499f96186a7b9382db52c1fb5310e96dab8b4a216a030a54de4cdbc53483"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/cynara_scolymus_l.pdf": {
+   "tamanho": 13900,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "0083988c59d859ec800dc817c0b3a423d60a964ab420cc5684ee7b62a6e93ec2"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/deltametrina.pdf": {
+   "tamanho": 198256,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "109f46fd41d7ec5bacef24e50521bd5cb253667a9de72ce52c8c660ae678a52a"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/dexpantenol.pdf": {
+   "tamanho": 190764,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "2c483baeefe2f24a3dc719d2e438c7fac007b560d02dcb6169f1a3f779c1cf10"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/diclofenaco_colestiramina.pdf": {
+   "tamanho": 274681,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "4cb9da090f31a6195bab9c4f420f0833aad355fc925468feb6c59a9839171a67"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/dicloridrato_de_etilenodicisteina_dietilester.pdf": {
+   "tamanho": 813938,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "98add12d5f441a7d73dc75c5218ef12abe61b112baeaec16865ea30792eb504c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/dicloridrato_de_meclozina_monoidratado.pdf": {
+   "tamanho": 447459,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "97118d59e37345872207dbe86281dadf69ea09ef13a5a5d03602ffe997caa057"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/digoxina.pdf": {
+   "tamanho": 356503,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "e91e35c201b0fd731fa6145b445fc58f9dcad2adc8ed30cc4b739ddd22bc8a1c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/diosmina.pdf": {
+   "tamanho": 511737,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "285c3849902ca57c9aaeb93d038559ccf8b76898cf644f272a4f7af4a1fc9311"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/dipirona.pdf": {
+   "tamanho": 547577,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "3887360a7abb980309e6db2b6d37f8c0169aa877f6c6138773511ccd071c26fa"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/dipirona_monoidratada.pdf": {
+   "tamanho": 340248,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "1d57d52ee49c2084254a7aca8ed3780e394bac02a22f248293b37e0a159f80f2"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/divalproato_de_sodio.pdf": {
+   "tamanho": 606618,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "288352b3f75dcab8ec05b3a6a878840a293554ae35315f750d337b0badac78df"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/dropropizina.pdf": {
+   "tamanho": 331038,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "778cf613b07eec9ee35a1874ed1f9487803360a140b56647688e827cce96380a"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/eltrombopague_olamina.pdf": {
+   "tamanho": 517131,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "97685a0bee3cabd24ec0c66e1956b3f69a901c31540b441cbbad011471476b5e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/estrogenios_conjugados.pdf": {
+   "tamanho": 264300,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "508b438d97de90e510a5d10ec9f7f8f25d9808bb43b0d215bca11934bec54664"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/everolimo.pdf": {
+   "tamanho": 775174,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "064a4ec60a3a6d765fb629afdac06802f063cce625a5fb4156e27a0bf1b4e9cb"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fendizoato_de_cloperastina.pdf": {
+   "tamanho": 213347,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "38e279284c474c084ed4d394a7d42b18cd0482377d734d1715d0d9edcde0bae7"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fenitoina.pdf": {
+   "tamanho": 802049,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "2bd0dea6b126c013c60b22ecf68af6dbd7316d528bf6d03dfa29c27c358f2843"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ferripolimaltose.pdf": {
+   "tamanho": 424582,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "1497a4f4039a253f500f765d8fdb0efbc65cde0e0cb0f5d672f79a3b1dda3224"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ferro.pdf": {
+   "tamanho": 506436,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "60b0df75c53235c53593ca259c8b69ba35119a42ae4dca060b457cf4c187362f"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ferrocarbonila.pdf": {
+   "tamanho": 516212,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "427f2cf910e5b863d6ccf82a85877be230e9f7b54f6679ea91854d66bb23ffa1"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fibrinogenio.pdf": {
+   "tamanho": 841689,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "55dca3751f127e193815e046063d57891942825bee25ed5bbc0edebfa29a1b7e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fitomenadiona.pdf": {
+   "tamanho": 414961,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "5a82d21e66438bdc22db15b94cfb897bebb1661a8c75b1011ea1064b334d9dde"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fludesoxiglicose_18f.pdf": {
+   "tamanho": 185387,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "ee393ae0c39dd3f805f33670cc92e95c4834c64a5dcc7fcd5bbf7d29d4a073a8"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fludroxicortida.pdf": {
+   "tamanho": 179410,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "33c02b1eda59026936332b73120cef269ffeff4e36bd72167bb953adc3e4d4e5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fluoreto_de_sodio.pdf": {
+   "tamanho": 341214,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "21ebbaa4227ba1cf34c8e63cc6f46f9780867b52ef21d5377bf2a63424abc1d5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/fluoruracila.pdf": {
+   "tamanho": 516506,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "1f6874f92317f6f03014e5735ddfec80f7cc52b651160d4970abac6b4c3519d5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/folinato_de_calcio.pdf": {
+   "tamanho": 270126,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "2b8c89d482a42c121565ed0afb72d6e5dca388fd1e3e900bc14d78836933c6cc"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/frangula_purshiana_dc_a_gray.pdf": {
+   "tamanho": 389630,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "3eedb77cb60bc575469c84111241df2fe460a70e11852088698feee05533795c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/frutose.pdf": {
+   "tamanho": 223952,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "6c4db592395b14efcb5f9c23787ccc0d48676dab216da79e74a280eea3ff343c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ginkgo_biloba_l.pdf": {
+   "tamanho": 119900,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "3d2b617c9bea262f2e16af0f3de3c4bd8d3a39b55d465fd5b0c9bb63d769a9cb"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/glibenclamida.pdf": {
+   "tamanho": 382922,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "2db23e3365f549db92c49b8bbfc134a6fb4a838580cde2f5e176df065dcee89b"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/glicerol.pdf": {
+   "tamanho": 205153,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "fbb324ef8572e09a320e8bf55c429d3f4c450025a38494939019666dfb45f2ee"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/glycine_max_l_merr.pdf": {
+   "tamanho": 152578,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "6308e512c08de91fc8b5d31e8cdf3c33ca6f7dc142c606f8e2d2e3b4c44ac386"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/gozetotida.pdf": {
+   "tamanho": 498584,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "51a15fd5779ee090d2ee67da094b3ae741aed4b0f4700e65c1be0ffb48aaa11c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hamamelis_virginiana_l.pdf": {
+   "tamanho": 286660,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "1d9da6ddee1a95cc8dd0cbd0f321062a04a31ecb05cb90ff87fd7d9596bb61a1"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/harpagophytum_procumbens_dc_ex_meissn.pdf": {
+   "tamanho": 293423,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "d9003ce2c61113e00fedc0c571ae08952651615cdef7bd3c805d90a0a8df8534"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hedera_helix.pdf": {
+   "tamanho": 593209,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "f18f44643b3cf92f202329ee5233c414cc964fd1664b89ca021c4f89126d54fd"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hialuronato_de_sodio.pdf": {
+   "tamanho": 289710,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "d9292487162f201c967a9ebff2b87128dab6615cbf1b8f4e4ab11878901917bf"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hidroquinona.pdf": {
+   "tamanho": 282845,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "f684a9b7e70cf130f8940b7ed9d4a0208f2fd44050db025211ff4afb16129670"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hidrosmina.pdf": {
+   "tamanho": 237828,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "e4f9cf371651a2fc680ecde0a3ce887dbaa7181940afab52bdfc12297b0b3928"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hidroxietilamido.pdf": {
+   "tamanho": 409954,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "9077d030f6c3c2ab33ff2e0e4059423c532d0ade0f3cd6b47cb78b30ae594ccc"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hidroxiureia.pdf": {
+   "tamanho": 436442,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "92dd5a2b32da35b010b10d418e8f5c14cc530fb313ac71bf5964ed065216c751"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hipromelose.pdf": {
+   "tamanho": 380323,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "78e757c18025ff4bb4ad94838fb663a655cfe3cc53af5a51736d506963ec4e21"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/hypericum_perforatum_l.pdf": {
+   "tamanho": 492591,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "bee12d011614c973972ff60fe44acab1020f7393e8df8185c2f3df6423f9411d"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/inibidor_de_c1_esterase_derivado_de_plasma_humano.pdf": {
+   "tamanho": 1204107,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "c60e51abd482bcd22d2a59078cd7a9c1f6b23787dc116fce6ff16db777b7539c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/insulina_isofana.pdf": {
+   "tamanho": 549801,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "aa8450429eba5d226afbb4c4762f85c026ba97dedc6ecca0fd1961b6eb74eb04"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/levodropropizina.pdf": {
+   "tamanho": 511396,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "4d242661dc4c0cf1732e5ddf306ff18588fce93224c42b58372acf2427022a26"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/levomefolato_de_calcio.pdf": {
+   "tamanho": 255009,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "ff6d394902cc51deae2c95a6b3ac4c84d2f4515a43269ad1c36b704590276f20"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/lisado_bacteriano.pdf": {
+   "tamanho": 625714,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "5323802ef72e758c24c72ad328fedc243215d85d8e76b5a7343d7e6d1be8d8df"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/luspatercepte.pdf": {
+   "tamanho": 701950,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "8ef8197a9f9a99c143e9d1a34a7d7760e788ecc0f74483b445e81ca7bc236e7e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/matricaria_recutita_l.pdf": {
+   "tamanho": 243094,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "d10fe18157feba21073c680b7bb47727bbbd1fab1227a3678b4a4748512f48b9"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/melilotus_officinalis_l_pall.pdf": {
+   "tamanho": 253010,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "b4fc3cb69adf67b477f67817a46617d8396d4dda3aaa398d008169eb5fced380"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/menaeptenona.pdf": {
+   "tamanho": 148832,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "e8b43a355fde99ac60ff045424a68806db48fa3ad9e1fd4807cd8cc4d45e6fff"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/menotropina.pdf": {
+   "tamanho": 350366,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "b31bdfd6ed5b561013c60c5d90cf8366e257d9e271f99c122b71381a948b6efd"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/mesilato_de_desferroxamina.pdf": {
+   "tamanho": 607112,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "0835b93cef5dee77b2be4a71791b74ba7e1da518b1602facca276b2d2c4a4a3e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/metotrexato.pdf": {
+   "tamanho": 1051426,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "9c8ee767767f2efed7d639f606891ccc8b8d2afde98493ff2f23e4f69727abfb"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/micofenolato_de_sodio.pdf": {
+   "tamanho": 404099,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "07af5e164719009103ce73a08c4a7dab27931f4e2be00177ed93995d6e5e013b"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/mikania_glomerata_spreng.pdf": {
+   "tamanho": 483454,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "97a4f9c8c7b6efe10b9b953933e2cc60c38c90598f8d39f99aa1818d7a802475"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/mycobacterium_bovis.pdf": {
+   "tamanho": 176698,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "685bddbc678d3097d3d839cb7d894434115a16f1d4695a4f1dc31996f95077cc"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/nimesulida.pdf": {
+   "tamanho": 226802,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "481cde0711fe4cd93f6032d167542e28b9f1534a7f35f699086977414da87eec"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/nitrato_de_fenticonazol.pdf": {
+   "tamanho": 236176,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "6857be253a3eca3925603ffdbec65d4bb1dc80033eb89b5e76a0ce824f9d0fe6"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/nitroprusseto_de_sodio_di_hidratado.pdf": {
+   "tamanho": 461265,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "607a7bc1f475270df5d93d513a79c681a3ed1fd25fd8d77e4eba86f38a6838b0"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ocitocina.pdf": {
+   "tamanho": 324906,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "df23ca4e9329fe33acb6fab4da4f6221f2fe7a59f14d731af61be19c0fd25822"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/olanzapina.pdf": {
+   "tamanho": 666576,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "003d08a3e174ff9e510ffbe4107350a941cad05c32427460677ee63a22729ffe"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/oleo_de_peixe.pdf": {
+   "tamanho": 268393,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "947f1dd41881997c39db697833030f8f7d5c5961bd2e0dd1abbabe7678a48e99"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/oligossacarideo_meningococico_do_grupo_c.pdf": {
+   "tamanho": 416499,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "5e76690b5a4934b0619d58ccabcc77985635aed6ca82deabacab4b2d4003fa08"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/passiflora_incarnata_l.pdf": {
+   "tamanho": 176753,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "6ce2db58ac96125902badb3fdc21ebb8040ded9990d0b7659e47423660706041"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/pelargonium_sidoides_dc.pdf": {
+   "tamanho": 157518,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "cf038077582de80f379a653e39082d095c06a7180a74e040a90b5f73972e1940"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/peumus_boldus_molina.pdf": {
+   "tamanho": 210002,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "7a329d4ab1cf56e705325af22787ca5453a676a4f9eda2816f1869cc48dde7a8"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/picossulfato_de_sodio.pdf": {
+   "tamanho": 349431,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "58b75262e7098a251576b450a45d6b292835c46db9a14e48c7d2de254f660888"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/pinus_pinaster_aiton.pdf": {
+   "tamanho": 254363,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "6c383d6e6859a309a95fa0547917c198024a0ccb558d1bb9c29c5a99b368b31d"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/plantago_ovata_forssk.pdf": {
+   "tamanho": 263110,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "8694d372a7d2f916df927db65ade547d79934c979a902089f4542db9715680f6"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/polissacarideo_de_haemophilus_influenzae_tipo_b.pdf": {
+   "tamanho": 310934,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "90dd0789920760fdf7c5a92af2b003543230421a0255e234fa3c55ca9c937344"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/polypodium_leucatomos_poir.pdf": {
+   "tamanho": 269649,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "bb005637b4e21951ca67aaad99c532bc1db3d9f898230f792800aaa4dcdb141c"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/promestrieno.pdf": {
+   "tamanho": 277397,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "d5d31a85ec8be19eadad834edd5a79c2af07e86a825bb3a1be344597f6248601"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/racecadotrila.pdf": {
+   "tamanho": 660977,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "f902815d7293de4adc3e4cc4190a907aa4f67498b0f0387aa8d353e7ac725d8e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ranibizumabe.pdf": {
+   "tamanho": 1182270,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "bfd8c02db5ad1a26919e59f58238992774166dc51d8b1dd4b8668ea1d76379e5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/rotavirus_humano_atenuado.pdf": {
+   "tamanho": 303790,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "224ec1769c51be478b6c560f39b17487ff2c6f26040aebd48901a550be003887"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/saccharomyces_boulardii.pdf": {
+   "tamanho": 434987,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "4fc7cfe1510d3ba3e43bde5e0ac92cbf0cbe4c53996704ad1c8674704180320a"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/saccharomyces_cerevisae.pdf": {
+   "tamanho": 102630,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "2a494f553bbff5ee943d8480bcdbe97932b4481ac872aeefb1264f2db221c1e0"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/salix_alba_l.pdf": {
+   "tamanho": 205977,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "883ec4ca1542ed96513187fa848c6a917883438c80c2642baf90ae52028e2cb8"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/senna_alexandrina_mill.pdf": {
+   "tamanho": 958764,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "4d03eb3b6c2bd89db0b78fdb54997e67d67c85b04be860e58767c6a34f672cf9"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/serenoa_repens_w_bartram_small.pdf": {
+   "tamanho": 504757,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "c1d0f092902e158cccf722a4008521472985961cccf6508bddbc18c45d79e0a8"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/silybum_marianum_l_gaertn.pdf": {
+   "tamanho": 476847,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "e8e4d185dbd2e1c743719db888d2c88dc37887ffcf75999d1c2d5cde00ae2302"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/sinvastatina.pdf": {
+   "tamanho": 489863,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "f592cf910db4ed14fa46fc5ab0c06ebf33ce80739f53565c74fbb209a988300a"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/sugamadex_sodico.pdf": {
+   "tamanho": 313201,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "81319ae4be442dc777d0f0726cf0b97bfbb970832dbc1ad5ff102c942037d75e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/sulfato_de_bario.pdf": {
+   "tamanho": 361155,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "e008a420373385b742589f76fc19ac87f49a269ac7c7ac06c2fe46ebd7f615b1"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/sulfato_ferroso_heptaidratado.pdf": {
+   "tamanho": 158401,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "79a7ed28ceea83ba427b00d1081e98b75f67faeb6478565711d6787167e002d7"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/symphytum_officinale.pdf": {
+   "tamanho": 342422,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "86193507e75fdf54f186b0a3c6b33cb284a2aca434bf34e32e09e8410660385f"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/tacrolimo_monoidratado.pdf": {
+   "tamanho": 453054,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "a9b01cd9e8877682f6aa35c6c93945b35bd310996e40cc2f7e6b9652d55d2d31"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/tartarato_de_evogliptina.pdf": {
+   "tamanho": 336302,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "d62aaafa4e3809063ca90b8e234d7478a9b9e4d9c8598b5b6f53bbb650dd4241"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/teicoplanina.pdf": {
+   "tamanho": 704479,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "d4056a7d01518f720bdb0ff5aa71bdd1f1c82cccb36b8961eef7c85cd33978e6"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/tenoxicam.pdf": {
+   "tamanho": 566364,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "83d1f16a9474f4c27afa2189ab266f03ecb88f37b7fe87d1fdf6676062158e69"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/tetrafluorborato_tetramibi_cuproso.pdf": {
+   "tamanho": 829098,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "05ee5c0b19c1e11e2794d3a4862e86b297e68890865772897934d39597ea06b5"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/tiocolchicosideo.pdf": {
+   "tamanho": 519666,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "8cea8af3e3564334bdae6392a519aedb85a09fa97d7adfe00559522d32b6ddb1"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/toxina_botulinica_a.pdf": {
+   "tamanho": 656662,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "21ea57c65c65fddc4b1d3092cf877e3827c003915fd25416f5de6c70a61ca228"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/trifolium_pratense_l.pdf": {
+   "tamanho": 259342,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "02efd4f86052131c0620cb8868a98901eb34aefa8b13a24c863261be5df2c635"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/ureia.pdf": {
+   "tamanho": 215968,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "b144b42a729fcfcdd6a7301eef076b2ac6c7f33e83cab70a3c5135eb523af27e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/vaccinium_macrocarpon_aiton.pdf": {
+   "tamanho": 181473,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "58e2eb208795313f2a3b1c9d48439156a161db4d0f7b439d3bdd61437657d5f9"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/valproato_de_sodio.pdf": {
+   "tamanho": 534757,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "e60df3873e04a19a500ffab4483d84053424a92538dff9866775156816d186d9"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/varfarina.pdf": {
+   "tamanho": 122231,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "916f1ef739cb9a7fb5cc1f376f37e70e3ef911af28ea983fd5e61121058d73c2"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/vimpocetina.pdf": {
+   "tamanho": 727248,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "5326dd818181a1eb8c4aa8942f2191ea313d9bb1d25bd33029c888ef22777659"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/virus_da_hepatite_a_inativado.pdf": {
+   "tamanho": 324743,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "d03cc449460039751f397eaa60df474644a52a90abfb345d7878fc0e39b592a1"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/virus_da_varicela.pdf": {
+   "tamanho": 603599,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "1bd8ee01da9801a086fc169b7c096e8e942032cbdbeb76501c02d06bc678d71e"
+  },
+  "fontes_novas/01_anvisa_bulario/pdf/zingiber_officinale_roscoe.pdf": {
+   "tamanho": 193580,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "4f3e07d25820f51ccc289ad4534bb01d6cbbe601cffcccda9bce6afd1831f088"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acebrofilina.json": {
+   "tamanho": 4852,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "01dd0bc44ee619adebe522339843f89e42c2d26adb819a8120ce22b43742657e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acetato_de_atosibana.json": {
+   "tamanho": 8180,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "48c90ddea5c60dde59f2373ac0fd9a89d34a43a62ef209e6e6232b9c19af5d94"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acetato_de_clormadinona.json": {
+   "tamanho": 38835,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "61beaa7164441358b242bc82522bf198f1928200bf404650a1c4c7fd732714dc"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acetato_de_leuprorrelina.json": {
+   "tamanho": 43677,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "878b48c36967ace34a0dcf3dfee3d52a385be2b5031fcbab282afd8953bf92f4"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acetato_de_racealfatocoferol.json": {
+   "tamanho": 4899,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "40ddbb163d11556d263c4dfdc8179d2cb30262d516ebea93f7c58c73426f4808"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acetato_de_sodio_tri_hidratado.json": {
+   "tamanho": 2875,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "72ea54d659af2b2863747a878357de81122f819f1c12e06bf673b47464fd0ac8"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acido_epsilon_aminocaproico.json": {
+   "tamanho": 5392,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "09964e974f17ecb20a19845a06be3ba963313571d5af29a94a4fe7eb7c36612b"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acido_fitico.json": {
+   "tamanho": 4582,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "60f86ede2563c82bdd874c50bc361a34753831eb408b52b4ba918c11d2a9f5fc"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acido_gamaminobutirico.json": {
+   "tamanho": 6257,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "837f9d4db4704cccbb1e4d7cbf476d211acbe0a12b3f9cb608e3d36530572925"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acido_medronico.json": {
+   "tamanho": 8040,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "7fe872303a95b3f0579071510b120413264e3038a4bfbf2562bbbc3f68c3def6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/acido_ursodesoxicolico.json": {
+   "tamanho": 8839,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9d690e37e2d280d937be40dd7445287cdbe5625a077cf1c8d41f5976c37c21b9"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/actaea_racemosa_l.json": {
+   "tamanho": 4391,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "0ff34157724f8c795b7b7ca9b607fd4433448bce537dd4da02c15d494980d00a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/aesculus_hippocastanum_l.json": {
+   "tamanho": 2627,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "cca367628683877b755afc19ab8d7192f194ba774c5d1163702ac0afdefd679a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alanilglutamina.json": {
+   "tamanho": 4054,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ee66c1d93177950ce5987f5295db117e9e4da2a20973baa074a367c56d11eaf8"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/albumina_humana.json": {
+   "tamanho": 5642,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "1c748a808eb47d5d29c362212cae584e6c6c0738cda5a2d2c6160db0d8eaf38c"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alfa1antitripsina.json": {
+   "tamanho": 8236,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "5e0a8d403ba7d08502b5393833fd045cc7738315988ceb28cb721fcfc18cc128"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alfaepoetina.json": {
+   "tamanho": 10841,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8310f18b1da2f6c9cefd935c977719cb3259baa2f90cce6e9f037335ac04a7fc"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alfaestradiol.json": {
+   "tamanho": 3730,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "12eb5f225c33693dc4cac5c2190da1dcd7c11e7bb83f15a4862280bd40358ffc"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alfafolitropina.json": {
+   "tamanho": 21842,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9f3eca5579738bea6f4dc5f1f3a96a8913e043951c5b6b8eb31190c8049a87b6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alfainterferona_2b.json": {
+   "tamanho": 22929,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "c811b9a8b525ca8f9adc86dbe9c3534e47a69aedac7fa04a1d68c85fe75cdeba"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/alfaoctocogue.json": {
+   "tamanho": 20107,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "bffea3191563d7c9ac844d508fdaba3ea28503f48fe47ce8bde9e267332537e6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/algestona_acetofenida.json": {
+   "tamanho": 19786,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "e3e1223d1f36f0fa806711ec07ba0b74f1f0d80fd48aabe4061c26736ce3117f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/antigeno_de_superficie_da_hepatite_b.json": {
+   "tamanho": 3753,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8ba01bedc5e65224cce653590f084d824dbcfd9a3973d82ac4d9834dacca77d5"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/arnica_montana_l.json": {
+   "tamanho": 44812,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "928f0ec478c9bbf92ff728977cf81b75c55bdae0144c183c20a78eaeed37a41e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/axetilcefuroxima.json": {
+   "tamanho": 13542,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "dca672f26e5e0d30216613ffca8c1b095e9cee74a850101bd6847c8d8f171adb"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/benfotiamina.json": {
+   "tamanho": 5336,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9ded970f924514e63b12cbe88192844ea05356f7369864b57309a29fbad10485"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/benzoilmetronidazol.json": {
+   "tamanho": 10568,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "fb8dc8bfae539a97be035f030d5b5561f523dab7e67602926b96e4f9e796c30c"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/borago_officinalis_l.json": {
+   "tamanho": 14465,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b8c7cf06fe8a6004afeb9f17ef8ff0b02bed802def65c035557fb813f4677dea"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/bromoprida.json": {
+   "tamanho": 8263,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "7bd3011dbb4233601d653bbd97432ee7f10717f9dfe35a517c58919c74006b80"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/carbamazepina.json": {
+   "tamanho": 58191,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "c64e05c9984e2d9afa79b80ad8b1727f1d24d41e40c3213c42e7b6ccb656d82f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/carmelose_sodica.json": {
+   "tamanho": 6360,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "db31ef36b17b74b3ce29f734fa012ba1313d3aa7bf030932af5220507568018d"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ciprofibrato.json": {
+   "tamanho": 11515,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "aa5f104a925abb62ff72124c3701e52e4403b760025d705cd8eee3cbfae7fea0"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/citrato_de_potassio_monoidratado.json": {
+   "tamanho": 6088,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3f0839f225ce0388b664a39791ca01e7086d1a5f68467ca91c8eb0193e57883d"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/citrato_de_sodio_di_hidratado.json": {
+   "tamanho": 2542,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "e8657dc389871728dc7b7ad86e7bc48a4ca656b182b94a8fb85838c03f3dbbe1"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/clonixinato_de_lisina.json": {
+   "tamanho": 6271,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "5cf3b4fac7982bc15d8e3831ed8308edbb2d001f7026f3f3ccadc3c23894c085"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_amorolfina.json": {
+   "tamanho": 4921,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b9f030bcd47bcb144702da183d8d6a6d4fb8496c2a4dca67a7f47289afa3c1f5"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_bromexina.json": {
+   "tamanho": 4729,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "06a80bb37c1f9baf0abd09c5b525eb5083c17df667c4229f11d5129d28d9bc7e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_clobutinol.json": {
+   "tamanho": 4456,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ff88aebabc484480d4671cd9960f45394b7746c16afa0fe52fb5eccabe726753"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_dapoxetina.json": {
+   "tamanho": 26231,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "460a27122b07bcdbf93b433382f5f5d0cda10d31dc1b4fa32189411eddb7bd0a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_lisina.json": {
+   "tamanho": 3604,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "be5c168547c9599734b29a334d9af8b4be405825405ffd27d64f952b43237f57"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_mebeverina.json": {
+   "tamanho": 6246,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "02eb0558ae753b26a14b5f2e14a49de6b64e4ef6388dfcc3bb72ad3e9be2b3b4"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cloridrato_de_oxomemazina.json": {
+   "tamanho": 4763,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "5bb4cbffc336ec631f09716b9783ec6f8d8b44d4478b797ca6d44954bf67350d"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/clozapina.json": {
+   "tamanho": 42646,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "82318c2042072587920c68e800f285f0f34cf00518191d6d128668de6f96bc13"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/colagenase.json": {
+   "tamanho": 9482,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "6ec8c15713cc1a027bbce44988ecdbb2cf55e6d156ecbd80184dcbd557ff1719"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cordia_verbenacea_dc.json": {
+   "tamanho": 3000,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "19ccefcdcee95badd7c0ccff27eaa67b5b61d417b0fefb32ac9ee92fd5ea1c91"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/cynara_scolymus_l.json": {
+   "tamanho": 134,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "41891ac9ed4c698f6d3cb30092519a0cd9bbbd4f091b165f80471a47b59ed338"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/deltametrina.json": {
+   "tamanho": 51392,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "d8e4392b5681f8953b0118f4e79066e3c2508fb7a19fdcd56c93a5b61784e0d6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/dexpantenol.json": {
+   "tamanho": 2464,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "05988dcc9128186139241b1274e919e81c176e427bd43177587a4c957e7cb5ad"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/diclofenaco_colestiramina.json": {
+   "tamanho": 20831,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9abccf9e8608359a3ecbbb78d66b63a6d3afbe546d7949e6782baed7282c35bb"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/dicloridrato_de_etilenodicisteina_dietilester.json": {
+   "tamanho": 5651,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "52bc77c1a33689fc3905c54e0406fd1fa6a07b218d565b80c49ff45c6ec6bed3"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/dicloridrato_de_meclozina_monoidratado.json": {
+   "tamanho": 7930,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "e9eb5c1e1dec30b17cad01618848fa21a03c74be6e4eea594f00c6e71f62cdc4"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/digoxina.json": {
+   "tamanho": 13454,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "6d0ebaaae639cc13df74924f60eac00bd622d851ddf4db57d4b09cdb759be472"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/diosmina.json": {
+   "tamanho": 3827,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "dae53d5da4a504734c66d2c017e88e10333d5c844d9731b623d105773cf9763f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/dipirona.json": {
+   "tamanho": 15492,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "d185d35d35820ec88d0a6c90838a80d0cee68f872737fe496c13b24a4bd60654"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/dipirona_monoidratada.json": {
+   "tamanho": 7274,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "4c60f74476a5cf4db72a65e5640a533ebe0dc4ae2beca7b1a7fae714a37519ee"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/divalproato_de_sodio.json": {
+   "tamanho": 77078,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "2689d31776356354864fc7e387ec29394e284abd53198a746f184cc1f0985a90"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/dropropizina.json": {
+   "tamanho": 4629,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "fbba584817d6dabd931de8aa617e1b932f0b4b1a097630216ce7e7bbce7542df"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/eltrombopague_olamina.json": {
+   "tamanho": 57540,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "856cf387bf88e8ba705df1ab69b94d90084466dd29632ffe3430269690abc933"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/estrogenios_conjugados.json": {
+   "tamanho": 13157,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8b42005683e0d6b47d6fe3f649f86f240c88582cc62d01b1ce895a6fbd9b36f8"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/everolimo.json": {
+   "tamanho": 54803,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "259dcbf7aa906e389a92249d2a661506749d398d76f8e6f972a11fd653cdc95f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fendizoato_de_cloperastina.json": {
+   "tamanho": 5354,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "a32ec1ee3af27f6b77fac3e6ecabe935b862cbb5ea84d9623c8be2d8b220eda0"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fenitoina.json": {
+   "tamanho": 59206,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "a06285d0c9805c8e14e3fd3a2ffdd4d609c338cdc89f50cac3b62667d91003c7"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ferripolimaltose.json": {
+   "tamanho": 5413,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "59a76ad9dd8da33b534a52f1659df0bd3a93ee4250f4cf8afcf933246ae7aefa"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ferro.json": {
+   "tamanho": 8099,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "0fc193f6efa7eb51a610126d04cc15c1b7352d7f4621ead3a11db892a18f12c6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ferrocarbonila.json": {
+   "tamanho": 5875,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9ba8ecc6dde0f2136bd0a75a0e45fd11224810c5f5e3396e8d29d41b677d69bc"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fibrinogenio.json": {
+   "tamanho": 18331,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "cb19a556a6db40fd2f65975d904fe9057e693f9bc3342102eb8df35e6b5c34a9"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fitomenadiona.json": {
+   "tamanho": 11084,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ef8f8fe40156eb2aed1bf6b36c95eb5e2e0a4d97952683e8442b1a1b4b9426a7"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fludesoxiglicose_18f.json": {
+   "tamanho": 31502,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "29c7d807fa7424f523cbe9ee26b324eb027cbdf653ee769465c1f7ca2ff8e08c"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fludroxicortida.json": {
+   "tamanho": 8155,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "fce362827fdab6ad7611f298adb12c0145d0daf04e5a709f89f85873ca3820fa"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fluoreto_de_sodio.json": {
+   "tamanho": 5925,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "22e527b4838303fe2a5d9d84053f12595804b897bb93fc7649cde9af563fef41"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/fluoruracila.json": {
+   "tamanho": 16068,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ef91ee27ca56362880c329d5ac0b15759e168d8e3473e50c694a29ca46e579f6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/folinato_de_calcio.json": {
+   "tamanho": 10662,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "643b27a690aecd247ae2792e0d999d4554a8fb216798994e4533d67941c98f66"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/frangula_purshiana_dc_a_gray.json": {
+   "tamanho": 27783,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3e415a4e25ffc8c0e3681966ca03c0bb039334969494e3f08c2edf16dd8fa1bf"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/frutose.json": {
+   "tamanho": 5249,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "c9abed1db93456e907fabdbedfc49cd93f4e1c40c43a3d9accca8a7aeb31aa29"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ginkgo_biloba_l.json": {
+   "tamanho": 3325,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "6750bb0c5e699a4b62156ebfe6a3d2285f68555db9106efb270d34716270c071"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/glibenclamida.json": {
+   "tamanho": 18574,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "fa09c0b2d82160da2efc182d4e4093cdbc3b261b1e8541f434db1d55fe3dcc53"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/glicerol.json": {
+   "tamanho": 3763,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "5e98a3b933d776684f164481b658e2b68f4cec503b49a8932664250f9ba07739"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/glycine_max_l_merr.json": {
+   "tamanho": 2980,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "d991a0e117c216316c6334f32a8ceac47408652fbf80ac1a318043e1794e4663"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/gozetotida.json": {
+   "tamanho": 13133,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "0607d7a503f25cc9910e3cb948a4fa4a2936c13ceafe8a6052ab1fe934b4745a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hamamelis_virginiana_l.json": {
+   "tamanho": 3959,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "c7b89f8ac80e46ca49055e84f96f91b69f78b55e1e112aa4048a0c65fd1711ed"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/harpagophytum_procumbens_dc_ex_meissn.json": {
+   "tamanho": 11180,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3927b41008e3cd0dd80f3ed07481b0ad1c9ab7a697b7f3eee8d420c68677d8ae"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hedera_helix.json": {
+   "tamanho": 5415,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "44fffc68577045aa5f201bc5915b88fc45e5751f7bf1bb252c26c74e35ca8ff2"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hialuronato_de_sodio.json": {
+   "tamanho": 8461,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "6b76ef0e146f33878330080d8e2bed8f98d2839e728e952fead189c64fea0172"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hidroquinona.json": {
+   "tamanho": 9269,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b5c98bef2d6ed94b64a6d0d6e825df7da7d36a6944fcd6d715d7f2b29925c50b"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hidrosmina.json": {
+   "tamanho": 4988,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "c76b1026bcfaad8ee9249680edb892b364829d8ae89d66cb644ef0026f043ff4"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hidroxietilamido.json": {
+   "tamanho": 14585,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8fbb75d5c4d9ffecaf861e538152458614d59eddb9aff74b8186f967d3cc8489"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hidroxiureia.json": {
+   "tamanho": 21718,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "47513f036fa890652a49e90277ac518e25fa8e82a9dd51fbdbc33e0559eb93da"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hipromelose.json": {
+   "tamanho": 2401,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "59795bdf26901f69b5f16205d124e6b442ecc822d8c9e461e8ee2357b188ce21"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/hypericum_perforatum_l.json": {
+   "tamanho": 50072,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "54a4b26ed2c01acf732aef2e125e272f3bc2d4faa1aa2c0c99784dd1927ab0e7"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/inibidor_de_c1_esterase_derivado_de_plasma_humano.json": {
+   "tamanho": 17143,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "38eef377ae69acf0749f791a3a700bca6f9f7ffe249ed366296c2fc634437f20"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/insulina_isofana.json": {
+   "tamanho": 11953,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "6df4bc393daaa208bb83ece647e5e1dce63e1a0b73b1d9d7c2c4e8fc40c9e6c2"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/levodropropizina.json": {
+   "tamanho": 7085,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "dcff851cfcc760e3d53ff20393a8e6bdcf5efd371b5698dc75ac7c82acff6fac"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/levomefolato_de_calcio.json": {
+   "tamanho": 5345,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "f49dd955786fee8b2b897077c3b6ec523e6923ec779e263d203144d9a96b205a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/lisado_bacteriano.json": {
+   "tamanho": 5787,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "a4cc086d232116a42ea566523a31c7cb9929648954f902f16866aca45c23367c"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/luspatercepte.json": {
+   "tamanho": 45665,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3060e7cdea40a3ea0957bf934cf3a8872f3bb0b013ffe351e95969e44018f163"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/matricaria_recutita_l.json": {
+   "tamanho": 1981,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8e220ef28e918aa85b300c67064e40b8e87d6794d7b6495a516764642d9ff920"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/melilotus_officinalis_l_pall.json": {
+   "tamanho": 5123,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ad244422572a7daa74013268c0c0f56a923b09ff6a1dfa1c2a73b2e25f1cf229"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/menaeptenona.json": {
+   "tamanho": 6071,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "5f29d20de87f66b3bafcae956c2ae8a413f5ddb4595c25c061ba6775ec507ab3"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/menotropina.json": {
+   "tamanho": 7465,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "02e84eeee7697bbaa867c963c6595a986f63802d0bc7f95ff047a914078839f2"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/mesilato_de_desferroxamina.json": {
+   "tamanho": 31730,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "744bb2bfcdfc6ccd140b888839301a71bf58b2ee6de2362ae5694f4928d1f7e1"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/metotrexato.json": {
+   "tamanho": 77250,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "0d19f19bd83e5b76b86c12d2e3eecc14b34ed06d279f77d1052b5658f50aaffe"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/micofenolato_de_sodio.json": {
+   "tamanho": 30869,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "013e2b422d0540e9c9658e9eb1be487a56b29236fae5b6cf95ce770cb0102e6a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/mikania_glomerata_spreng.json": {
+   "tamanho": 5901,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "a790274a53dc683c5927d12efa7f4bea609eec8e00f7801e497fddf8ead65410"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/mycobacterium_bovis.json": {
+   "tamanho": 27705,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "7aac099e5c56e7602a0853ce172296cd268001c3c586947114f5c25c5355387a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/nimesulida.json": {
+   "tamanho": 19709,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "78ec4c47e3c50a3198a667f9c0cb57add5ad8c00a6796dc345021d4365f50c4f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/nitrato_de_fenticonazol.json": {
+   "tamanho": 3757,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b17e432e4f6d77f08bd05ec477a7ebe17be41e11a3843ac1ae2a6983a517f8c6"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/nitroprusseto_de_sodio_di_hidratado.json": {
+   "tamanho": 8048,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "75473024aeb4d3d8cab87ed148339ab8021b70416f1be5970a228a484c5a6101"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ocitocina.json": {
+   "tamanho": 14332,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3c2fd30a7638965a247d66e70985cc54c2bbd28db3106d1ef49e00dd87d8a679"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/olanzapina.json": {
+   "tamanho": 44609,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "66f9cc561aa49211c22b92af576223e9657aaae23f5f2e75464085079e4874ac"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/oleo_de_peixe.json": {
+   "tamanho": 5038,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8b1373771a6c0a90d372868272bc5fb1e4eda41e6ca55b4ddd787faf2e941593"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/oligossacarideo_meningococico_do_grupo_c.json": {
+   "tamanho": 16107,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "43fdaae664f06e7b681d86e2364918bc99e1e46fa9238bef83c7d5108ef54403"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/passiflora_incarnata_l.json": {
+   "tamanho": 12374,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ad5332fbb7f0e9b6862a2303b1707b4d092df0d4c3f5446cd95ca9d366c7af07"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/pelargonium_sidoides_dc.json": {
+   "tamanho": 6236,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "36e4eeacc910b16371731d5bc4642c81c1977b83464576eff37f36de0ea6fa74"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/peumus_boldus_molina.json": {
+   "tamanho": 6047,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "712ec3cf6b11121f7a9b8cb339385d2ab6aa673c426cbd58cd413b0c907b101f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/picossulfato_de_sodio.json": {
+   "tamanho": 4667,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "449b84922e612995e53c461816fa4580de7cd3f09419024f0b61850841773f2a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/pinus_pinaster_aiton.json": {
+   "tamanho": 31359,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "c5b0ecce08b94c3f59e00a40ed947179ac21b57a5a73dea85581c43ed2b0ec5e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/plantago_ovata_forssk.json": {
+   "tamanho": 957,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "147042fa1e6de79f960a9b905ace9fa35be887c0d23e317f00a13e3bd8a7dc6a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/polissacarideo_de_haemophilus_influenzae_tipo_b.json": {
+   "tamanho": 13582,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "586cb32a8a3e9984efb309ecbd5127b96813739ba134cc9b8e0bb7b21dccf087"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/polypodium_leucatomos_poir.json": {
+   "tamanho": 7031,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "71aa151f6e5057ccdfc7b429e7cf816029d5e67a1d7b6fcc75ccdff6c5664c74"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/promestrieno.json": {
+   "tamanho": 5071,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "86b10ece515e727d7f1162d543f7828abfc0ccee6b1560ef73f17cf99e136e2d"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/racecadotrila.json": {
+   "tamanho": 7195,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8f91325f8c388cb972daadd79bd7484f747c667fbf2905ed6d6a1c1b9b4d06e8"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ranibizumabe.json": {
+   "tamanho": 49164,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b880f87b176afc8852d537a840161eb0ccbbfb7b9655fab5b619d0ddc81e3a46"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/rotavirus_humano_atenuado.json": {
+   "tamanho": 18703,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "97e36f72fc37a8e2d2edbc249c57fcb1dc845ae49557b61a66cef7dbdc515755"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/saccharomyces_boulardii.json": {
+   "tamanho": 13790,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "97c8061f8030c91be6fb30e0384a0e5da14194464a567ead9ae6a37dd6f8bf90"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/saccharomyces_cerevisae.json": {
+   "tamanho": 16911,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "729f3e26ed85321ec4d5a3d0909666ab31653a551f594a0391430aa9cc7f269e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/salix_alba_l.json": {
+   "tamanho": 3568,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "1d545d4c76f38498c1566d81ccd86123f8124d5a38045aa1d5e05335249bd063"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/senna_alexandrina_mill.json": {
+   "tamanho": 32100,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "524111b11bb7d286595c388c7303d69e5d9a4e4055bc9252b3e760bcd8de0433"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/serenoa_repens_w_bartram_small.json": {
+   "tamanho": 18609,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "ca3cb7e4fa0ad69cbcb9848485b6c37f61b92ce97df5b8ed460e326db71d1630"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/silybum_marianum_l_gaertn.json": {
+   "tamanho": 4104,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "947e11dcb291750a69bec2fbbfcc4ae4079573b884cd4759cf564c41af54cdd0"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/sinvastatina.json": {
+   "tamanho": 8465,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "0d29917d5fa22a7645170f19bea32389b1f164fbb2df98caa1db805199f4260d"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/sugamadex_sodico.json": {
+   "tamanho": 32733,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "64889d6e71ad317fd96a432b625913bacdd37753ddab40376f5040c1b8237dcb"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/sulfato_de_bario.json": {
+   "tamanho": 4710,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8353375524bf280e89637991ec1ea951f6aa0742437979e0c5d452935a663d2f"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/sulfato_ferroso_heptaidratado.json": {
+   "tamanho": 2730,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "b81875580ff756560f329e634e4c981ccf8f740d8a6db92cc63f0565e5c26d7e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/symphytum_officinale.json": {
+   "tamanho": 2834,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "64b5ce585af6ca2810a07685302c96b53321f157bb5dfe146e0dea278a53c4d1"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/tacrolimo_monoidratado.json": {
+   "tamanho": 78136,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "8daf4c49353d7c5b37dca263b5012a4993e9bb552b4bb03e09c9cc31357c270a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/tartarato_de_evogliptina.json": {
+   "tamanho": 21261,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "858af802326fed0104c4a414b8ae217e8b7f33a4b311ccc63abd5fc79b305fc2"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/teicoplanina.json": {
+   "tamanho": 19735,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "a67a369c24ea21b16c6f249acb99a16f461ffcd6f7737aced12c07eeab7b6bb7"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/tenoxicam.json": {
+   "tamanho": 10453,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "7eace25092c86e8ec67de313a0587aaa67fe6d5d008eb6c69a644ff2de3c06c2"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/tetrafluorborato_tetramibi_cuproso.json": {
+   "tamanho": 5990,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3823c6c69c14f44a7b4a19700ac11c59a02cd17f4f0855108b6b602059a3c601"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/tiocolchicosideo.json": {
+   "tamanho": 6783,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "a4da569b3ee5aea0990b747d6bb007ff0d0f8050f39bc798d2d579955b79197c"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/toxina_botulinica_a.json": {
+   "tamanho": 30344,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "3702219932f7d056e1509799f52aa7160e9eb273af9fac61640f6a80a4b76839"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/trifolium_pratense_l.json": {
+   "tamanho": 2348,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9b5baa6f6e03a3733e84fdde2a3b98ffb3151f3d5d27cda73f6c04e5a8f07c69"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/ureia.json": {
+   "tamanho": 4212,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "9910c076d24e51f24865c072b3c86d13f6ea8ec1617299697416d3e18e59a327"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/vaccinium_macrocarpon_aiton.json": {
+   "tamanho": 6310,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "17196d5016f4298717dfe4cb8391ace2e4da05ad7e240ab38c240a870be0e9a3"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/valproato_de_sodio.json": {
+   "tamanho": 132303,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "bc04d293489a9e9e2a89aa8fbc58755550c6503de5b365ce3f327daecb96634b"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/varfarina.json": {
+   "tamanho": 9312,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "581b0dad0f57d4e950735962d561f8fa538e55dcbbae56e4e5099005781aa49e"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/vimpocetina.json": {
+   "tamanho": 4093,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "e166223fc55b33c5663da81ff83a471fcaed59a2f343596724112ffbbf2967ff"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/virus_da_hepatite_a_inativado.json": {
+   "tamanho": 4841,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "5d34a7e36efa46cd9be5406ef40062588fd33e97b9cd59a1e60ab73345b1862a"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/virus_da_varicela.json": {
+   "tamanho": 12460,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "825abf06d34da57af8baa5569c8a0101251a774788cba5c5f73719dbefb27867"
+  },
+  "fontes_novas/01_anvisa_bulario/secoes/zingiber_officinale_roscoe.json": {
+   "tamanho": 3759,
+   "modificado": "2026-08-31 09:52",
+   "sha256": "21a0cf427a915cfb03937b1d322cb0ac2c42cab836056036c743ea0022a1cb5b"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acebrofilina.txt": {
+   "tamanho": 19897,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "88e47ba0bc413e9a16524b7ef4ec355920351cabd6edd54608324d1454b76846"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acetato_de_atosibana.txt": {
+   "tamanho": 27479,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "d5c00c1ed380eb3929aa8d03f747d2f73ffa06e38d593fa46312904f7cda7227"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acetato_de_clormadinona.txt": {
+   "tamanho": 72056,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "820e6c6de1adc7a6b66f449f8ee96af38f9bca1a0295efa7fc2a950683f8bf43"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acetato_de_leuprorrelina.txt": {
+   "tamanho": 134162,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "3cc49180add668186b40bbd63f59ee70723b1ff6b9d56e2281bba19fc184685e"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acetato_de_racealfatocoferol.txt": {
+   "tamanho": 17786,
+   "modificado": "2026-08-31 09:44",
+   "sha256": "0b02e523a43b0eaabf914b9224a320147e188a4e710a51780bb40b3f2c51b065"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acetato_de_sodio_tri_hidratado.txt": {
+   "tamanho": 11542,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "30714f5a910b5cff35ab0dac5547d5fb8b0c5f6871f6dd91ae7eef45afba1f79"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acido_epsilon_aminocaproico.txt": {
+   "tamanho": 37164,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "470b5d67d75352562232478ac4c2c4d88eef2356c180a10a5a066bc2feebcd35"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acido_fitico.txt": {
+   "tamanho": 20727,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "91e23973d1dc6aa1efe2b6af0e2abe78215ed02fa5ed50c7e1d4713dbb0665af"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acido_gamaminobutirico.txt": {
+   "tamanho": 13207,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "7a9c3c5696072b60c7b5e22f23d638a93723b30eb3ec28f1a145f437cf8069a5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acido_medronico.txt": {
+   "tamanho": 21989,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "f418922839df8ae256df186e9a920bdedf4e47dd8e3d38440b856b8a83ad1901"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/acido_ursodesoxicolico.txt": {
+   "tamanho": 46280,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "d3b5237f59d5c64212ec676df46d75222ba423d514adb3e86ba0708600358ee4"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/actaea_racemosa_l.txt": {
+   "tamanho": 16516,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "eb1c7171043215149db32c292ef86e69871682340a1d5c21b1d84a64d87fc20a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/aesculus_hippocastanum_l.txt": {
+   "tamanho": 11021,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "c19f033f64f2d0a539653b0e9e17bef735695a96221c623ea20e042a646d99e2"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alanilglutamina.txt": {
+   "tamanho": 22981,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "d0eae4ee56273459e52a9e097343ce83d1b137257b995b3066d1563815892cc8"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/albumina_humana.txt": {
+   "tamanho": 29519,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "d82a10a8682e620b50d9858754b91b7cc02f907e03935c9640ee90208a76a93e"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alfa1antitripsina.txt": {
+   "tamanho": 47287,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "5badd9e87ab3b034dda171e7f5f5ef33c15e8665558f926eca28de38779de83f"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alfaepoetina.txt": {
+   "tamanho": 66861,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "4c11106e52432ccb1371a45f5e5e0e2cf8ae12675d60c4e738f3d873a86302b1"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alfaestradiol.txt": {
+   "tamanho": 13558,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "1eca395f62045460d97e0eca9958d65c768c1a4cc66b6fd2ce4d5f1621165070"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alfafolitropina.txt": {
+   "tamanho": 67090,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "a75d4487363805f1e77ac1907d8f60f4f99f1e438b74b4fd04a25f5e5fe11a29"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alfainterferona_2b.txt": {
+   "tamanho": 49729,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "4f2765d26b8ddd0bdef7c1cd54e1b370cac3c93b2d4dd4387e79cdf06872d815"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/alfaoctocogue.txt": {
+   "tamanho": 58669,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "9344f9fb2584ea64450899a1772bf8ebaba81234b71f091a71b77761b23c84d1"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/algestona_acetofenida.txt": {
+   "tamanho": 38640,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "7f7ef67b1852532829a7072364f9b24e4acf6447040967a6f44d85f24733cda6"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/antigeno_de_superficie_da_hepatite_b.txt": {
+   "tamanho": 18676,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "a612f6439e606b353d7e933c48c63d9775d1669056caaa0ab4387db9059fc068"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/arnica_montana_l.txt": {
+   "tamanho": 21319,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "ee37d789a1d45f521d92767c889d5144ca65ec679a6a9f4bff7bfdf8a04ce1ad"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/axetilcefuroxima.txt": {
+   "tamanho": 46276,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "8ed1ce73c75fae9431d82ba113a5ca63a8b993a68874596be2b3716d52e9da6f"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/benfotiamina.txt": {
+   "tamanho": 18328,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "759950d1259d338524d1bd9fc8e7c98b0945732504cb1476c377eaf3fc8ec1d5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/benzoilmetronidazol.txt": {
+   "tamanho": 15969,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "a5d0fc7509d5c2415df5296df34cf8c8002530ce5903d80729a07e9f50a333cc"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/borago_officinalis_l.txt": {
+   "tamanho": 8270,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "9d4f94b55739d69a8aa54ddacdd21f809f8aba97c606fd0fe0ed0a317c4d7323"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/bromoprida.txt": {
+   "tamanho": 20117,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "2067aa2d38f7e31eddf6172a2be6fcf4ee0bb1520f23954e4b6c0a295a8c477a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/carbamazepina.txt": {
+   "tamanho": 86587,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "4664576ba1dbe9950cc586d460a9502067c01e652651f254bc4db3aa9f3ac1f6"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/carmelose_sodica.txt": {
+   "tamanho": 22145,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "7e878b1204f898386f15c9d633376843783277020c09a94a3bfa73be888da769"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ciprofibrato.txt": {
+   "tamanho": 21680,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "b9b0b1101ba5b4c13eb288e4de4be8f0f009a114376a4ac55aa1c254dbed5d35"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/citrato_de_potassio_monoidratado.txt": {
+   "tamanho": 23896,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "3aa19f858364a92680a03f88dbc83bbeb8f66bcb65e2e4b635d6a6f43cb6cdd5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/citrato_de_sodio_di_hidratado.txt": {
+   "tamanho": 16215,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "9904aad4697d72ae699689a25d77ded161a4c41b522551149bad54ac0a2a198f"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/clonixinato_de_lisina.txt": {
+   "tamanho": 21242,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "f6b3551026d471982c4f2d31dde7c05b13d66fc98850b0f88a1db0f2fb3e6b28"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_amorolfina.txt": {
+   "tamanho": 17870,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "a7b808cc742b024e84da0b93a25499c08eb42394233339f91f768f90e60523d2"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_bromexina.txt": {
+   "tamanho": 16943,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "4f9ec447a26dbbf3819883e741ba67b25c95c61617db4f84ed55676f8fd941b6"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_clobutinol.txt": {
+   "tamanho": 14746,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "a8bd22a50b417dd1bd32c522e6f51ff0e8d4e32b15f58256c7d22e68f2536b92"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_dapoxetina.txt": {
+   "tamanho": 62758,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "115c63efbcfc5ebd0f34712c52cbe9e564f8a111ec3a60dc973857b02b468fb3"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_lisina.txt": {
+   "tamanho": 13784,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "a87e4b44653e6a4e049c426730accb2a046a2ba570743beb2db28688538277ee"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_mebeverina.txt": {
+   "tamanho": 20056,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "fe5d8f7c2492c74a484e6a4870819bf246a4f4cd26a90d3f8e341d1563569268"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cloridrato_de_oxomemazina.txt": {
+   "tamanho": 11272,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "cbfe881c463591e5c9cdb2341fac804c45ede04851147d2c26980951ea0ba24c"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/clozapina.txt": {
+   "tamanho": 84959,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "b17a7f57f8051dfed605d662c641e30bac793b418fc23b040b9b9df507378dfb"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/colagenase.txt": {
+   "tamanho": 27136,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "af0bfb9fd9f4fd714c183c042bc67b9f319c933089a236cee7ab02832172ef1e"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cordia_verbenacea_dc.txt": {
+   "tamanho": 24821,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "5e6fcf7632768e915f45fc5751d99312aec56b46371b5c53509409823f59a5a7"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/cynara_scolymus_l.txt": {
+   "tamanho": 51,
+   "modificado": "2026-08-31 09:45",
+   "sha256": "0196bad6bdb7c316a9d2da89340a179b32fa76e65281bc8d0eeedf311c5b0361"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/deltametrina.txt": {
+   "tamanho": 22735,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "aa09e05b10f1136e2d4737c8f62901955eeefdaf198e5f14e0b7148e25e7108a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/dexpantenol.txt": {
+   "tamanho": 9608,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "4199464ba1e1b88ab33ad256fb402978b2771b0b7005aed66fadfafcf513666f"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/diclofenaco_colestiramina.txt": {
+   "tamanho": 57057,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "332dd79eb980c57340ac6ab6685432879a5312d8c5b8431ef47c5f604dd6ba46"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/dicloridrato_de_etilenodicisteina_dietilester.txt": {
+   "tamanho": 22476,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "d11119c279fb2eeffcbd08c4aef01429d8049df67fb2e4e7b300ab5947718cd9"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/dicloridrato_de_meclozina_monoidratado.txt": {
+   "tamanho": 19442,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "598193131975a2124065f2dd91ac46e26d9d3fc182cff6ac9b0bb6cc41ba094b"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/digoxina.txt": {
+   "tamanho": 40480,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "21ca2378df742b05597a030b6c4de8e2dd92572b8c6a62d681f9d1515d4f12d6"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/diosmina.txt": {
+   "tamanho": 16431,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "e74937e7efc60bbb43f930cecb657f4a1b8654dba70f59e33067ae05db1afad5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/dipirona.txt": {
+   "tamanho": 44677,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "39c5d911708382e2a147766dfb30bf2bc67974da097135650241b73ae5637dcb"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/dipirona_monoidratada.txt": {
+   "tamanho": 45212,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "9e50072b7a02c16baa66a87f1546e1599cc345af9161fc3c39fa0eec8ea8182a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/divalproato_de_sodio.txt": {
+   "tamanho": 143282,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "6fdcba77d5b82049af8e3f65a899ca242cf760e1d822c9a0c9a6515576f078b3"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/dropropizina.txt": {
+   "tamanho": 13897,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "4f2057003c4135d86895b54ce7c8886645a38ada954c20832be7426f00ddd81c"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/eltrombopague_olamina.txt": {
+   "tamanho": 103763,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "55cc1f880d83fa320768e5c0ed345365fa3940d0fa2a48ff4e97481c62dbeef7"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/estrogenios_conjugados.txt": {
+   "tamanho": 26545,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "b48f441a05bc856d1b561d1d12a445f846d2c13606e384bc629c021a6221254a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/everolimo.txt": {
+   "tamanho": 103988,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "efb29cdc788be72e50be5326bda637c4872edd7f9013988c2bfa929259413fa8"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fendizoato_de_cloperastina.txt": {
+   "tamanho": 26063,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "6950602ca3d2c7d0ad4587550b09e2bdf6c665bcce6869d8f009745121fd957e"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fenitoina.txt": {
+   "tamanho": 59770,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "5795f6b7f83b75e972676108d55c0ce053d0ee76b5f26821fec6c304b6fda62b"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ferripolimaltose.txt": {
+   "tamanho": 17691,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "dde66d620bf64eda3ebcfcdae93f302ec48f90f41ff63f2e515372231b2d16e5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ferro.txt": {
+   "tamanho": 44796,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "e47d07764c129ca02b7437d90846f2224c629935acd7f1c4bcf429ad3c377762"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ferrocarbonila.txt": {
+   "tamanho": 21327,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "d1b87297ef0b76b139e8189da5e4173e75a71f5d02f35139716a0301c92c55a4"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fibrinogenio.txt": {
+   "tamanho": 37612,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "9fa4d84b122b124b653ca99bf5e9004b00a1209d60474d748c3ac3b778c04b5d"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fitomenadiona.txt": {
+   "tamanho": 25967,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "034764d02c0fe0ba2c4f38fd357551cb46fbb3bab61972141a313c6e0130a3aa"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fludesoxiglicose_18f.txt": {
+   "tamanho": 18750,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "5a3b5898478d1ec965b6c2423e55dd81e25577cf1b18c65975a83ee5e82aee9a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fludroxicortida.txt": {
+   "tamanho": 19363,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "ee9733a3a262ebaebdee15c239a07e06938a5ed5cd23fe8faef3aa6492966d05"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fluoreto_de_sodio.txt": {
+   "tamanho": 20043,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "645e6376d24922dec5885d2f262072257d0fdb75246cf9810f9418f63f1d2d02"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/fluoruracila.txt": {
+   "tamanho": 64628,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "d9bf45d8573d269024f876e3d733b51e85af36446ed3676ce271798d17ca0865"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/folinato_de_calcio.txt": {
+   "tamanho": 26732,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "bbc3f3e9f019ed06487e6d6f720fea4c26afdcaa2602d00519b4abd471463ea5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/frangula_purshiana_dc_a_gray.txt": {
+   "tamanho": 12874,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "8e90f101031964d71cccc0009f838e0ca4a0499fe075ea8c712df2d7c33ad465"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/frutose.txt": {
+   "tamanho": 9494,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "0402755bbec83f29b09ae74a37e83830c5263eedbffad7b393fd467870218796"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ginkgo_biloba_l.txt": {
+   "tamanho": 11849,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "deaa999b0ff0b11e08d14e127f29dd0eb794cc390ef102af626403a77cc32806"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/glibenclamida.txt": {
+   "tamanho": 39001,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "1d3b20757294376f80591e77cf45710a9872d4b607a51d0daf05cb77dd73bda1"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/glicerol.txt": {
+   "tamanho": 8467,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "dbdb433b022277b36edfeebea87497916f45ac7e2a71eac66170dffcd149fd38"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/glycine_max_l_merr.txt": {
+   "tamanho": 14690,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "91c81cbdce40e486288a57d28e40422f55b55ab94d92c3e2346d498721b1efdc"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/gozetotida.txt": {
+   "tamanho": 35837,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "b0607525037322442e60d88043f1d0dcad1ae5b51b71f3940ddbb86ef40c9978"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hamamelis_virginiana_l.txt": {
+   "tamanho": 11701,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "68f4d4fcf626f033d479255ad8705654f4e2ea9fa0856bbeb47173025e000f20"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/harpagophytum_procumbens_dc_ex_meissn.txt": {
+   "tamanho": 11844,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "218595d6b264625c2c5c2c9933f7a5d37e2db184c3cd297bf4f98282e473b248"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hedera_helix.txt": {
+   "tamanho": 10859,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "1646f794e635f5a49bd920c99bf9f8a1ebdaba74e0c2f872292eee422835c16d"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hialuronato_de_sodio.txt": {
+   "tamanho": 15159,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "81e350cfb2f3f842e43a507bff0a370df7427117366b8323f369725eabb8d5b6"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hidroquinona.txt": {
+   "tamanho": 20373,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "687109ca7eb2fdd8c1a6a7bcf5774a4891182cc64f62142af045f3b888d6f058"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hidrosmina.txt": {
+   "tamanho": 12966,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "b183ccc8b0a6c87852bb19ba34eb8bbee7d296507a6073aac8619843dd8bfe36"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hidroxietilamido.txt": {
+   "tamanho": 38887,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "27e6037c6362600b74c5056a6c71c852cd7684200cb4f83bee70460126b698f3"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hidroxiureia.txt": {
+   "tamanho": 45883,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "97aa198b781da2e6cf2f6da44480f240577f5c4fbad633145125cd5e80560cc7"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hipromelose.txt": {
+   "tamanho": 7662,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "9a3d2bfb8fc7cf3403a15a9a7b3fc3465e0706df5d49cda67759a00509de660f"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/hypericum_perforatum_l.txt": {
+   "tamanho": 19671,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "62379556b6cfb543bc18c41b0377abcc43b113ff04d86f137433765214a5cf14"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/inibidor_de_c1_esterase_derivado_de_plasma_humano.txt": {
+   "tamanho": 112557,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "675ab456fe86504ab1efa4e6505c2edd247b5ba9959e373e53b6d295831499fa"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/insulina_isofana.txt": {
+   "tamanho": 56848,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "84c2c55414676de2442642fccd75fc8d284484d0fc35d0f8f2060b9f894d5b75"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/levodropropizina.txt": {
+   "tamanho": 34314,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "81a534b1575c1128d3d096d1c7082a43f4ace50bcb4c3d999a926a8a1bf7e1c7"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/levomefolato_de_calcio.txt": {
+   "tamanho": 15658,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "a553816390e56d7cc657e06683616a82b91eb88c1f1200ddd3ec1a31638f5388"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/lisado_bacteriano.txt": {
+   "tamanho": 26735,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "0a00a29a23446c453f7e74838e0db1b1b8c216e458ed82785d0a696bfb30b78a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/luspatercepte.txt": {
+   "tamanho": 125252,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "cf8529e8e736939a6eadbc1dce9cf0b547ebbb8b5a0eb974b195cacfe524af1e"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/matricaria_recutita_l.txt": {
+   "tamanho": 10734,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "301aa3fe83e7a8b35957cef1d72f781cf2fda0596dc2e151b0e3ac19dc72737d"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/melilotus_officinalis_l_pall.txt": {
+   "tamanho": 18237,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "3122daa9e8c3213c1a3e0e5c8a55daa718310f877ec53e904be4705fb4bd3980"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/menaeptenona.txt": {
+   "tamanho": 22045,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "ea20d69b2cbcc4d29ba1cb898aee0eccd67df58897027f239ab7efb7133bcbd8"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/menotropina.txt": {
+   "tamanho": 28849,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "a2091bdb444deaa1d2ffa3f4dc010ea4617042a32547cff4e31f745bb2a45187"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/mesilato_de_desferroxamina.txt": {
+   "tamanho": 53216,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "8241fd85c69d4fae4d160f6b5d989351a4832a713a2c2ba081d7713eab966bb0"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/metotrexato.txt": {
+   "tamanho": 165049,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "49e2095b06064a1a76b50aaf2429e90d95cddc5b8fedd126b694f1d5fe645be5"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/micofenolato_de_sodio.txt": {
+   "tamanho": 57672,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "67006b8fb48b0199f50a2511947183ae88f6a7ccb3afdf9f91376406c079edf2"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/mikania_glomerata_spreng.txt": {
+   "tamanho": 11813,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "da5b2464f776fc94b43e229afbc43fc9b29fd6d51ef3aeb0f4b1886a7ac98d6d"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/mycobacterium_bovis.txt": {
+   "tamanho": 13822,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "7afb0ef68e4b80d4a6c3a68552463ea6197f5cd0371fc8d41d6df959430fe3ac"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/nimesulida.txt": {
+   "tamanho": 41090,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "f8178cfd497afe0be6c8333ef118d93d2151a081aea3986e32fb6553066c1694"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/nitrato_de_fenticonazol.txt": {
+   "tamanho": 13755,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "79c630fa2546e0bc7ac13252071ab54290ce5345b67d1b6455a7f431825dd5dd"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/nitroprusseto_de_sodio_di_hidratado.txt": {
+   "tamanho": 42399,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "f71bfd7e2095e5e221c7ff5b417bb637f476837940418bacbf6d8d979b3a2852"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ocitocina.txt": {
+   "tamanho": 32569,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "65d68a3c1ce13d18d3a8a7d84ed4f00edf7c6ab04d316e342f1a5342e9383839"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/olanzapina.txt": {
+   "tamanho": 55379,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "9fac62eee285cb17bf97a65939aba4b40ed17501a3b28062b9b1332a6a4b3eb3"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/oleo_de_peixe.txt": {
+   "tamanho": 18332,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "1652112b98b6314f28d6f3e395d48816208ac5420def464ef7612ac8eff8956e"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/oligossacarideo_meningococico_do_grupo_c.txt": {
+   "tamanho": 37567,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "65050549b996c06c4bb87fdfc1b8dfa69c36b56b59eccb64be7248392d7c2d4c"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/passiflora_incarnata_l.txt": {
+   "tamanho": 23059,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "9afb6d54f16c1bd4df788122d97e855a6152fe19b731052d13f7fb3becee8f3f"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/pelargonium_sidoides_dc.txt": {
+   "tamanho": 8413,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "7e93aedba8d36233232bfb508c816ec46c1edf8c2a5a4ff429457d93e28abe0d"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/peumus_boldus_molina.txt": {
+   "tamanho": 12014,
+   "modificado": "2026-08-31 09:47",
+   "sha256": "b417d6e4edc193f24410076d86475e5fd1676ba17331aa0f9b52d2ef1d2070fa"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/picossulfato_de_sodio.txt": {
+   "tamanho": 15166,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "bb8cffbfbc8cbea6e11b4d3aa6e7725709597292b5aa75e147f8c793ef0879eb"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/pinus_pinaster_aiton.txt": {
+   "tamanho": 26115,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "e6f839e91550f45297bf6d6dd2291adf8e4b7e4a5c9688fd34dcdf4eb3ead966"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/plantago_ovata_forssk.txt": {
+   "tamanho": 13306,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "5603014890e025a708aeabdf92303d93858517ced39c379330c17fe8d1f932bc"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/polissacarideo_de_haemophilus_influenzae_tipo_b.txt": {
+   "tamanho": 16477,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "3c79891a3d0f478d11d2d2efd029293ae7dc038226380c306d8e6e70bec78d1a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/polypodium_leucatomos_poir.txt": {
+   "tamanho": 9497,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "db52bf5bb5c5674d5ec0e384ffc8b941f61f6b34ee922c2604332bbcf123c1b0"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/promestrieno.txt": {
+   "tamanho": 22691,
+   "modificado": "2026-08-31 09:38",
+   "sha256": "75a4848dafdb8d8d34196dc90e046a18fc24e09abf8c30b90eecf369c1a26d1b"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/racecadotrila.txt": {
+   "tamanho": 23969,
+   "modificado": "2026-08-31 09:40",
+   "sha256": "ecadfe30010eb35b8d18b12c2903c4f20d7ede5d64aeff8926f058497333e6ee"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ranibizumabe.txt": {
+   "tamanho": 93071,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "9180e7ceb57582b221bbcf69177918cb3842d237b47373b0a151b2678949bcf7"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/rotavirus_humano_atenuado.txt": {
+   "tamanho": 43668,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "7c8cb621d82262d16033ec0a3a94a004906fa512f235caf0154063bac14cd8cb"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/saccharomyces_boulardii.txt": {
+   "tamanho": 65301,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "d1c7e9e6a24fcbcad1f8092f92d5266176ea6824e428581e5be353ec4078b07c"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/saccharomyces_cerevisae.txt": {
+   "tamanho": 7193,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "75d691cf0a24e97d8bb1c30162e261c3e1a6f96298b681d4afd7da8626b0e3ec"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/salix_alba_l.txt": {
+   "tamanho": 9087,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "714c68ffd2a3e1740e9be2f2eebacfcb29134013d219917b99bd56201a5c9521"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/senna_alexandrina_mill.txt": {
+   "tamanho": 16888,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "e49496d6dcfd135eae42fa21a82c9159ab1b07e00f1cefbb57c8f25ed0515f33"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/serenoa_repens_w_bartram_small.txt": {
+   "tamanho": 10335,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "e93e03a034b619b510c2e8d53120d016986f5eb04112215f18fe308cb85b91bf"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/silybum_marianum_l_gaertn.txt": {
+   "tamanho": 10772,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "a76a05921c447bf6bace804333a7a7ca8869418a8a5880fbffdb480738a5e46d"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/sinvastatina.txt": {
+   "tamanho": 114914,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "76c165f994b4ce3b7a06c25c7226404399ed8aa1250212530955b84344c9be5a"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/sugamadex_sodico.txt": {
+   "tamanho": 54744,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "f2bbe5f722db9cbdd522b5bcd4e94281c0b99f6af81f5a5c783d22150f501adc"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/sulfato_de_bario.txt": {
+   "tamanho": 9815,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "d664fdf7e2649c8ada42cbbeb29e91760e71e1c908debbe8856630bb491cfbc8"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/sulfato_ferroso_heptaidratado.txt": {
+   "tamanho": 10640,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "135ca0d318c7e00cea2cdef16ba3cd349c5006c61f58decf320dbb512f2e54cd"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/symphytum_officinale.txt": {
+   "tamanho": 11021,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "291a82e900583153b588b0c12a6b3af4e5dba9579e22c9c4706bdd36f1762c95"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/tacrolimo_monoidratado.txt": {
+   "tamanho": 108588,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "a3b9889bff65d61285051e73b96dd362fc42e612e52ef46fa0352a8f47dd5bf6"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/tartarato_de_evogliptina.txt": {
+   "tamanho": 37870,
+   "modificado": "2026-08-31 09:48",
+   "sha256": "2074b6430e634a9a11ee15591683b9bad1d2468b3ae1bdde70747c945268c9ed"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/teicoplanina.txt": {
+   "tamanho": 49043,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "90c8be892d32f7883f78322012cf2ec3841689679b99fe3078801daace72a4f0"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/tenoxicam.txt": {
+   "tamanho": 32488,
+   "modificado": "2026-08-31 09:34",
+   "sha256": "b6e47a2acb705dd73fcde5e3661652ec1a2dbc97a9aa0002cf3dcff9d4fe29e3"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/tetrafluorborato_tetramibi_cuproso.txt": {
+   "tamanho": 30594,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "d265a2a27903a0a45b88ecbbe5aa9cdde9247bef4a0d6f8bd84a42778c5c8b22"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/tiocolchicosideo.txt": {
+   "tamanho": 23993,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "8ce0002476457faa69bc3228e7e5628f535f5eeeea77a2f6c305c0b8938cbf17"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/toxina_botulinica_a.txt": {
+   "tamanho": 83080,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "d655cc2b3116794788482956f7808a688b98e83d58dac08029da2d9928830826"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/trifolium_pratense_l.txt": {
+   "tamanho": 16054,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "bd7a7e52af08d439c085503dfb90017f6944a80de5ee03ab302a76bc8a3c62fe"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/ureia.txt": {
+   "tamanho": 14015,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "64d8325d6ec6639b6fe2ab679c538e90384e2bd4a50205174e143055bb5828db"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/vaccinium_macrocarpon_aiton.txt": {
+   "tamanho": 8949,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "e8a5092107c53563f0704e2fe025bb689d5b41da5ad44cd4994866be6e626919"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/valproato_de_sodio.txt": {
+   "tamanho": 111610,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "4d8327e8f9c10b6477ab3a60045623d720a2bf867cc0ef78d8de6edee1e8517c"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/varfarina.txt": {
+   "tamanho": 29133,
+   "modificado": "2026-08-31 09:35",
+   "sha256": "661e8106ceaeb37986fb0e92f567cc5f54acd6d46341b6984f9efbf7059aca48"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/vimpocetina.txt": {
+   "tamanho": 15304,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "3af694c5ddbbdd3886ca85c66a239c4e7ec51091b473554ede59b5661952f8a8"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/virus_da_hepatite_a_inativado.txt": {
+   "tamanho": 22537,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "321eed15c3e1bea2773c4253f69685619c17baffb7a17daaff5c8af90c7460c8"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/virus_da_varicela.txt": {
+   "tamanho": 45520,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "61d71e74d282e8de7768835b24c1c2ec4378e95aabfae41359abcdabcee89be1"
+  },
+  "fontes_novas/01_anvisa_bulario/texto/zingiber_officinale_roscoe.txt": {
+   "tamanho": 14118,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "6b539a47a2bb307346bc052fcf40413dc4e981bab8c50e653203481a08550e17"
+  },
+  "fontes_novas/02_cmed_precos_drogaria/DICIONARIO_TA_PRECOS_MEDICAMENTOS.pdf": {
+   "tamanho": 220831,
+   "modificado": "2026-08-31 09:30",
+   "sha256": "39b203aec3e306ffee6de3d8587222961f8f706a072203ba9d89df002546e9e8"
+  },
+  "fontes_novas/02_cmed_precos_drogaria/DICIONARIO_TA_PRECO_MEDICAMENTO.pdf": {
+   "tamanho": 57869,
+   "modificado": "2026-08-31 09:30",
+   "sha256": "44e8af589f6a08605b8d0f6ee3fa7a62e17ae81b0568180a7a4505bc91f48c21"
+  },
+  "fontes_novas/02_cmed_precos_drogaria/README.md": {
+   "tamanho": 4041,
+   "modificado": "2026-08-31 09:54",
+   "sha256": "4e7e063cd5c009978f15c86d9d7f9a589f00a0b5613c0197203421264da57575"
+  },
+  "fontes_novas/02_cmed_precos_drogaria/TA_PRECOS_MEDICAMENTOS.csv": {
+   "tamanho": 10670502,
+   "modificado": "2026-08-31 09:30",
+   "sha256": "610389fce31a7169f2251793eee856c7e8008cc946ae9b324706fa53a1107a7d"
+  },
+  "fontes_novas/02_cmed_precos_drogaria/TA_PRECO_MEDICAMENTO.csv": {
+   "tamanho": 16548279,
+   "modificado": "2026-08-31 09:29",
+   "sha256": "fef915b3c8e8c440d2f7123b2e0b7df0074747a9ab48c64607316eea080c7071"
+  },
+  "fontes_novas/02_cmed_precos_drogaria/TA_PRECO_MEDICAMENTO_GOV.csv": {
+   "tamanho": 17197121,
+   "modificado": "2026-08-31 09:30",
+   "sha256": "1cfdc5ba06af704604205a6134f1f7622ec60e611954a3fb7db8f2a6989e5740"
+  },
+  "fontes_novas/03_dcb_denominacoes/chave_substancia_br.csv": {
+   "tamanho": 231440,
+   "modificado": "2026-08-31 09:51",
+   "sha256": "97bfd416e7ff0e1f84e9fb655d6d40077366103a6c1160de37537d8ccf7ee9a2"
+  },
+  "fontes_novas/03_dcb_denominacoes/construir_chave_normalizacao.py": {
+   "tamanho": 7828,
+   "modificado": "2026-08-31 09:50",
+   "sha256": "1c066ed8ad7f4c2076bffcd9c11697589e4c7fbc69a3e25a40241a34db0ba5b1"
+  },
+  "fontes_novas/03_dcb_denominacoes/DCB_lista_consolidada_jul2026_IN462_VIGENTE.xlsx": {
+   "tamanho": 581120,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "66e33f3bca183c7d86832c0b2374b2017b7546e9abdc387876cc765baa38a21f"
+  },
+  "fontes_novas/03_dcb_denominacoes/Manual_DCB_ANVISA.pdf": {
+   "tamanho": 4402148,
+   "modificado": "2026-08-31 09:36",
+   "sha256": "cd0da7b7f52d1703bce65847ec25e4f7ca9cc668b37e6aee51f2f756217576b0"
+  },
+  "fontes_novas/03_dcb_denominacoes/README.md": {
+   "tamanho": 4423,
+   "modificado": "2026-08-31 09:55",
+   "sha256": "15c5299f340be48bd3e050eca0ae7d264c49d747b8a8d1bd8f2ebfbc8bb74b7b"
+  },
+  "fontes_novas/04_rename_renisus/equivalencia_fitoterapicos.csv": {
+   "tamanho": 16027,
+   "modificado": "2026-08-31 09:49",
+   "sha256": "43a4bd69ffded9d4a227cd393cf0f9b7b63133f596891957bc322677da00bf70"
+  },
+  "fontes_novas/04_rename_renisus/mapear_fitoterapicos.py": {
+   "tamanho": 9754,
+   "modificado": "2026-08-31 09:46",
+   "sha256": "0c77c99703ebafb75a36e81a9cddd776bc64eec6f850836df751c65c7fb945b8"
+  },
+  "fontes_novas/04_rename_renisus/Memento_Fitoterapico_Farmacopeia_Brasileira_1ed.pdf": {
+   "tamanho": 1263754,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "230b0de0d638785b69a29cf2cc0f3969a9864dd642ec92684960056f33797deb"
+  },
+  "fontes_novas/04_rename_renisus/README.md": {
+   "tamanho": 5634,
+   "modificado": "2026-08-31 09:56",
+   "sha256": "52760ccdcef0f5460ef10617bb7c50a3b918a5ce7eb295ff235336b9f2ab4bca"
+  },
+  "fontes_novas/04_rename_renisus/RENAME_2024.pdf": {
+   "tamanho": 2576541,
+   "modificado": "2026-08-31 16:31",
+   "sha256": "b1b0d582cb68fc96fcbe04fd65c1c697d5206b7dce8886f1c6ddb06374fd5201"
+  },
+  "fontes_novas/04_rename_renisus/RENAME_2024_digitalizado_sem_texto.pdf": {
+   "tamanho": 29177454,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "b071510a8b723c5ae5a00b65b3ecd14e45edf4c2189732e2b2973a262b6ed0bc"
+  },
+  "fontes_novas/04_rename_renisus/RENISUS_especies_por_projeto.pdf": {
+   "tamanho": 312983,
+   "modificado": "2026-08-31 09:43",
+   "sha256": "e0f1003d867c97687ee1b987808e1d9360317bcaa688160787d49a077ecc503c"
+  },
+  "fontes_novas/04_rename_renisus/RENISUS_lista_plantas_medicinais_SUS.pdf": {
+   "tamanho": 73782,
+   "modificado": "2026-08-31 09:43",
+   "sha256": "ed9a3dcd70cd132d72e9d3737e8124fdff42c2bdd0489ed0f20db17147dccf2a"
+  },
+  "fontes_novas/05_atc_classes/FONTE_atcd_README.md": {
+   "tamanho": 5874,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "66a3ca3e63ebd9d9fce5b6edff47bf3e9f1b047a3f44f0d8a071800ee01711a7"
+  },
+  "fontes_novas/05_atc_classes/README.md": {
+   "tamanho": 3675,
+   "modificado": "2026-08-31 09:56",
+   "sha256": "7038cedf41d47ee277475f03d5a9ca5f755c94f72458cac316223b1509535d15"
+  },
+  "fontes_novas/05_atc_classes/WHO_ATC-DDD-combinacoes_2026-04-25.csv": {
+   "tamanho": 23792,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "42ba5def8706f7ad5abd4380f38e1178376b087e0f74ff16ea3e0b2f820a5cf4"
+  },
+  "fontes_novas/05_atc_classes/WHO_ATC-DDD_2026-04-25.csv": {
+   "tamanho": 297857,
+   "modificado": "2026-08-31 09:37",
+   "sha256": "93dac13945201f72c7f947e762bca6181b4273e1701bce090bffca04229f23ed"
+  },
+  "fontes_novas/06_vendas_sngpc/agregar_sngpc.py": {
+   "tamanho": 5868,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "6abf12cd217974f07917d13acc44c053da737131dfed4502b7b401b3a7aa09f6"
+  },
+  "fontes_novas/06_vendas_sngpc/DICIONARIO_SNGPC_Industrializados.pdf": {
+   "tamanho": 1058048,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "a319353da23cd86309ec58ac0a876165d473882aace1f680c3bdd73c0d9ac343"
+  },
+  "fontes_novas/06_vendas_sngpc/PARAMETROS_CONSULTA.csv": {
+   "tamanho": 648,
+   "modificado": "2026-08-31 09:42",
+   "sha256": "cf4ce2986597dde26e442ec9e7ef6c8a356c83df62df28b190c9ebe355337f46"
+  },
+  "fontes_novas/06_vendas_sngpc/principio_ativo_x_cid10_202607.csv": {
+   "tamanho": 16482,
+   "modificado": "2026-08-31 10:00",
+   "sha256": "bc4607c485bad8693b3be6bb7d3a591a92df37d08bb496fa437e31ea25d66cc3"
+  },
+  "fontes_novas/06_vendas_sngpc/principio_ativo_x_faixa_etaria_202607.csv": {
+   "tamanho": 208384,
+   "modificado": "2026-08-31 10:00",
+   "sha256": "55c6cbc7ae14cda21813fec5d642db3185c95ba5b8ed0f96bb59c2fd8f282df3"
+  },
+  "fontes_novas/06_vendas_sngpc/ranking_principio_ativo_202607.csv": {
+   "tamanho": 35626,
+   "modificado": "2026-08-31 10:00",
+   "sha256": "edcb082807b1addd6e64176f4bac8f8b9973a544ed53d354944c055af76cfe05"
+  },
+  "fontes_novas/06_vendas_sngpc/README.md": {
+   "tamanho": 6638,
+   "modificado": "2026-08-31 10:01",
+   "sha256": "822be5b8a3470977e10fd200fb05b6006f31ecf6ba2f5e40293c9e34ceade677"
+  },
+  "fontes_novas/06_vendas_sngpc/resumo_202607.json": {
+   "tamanho": 2090,
+   "modificado": "2026-08-31 10:00",
+   "sha256": "ca3545e2cb0415702baf00184212178c35e163fd47b7e87267c1efe0d1910905"
+  },
+  "fontes_novas/07_complementares/DADOS_ABERTOS_MEDICAMENTOS.csv": {
+   "tamanho": 8315024,
+   "modificado": "2026-08-31 09:29",
+   "sha256": "56833131e5283cdbf80c9b47b1d667891d56b02412e82e55ddab8f37fbf4ed4d"
+  },
+  "fontes_novas/07_complementares/DICIONARIO_FARMACOVIGILANCIA_VIGIMED.pdf": {
+   "tamanho": 775505,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "e851c3739c5486b625287b9077300d62ff715641dbb58f4b499b904872157d56"
+  },
+  "fontes_novas/07_complementares/DICIONARIO_RESTRICAO_MEDICAMENTO.pdf": {
+   "tamanho": 422515,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "4b02828e2bdcb921838b9271c55b22b708b792d4c0355a87b441a2696b5144b3"
+  },
+  "fontes_novas/07_complementares/README.md": {
+   "tamanho": 5534,
+   "modificado": "2026-08-31 09:57",
+   "sha256": "3e5acad3fe8980a42edec6e3ea0a436b23d0c735e9dc6f88b16377a237358d18"
+  },
+  "fontes_novas/07_complementares/TA_RESTRICAO_MEDICAMENTO.csv": {
+   "tamanho": 1892351,
+   "modificado": "2026-08-31 09:29",
+   "sha256": "48590dceb6518874f9764f970dc2251b3f2529b57fd3f1a69ed4eee83c4522a8"
+  },
+  "fontes_novas/07_complementares/VigiMed_Medicamentos.csv": {
+   "tamanho": 148650378,
+   "modificado": "2026-08-31 09:33",
+   "sha256": "2f511e0f0632827258a60fa865f3d900b0fcb56b4069b25b32eeb8e16ed69ab3"
+  },
+  "fontes_novas/07_complementares/VigiMed_Notificacoes.csv": {
+   "tamanho": 106238629,
+   "modificado": "2026-08-31 09:41",
+   "sha256": "b1043fd9b0717b49bbe42f53727ad62ae84d1de4c7ad77493390acbd9a83c9d3"
+  },
+  "fontes_novas/07_complementares/VigiMed_Reacoes.csv": {
+   "tamanho": 250795032,
+   "modificado": "2026-08-31 09:39",
+   "sha256": "ee2ac6eebab448258a5b0b83c7b809b786081f50ec811a6d6740fd3cd31dbfd7"
+  },
+  "fontes_novas/07_fda_ddi/fda_index_cyp.csv": {
+   "tamanho": 2202,
+   "modificado": "2026-09-02 16:07",
+   "sha256": "a2c513ded74443fca76f7c6900e36b6a0f44a2531555931a534c03fc80b5b578"
+  },
+  "fontes_novas/07_fda_ddi/README.md": {
+   "tamanho": 3116,
+   "modificado": "2026-09-02 16:07",
+   "sha256": "4e72980666ac7ddc4b4d2f3df0bf7c33a1e2806e99b67138e7572c34e75135cb"
+  },
+  "fontes_novas/08_iuphar_gtopdb/interactions.csv": {
+   "tamanho": 7435365,
+   "modificado": "2026-09-02 17:13",
+   "sha256": "07bb605283dfc5356f309181737a4b15e7ecfe9e1dc53f9f4667163705d6a082"
+  },
+  "fontes_novas/08_iuphar_gtopdb/ligands.csv": {
+   "tamanho": 6786509,
+   "modificado": "2026-09-02 17:14",
+   "sha256": "daaeb79ae670f2774e8e2b31cf047a32fdbf5cd434464113db6b3382af2faf42"
+  },
+  "fontes_novas/08_iuphar_gtopdb/README.md": {
+   "tamanho": 3839,
+   "modificado": "2026-09-02 17:30",
+   "sha256": "95648f50b76a806c76811c6bef849a5c805da7871f312ae4b4f850658bb924d0"
+  },
+  "fontes_novas/08_iuphar_gtopdb/targets_and_families.csv": {
+   "tamanho": 1893389,
+   "modificado": "2026-09-02 17:14",
+   "sha256": "1be2b880391bd0b523c027ca7b3767e176507374526184793ab91302b7272dfd"
+  },
+  "ml_teste/01_diagnostico.py": {
+   "tamanho": 8470,
+   "modificado": "2026-09-04 00:56",
+   "sha256": "df8cf5ccff5cb9f37bfc6feafc8a04242d4905c84054427f5ec138d7998f55da"
+  },
+  "ml_teste/02_amostragem_negativos.py": {
+   "tamanho": 8792,
+   "modificado": "2026-09-04 01:07",
+   "sha256": "1ee47c9206bb627d1665346026193ac656dd83c789ec13bfe120c428202742d4"
+  },
+  "ml_teste/03b_transferencia.py": {
+   "tamanho": 6371,
+   "modificado": "2026-09-04 01:52",
+   "sha256": "06e6b469ce2d621dd1285cb6c0aaf7afc047882c03ee0f7ff6582afc461736d2"
+  },
+  "ml_teste/03_pu_learning.py": {
+   "tamanho": 8562,
+   "modificado": "2026-09-04 01:53",
+   "sha256": "4b2d220f3373ef8ed1998239d03b9dbb2b1a4091b68c4b45f6d2705d64d3971e"
+  },
+  "ml_teste/04_modelo_final.py": {
+   "tamanho": 14566,
+   "modificado": "2026-09-04 02:04",
+   "sha256": "408d751fb72aa4322df39d7323e1f84f44bf542f544b2c78f4b019e473ae9a8f"
+  },
+  "ml_teste/05_mecanismo_texto.py": {
+   "tamanho": 9664,
+   "modificado": "2026-09-04 01:30",
+   "sha256": "a0d44a0b18c9f03545a79bd24a3538526f76f392b8b5289fb71cbe25ecdbf7c2"
+  },
+  "ml_teste/06_troca_segura.py": {
+   "tamanho": 9468,
+   "modificado": "2026-09-04 01:34",
+   "sha256": "70d3008b825c6d558921f478bbb4b82995ee7632cc5bdfd2f8f41c26f0ff9f02"
+  },
+  "ml_teste/07_familias_ml.py": {
+   "tamanho": 10068,
+   "modificado": "2026-09-04 08:16",
+   "sha256": "832abdc30a04afbb0e21e4c838f16f886ad1023a23b51d79f99ee061e6ef5f79"
+  },
+  "ml_teste/08_propagacao.py": {
+   "tamanho": 8390,
+   "modificado": "2026-09-04 11:11",
+   "sha256": "6dbfc39b375b154eceb61db8acae04e9d9c152d326ff7bdc8726e3e3bce62a03"
+  },
+  "ml_teste/09_roteamento.py": {
+   "tamanho": 6963,
+   "modificado": "2026-09-04 11:41",
+   "sha256": "8cf2c1def4bfc3a94390ec518808e23b7de75b0fade8426c0296fcb0836c33c5"
+  },
+  "ml_teste/DIAGNOSTICO_FAMILIAS.md": {
+   "tamanho": 15732,
+   "modificado": "2026-09-04 11:47",
+   "sha256": "d6816fa871ee43dd90e9f7c2d33b82e357fae8d095ebe69352ccf35d4983da8c"
+  },
+  "ml_teste/PROPAGACAO.md": {
+   "tamanho": 7311,
+   "modificado": "2026-09-04 11:46",
+   "sha256": "7c0b44caa2a1a94347e0cbcd76325c560b381d62904c8d9a643dee100f64ba9b"
+  },
+  "ml_teste/README.md": {
+   "tamanho": 4552,
+   "modificado": "2026-09-04 11:47",
+   "sha256": "7bfceda4005a3893b6a68ca391a3d1e6367d56b81167e300c4752800855111c0"
+  },
+  "ml_teste/RELATORIO.md": {
+   "tamanho": 20773,
+   "modificado": "2026-09-04 02:13",
+   "sha256": "4ec778aa0a525957f99cef23788e81453b76051ed69fffb9780b362a648167d6"
+  },
+  "ml_teste/_dados.py": {
+   "tamanho": 18872,
+   "modificado": "2026-09-04 01:52",
+   "sha256": "92a069d990411abac7c2e0e588352b01559acca0109cc5dfa31f6e36e3e76f1a"
+  },
+  "ml_teste/_propagacao.py": {
+   "tamanho": 10091,
+   "modificado": "2026-09-04 11:11",
+   "sha256": "a698da0dfe3286628d95894fdc3f4fcfafdba037a3f84e44aa61da0a8e032810"
+  },
+  "ml_teste/_protocolo.py": {
+   "tamanho": 7953,
+   "modificado": "2026-09-04 00:55",
+   "sha256": "fb1f34234c5f4a0c6062d7e8d4131cd44ab9cd1e79cba7b00be6d3ca08bbfed2"
+  },
+  "ml_teste/saida/01_diagnostico.json": {
+   "tamanho": 5023,
+   "modificado": "2026-09-04 01:06",
+   "sha256": "b9012e91f4dec972c2e774730a053a14c505bfccce99fe81cd96e9ede65e7a09"
+  },
+  "ml_teste/saida/02_amostragem.json": {
+   "tamanho": 3431,
+   "modificado": "2026-09-04 01:15",
+   "sha256": "dde84eae1b30c9374194c6e231010007cb8f338cba470efc7e41ea76bba3d53c"
+  },
+  "ml_teste/saida/02_log.txt": {
+   "tamanho": 3268,
+   "modificado": "2026-09-04 01:15",
+   "sha256": "4f69a85972b7a22abc61e6b72151b8240fa280ea09d97e29d5682aaf1eeb320f"
+  },
+  "ml_teste/saida/03b_log.txt": {
+   "tamanho": 1635,
+   "modificado": "2026-09-04 02:07",
+   "sha256": "8bc5686a8ac98753c06ddf2646966f437ae8bd9a42577f9ccfe2a6dada2b6a7f"
+  },
+  "ml_teste/saida/03b_transferencia.json": {
+   "tamanho": 2135,
+   "modificado": "2026-09-04 02:07",
+   "sha256": "ebab2ebe71b76a11f98085c5cd2524ba2d2ef4a066da80cee8fd07dfd746b8c1"
+  },
+  "ml_teste/saida/03_log.txt": {
+   "tamanho": 3603,
+   "modificado": "2026-09-04 01:56",
+   "sha256": "3a604faa6492a63811486dc07212cc2d4e8929e33a958a6f79482a4a19040f25"
+  },
+  "ml_teste/saida/03_negativos_confiaveis.npy": {
+   "tamanho": 656768,
+   "modificado": "2026-09-04 01:56",
+   "sha256": "070b4794f8e0c1346c481fa91d31d82b72b07158c51ff106a3220936bae0e11f"
+  },
+  "ml_teste/saida/03_pu.json": {
+   "tamanho": 248,
+   "modificado": "2026-09-04 01:56",
+   "sha256": "aa22a28fc8f7b3db02ad1eeec5185b7597045f9ac32e3619223b65f2364aa5de"
+  },
+  "ml_teste/saida/04_log.txt": {
+   "tamanho": 5350,
+   "modificado": "2026-09-04 02:11",
+   "sha256": "26ddeb938a2b861365934bdf9e0d09e4ae8216f07dcf2ca84e5f281ad6b892d0"
+  },
+  "ml_teste/saida/05_mecanismo.json": {
+   "tamanho": 405,
+   "modificado": "2026-09-04 01:32",
+   "sha256": "2cf0f59cb2caee8554cd2cb2421398e5dd52acf5849c66de9edad78bac98572d"
+  },
+  "ml_teste/saida/05_tipo_mecanismo_derivado.csv": {
+   "tamanho": 6247171,
+   "modificado": "2026-09-04 01:32",
+   "sha256": "89f2adfdfd9e822036663f05e011e47beda162c3c654c2843a1de6bf4a2f1cde"
+  },
+  "ml_teste/saida/06_log.txt": {
+   "tamanho": 4696,
+   "modificado": "2026-09-04 01:41",
+   "sha256": "02c1e88c709cb7b3290c6f682016e4166e1821ee39bef10fdd9b25bfa91ab6c0"
+  },
+  "ml_teste/saida/06_troca.json": {
+   "tamanho": 336,
+   "modificado": "2026-09-04 01:41",
+   "sha256": "02464edb1849a5637da0df1f22efebb6a471127e54af44864755b2ca303c6443"
+  },
+  "ml_teste/saida/07_familias.json": {
+   "tamanho": 3217,
+   "modificado": "2026-09-04 08:22",
+   "sha256": "ed1cf6925b477311f95314df3532790f812916735a82131a33b7023929f0006e"
+  },
+  "ml_teste/saida/07_log.txt": {
+   "tamanho": 4657,
+   "modificado": "2026-09-04 08:22",
+   "sha256": "a6ee350cf1ba8c5d92ad0676eb9ff448c19692c4a35c75193902bf7151a8e85e"
+  },
+  "ml_teste/saida/08_log.txt": {
+   "tamanho": 4057,
+   "modificado": "2026-09-04 11:34",
+   "sha256": "f3bc17c19d3b67d27d0efe9f2886c2956ec906ce4523c6d22f717f05de8605c2"
+  },
+  "ml_teste/saida/08_propagacao.json": {
+   "tamanho": 9617,
+   "modificado": "2026-09-04 11:34",
+   "sha256": "37dfbb02fd82270ff879d9f8df603016f96f055749a3b0c9808b5bb8d499bafd"
+  },
+  "ml_teste/saida/09_log.txt": {
+   "tamanho": 1816,
+   "modificado": "2026-09-04 11:45",
+   "sha256": "ee534164548ab2ca485a9458cf9348592748165ec64aa06ca139de9100ab7fa6"
+  },
+  "ml_teste/saida/09_roteamento.json": {
+   "tamanho": 4029,
+   "modificado": "2026-09-04 11:45",
+   "sha256": "4fd18f29158b472030976a975ff882e86989e3cdabed9c5762ca77904906c1ce"
+  },
+  "ml_teste/saida/modelo_final.json": {
+   "tamanho": 4722,
+   "modificado": "2026-09-04 02:11",
+   "sha256": "ff3341453de07d05bb7d3798e83a9d241dd343cafa9586a250c55da11d3dd2fa"
+  },
+  "ml_teste/saida/modelo_final_teste.npz": {
+   "tamanho": 47503,
+   "modificado": "2026-09-04 02:11",
+   "sha256": "17ae1131d0f398b1894f0e9812ae463c9ee1b43b45c683b7fc4eba91a7613fa3"
+  }
+ }
+}

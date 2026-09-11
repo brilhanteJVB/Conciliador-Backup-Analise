@@ -1,0 +1,90 @@
+
+==========================================================================
+EXPLICABILIDADE — modelo SEM_GRAFO, split POR_FARMACO
+==========================================================================
+
+--- 1. IMPORTANCIA POR PERMUTACAO — gradient boosting (validacao)
+  atributo                                  queda de AUC ao embaralhar
+  adm_lados_com_regra                          0.0561  (+-0.0022)
+  produtos_log_min                             0.0386  (+-0.0014)
+  produtos_log_max                             0.0292  (+-0.0009)
+  atc_grupo1_N                                 0.0139  (+-0.0005)
+  tarja_desconhecida_lados                     0.0097  (+-0.0002)
+  atc_grupo2_A16                               0.0093  (+-0.0017)
+  tarja_MIP                                    0.0090  (+-0.0002)
+  atc_grupo1_C                                 0.0083  (+-0.0001)
+  atc_grupo1_L                                 0.0060  (+-0.0004)
+  atc_n1_igual                                 0.0052  (+-0.0002)
+  pk_lados_com_papel                           0.0049  (+-0.0002)
+  atc_grupo2_G03                               0.0049  (+-0.0002)
+  atc_grupo2_A11                               0.0046  (+-0.0004)
+  atc_grupo2_L01                               0.0045  (+-0.0004)
+  atc_grupo1_S                                 0.0042  (+-0.0007)
+  atc_grupo2_N01                               0.0041  (+-0.0005)
+  atc_grupo2_J01                               0.0040  (+-0.0007)
+  atc_grupo2_M01                               0.0039  (+-0.0003)
+  atc_lados_com_codigo                         0.0036  (+-0.0002)
+  atc_grupo2_R06                               0.0036  (+-0.0001)
+
+  bloco ATC (classe farmacologica)                             0.1536 
+  bloco REG (mercado e tarja)                                  0.0928 
+  bloco ADM (regra de administracao)                           0.0644 
+  bloco PK (papel CYP)                                         0.0055 
+
+--- 2. COEFICIENTES — regressao logistica (direcao e tamanho)
+  adm_lados_com_regra                          +1.348  (aumenta a chance estimada)
+  adm_tipo_INDIFERENTE_ALIMENTO                -0.787  (reduz a chance estimada)
+  adm_tipo_COM_ALIMENTO                        -0.453  (reduz a chance estimada)
+  adm_tipo_JEJUM                               -0.347  (reduz a chance estimada)
+  atc_grupo2_A16                               -0.306  (reduz a chance estimada)
+  atc_grupo2_M09                               -0.257  (reduz a chance estimada)
+  produtos_log_min                             +0.223  (aumenta a chance estimada)
+  atc_grupo2_A01                               +0.223  (aumenta a chance estimada)
+  atc_n1_igual                                 +0.200  (aumenta a chance estimada)
+  produtos_log_soma                            +0.179  (aumenta a chance estimada)
+  atc_grupo2_A11                               -0.147  (reduz a chance estimada)
+  atc_grupo2_D02                               -0.144  (reduz a chance estimada)
+  lados_com_dcb                                -0.142  (reduz a chance estimada)
+  adm_tipo_APOS_ALIMENTO                       -0.141  (reduz a chance estimada)
+  atc_grupo2_N05                               +0.132  (aumenta a chance estimada)
+  atc_grupo2_A03                               -0.119  (reduz a chance estimada)
+
+--- 3. EXPLICACAO POR PREVISAO — ocultacao uma-a-uma
+
+  fluoxetina  x  paroxetina
+    probabilidade estimada: 0.991   |   rotulo real: afirmado por fonte
+    o modelo pesou:
+      [+0.031] os dois atuam na mesma enzima CYP
+      [+0.011] quantos lados tem regra de administracao
+      [+0.007] quantidade de apresentacoes do menos comercializado
+      [+0.006] quantidade de apresentacoes do mais comercializado
+      [+0.006] mesmo subgrupo farmacologico
+      [+0.005] 2 dos farmacos e(sao) do grupo anatomico N (Sistema nervoso)
+
+  acetato de glatirâmer  x  sulfacetamida
+    probabilidade estimada: 0.000   |   rotulo real: nao afirmado
+    o modelo pesou:
+      [-0.004] um dos farmacos e do subgrupo D10 (Preparações antiacne)
+      [-0.002] quantos lados tem regra de administracao
+      [-0.002] um dos farmacos e do subgrupo L03 (Imunoestimulantes)
+      [-0.001] tarja mip em 1 lado(s)
+      [-0.000] quantidade de apresentacoes no mercado (soma)
+      [+0.000] quantidade de apresentacoes do mais comercializado
+
+  magaldrato  x  metronidazol
+    probabilidade estimada: 0.500   |   rotulo real: nao afirmado
+    o modelo pesou:
+      [+0.330] um dos farmacos e do subgrupo A01 (Preparações estomatológicas)
+      [+0.305] quantidade de apresentacoes do mais comercializado
+      [+0.183] quantidade de apresentacoes do menos comercializado
+      [-0.081] quantidade de apresentacoes no mercado (soma)
+      [-0.056] tarja mip em 1 lado(s)
+      [+0.029] 2 dos farmacos e(sao) do grupo anatomico A (Trato alimentar e metabolismo)
+
+  LEITURA OBRIGATORIA JUNTO COM O NUMERO: nenhuma linha acima e mecanismo.
+  "os dois sao do subgrupo C09" explica o que o MODELO viu; nao afirma que
+  ha interacao farmacologica, nem qual seria. Se houver mecanismo conhecido,
+  ele vem da fonte pelo caminho deterministico e aparece no achado
+  DOCUMENTADO — nunca daqui.
+
+Gravado: ml/saida/40_explicabilidade.json

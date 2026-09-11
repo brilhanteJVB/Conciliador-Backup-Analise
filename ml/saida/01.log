@@ -1,0 +1,138 @@
+
+==========================================================================
+AUDITORIA DO DATASET DE INTERACAO FARMACO x FARMACO
+==========================================================================
+Banco: database/conciliador.db   impressao: 59d4915db0a349e3
+
+--- 1. VOLUME — linha nao e observacao
+  linhas em interacao_substancia                              112.520 
+  pares distintos (a<b)                                        94.770 
+  linhas por par (media)                                         1.19 
+  substancias no banco                                          2.094 
+  substancias com >=1 interacao                                   957 (45,7%)
+
+  A inflacao vem de duas fontes afirmando o mesmo par. O dataset
+  tem 94.770 observacoes de par, nao 112.520.
+
+--- 2. MULTIPLICIDADE E DUPLICIDADE
+  pares afirmados por 1 fonte(s)                               77.020 (81,3%)
+  pares afirmados por 2 fonte(s)                               17.750 (18,7%)
+
+  fonte 7 — DDInter (ALTA)                                     58.323 
+  fonte 8 — db_drug_interactions (MEDIA)                       54.197 
+  duplicata exata (mesmo par, mesma fonte)                          0 <- UNIQUE(a,b,fonte_id) impede
+
+--- 3. SIMETRIA E DIRECIONALIDADE
+  linhas violando a<b (par invertido)                               0 <- CHECK do esquema impede
+
+  SIMETRICAS (par canonico, uma linha):
+    farmaco x farmaco     — "A interage com B" == "B interage com A".
+                            A ordem em que o paciente tomou nao muda o par.
+  ASSIMETRICAS (nao viram par canonico, e nao entram neste dataset):
+    papel_farmacocinetico — "A inibe CYP3A4" e "B e substrato de CYP3A4" sao
+                            papeis diferentes; a direcao do efeito depende de
+                            qual e qual. Vira ATRIBUTO do lado, nao rotulo.
+    regra_separacao       — tem lado que deve ser adiado.
+    interacao_doenca      — farmaco -> doenca, nunca o contrario.
+  CONSEQUENCIA: o alvo de existencia e simetrico, logo os atributos de par tem
+  de ser simetricos tambem (soma, ou-logico, min/max), nunca "valor de A" e
+  "valor de B" em posicoes fixas — isso ensinaria a ordem do id.
+
+--- 4. GRAFO DE INTERACAO — a medicao que decide sobre GNN
+  substancias com grau ZERO                                     1.137 (54,3%)  <- ponto cego
+  substancias com grau >= 1                                       957 (45,7%)
+  grau medio (todas as substancias)                              90.5 
+  grau medio (so as conectadas)                                 198.1 
+  grau mediano (conectadas)                                       178 
+  grau maximo                                                     629 
+  pares possiveis entre as conectadas                         457.446 
+  pares observados                                             94.770 
+  DENSIDADE do subgrafo conectado                              20,72% 
+  componentes conexas (entre as conectadas)                         1 
+  maior componente                                                957 (100,0% das conectadas)
+
+  LEITURA: o grafo e dois objetos colados. Entre as 957 conectadas ele e DENSO
+  (20,7% de todos os pares possiveis ja e aresta) e tem uma componente unica —
+  ha pouca estrutura de vizinhanca a explorar, porque quase todo mundo e
+  vizinho de quase todo mundo. E ha 1137 substancias com grau zero, onde um
+  modelo que propaga por aresta nao tem o que propagar. Essas 1137 sao
+  exatamente as que motivam o projeto: o farmaceutico consulta o sistema
+  justamente sobre o que nao esta na base.
+
+--- 5. COBERTURA DE ATRIBUTO — o teto do que se pode aprender
+  codigo ATC                                                    1.153 (55,1% de todas | 94,4% das conectadas)
+  canal de dispensacao (tarja)                                  1.450 (69,2% de todas | 84,7% das conectadas)
+  CAS                                                           1.505 (71,9% de todas | 98,7% das conectadas)
+  numero DCB                                                    1.757 (83,9% de todas | 99,2% das conectadas)
+  indice terapeutico estreito=1                                     0 (0,0% de todas | 0,0% das conectadas)
+  na RENAME=1                                                       0 (0,0% de todas | 0,0% das conectadas)
+  papel farmacocinetico (CYP)                                      22 (1,1% de todas | 2,3% das conectadas)
+  alvo molecular                                                    0 (0,0% de todas | 0,0% das conectadas)
+  regra de administracao                                          620 (29,6% de todas | 55,8% das conectadas)
+  interacao com doenca                                            102 (4,9% de todas | 0,9% das conectadas)
+  interacao com item                                              196 (9,4% de todas | 19,5% das conectadas)
+  reacao adversa                                                    0 (0,0% de todas | 0,0% das conectadas)
+
+  O que sobra como atributo REAL: a hierarquia ATC (94,4% das conectadas), a
+  tarja e o numero de produtos ativos. CYP cobre 22 substancias e alvo
+  molecular NENHUMA — a camada IUPHAR nao foi carregada neste projeto.
+  Estrutura quimica (fingerprint, descritor molecular) nao existe no acervo:
+  ha CAS, que e identificador, nao estrutura. Nao ha como calcular
+  similaridade estrutural sem carregar fonte nova.
+
+--- 6. GRANULARIDADE DO ATC — por que o 5o nivel nao pode ser atributo
+  substancias com codigo de 7 caracteres                        1.153 
+  codigos ATC de 5o nivel com >1 substancia                         0 
+  classes distintas no nivel 1 (1 chars)                           14 
+  classes distintas no nivel 2 (3 chars)                           83 
+  classes distintas no nivel 3 (4 chars)                          181 
+  classes distintas no nivel 4 (5 chars)                          445 
+
+  Todo codigo gravado e de 5o nivel e nenhum e compartilhado por duas
+  substancias: o 5o nivel E a substancia. Usa-lo como atributo categorico
+  seria entregar o id ao modelo. Os niveis 1 a 4 sao classe de verdade e
+  entram; o 5o fica fora. (Mesmo motivo de D-028 para duplicidade.)
+  LIMITACAO: a coluna guarda UM codigo por substancia; farmaco com mais de uma
+  indicacao ATC perde os outros. E limite do esquema atual, nao do modelo.
+
+--- 7. EIXO TEMPORAL — split por data e possivel?
+  datas distintas de importacao                                     1 ['2026-09-10']
+  colunas de data na tabela de interacao                            0 
+
+  NAO. Todas as cargas sao do mesmo dia e nenhuma das duas fontes publica a
+  data em que a interacao foi documentada. Split temporal fica declarado como
+  IMPOSSIVEL com os dados atuais — nao substituido por proxy.
+
+--- 8. COLUNAS QUE NAO PODEM SER ATRIBUTO (circularidade)
+  interacao_substancia.tipo                  PK/PD sai de regex sobre a descricao da propria interacao
+  interacao_substancia.gravidade             graduacao da propria afirmacao de interacao
+  interacao_substancia.mecanismo             traduzido da descricao da interacao
+  interacao_substancia.efeito_esperado       traduzido da descricao da interacao
+  interacao_substancia.descricao_original    e o texto do rotulo
+  achado.prioridade                          calculada pelas nossas proprias regras a partir do rotulo
+
+  Registro: no sistema ANTERIOR o vetor farmacodinamico era extraido de
+  db_drug_interactions.csv — o mesmo arquivo que dava o rotulo. A ablacao
+  "SEM PD" custava 0,0428 de AUC. Neste projeto essa coluna nao existe: os
+  atributos vem de WHO ATC, CMED e FDA, fontes que nao afirmam interacao
+  nenhuma. A circularidade foi resolvida por construcao. A ablacao sera feita
+  igual, sobre os atributos de GRAFO, que tem o mesmo problema por outro
+  caminho: grau e contagem de rotulos positivos disfarcada de atributo.
+
+--- 9. UNIDADE DO DATASET — decisao
+  Unidade escolhida: O PAR CANONICO DE SUBSTANCIAS (a<b), uma linha por par.
+
+  Por que nao a linha de interacao: 112.520 linhas viram 94.770 pares porque duas
+  fontes afirmam o mesmo par. Treinar nas linhas daria peso 2 a 17.750 pares
+  (18,7% deles) e peso 1 ao resto — o modelo aprenderia "este par aparece em
+  duas bases", que e propriedade da compilacao, nao farmacologia.
+
+  Por que nao o achado: achado depende de paciente. Existencia de interacao e
+  propriedade do par; misturar contexto de paciente num alvo que pretende ser
+  geral e exatamente o que a especificacao §12 proibe.
+
+  O numero de fontes que afirmam o par NAO e descartado: vira o rotulo
+  auxiliar `n_fontes`, usado para medir concordancia entre bases e para o
+  teste de robustez do rotulo — nunca como atributo de entrada.
+
+Gravado: ml/saida/01_auditoria_dataset.json

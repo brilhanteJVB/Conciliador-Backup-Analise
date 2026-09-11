@@ -1,0 +1,1268 @@
+PIPELINE DO CONCILIADOR — reconstrução completa
+
+========================================================================
+>> pipeline/10_fontes.py  —  catálogo de fontes
+========================================================================
+
+FONTES
+  inseridas agora                              19
+  ja existentes                                0
+  total no banco                               19
+  REGULATORIA                                  6
+  GOVERNAMENTAL                                4
+  BASE_CIENTIFICA                              4
+  COMPILACAO                                   3
+  CURADORIA                                    1
+  BULA                                         1
+   (0.3s)
+
+========================================================================
+>> pipeline/20_substancias.py  —  substâncias (ANVISA + DCB)
+========================================================================
+Lendo DCB (IN 462)...
+  12736 denominacoes -> 10667 esqueletos (2069 variantes de sal colapsadas)
+Lendo cadastro ANVISA...
+  43441 registros; 3614 esqueletos distintos; 2094 com produto ativo
+
+SUBSTANCIAS
+  registros ANVISA lidos                       43441
+  denominacoes DCB lidas                       12736
+  substancias inseridas (com produto ativo)    2094
+    com nomenclatura DCB oficial               1757 (83.9%)
+    sem DCB (nome da ANVISA)                   337
+    marcadas AMBIGUA para curadoria            32
+  sinonimos                                    1207
+  identificadores externos                     5110
+   (3.2s)
+
+========================================================================
+>> pipeline/30_produtos.py  —  produtos, apresentações e EAN (CMED)
+========================================================================
+indice de substancias: 2094 esqueletos
+
+PRODUTOS E APRESENTACOES
+  linhas CMED lidas                            25702
+  produtos                                     8935
+  apresentacoes                                25702
+    com concentracao estruturada               21342 (83.0%)
+  codigos de barras                            26889
+    EAN recusados por formato                  0
+  vinculos apresentacao-substancia             33129
+  substancias com canal de dispensacao         1450
+  strings de substancia sem correspondencia    118
+
+  10 mais frequentes sem correspondencia:
+    orlipastat                                           17
+    eritropoietina                                       14
+    ion citrato                                          14
+    vacina influenza tetravalente                        11
+    vacina vírus sincicial respiratório a e b            8
+    hidroxinaftoato de salmeterol                        7
+    3 e 4                                                7
+    extrato de ginkgo biloba                             6
+    plantago ovata phil                                  6
+    vírus da varicela -zoster                            6
+   (3.5s)
+
+========================================================================
+>> pipeline/40_atc.py  —  classificação ATC (WHO)
+========================================================================
+
+CLASSIFICACAO ATC
+  linhas WHO lidas                             7536
+  classes inseridas                            6996
+  substancias com codigo ATC                   1153 de 2094 (55.1%)
+
+  nivel   classes   nome em português   cobertura
+    1         14             14       100.0%
+    2         94             94       100.0%
+    3        271            106        39.1%
+    4        942            138        14.6%
+    5       6215           1869        30.1%
+
+  5284 classes ficaram em inglês (não cobertas pelo glossário).
+  Ficam declaradas como não traduzidas, nunca traduzidas pela metade.
+   (0.5s)
+
+========================================================================
+>> pipeline/50_regras_administracao.py  —  regras de administração (DrugBank)
+========================================================================
+
+REGRAS DE ADMINISTRACAO
+  farmacos no DrugBank                         1423
+    sem produto ativo no Brasil (ignorados)    735
+  regras de administracao                      671
+  regras de separacao                          71
+    com intervalo declarado pela fonte         61
+    SEM intervalo (fonte nao publica)          10
+  interacoes com item (alimento/planta/mineral) 289
+  interacoes com habito (alcool/cafeina)       196
+  itens nao medicamentosos criados             14
+  contradicoes intra-fonte removidas           1
+  substancias BR com regra de administracao    583 de 2094 (27.8%)
+
+  por tipo de regra:
+    INDIFERENTE_ALIMENTO           332
+    COM_ALIMENTO                   160
+    JEJUM                          58
+    CONFORME_SINTOMA               49
+    COM_AGUA_ABUNDANTE             48
+    ANTES_ALIMENTO                 15
+    APOS_ALIMENTO                  11
+   (0.4s)
+
+========================================================================
+>> pipeline/55_regras_bula.py  —  regras de administração (bulas ANVISA)
+========================================================================
+
+REGRAS DE ADMINISTRACAO — BULAS ANVISA
+  bulas lidas                                  150
+    casaram com substancia brasileira          145
+    com secao de posologia localizada          142
+    sem correspondencia (ignoradas)            5
+  regras extraidas                             52
+  regras confirmadas por DUAS fontes           1
+  bulas com regra de alimentacao ambigua (nao gravada) 3
+
+  por tipo:
+    NAO_PARTIR_NAO_TRITURAR        35
+    COM_ALIMENTO                   4
+    APOS_ALIMENTO                  4
+    COM_AGUA_ABUNDANTE             3
+    JEJUM                          3
+    ANTES_ALIMENTO                 2
+    SUBLINGUAL                     1
+
+  amostra do trecho que gerou a regra:
+    acetato de clormadinon NAO_PARTIR_NAO_TRITURAR revestidos devem ser tomados diariamente seguindo a direção da seta. Este medicamento não deve ser partido ou 
+    acetato de racealfatoc COM_ALIMENTO           melhor absorção, o acetato de racealfatocoferol deve ser administrado preferencialmente com alimentos que cont
+    acetato de racealfatoc NAO_PARTIR_NAO_TRITURAR éricos de acetato de racealfatocoferol, como prescrito por seu médico. Este medicamento não deve ser partido, 
+    acido ursodesoxicolico NAO_PARTIR_NAO_TRITURAR lo imediatamente caso não esteja muito próximo da dose subsequente. Este medicamento não deve ser partido ou m
+    acido ursodesoxicolico COM_AGUA_ABUNDANTE     s. Poderá ser administrada a metade da dose diária após o jantar. Ingerir os comprimidos com um copo de água.
+   (0.7s)
+
+========================================================================
+>> pipeline/58_conflitos_administracao.py  —  conflitos entre fontes
+========================================================================
+
+CONFLITOS ENTRE FONTES — REGRAS DE ADMINISTRACAO
+  substancias com regra de alimentacao         586
+  conflitos novos registrados                  0
+    contradicao direta (jejum x com alimento)  0
+    divergencia de especificidade              0
+  regras confirmadas por duas fontes           1
+  total em auditoria_conflito                  4
+
+  Nenhum conflito foi resolvido automaticamente.
+   (0.1s)
+
+========================================================================
+>> pipeline/60_interacoes_substancia.py  —  interações fármaco × fármaco
+========================================================================
+carregando DDInter (gradua gravidade, nao publica descricao)...
+carregando db_drug_interactions (descreve o efeito, nao gradua)...
+
+INTERACAO FARMACO x FARMACO
+  DDInter — linhas lidas                       222383
+  DDInter — inseridas                          58323
+  DDInter — por nivel                          {'MODERADA': 28027, 'MAIOR': 8106, 'MENOR': 2326, 'NAO_DETERMINADA': 19864}
+  db_drug — linhas lidas                       191541
+  db_drug — inseridas                          54197
+  db_drug — descricoes traduzidas              54183
+  db_drug — por tipo                           {'FARMACODINAMICA': 24387, 'FARMACOCINETICA': 27874, 'NAO_DETERMINADO': 1936}
+  nomes EN gravados como sinonimo INN          983
+  nomes sem correspondencia BR                 1340
+  nomes ambiguos (nao resolvidos)              5
+                                               
+  linhas em interacao_substancia               112520
+  pares distintos                              94770
+  pares afirmados por DUAS fontes              17750
+  pares com CONFLITO de gravidade              0
+  linhas com gravidade NAO_DETERMINADA         74061 (65.8%)
+  linhas com efeito em portugues               54183 (48.2%)
+  substancias BR com ao menos uma interacao    957 de 2094 (45.7%)
+   (9.9s)
+
+========================================================================
+>> pipeline/62_papel_farmacocinetico.py  —  papel farmacocinético (FDA)
+========================================================================
+
+PAPEL FARMACOCINETICO (FDA)
+  linhas lidas                                 31
+  inseridas                                    28
+  sem correspondencia no Brasil                3
+  ambiguas (nao resolvidas)                    0
+  substancias BR cobertas                      22 de 2094 (1.1%)
+  por papel                                    {'INIBIDOR': 13, 'INDUTOR': 7, 'SUBSTRATO': 8}
+  por sistema                                  {'CYP1A2': 3, 'CYP2C8': 4, 'CYP2C9': 2, 'CYP2C19': 4, 'CYP2D6': 5, 'CYP3A4': 9, 'CYP2B6': 1}
+  pares inferiveis (inibidor/indutor x substrato) 23
+
+  nao casaram com substancia brasileira:
+    desipramine
+    tolbutamide
+    triazolam
+
+  LIMITE DECLARADO: 8 sistemas CYP, nenhum transportador. 
+  Nao ha no acervo fonte de papel PK com cobertura ampla; a lacuna
+  esta registrada em docs/novas_fontes.md.
+   (0.1s)
+
+========================================================================
+>> pipeline/64_contraindicacoes_bula.py  —  fármaco × doença (bulas)
+========================================================================
+
+FARMACO x DOENCA (bulas ANVISA)
+  bulas lidas                                  150
+  sem seção de contraindicações                2
+  substância da bula não casou                 0
+  substância ambígua (não resolvida)           0
+  frases de 'não estabelecido' descartadas     2
+  linhas inseridas                             182
+  substâncias cobertas                         102
+  condições distintas                          28
+  por relação                                  {'CONTRAINDICADO': 94, 'USAR_COM_CAUTELA': 88}
+
+  por grupo de condição:
+    Gestação e lactação          102
+    Renal e hepático             24
+    Cardiovascular               17
+    Metabólico e endócrino       11
+    Digestivo                    8
+    Hematológico                 8
+    Neurológico e psiquiátrico   6
+    Respiratório                 5
+    Infeccioso                   1
+
+  condições mais frequentes:
+    gravidez                           78
+    lactação                           24
+    insuficiência hepática             13
+    insuficiência renal                11
+    diabetes mellitus                  9
+    insuficiência cardíaca             6
+    anemia                             4
+    asma                               4
+    doença inflamatória intestinal     4
+    úlcera péptica                     3
+    epilepsia                          3
+    depressão                          2
+
+  amostra do trecho que gerou a linha:
+    acebrofilina             úlcera péptica           CONTRAINDICADO    A acebrofilina não deve ser utilizado em pacientes portadores de doenças hepáticas, renais ou cardiovasculares
+    acebrofilina             epilepsia                CONTRAINDICADO    A acebrofilina não deve ser utilizado em pacientes portadores de doenças hepáticas, renais ou cardiovasculares
+    acetato de leuprorrelina gravidez                 CONTRAINDICADO    Lectrum (acetato de leuprorrelina) é contraindicado a mulheres grávidas ou que possam engravidar durante o tra
+    acetato de racealfatocof anemia                   CONTRAINDICADO    CONTRAINDICAÇÕES Este medicamento é contraindicado em pacientes que apresentam hipersensibilidade conhecida ao
+    acetato de racealfatocof gravidez                 USAR_COM_CAUTELA  ADVERTÊNCIAS E PRECAUÇÕES”) Este medicamento não deve ser utilizado por mulheres grávidas sem orientação médic
+    acetato de sódio tri-hid insuficiência cardíaca   CONTRAINDICADO    CONTRAINDICAÇÕES O acetato de sódio é contraindicado para pacientes com hipernatremia ou retenção de líquidos,
+    acetato de sódio tri-hid insuficiência renal      CONTRAINDICADO    CONTRAINDICAÇÕES O acetato de sódio é contraindicado para pacientes com hipernatremia ou retenção de líquidos,
+    ácido gamaminobutírico   gravidez                 CONTRAINDICADO    Categoria de Risco na Gravidez: C Este medicamento não deve ser utilizado por mulheres grávidas sem orientaçã 
+
+  TODAS as 182 linhas estão PENDENTE de revisão farmacêutica e
+  entram no relatório como EXTRAIDO_AUTOMATICAMENTE, nunca como
+  documentado. A gravidade fica NAO_DETERMINADA: a bula não gradua.
+   (0.5s)
+
+========================================================================
+>> pipeline/65_habitos_bula.py  —  fármaco × hábito: tabagismo (bulas)
+========================================================================
+
+FARMACO x HABITO — tabagismo (bulas)
+  bulas lidas                                  150
+  linhas de tabagismo inseridas                3
+  frases que citaram tabaco sem verbo de risco 18
+  substância da bula não resolvida             0
+  interacao_habito por hábito                  {'ALCOOL': 169, 'CAFEINA': 27, 'TABAGISMO': 3}
+    acetato de clormadinona        As mulheres acima dos 35 anos fumantes devem utilizar outros métodos contraceptivos.
+    alfa1antitripsina              Desta forma, é fortemente recomendado que o paciente deixe de fumar e evite ambientes com fumaça de tabaco.
+    algestona acetofenida          O tabagismo aumenta o risco de efeitos adversos cardiovasculares.
+
+  Todas PENDENTE de revisão. Gravidade NAO_DETERMINADA: a bula
+  descreve o risco em texto e não publica escala.
+   (0.3s)
+
+========================================================================
+>> pipeline/90_validacao.py  —  validação estrutural
+========================================================================
+VALIDACAO ESTRUTURAL — conciliador.db
+
+INTEGRIDADE
+  [OK ] violacoes de chave estrangeira                             0
+  [OK ] integrity_check do SQLite                                  ok
+
+INVARIANTES DE SEGURANCA CLINICA
+  [OK ] predicao com gravidade atribuida pelo modelo               0
+  [OK ] achado PREVISTO sem probabilidade do modelo                0
+  [OK ] achado DOCUMENTADO sem nivel de evidencia                  0
+  [OK ] achado PREVISTO sem apontar a linha de predicao que o sustenta 0
+  [OK ] achado PREVISTO com nivel de evidencia de publicacao       0
+  [OK ] achado de origem MODELO que nao se declara previsao        0
+  [OK ] mais de um modelo ativo para o mesmo problema              0
+  [OK ] modelo ativo sem estar homologado                          0
+  [OK ] modelo sem semente, versao de dados ou espaco de atributos 0
+  [OK ] predicao revisada sem quem revisou                         0
+  [OK ] predicao apontando para modelo aposentado e ainda em uso   0
+  [OK ] interacao com par fora de ordem (A > B)                    0
+  [OK ] regra de separacao com intervalo fora de 0,25-24 h         0
+  [OK ] horario invalido                                           0
+
+INVARIANTES DA FASE 5 — INTERACAO, ACHADO E CONCILIACAO
+  [OK ] interacao afirmando gravidade que a fonte nao gradua (db_drug_interactions) 0
+  [OK ] interacao com efeito em portugues igual ao original em ingles 0
+  [OK ] interacao sem evidencia de origem                          0
+  [OK ] contraindicacao de bula sem trecho literal que a sustente  0
+  [OK ] contraindicacao de bula com gravidade inventada            0
+  [OK ] extracao por regex apresentada como revisada               0
+  [OK ] papel farmacocinetico sem potencia declarada               0
+  [OK ] achado com natureza PREVISTO e status divergente           0
+  [OK ] achado de regra carregando probabilidade de modelo         0
+  [OK ] achado marcado REVISADO sem extracao revisada              0
+  [OK ] achado com informacao insuficiente acima de informativo    0
+  [OK ] achado sem justificativa de prioridade                     0
+  [OK ] achado agrupado sem representante existente                0
+  [OK ] achado exibindo gravidade que nenhuma evidencia declara    0
+  [OK ] intencionalidade decidida sem profissional identificado    0
+
+RASTREABILIDADE
+  [OK ] substancia sem evidencia de origem                         0
+  [OK ] apresentacao sem evidencia de origem                       0
+  [OK ] evidencia apontando para fonte inexistente                 0
+  [OK ] carga sem contagem registrada                              0
+
+QUALIDADE DOS DADOS
+  [OK ] substancia sem produto ativo                               0
+  [OK ] CAS fora do formato oficial                                0
+  [OK ] EAN fora do padrao GS1                                     0
+  [OK ] esqueleto duplicado entre substancias                      0
+  [OK ] ambiguidade marcada sem registro para curadoria            0
+  [OK ] classe ATC apontando para pai inexistente                  0
+
+VOLUME CARREGADO
+  fonte                                                            19
+  carga                                                            11
+  evidencia                                                        153653
+  substancia                                                       2094
+  substancia_sinonimo                                              2190
+  substancia_identificador                                         5110
+  resolucao_ambigua                                                41
+  produto                                                          8935
+  apresentacao                                                     25702
+  apresentacao_ean                                                 26889
+  apresentacao_substancia                                          33129
+  classe_atc                                                       6996
+  interacao_substancia                                             112520
+  interacao_doenca                                                 182
+  interacao_item                                                   289
+  interacao_habito                                                 199
+  papel_farmacocinetico                                            28
+  doenca                                                           28
+  regra_administracao                                              723
+  regra_separacao                                                  71
+
+COBERTURA — o que o sistema sabe e o que nao sabe
+  substancias com codigo ATC                             1153  (55.1%)
+  substancias com CAS                                    1505  (71.9%)
+  substancias com numero DCB                             1757  (83.9%)
+  substancias com canal de dispensacao                   1450  (69.2%)
+  substancias ligadas a alguma apresentacao              1709  (81.6%)
+  classes ATC com nome em portugues                      1712  (24.5%)
+
+COBERTURA DOS MODULOS DO MOTOR DE CONCILIACAO
+  modulo 1  farmaco x farmaco                             957  (45.7%)
+  modulo 2  farmaco x doenca                              102  (4.9%)
+  modulos 4-6  farmaco x alimento, planta e suplemento    196  (9.4%)
+  modulo 7  farmaco x habito                              184  (8.8%)
+  modulo 7b farmaco x CYP                                  22  (1.1%)
+  modulo 8  duplicidade (substancias com ATC de 4o nivel)   1153  (55.1%)
+  modulos 10-11 regra de administracao                    620  (29.6%)
+  linhas de interacao COM gravidade graduada            38459  (34.2%)
+
+========================================================================
+AVISOS (nao bloqueiam):
+  - 5284 classes ATC ainda em ingles (declaradas, nao traduzidas pela metade)
+  - 74061 de 112520 linhas de interacao (65.8%) estao NAO_DETERMINADA porque a fonte nao gradua
+VALIDACAO COMPLETA — todas as garantias satisfeitas
+   (2.2s)
+
+
+########################################################################
+# VERIFICAÇÃO 2 — independente da carga
+########################################################################
+
+========================================================================
+>> tests/teste_normalizacao.py  —  normalizador
+========================================================================
+NORMALIZADOR — casos fixados
+  [OK ] 'dipirona monoidratada'              -> metamisol      PT com sal <-> INN
+  [OK ] 'Metamizole sodium'                  -> metamisol      INN com sal <-> PT
+  [OK ] 'cloridrato de fluoxetina'           -> fluoksetin     sal PT
+  [OK ] 'Fluoxetine hydrochloride'           -> fluoksetin     sal EN
+  [OK ] 'varfarina sódica'                   -> varfarin       anticoagulante, alto risco
+  [OK ] 'Warfarin'                           -> varfarin       
+  [OK ] 'omeprazol'                          -> omeprasol      
+  [OK ] 'Omeprazole'                         -> omeprasol      
+  [OK ] 'levotiroxina sódica'                -> levotiroksin   faixa terapeutica estreita
+  [OK ] 'Levothyroxine'                      -> levotiroksin   
+  [OK ] 'ácido acetilsalicílico'             -> aspirin        acido inicia o nome
+  [OK ] 'Acetylsalicylic acid'               -> aspirin        
+  [OK ] 'ácido fólico'                       -> akid folik     acido inicia o nome
+  [OK ] 'maleato ácido de timolol'           -> timolol        acido apos sal
+  [OK ] 'timolol'                            -> timolol        
+  [OK ] 'sulfato de morfina'                 -> morfin         opioide
+  [OK ] 'sulfato de morfina pentaidratado'   -> morfin         hidrato superior
+  [OK ] ''                                   ->                vazio
+  [OK ] '   '                                ->                so espaco
+
+SIMETRIA — PT e EN da mesma molécula têm de coincidir
+  [OK ] dipirona         / Metamizole       -> metamisol / metamisol
+  [OK ] varfarina        / Warfarin         -> varfarin / varfarin
+  [OK ] omeprazol        / Omeprazole       -> omeprasol / omeprasol
+  [OK ] sinvastatina     / Simvastatin      -> sinvastatin / sinvastatin
+  [OK ] amoxicilina      / Amoxicillin      -> amoksikilin / amoksikilin
+  [OK ] metformina       / Metformin        -> metformin / metformin
+  [OK ] ibuprofeno       / Ibuprofen        -> ibuprofen / ibuprofen
+  [OK ] paracetamol      / Paracetamol      -> paraketamol / paraketamol
+  [OK ] sertralina       / Sertraline       -> sertralin / sertralin
+  [OK ] clonazepam       / Clonazepam       -> klonasepam / klonasepam
+
+SEPARAÇÃO — moléculas diferentes não podem colidir
+  [OK ] varfarina      vs vareniclina    -> varfarin / vareniklin
+  [OK ] clonazepam     vs clobazam       -> klonasepam / klobasam
+  [OK ] losartana      vs valsartana     -> losartan / valsartan
+  [OK ] morfina        vs codeína        -> morfin / kodein
+
+==============================================================
+NORMALIZADOR OK — 33 casos
+   (0.1s)
+
+========================================================================
+>> tests/teste_schema.py  —  invariantes do esquema
+========================================================================
+ESQUEMA — criação
+  44 tabelas, 14 views criadas
+
+INVARIANTE 1 — ML nunca atribui gravidade
+  [OK ] recusou (IntegrityError): predição com gravidade_sugerida preenchida
+  [OK ] aceitou: predição com gravidade_sugerida NULL
+
+INVARIANTE 2 — previsão não se disfarça de fato
+  [OK ] recusou (IntegrityError): achado PREVISTO sem probabilidade do modelo
+  [OK ] recusou (IntegrityError): achado DOCUMENTADO sem nível de evidência
+  [OK ] aceitou: achado DOCUMENTADO com evidência
+
+INVARIANTE 2b — os eixos do achado não se disfarçam (Fase 5)
+  [OK ] recusou (IntegrityError): natureza PREVISTO com status que diz outra coisa
+  [OK ] recusou (IntegrityError): achado de REGRA carregando probabilidade de modelo
+  [OK ] recusou (IntegrityError): achado se dizendo REVISADO sem extração revisada
+  [OK ] recusou (IntegrityError): conflito declarado sem natureza conflitante
+  [OK ] recusou (IntegrityError): achado agrupado sem apontar o representante
+
+INVARIANTE 2d — previsão é rastreável até o modelo (Fase 7)
+  [OK ] recusou (IntegrityError): achado PREVISTO apontando para uma regra, não para a previsão
+  [OK ] aceitou: achado PREVISTO apontando para predicao.1
+  [OK ] recusou (IntegrityError): achado PREVISTO com nível de evidência de publicação
+  [OK ] recusou (IntegrityError): achado de MODELO com natureza que não é previsão
+
+INVARIANTE 2e — modelo não é trocado em silêncio (Fase 7)
+  [OK ] recusou (IntegrityError): modelo ativo sem estar homologado
+  [OK ] aceitou: modelo homologado e ativo
+  [OK ] recusou (IntegrityError): segundo modelo ativo para o mesmo problema
+  [OK ] aceitou: segundo modelo, inativo
+  [OK ] recusou (IntegrityError): previsão revisada sem quem revisou
+
+INVARIANTE 2c — o sistema não decide intencionalidade
+  [OK ] recusou (IntegrityError): divergência classificada como erro sem assinatura
+  [OK ] recusou (IntegrityError): par de conciliação sem nenhum dos dois lados
+  [OK ] aceitou: divergência com intencionalidade não determinada
+  [OK ] recusou (IntegrityError): par conciliado com tipo de divergência
+
+INVARIANTE 3 — intervalo não estabelecido é NULL, não número inventado
+  [OK ] aceitou: regra_separacao sem intervalo (fonte não publica)
+  [OK ] recusou (IntegrityError): intervalo absurdo (48 h)
+  [OK ] recusou (IntegrityError): alvo_tipo ITEM apontando para substância
+
+INVARIANTE 4 — par ordenado, sem A-B e B-A duplicados
+  [OK ] recusou (IntegrityError): interação com a_id > b_id
+  [OK ] aceitou: interação com a_id < b_id
+
+INVARIANTE 5 — horário é hora válida, não texto livre
+  [OK ] aceitou: posologia estruturada
+  [OK ] recusou (IntegrityError): horário 'de manhã'
+  [OK ] aceitou: horário 06:30
+
+INVARIANTE 6 — uso contínuo não tem data de término prevista
+  [OK ] recusou (IntegrityError): uso contínuo com data de término
+
+P-01 — duas fontes podem afirmar o mesmo par (e o conflito aparece)
+  [OK ] aceitou: mesmo par, segunda fonte
+  [OK ] recusou (IntegrityError): mesmo par, mesma fonte, duas vezes
+  [OK ] conflito de gravidade detectado [('DDInter', 'MAIOR', 'db_drug_interactions', 'MODERADA')]
+
+INVARIANTE 7 — a view não deixa passar inferência não revisada
+  [OK ] inferência pendente barrada pela view (total=3 liberadas=2)
+
+INVARIANTE 8 — separação sem intervalo produz texto honesto
+  [OK ] orientação declara ausência do intervalo Requer separação — intervalo não estabelecido na fonte
+
+P-03 — hora fora de 00:00–23:59
+  [OK ] recusou (IntegrityError): hora 29:59
+  [OK ] aceitou: hora 23:59
+
+P-04 — identificadores externos
+  [OK ] aceitou: DrugBank ID
+  [OK ] recusou (IntegrityError): sistema de identificador não previsto
+
+P-05 — ambiguidade é registrada, não resolvida por sorteio
+  [OK ] aceitou: termo ambíguo com 2 candidatos
+  [OK ] recusou (IntegrityError): 'ambiguidade' com 1 só candidato
+
+P-06 — EAN repete, GGREM não
+  [OK ] aceitou: duas apresentações distintas
+  [OK ] aceitou: o mesmo EAN em duas apresentações (ocorre na CMED)
+  [OK ] aceitou: segunda barra da mesma apresentação
+  [OK ] recusou (IntegrityError): EAN com letra
+  [OK ] recusou (IntegrityError): EAN de 5 dígitos
+  [OK ] recusou (IntegrityError): dois GGREM iguais
+
+P-02 — rastreabilidade até a carga
+  [OK ] aceitou: evidência ligada a fonte e carga
+  [OK ] afirmação rastreável até fonte, arquivo e data ('DDInter', 'ddinter_A.csv', 1)
+
+P-08 — índices em colunas de junção
+  [OK ] índices de junção presentes 
+
+INTEGRIDADE REFERENCIAL
+  [OK ] nenhuma violação de chave estrangeira []
+  [OK ] recusou (IntegrityError): interação apontando para substância inexistente
+
+==============================================================
+TODAS AS VERIFICAÇÕES DO ESQUEMA PASSARAM
+   (0.1s)
+
+========================================================================
+>> tests/verificacao_20_substancias.py  —  substâncias (independente)
+========================================================================
+VERIFICACAO INDEPENDENTE — carga de substancias
+
+V1 — recontagem direta do arquivo bruto (codigo independente)
+     linhas ativas no CSV ............ 17271
+     strings brutas distintas ....... 2365
+     substancias no banco ........... 2094
+  [OK ] agrupamento reduziu as grafias cruas (2094 < 2365, reducao de 11.5%)
+  [OK ] nenhuma substancia sem produto ativo entrou 
+
+V2 — comparacao com o sistema anterior (codigo diferente)
+     substancias — anterior: 2097 | novo: 2094
+     esqueletos em comum ............ 2068 (98.6% do anterior)
+     so no anterior ................. 29
+     so no novo ..................... 26
+       exemplos so no anterior: ['1 34 98 biperiden k l port', '19 kovid rekombinant vakin', '254 kepa ns98', '8 bovin p1a rearanj rotavirus uman', 'adjuvad']
+       exemplos so no novo: ['1 98 k l', '254', '34 biperiden port', '8 bovin p1a', 'agua']
+  [OK ] convergencia com o sistema anterior acima de 95% (98.6%)
+
+V3 — casos conhecidos de balcao
+  [OK ] substancias de balcao presentes (15/15)
+  [OK ] CAS no formato oficial (0 fora do padrao em 1505)
+  [OK ] nenhum nome com residuo de divisao []
+     (47 nomes com parenteses: citacao de autoridade botanica)
+  [OK ] um esqueleto = uma substancia []
+  [OK ] toda ambiguidade tem registro para curadoria (32 marcadas, 41 registradas)
+
+V4 — rastreabilidade
+  [OK ] toda substancia tem evidencia de origem (0 sem)
+  [OK ] rastro chega a fonte, arquivo e data ('ANVISA - Medicamentos registrados', 'TA_CONSULTA_MEDICAMENTOS.CSV', '2026-09-10 03:26:12')
+  [OK ] integridade referencial []
+
+==============================================================
+VERIFICACAO INDEPENDENTE PASSOU
+   (0.7s)
+
+========================================================================
+>> tests/verificacao_30_produtos.py  —  produtos (independente)
+========================================================================
+VERIFICAÇÃO INDEPENDENTE — produtos, apresentações e EAN
+
+V1 — recontagem direta da CMED (código independente)
+     linhas CMED ................ 25702
+  [OK ] apresentações = GGREM distintos (25702 vs 25702)
+  [OK ] produtos = (registro9, nome) distintos (8935 vs 8935)
+  [OK ] códigos de barras conferem (26889 vs 26889)
+  [OK ] mais apresentações do que produtos (2.9 apresentações por produto)
+
+V2 — comparação com o sistema anterior (código diferente)
+     EAN — anterior: 26762 | novo: 26701 | em comum: 26700
+  [OK ] cobertura de EAN do sistema anterior acima de 90% (99.8%)
+  [OK ] o novo não perdeu volume de EAN (26701 vs 26762)
+
+V3 — casos conhecidos
+  [OK ] leitura por código de barras devolve produto e apresentação 
+       7891106000956 -> BAYCUTEN N | 10 MG/G + 0,443 MG/G CREM DERM CT BG AL 
+       7896016806469 -> ORENCIA | 250 MG PO LIOF SOL INJ CT 1 FA + SER DES
+       7896016808197 -> ORENCIA | 125 MG/ML SOL INJ SC CT 4 SER PREENC VD 
+  [OK ] tarja de dipirona -> MIP (dipirona)
+  [OK ] tarja de clonazepam -> TARJA_PRETA (clonazepam)
+  [OK ] tarja de tramadol -> TARJA_VERMELHA_RETENCAO (tramadol)
+  [OK ] tarja de amoxicilina -> TARJA_VERMELHA_RETENCAO (amoxicilina)
+  [OK ] tarja de paracetamol -> MIP (paracetamol)
+  [OK ] associação em dose fixa ficou sem concentração única 
+     (1913 com '+' mantiveram concentração: dispositivo, não 2º ativo)
+  [OK ] todo EAN tem formato GS1 (0 fora)
+
+V4 — integridade e rastreabilidade
+  [OK ] integridade referencial []
+  [OK ] nenhuma apresentação órfã 
+  [OK ] toda apresentação tem evidência de origem (0 sem)
+     vínculos apresentação-substância: 33129
+     apresentações sem substância reconhecida: 182 (0.7%)
+  [OK ] menos de 5% das apresentações sem substância 
+  [OK ] integrity_check do SQLite ok
+
+==============================================================
+VERIFICAÇÃO INDEPENDENTE PASSOU
+   (1.7s)
+
+========================================================================
+>> tests/verificacao_50_regras.py  —  regras de administração (independente)
+========================================================================
+VERIFICAÇÃO INDEPENDENTE — regras de administração e separação
+
+V1 — recontagem direta do JSON (código independente)
+     no arquivo (todos os países): jejum=131 comida=315 água=53 álcool=323 toranja=194
+  [OK ] regras de jejum não excedem o arquivo (58 <= 131)
+  [OK ] regras com alimento não excedem o arquivo (159 <= 315)
+  [OK ] regras de água não excedem o arquivo (48 <= 53)
+  [OK ] interações com álcool não excedem o arquivo (169 <= 323)
+  [OK ] interações com toranja não excedem o arquivo (114 <= 194)
+
+V2 — casos clínicos conhecidos
+  [OK ] levotiroxina tem regra JEJUM -> ['JEJUM']
+  [OK ] alendronato tem regra JEJUM ou ANTES_ALIMENTO -> ['ANTES_ALIMENTO', 'COM_AGUA_ABUNDANTE']
+  [OK ] captopril tem regra JEJUM -> ['JEJUM']
+  [OK ] carvedilol tem regra COM_ALIMENTO -> ['COM_ALIMENTO']
+     separações por cátion/laticínio carregadas:
+       fenitoína              Separar por pelo menos 2 hora(s)
+       doxiciclina            Requer separação — intervalo não estabelecido na fonte
+       etambutol              Separar por pelo menos 4 hora(s)
+       etambutol              Separar por pelo menos 4 hora(s)
+       sucralfato             Separar por pelo menos 1 hora(s)
+       digoxina               Separar por pelo menos 2 hora(s)
+       digoxina               Separar por pelo menos 2 hora(s)
+       digoxina               Separar por pelo menos 2 hora(s)
+  [OK ] existem regras de separação (71)
+
+V3 — coerência interna
+  [OK ] nenhuma fonte manda jejum e com-alimento ao mesmo tempo (0)
+     substâncias com mais de um tipo de regra alimentar: 0
+     conflitos registrados em auditoria: 4
+  [OK ] divergência não fica sem registro 
+  [OK ] intervalos dentro da faixa plausível (0 fora)
+  [OK ] toda regra tem evidência (0 sem)
+  [OK ] toda evidência guarda o trecho de origem (0 sem)
+     regras extraídas automaticamente: 723 | revisadas: 0
+  [OK ] regra não revisada é marcada como tal 
+
+V4 — intervalo não estabelecido
+     regras sem intervalo: 10
+  [OK ] todas declaram a ausência do intervalo Requer separação — intervalo não estabelecido na fonte
+  [OK ] nenhuma sugere número de horas []
+     com intervalo declarado pela fonte: 61 de 71
+
+================================================================
+VERIFICAÇÃO INDEPENDENTE PASSOU
+   (0.1s)
+
+========================================================================
+>> tests/teste_motor_horarios.py  —  motor de horários (casos clínicos)
+========================================================================
+
+ 1. Medicamento em jejum, tomado bem longe da refeição
+     [OK ] regra de jejum reconhecida JEJUM
+     [OK ] sem conflito de refeição ['HORARIO_FORA_DA_ROTINA']
+     [OK ] orientação em português Tomar em jejum, com o estômago vazio.
+
+ 2. Mesmo medicamento em jejum, agora junto do café da manhã
+     [OK ] conflito de jejum detectado ['JEJUM_PROXIMO_DE_REFEICAO']
+     [OK ] conflito classificado POSSIVEL_CONFLITO
+     [OK ] justificativa cita o horário da refeição Puran T4 deve ser tomado em jejum, mas está 0 min do café da manhã (07
+
+ 3. Medicamento com alimento, tomado longe de qualquer refeição
+     [OK ] possível conflito de alimento ['ALIMENTO_EXIGIDO_SEM_REFEICAO_PROXIMA']
+
+ 4. Mesmo medicamento, agora no horário do almoço
+     [OK ] sem conflito de alimento []
+
+ 5. Separação com intervalo conhecido, alvo presente e perto
+     [OK ] separação não respeitada é detectada ['SEPARACAO_NAO_RESPEITADA']
+     [OK ] intervalo exigido preservado exigido=4.0 observado=0.0
+     [OK ] conflito confirmado CONFLITO_CONFIRMADO
+
+ 6. Mesma separação, agora com o intervalo respeitado
+     [OK ] sem conflito de separação []
+
+ 7. Separação exigida com intervalo DESCONHECIDO na fonte
+     [OK ] classificado como regra desconhecida ['SEPARACAO_COM_INTERVALO_DESCONHECIDO']['REGRA_SEM_INTERVALO_ESTABELECIDO']
+     [OK ] nenhum intervalo foi inventado doxiciclina e cálcio devem ser separados (O cálcio forma complexo com o medicame
+
+ 8. Antiácido por CLASSE ATC, não por substância
+     [OK ] conflito por classe é detectado ['SEPARACAO_NAO_RESPEITADA']
+
+ 9. Frequência declarada não bate com os horários informados
+     [OK ] incompatibilidade detectada ['FREQUENCIA_INCOMPATIVEL_COM_HORARIOS', 'HORARIO_FORA_DA_ROTINA']
+
+10. Intervalo entre doses menor que o declarado
+     [OK ] intervalo insuficiente detectado ['INTERVALO_ENTRE_DOSES_MENOR_QUE_O_DECLARADO']
+     [OK ] observado 4 h contra 12 h exigidas obs=4.0 exig=12.0
+
+11. Medicamento sem posologia registrada
+     [OK ] declarado como não avaliado ['POSOLOGIA_NAO_INFORMADA']
+     [OK ] nenhum evento inventado 0
+
+12. Medicamento se necessário (PRN), sem horário fixo
+     [OK ] evento criado sem horário [('amoxicilina', None)]
+     [OK ] marcado como se necessário SE_NECESSARIO_SEM_HORARIO_FIXO
+
+13. Horário fora da rotina e substância não reconhecida
+     [OK ] horário fora da rotina detectado ['HORARIO_FORA_DA_ROTINA']
+     [OK ] não reconhecido é declarado ['SUBSTANCIA_NAO_RECONHECIDA']
+
+14. Paciente polimedicado: agenda montada e ordenada
+     [OK ] eventos em ordem crescente de horário ['05:30', '08:00', '12:00', '19:30']
+     [OK ] 4 tomadas montadas 4
+     resumo: {'eventos': 4, 'conflitos': 1, 'por_classificacao': {'POSSIVEL_CONFLITO': 1}, 'nao_avaliado': 0}
+
+15. Duplicidade da mesma substância no atendimento
+     [OK ] duplicidade detectada ['HORARIO_FORA_DA_ROTINA', 'HORARIO_FORA_DA_ROTINA', 'DUPLICIDADE_DA_MESMA_SUBSTANCIA']
+
+16. Sem rotina informada: regra alimentar não pode ser verificada
+     [OK ] ausência de rotina é declarada ['HORARIO_NAO_INFORMADO']
+     [OK ] não afirmou conflito sem base []
+
+==================================================================
+casos clínicos executados: 16
+TODOS OS CASOS CLÍNICOS PASSARAM
+   (0.1s)
+
+========================================================================
+>> tests/verificacao_motor_horarios.py  —  motor de horários (independente)
+========================================================================
+VERIFICAÇÃO INDEPENDENTE — motor de horários
+
+V1 — implementação alternativa do cálculo de distância
+  [OK ] as duas implementações concordam em 21115 pares []
+  [OK ] 23:30 e 00:30 distam 60 min 60
+  [OK ] mesma hora dista 0 
+  [OK ] hora inválida devolve None 
+  [OK ] texto livre devolve None 
+
+V2 — invariantes independentes do caso
+  [OK ] todo horário citado em conflito existe na agenda ou na rotina []
+  [OK ] todo conflito tem justificativa não vazia 
+  [OK ] toda classificação está no vocabulário set()
+  [OK ] nenhum intervalo de separação sem origem no banco []
+  [OK ] regra de Puran T4 vem da view liberada JEJUM
+  [OK ] regra de etambutol vem da view liberada COM_ALIMENTO
+  [OK ] regra de etambutol vem da view liberada COM_ALIMENTO
+  [OK ] toda regra aplicada carrega a confiança da extração [('Puran T4', 'EXTRAIDA_AUTOMATICAMENTE'), ('etambutol', 'EXTRAIDA_AUTOMATICAMENTE')]
+
+V3 — conferência por consulta SQL independente
+  [OK ] conflito de separação produzido 
+  [OK ] regra existe no banco com o mesmo intervalo banco=4.0 conflito=4.0
+  [OK ] fonte do conflito bate com a do banco banco=DrugBank - interacoes com alimento conflito=DrugBank - interacoes com alimento
+  [OK ] intervalo observado confere com cálculo externo motor=0.5 externo=0.50
+
+V4 — propriedade: sem regra e sem proximidade, sem conflito
+  [OK ] substância sem regra não gera conflito []
+  [OK ] mas a agenda foi montada 
+     teste aleatorio: 60 agendas dentro da janela acordada
+  [OK ] nenhuma agenda dentro da rotina gerou conflito sem regra []
+     fora da janela, o motor TEM de acusar
+  [OK ] horario fora da rotina e sempre detectado []
+
+==================================================================
+VERIFICAÇÃO INDEPENDENTE PASSOU
+   (3.3s)
+
+========================================================================
+>> pipeline/traducao_interacao.py  —  tradução de interação (cobertura)
+========================================================================
+autoteste de traducao_interacao.py
+
+   OK   O metabolismo de Omeprazole pode ser reduzido quando combinado com Ibuprofen.
+   OK   O risco ou a gravidade de efeitos adversos pode aumentar quando Clonazepam é associado a Clozapi
+   OK   A concentração sérica de Nimesulide pode aumentar quando associado a Digoxin.
+   OK   Metformin pode aumentar os efeitos hipoglicemiantes de Acetylsalicylic acid.
+   OK   Nimesulide pode reduzir os efeitos diuréticos de Furosemide.
+   OK   Amiodarone pode aumentar o prolongamento do intervalo QTc associado a Citalopram.
+   OK   Diazepam pode aumentar os efeitos depressores do sistema nervoso central de Morphine.
+   OK   Verapamil pode aumentar o bloqueio atrioventricular associado a Digoxin.
+
+   -- a regra de ouro: termo fora do glossario nao traduz --
+   OK   devolveu o original intacto
+   OK   risco fora do glossario nao traduz
+
+   -- nomes em DCB brasileiro --
+   OK   O metabolismo de omeprazol pode ser reduzido quando combinado com ibuprofeno.
+
+=== COBERTURA SOBRE O BANCO REAL ===
+   nomes en->DCB carregados: 983
+   descrições em inglês: 54197
+   traduzíveis:          54183  (100.0%)
+   intactas:             14
+
+   moldes ainda não cobertos (10 maiores):
+        2  The risk of a hypersensitivity reaction to Allopurinol is increased wh
+        1  The risk of a hypersensitivity reaction to Hydrochlorothiazide is incr
+        1  The risk of a hypersensitivity reaction to Indapamide is increased whe
+        1  The risk of a hypersensitivity reaction to Chlorthalidone is increased
+        1  The risk of a hypersensitivity reaction to Lisinopril is increased whe
+        1  The risk of a hypersensitivity reaction to Enalapril is increased when
+        1  The risk of a hypersensitivity reaction to Ramipril is increased when 
+        1  The risk of a hypersensitivity reaction to Perindopril is increased wh
+        1  The risk of a hypersensitivity reaction to Benazepril is increased whe
+        1  The risk of a hypersensitivity reaction to Captopril is increased when
+
+todos os testes passaram
+   (0.6s)
+
+========================================================================
+>> rules/_prioridade.py  —  tabela de prioridade (autoteste)
+========================================================================
+autoteste de _prioridade.py
+
+-- tabela base --
+   OK   alergia exata                                        CRITICO
+   OK   alergia por classe                                   ALTO
+   OK   contraindicacao                                      ALTO
+   OK   interacao maior                                      ALTO
+   OK   interacao sem gravidade                              BAIXO
+   OK   duplicidade de substancia                            ALTO
+   OK   duplicidade terapeutica (ATC 4)                      MODERADO
+   OK   CYP forte e so inferencia                            MODERADO
+
+-- a especificacao exige: informacao insuficiente NAO vira alerta grave --
+   OK   interacao maior mas sem dado                         INFORMATIVO
+   OK   divergencia sem posologia                            INFORMATIVO
+
+-- confianca baixa desce um degrau, mas nunca na alergia --
+   OK   contraindicacao com confianca baixa                  MODERADO
+   OK   alergia exata com confianca baixa                    CRITICO
+
+-- anafilaxia sobrepoe --
+   OK   classe ATC + anafilaxia                              CRITICO
+
+-- item nao declarado vira orientacao preventiva --
+   OK   toranja MAIOR, paciente nao declarou                 INFORMATIVO
+   OK   toranja MAIOR, paciente declarou                     ALTO
+
+-- combinacao desconhecida nao e arbitrada --
+   OK   modulo inexistente                                   INFORMATIVO
+   OK   justificativa diz que nao sabe                       True
+
+-- toda entrada da tabela tem justificativa nao vazia --
+   OK   entradas sem justificativa                           []
+   OK   toda prioridade esta na escala                       []
+
+-- confianca do sistema --
+   OK   regex nao revisada                                   BAIXA
+   OK   carga direta de fonte alta                           ALTA
+   OK   carga direta, evidencia limitada                     MEDIA
+   OK   inferencia mecanistica                               BAIXA
+   OK   melhor entre duas fontes                             ALTA
+
+todos os testes passaram
+   (0.0s)
+
+========================================================================
+>> tests/teste_motor_conciliacao.py  —  motor de conciliação (casos clínicos)
+========================================================================
+==============================================================================
+VERIFICACAO 1 — FUNCIONAL — MOTOR DE CONCILIACAO
+==============================================================================
+
+BATERIA DE CASOS CLINICOS (especificacao, secao 16)
+
+   OK     01 interação medicamento × medicamento         betametasona × ciprofloxacino → ALTO/MAIOR
+   OK     02 alergia à substância em uso                 betametasona → CRITICO
+   OK     02b alergia por classe ATC (possível)          bupropiona ~ desvenlafaxina (N06AX) → ALTO/POSSIVEL
+   OK     03 contraindicação por condição                acebrofilina + úlcera péptica → MODERADO (conf BAIXA, EXTRAIDO_AUTOMATICAMENTE
+   OK     04 duplicidade da mesma substância             betametasona duas vezes → ALTO
+   OK     04b duplicidade terapêutica (ATC 4)            A01AB: clotrimazol + metronidazol → MODERADO
+   OK     05 diferença de dose (prescrito × relatado)    betametasona: 10 mg vs 20 mg
+   OK     06 diferença de frequência e de horário        divergências: FREQUENCIA_DIFERENTE, HORARIO_DIFERENTE
+   OK     07 conflito de horário (separação × item)      etambutol × alumínio (4h) → BAIXO, confiança BAIXA
+   OK     08 conflito com refeição (jejum × café)        zolpidem às 07:05, café às 07:00 → INFORMATIVO
+   OK     09 separação por classe ATC                    fenitoína × glicinato de alumínio (Antiácidos) → 1 achado(s)
+   OK     10 informação insuficiente não vira alerta gra 1 achado(s) insuficientes, nenhum acima de informativo
+   OK     11 duas fontes → um alerta, duas evidências    abemaciclibe × atazanavir: 1 achado, 2 evidências de 2 fonte(s)
+   OK     12 medicamento × item declarado pelo paciente  etinilestradiol × erva-de-são-joão (PLANTA_MEDICINAL) → FARMACO_PLANTA/MODERAD
+   OK     12b item não declarado vira orientação, não al etinilestradiol × erva-de-são-joão → INFORMATIVO
+   OK     13 medicamento × hábito (álcool declarado)     paracetamol + álcool → gravidade MODERADA, prioridade BAIXO (confiança BAIXA)
+   OK     14 medicamento × CYP: inferência, nunca docume fluvoxamina inibidor CYP1A2 × cafeína substrato → natureza POSSIVEL
+   OK     15 medicamento PRN não gera conflito de horári betametasona se necessário → 1 evento sem hora, 0 conflito
+   OK     16 sem cobertura é declarado, não silenciado   dipirona → 1 declaração(ões) de ausência de cobertura
+   OK     17 medicamento não reconhecido                 2 declaração(ões) + 1 par de revisão necessária
+   OK     18 gravidade ausente: nem inflada, nem escondi betametasona × enzalutamida → BAIXO, declarado 1 vez
+   OK     19 paciente polimedicado: vários módulos junto 10 achados de 6 módulos; 4 divergências
+   OK     20 controle negativo: zero alerta clínico      0 achados no total, 0 clínicos
+   OK     21 persistência cabe no esquema                6 achados (6 na view), 6 evidências, 3 pares
+   OK     22 todo achado explica por que apareceu        2 achado(s), 0 sem cadeia completa
+   OK     23 sem prescrição não inventa divergência      0 divergências, 1 declaração de ausência de lista
+   OK     24 item conciliado não vira duplicidade        0 duplicidade(s), 1 conciliado(s)
+   OK     25 suspenso que continua em uso                1 divergência → ALTO
+
+CASOS DIFICEIS (especificacao, secao 17)
+
+   OK     A três problemas preservados e ordenados       metotrexato: interação=True CI=True horário/adm=True ordem=True
+   OK     B fontes discordam: nenhuma é escolhida em sil natureza=CONFLITANTE, 2 evidências divergentes, adotou MAIOR
+   OK     C extração automática nunca vira revisada      status=EXTRAIDO_AUTOMATICAMENTE natureza=POSSIVEL
+   OK     D falta de dado não gera alerta grave          1 achado(s), 0 acima de baixo; 10 declarações de não avaliado
+   OK     E dedup sem perder evidência                   fluoxetina × dextrometorfano: 1 principal + 1 agrupado(s); evidências de inter
+   OK     F item relatado ausente da prescrição          1 só no relato, 1 conciliado
+   OK     G item prescrito ausente do relato             1 só na prescrição (ciprofloxacino)
+
+==============================================================================
+35 caso(s) · 35 ok · 0 falha(s) · 0 pulado(s) por ausência de dado
+   (1.7s)
+
+========================================================================
+>> tests/verificacao_motor_conciliacao.py  —  motor de conciliação (independente)
+========================================================================
+==============================================================================
+VERIFICACAO 2 — INDEPENDENTE — MOTOR DE CONCILIACAO
+==============================================================================
+
+1. INVARIANTES — sobre atendimentos construídos de formas diferentes
+
+   OK   invariantes — cenário completo                       11 achados, 0 violações
+   OK   invariantes — cenário vazio                          0 achados, 0 violações
+   OK   invariantes — cenário sem reconhecimento             2 achados, 0 violações
+   OK   invariantes — cenário sem posologia                  1 achados, 0 violações
+
+2. SQL INDEPENDENTE — cada achado gravado é conferido na origem
+
+   OK   2.1 toda evidência existe na origem, com a mesma gra 11 evidência(s) conferidas, 0 erro(s)
+   OK   2.2 nenhuma gravidade exibida sem fonte que a declar 0 gravidade(s) sem lastro
+   OK   2.3 a view expõe representantes, a tabela guarda tud view 10 = principais 10; tabela guarda 10
+   OK   2.4 resumo gravado = recontagem por SQL própria      gravado [10, 0, 1, 8, 0, 1] vs recontado [10, 0, 1, 8, 0, 1]
+   OK   2.5 o motor nunca grava intencionalidade             0 par(es) com intencionalidade decidida por script
+
+3. RECONTAGEM — o esperado é calculado por SQL, sem passar pelo motor
+
+   OK   3.1 pares detectados = pares calculados por SQL inde 12 rodadas, 18 par(es) conferidos, 0 divergência(s)
+
+4. PROPRIEDADES — geradas, não escolhidas a dedo
+
+   OK   4.1 duas execuções sobre o mesmo dado dão o mesmo re 9 achados, resumo idêntico: True
+   OK   4.2 acrescentar medicamento nunca apaga um achado    8 rodadas, 0 quebra(s) de monotonicidade
+   OK   4.3 um medicamento e nenhum contexto: nenhum módulo  0 disparo(s) sem causa
+   OK   4.4 CRÍTICO aparece com alergia e some sem ela       sem alergia: 0 crítico; com alergia: 1
+   OK   4.5 todo medicamento aparece em algum achado ou em a 0 medicamento(s) sumiram sem deixar registro
+
+5. CONFERÊNCIA MANUAL — expectativas calculadas fora do motor
+
+   OK   5.1 gravidade e prioridade conferidas par a par      5 par(es) conferidos, 0 erro(s)
+   OK   5.2 relação e trecho vêm intactos da bula            6 contraindicação(ões) conferidas, 0 erro(s)
+   OK   5.3 descrição em português é distinta do original    200 descrições conferidas, 0 problema(s)
+
+==============================================================================
+18 verificação(ões) · 18 ok · 0 falha(s)
+   (1.0s)
+
+========================================================================
+>> app/busca.py  —  serviço de busca (autoteste)
+========================================================================
+autoteste de app/busca.py
+
+   OK   busca por princípio ativo                      20 resultado(s), 1º = dipirona
+   OK   o primeiro é casamento exato                   NOME_EXATO
+   OK   sinônimo fonético encontra a substância brasil dipirona
+   OK   prefixo (autocompletar) devolve candidatos     20 resultado(s)
+   OK   código de barras é determinístico              0000000000000 -> ADACNE PEROX
+   OK   termo sem correspondência devolve lista vazia  0
+   OK   termo curto não quebra                         []
+   OK   termo vazio não quebra                         []
+   OK   associação devolve todos os componentes        2 componentes
+   OK   busca de condição clínica                      insuficiência renal
+   OK   condições agrupadas para o checklist           9 grupos
+   OK   itens separados por grupo                      plantas 3 · alimentos 5 · suplementos 6
+   OK   os grupos não se misturam                      ok
+   OK   busca de substância para alergia               varfarina
+
+todos os testes passaram
+   (0.3s)
+
+========================================================================
+>> tests/teste_aplicacao.py  —  aplicação (fluxo do usuário)
+========================================================================
+==============================================================================
+VERIFICACAO 1 — FUNCIONAL — APLICACAO DO FARMACEUTICO
+==============================================================================
+
+criar → anamnese → medicamento → posologia → rotina → analisar →
+   OK   01.1 paciente salvo e redireciona para anamnese    /a/20260909-001/anamnese
+   OK   01.2 condição, alergia e hábito aparecem na anamne 
+   OK   01.3 busca encontrou e a tela adicionou            varfarina -> grupo 1
+   OK   01.4 posologia salva e exibida na lista            
+   OK   01.5 rotina salva e leva a alimentos               
+   OK   01.6 análise executa e mostra resultados           
+   OK   01.7 achado abre com os seis eixos                 
+   OK   01.8 a evidência aparece com fonte e origem        
+   OK   01.9 revisão profissional registrada               
+   OK   01.10 relatório traz resumo, achados e limitações  
+   OK   01.11 relatório em texto puro                      
+
+t02_interacao
+   OK   02 interação maior aparece como Alto               bupropiona × lidocaína
+
+t03_alergia
+   OK   03 alergia à substância em uso vira Crítico        
+
+t04_condicao
+   OK   04 contraindicação por condição aparece, marcada c acebrofilina + úlcera péptica
+
+t05_duplicidade
+   OK   05 marca e genérico do mesmo ativo viram duplicida 
+
+t06_divergencia
+   OK   06.1 conciliação mostra a divergência de dose      
+   OK   06.2 intencionalidade nasce não determinada        
+   OK   06.3 profissional registra a intencionalidade      
+
+t07_conflito_horario
+   OK   07 jejum junto do café da manhã vira achado de hor zolpidem
+
+t08_item
+   OK   08 item declarado é registrado e entra na análise  etinilestradiol × erva-de-são-joão
+
+t09_sem_achado
+   OK   09 sem achado clínico, a tela diz que isso não é a dipirona
+
+t10_sem_regra
+   OK   10 substância sem cobertura é declarada, não silen cepa influenza tipo a
+
+t11_nao_reconhecido
+   OK   11 item não reconhecido é marcado na tela e no res 
+
+t12_incompleto
+   OK   12.1 falta de dado vira declaração, não alerta gra 
+   OK   12.2 as pendências aparecem no painel lateral      
+
+t13_polimedicado
+   OK   13 paciente polimedicado produz vários achados ord 7 achados, 6 medicamentos
+
+t14_erros_de_entrada
+   OK   14.1 entradas inválidas são recusadas com mensagem 6 casos, 0 sem mensagem: 
+   OK   14.2 atendimento sem nome de paciente é recusado   
+   OK   14.3 duplicação acidental do mesmo item é impedida 
+   OK   14.4 atendimento inexistente não quebra a aplicaçã 
+   OK   14.5 achado inexistente devolve página de erro, nã 
+   OK   14.6 rota inexistente devolve 404 tratado          
+
+t15_edicao_e_remocao
+   OK   15.1 editar posologia substitui, não duplica       dose 1000.0, 2 horários, 1 posologia(s)
+   OK   15.2 mover de lista preserva a posologia           
+   OK   15.3 remover apaga o item e não deixa posologia ór 0 órfã(s)
+
+Trocar de secao nao pode perder dado.
+   OK   16 nada se perde ao navegar entre as etapas        
+
+Resultado de um paciente nao pode aparecer no atendimento de outro.
+   OK   17 resultados não vazam entre atendimentos         A: 4 achados · B: 1 achados
+
+Relatorio antes de analisar nao pode quebrar.
+   OK   18 relatório funciona mesmo sem análise gravada    
+
+t19_analise_sem_medicamento
+   OK   19 analisar sem medicamento é recusado com explica 
+
+t20_concluir_reabrir
+   OK   20 concluir e reabrir o atendimento                
+
+t21_busca
+   OK   21.1 busca por nome traz resultado com confiança d 
+   OK   21.2 busca sem resultado oferece registrar assim m 
+   OK   21.3 código de barras é reconhecido como determiní 0000078905108
+   OK   21.4 autocompletar responde JSON                   
+
+==============================================================================
+44 verificação(ões) · 44 ok · 0 falha(s) · 22 atendimento(s) criados e apagados
+   (3.7s)
+
+========================================================================
+>> tests/verificacao_aplicacao.py  —  aplicação (independente)
+========================================================================
+==============================================================================
+VERIFICACAO 2 — INDEPENDENTE — APLICACAO DO FARMACEUTICO
+==============================================================================
+
+1. CONFRONTO — a tela mostra exatamente o que o motor devolve
+
+   OK   1.1 todo achado do motor aparece na tela             19 achados, 0 ausentes na página
+   OK   1.2 os números do painel são os do motor             8 painel(éis) conferido(s)[]
+   OK   1.3 gravidade, confiança, prioridade e status batem  19 achados conferidos, 0 divergência(s)
+   OK   1.4 toda divergência do motor aparece na conciliação 3 divergência(s), 0 ausente(s)
+   OK   1.5 relatório em texto usa o mesmo resumo            19 achados
+   OK   1.6 nada do 'não avaliado' desaparece na exibição    4 motivo(s), 0 sumido(s)
+
+2. INSPEÇÃO DO BANCO — SQL próprio, coluna a coluna
+
+   OK   2.1 o formulário do paciente gravou exatamente o que ('Inspeção do banco', '1950-06-15', 'F', 64.0, 157.0)
+   OK   2.2 as listas foram gravadas como a tela pediu       [('PRESCRITA', 2), ('RELATADA', 4)]
+   OK   2.3 campo não informado ficou NULL, não virou zero   0 campo(s) com zero indevido
+   OK   2.4 horário digitado é marcado como definido pelo fa 0 horário(s) com origem errada
+   OK   2.5 condição e alergia gravadas com vínculo e gravid 1 condição · alergia ('GRAVE', 'urticária')
+   OK   2.6 item registrado com frequência e horário         (3, 'DIARIO', '08:15')
+   OK   2.7 rotina gravada evento a evento                   5 evento(s)
+   OK   2.8 nenhum achado gravado sem justificativa do motor (0)
+   OK   2.9 nenhuma gravidade exibida sem evidência que a de (0)
+   OK   2.10 a aplicação não decidiu intencionalidade nenhum (0)
+   OK   2.11 nenhum achado se apresenta como previsão de mod (0) — não há ML no projeto
+
+3. ARQUITETURA — lida no código-fonte, não na execução
+
+   OK   3.1 a interface não consulta tabela de conhecimento  nenhuma das 11
+   OK   3.2 a interface não tem SQL nenhum                   0 comando(s) SQL em web.py
+   OK   3.3 nenhum template calcula prioridade ou gravidade  13 templates lidos
+   OK   3.4 os serviços chamam o motor em vez de reimplement importa e chama os dois motores; zero tabela clínica
+   OK   3.5 a busca não lê tabela de interação nem de regra  consulta só substância, produto, apresentação, doença e item
+   OK   3.6 'extraído automaticamente' nunca é rotulado como Extraído automaticamente — sem revisão
+
+4. PERSISTÊNCIA — analisar duas vezes, e o que sobrevive
+
+   OK   4.1 reanálise cria uma conciliação nova, não sobresc conciliação 2 -> 3, 20 achados
+   OK   4.2 a anotação do profissional sobrevive à reanálise 2 anotação(ões) preservada(s)
+   OK   4.3 a intencionalidade foi reaplicada COM assinatura ('INTENCIONAL', 'Farm. V2')
+   OK   4.4 a chave da anotação é estável, não um id de linh ['PAR:1039-2070', 'SO_NO_RELATO|1039']
+   OK   4.5 o banco recusa intencionalidade sem profissional 
+   OK   4.6 a tela reencontra a revisão pela chave estável   
+
+5. INTEGRIDADE — nada de órfão, nada de vazamento
+
+   OK   5.1 nenhum achado cita substância que não é do atend (0)
+   OK   5.2 nenhum par aponta para item de outro atendimento (0)
+   OK   5.3 todo achado gravado guarda a origem da afirmação (0)
+   OK   5.4 nenhuma evidência solta, sem achado              (0)
+   OK   5.5 remover pela tela não deixa posologia nem horári (0 resto(s))
+   OK   5.6 apagar o atendimento leva tudo e não quebra refe 0 resto(s), 0 violação(ões) de chave
+
+==============================================================================
+35 verificação(ões) · 35 ok · 0 falha(s)
+   (2.3s)
+
+========================================================================
+>> tests/teste_ponta_a_ponta.py  —  atendimento completo, ponta a ponta
+========================================================================
+==============================================================================
+PONTA A PONTA — um atendimento completo pela aplicação
+==============================================================================
+  OK   0. insumos reais localizados no banco          varfarina · ibuprofeno · losartana · item: ervas com ação anticoagulante
+  OK   1. paciente identificado                       20260909-001
+  OK   2. anamnese registrada                         1 condição · 1 alergia · 3 hábitos
+  OK   3. medicamentos e posologias registrados       6 itens, 1 deles não reconhecido
+  OK   4. rotina do dia informada                     acorda 06:30 · almoça 12:00 · dorme 22:30
+  OK   5. alimento/planta/suplemento registrado       ervas com ação anticoagulante
+  OK   6. conciliação mostra as duas listas lado a la divergência de dose da losartana visível
+  OK   7. análise executada pelo motor                16 achados · 5 divergências · 8 não avaliados
+  OK   8. a interação anticoagulante × anti-inflamató Interação entre Ibuprofeno 600 mg e Varfarin — prioridade ALTO, gravidade 
+  OK   9. o achado abre com os seis eixos e a cadeia  2 evidência(s) de 2 fonte(s)
+  OK   10. revisão do profissional registrada, com as 
+  OK   11. relatório gerado, com tudo que a especific 26400 caracteres em HTML, 13403 em texto
+  OK   12. atendimento concluído                      
+  OK   13. resultado documentado em docs/ATENDIMENTO_ 14685 bytes
+
+==============================================================================
+14 etapa(s) · 14 ok · 0 falha(s)
+
+O ATENDIMENTO COMPLETO FUNCIONOU DE PONTA A PONTA.
+Relatório do caso: docs/ATENDIMENTO_EXEMPLO.md
+   (1.0s)
+
+========================================================================
+>> tests/teste_regressao.py  —  regressão das fases anteriores
+========================================================================
+REGRESSÃO — defeitos corrigidos que não podem voltar
+
+FASE 2 — carga e normalização
+  [OK ] nenhum CAS com marcador de rodapé ('[Ref. 8]') (0)
+  [OK ] produtos agrupam apresentações 8935 produtos para 25702 apresentações
+  [OK ] associação em dose fixa fica sem concentração única []
+  [OK ] 'sulfato de morfina pentaidratado' reduz a morfina morfin
+  [OK ] 'maleato ácido de timolol' reduz a timolol timolol
+  [OK ] 'ácido acetilsalicílico' NÃO perde o 'ácido' inicial aspirin
+  [OK ] EAN repetido é aceito (não é identidade) 183 EANs em mais de uma apresentação
+  [OK ] GGREM continua único (0)
+  [OK ] parênteses não são divididos 
+  [OK ] nenhum nome é fragmento de parêntese (0)
+
+FASE 3 — regras de administração
+  [OK ] captopril tem regra de jejum ['JEJUM']
+  [OK ] 'separate from meals' é reconhecido como jejum 
+  [OK ] 'one hour prior to meals' vira 60 minutos [60]
+  [OK ] 'Alendronic acid' gera candidato '-ate' ['akid alendronik', 'alendronat']
+  [OK ] alendronato tem alguma regra carregada ['ANTES_ALIMENTO', 'COM_AGUA_ABUNDANTE']
+  [OK ] diosmina não tem regras alimentares contraditórias ['INDIFERENTE_ALIMENTO']
+  [OK ] nenhuma fonte afirma duas regras alimentares para o mesmo fármaco (0)
+  [OK ] 'avoid multivalent ions' gera separação ['antiácidos', 'cálcio']
+  [OK ] e sem intervalo inventado [None, None]
+  [OK ] existem separações com intervalo declarado (61)
+  [OK ] e separações com intervalo desconhecido (10)
+  [OK ] as sem intervalo declaram a ausência Requer separação — intervalo não estabelecido na fonte
+  [OK ] e nenhuma cita um número de horas 
+  [OK ] nenhuma regra não aprovada se diz revisada (0)
+  [OK ] tarja de dipirona MIP
+  [OK ] tarja de clonazepam TARJA_PRETA
+  [OK ] tarja de tramadol TARJA_VERMELHA_RETENCAO
+
+FASE 5 — interações, conciliação e prioridade
+  [OK ] duplicidade terapêutica usa o nível ATC que existe 5º nível: 0 grupos (regra morta) · 4º nível: 248 grupos
+  [OK ] interação lida de coluna não se declara extraída por regex (0)
+  [OK ] fonte que não gradua não recebe gravidade (0)
+  [OK ] rifampicina entrou como indutor (USAN x DCB) (5)
+  [OK ] ML não atribui gravidade (0)
+  [OK ] nenhuma chave de grupo presa à linha do atendimento (0)
+  [OK ] contraindicação de bula continua pendente de revisão (0)
+  [OK ] bula não gradua, então gravidade fica não determinada (0)
+
+FASE 6 — aplicação do farmacêutico
+  [OK ] remover medicamento após analisar continua possível 2 referência(s), ações: ['CASCADE', 'CASCADE']
+  [OK ] anotação profissional usa chave estável, não id de linha (0)
+  [OK ] intencionalidade nunca sem profissional identificado (0)
+  [OK ] nenhum achado se apresenta como previsão de modelo (0)
+
+==================================================================
+NENHUMA REGRESSÃO — todos os defeitos corrigidos continuam corrigidos
+   (0.2s)
+
+========================================================================
+>> tests/teste_ml.py  —  garantias de Machine Learning (Fase 7)
+========================================================================
+==========================================================================
+REGRESSAO — GARANTIAS DE ML
+==========================================================================
+
+ML NUNCA ATRIBUI GRAVIDADE
+  [OK ] nenhuma predicao com gravidade sugerida                    
+
+PREVISAO NAO SE DISFARCA DE FATO
+  [OK ] nenhum achado com natureza PREVISTO no banco               modelo EXPERIMENTAL: nenhuma previsao virou achado
+  [OK ] nenhum achado com origem MODELO                            
+  [OK ] todo achado existente e de REGRA                           0 achados
+  [OK ] nenhum achado de REGRA carrega probabilidade de modelo     
+  [OK ] PREVISTO sempre aponta para uma linha de predicao          
+  [OK ] previsao nao entra em vw_interacao_liberada                a view que chega ao farmaceutico nao le a tabela de previsao
+
+MODELO NAO E TROCADO EM SILENCIO
+  [OK ] no maximo um modelo ativo por problema                     
+  [OK ] nenhum modelo ativo hoje                                   0 modelos registrados, todos inativos
+  [OK ] todo modelo declara semente, versao de dados e espaco de atributos 
+  [OK ] todo modelo declara limitacoes em texto                    
+  [OK ] nenhum modelo ativo sem estar homologado                   
+
+==========================================================================
+BANCO SEM MODELO REGISTRADO — as garantias estruturais acima
+passaram; as que dependem de modelo treinado NAO foram
+verificadas. Rode `python ml/executar_tudo.py` para reconstrui-lo.
+==========================================================================
+   (0.1s)
+
+========================================================================
+PIPELINE COMPLETO — carga validada e verificada de forma independente

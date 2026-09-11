@@ -1,0 +1,355 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "modelo": "1.0-boosting",
+  "filas": {
+    "A_PONTO_CEGO": [
+      {
+        "a": "aripiprazol",
+        "b": "levomepromazina",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "clozapina",
+        "b": "levomepromazina",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "fibrinolisina",
+        "b": "clopidogrel",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "buspirona",
+        "b": "levomepromazina",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "quetiapina",
+        "b": "levomepromazina",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "haloperidol",
+        "b": "levomepromazina",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "fibrinolisina",
+        "b": "varfarina",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "levomepromazina",
+        "b": "paliperidona",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "fibrinolisina",
+        "b": "rivaroxabana",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "levomepromazina",
+        "b": "lurasidona",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "levomepromazina",
+        "b": "zuclopentixol",
+        "probabilidade": 1.0
+      },
+      {
+        "a": "apixabana",
+        "b": "fibrinolisina",
+        "probabilidade": 0.9933185706412582
+      },
+      {
+        "a": "fibrinolisina",
+        "b": "cilostazol",
+        "probabilidade": 0.9817282136823449
+      },
+      {
+        "a": "fibrinolisina",
+        "b": "ticagrelor",
+        "probabilidade": 0.9577615798355082
+      },
+      {
+        "a": "dexametasona",
+        "b": "racecadotrila",
+        "probabilidade": 0.9516364217180152
+      },
+      {
+        "a": "fenol",
+        "b": "ziprasidona",
+        "probabilidade": 0.9507894669623965
+      },
+      {
+        "a": "cloreto de dequalínio",
+        "b": "zolpidem",
+        "probabilidade": 0.9491550973135904
+      },
+      {
+        "a": "cloreto de dequalínio",
+        "b": "ziprasidona",
+        "probabilidade": 0.9450409632876432
+      },
+      {
+        "a": "fenol",
+        "b": "hidroxizina",
+        "probabilidade": 0.9425204323543315
+      },
+      {
+        "a": "fenol",
+        "b": "clozapina",
+        "probabilidade": 0.9369586002255937
+      }
+    ],
+    "B_LACUNA_DE_FONTE": [
+      {
+        "a": "mometasona",
+        "b": "prednisolona",
+        "probabilidade": 0.9959760931406776
+      },
+      {
+        "a": "esomeprazol",
+        "b": "metronidazol",
+        "probabilidade": 0.994540553325067
+      },
+      {
+        "a": "esomeprazol",
+        "b": "prednisolona",
+        "probabilidade": 0.9800234615522369
+      },
+      {
+        "a": "dexametasona",
+        "b": "esomeprazol",
+        "probabilidade": 0.9650226481786525
+      },
+      {
+        "a": "dexametasona",
+        "b": "mometasona",
+        "probabilidade": 0.963615997702016
+      },
+      {
+        "a": "desvenlafaxina",
+        "b": "metronidazol",
+        "probabilidade": 0.9571518626057145
+      },
+      {
+        "a": "etoricoxibe",
+        "b": "metronidazol",
+        "probabilidade": 0.955408326166899
+      },
+      {
+        "a": "clioquinol",
+        "b": "lemborexante",
+        "probabilidade": 0.9490603620143477
+      },
+      {
+        "a": "clioquinol",
+        "b": "periciazina",
+        "probabilidade": 0.9466192571712968
+      },
+      {
+        "a": "prednisolona",
+        "b": "trazodona",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "amissulprida",
+        "b": "clioquinol",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "cenobamato",
+        "b": "estiripentol",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "desonida",
+        "b": "prednisolona",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "esomeprazol",
+        "b": "celecoxibe",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "clioquinol",
+        "b": "clordiazepóxido",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "esomeprazol",
+        "b": "paroxetina",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "anastrozol",
+        "b": "fluconazol",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "levofloxacino",
+        "b": "omeprazol",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "clortalidona",
+        "b": "metronidazol",
+        "probabilidade": 0.936709
+      },
+      {
+        "a": "fenilbutazona",
+        "b": "clopidogrel",
+        "probabilidade": 0.936709
+      }
+    ]
+  },
+  "candidatos": 581201,
+  "acima_0_90": 243,
+  "acima_0_50": 21881,
+  "gravadas_em_predicao": 600
+}

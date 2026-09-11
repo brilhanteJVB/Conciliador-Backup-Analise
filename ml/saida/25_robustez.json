@@ -1,0 +1,443 @@
+{
+  "versao_dados": {
+    "contagens": {
+      "substancia": 2094,
+      "classe_atc": 6996,
+      "interacao_substancia": 112520,
+      "papel_farmacocinetico": 28,
+      "interacao_doenca": 182,
+      "interacao_item": 289,
+      "interacao_habito": 199,
+      "regra_administracao": 723,
+      "anotacao_profissional": 0,
+      "_colunas_substancia": [
+        1159,
+        1450,
+        1505,
+        1757,
+        14283
+      ],
+      "_perfil_regra_administracao": [
+        [
+          "ANTES_ALIMENTO",
+          17
+        ],
+        [
+          "APOS_ALIMENTO",
+          15
+        ],
+        [
+          "COM_AGUA_ABUNDANTE",
+          51
+        ],
+        [
+          "COM_ALIMENTO",
+          163
+        ],
+        [
+          "CONFORME_SINTOMA",
+          49
+        ],
+        [
+          "INDIFERENTE_ALIMENTO",
+          331
+        ],
+        [
+          "JEJUM",
+          61
+        ],
+        [
+          "NAO_PARTIR_NAO_TRITURAR",
+          35
+        ],
+        [
+          "SUBLINGUAL",
+          1
+        ]
+      ],
+      "_perfil_papel_pk": [
+        [
+          "CYP1A2",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP1A2",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2B6",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2C19",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP2C8",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C8",
+          "INIBIDOR",
+          2
+        ],
+        [
+          "CYP2C8",
+          "SUBSTRATO",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INDUTOR",
+          1
+        ],
+        [
+          "CYP2C9",
+          "INIBIDOR",
+          1
+        ],
+        [
+          "CYP2D6",
+          "INIBIDOR",
+          3
+        ],
+        [
+          "CYP2D6",
+          "SUBSTRATO",
+          2
+        ],
+        [
+          "CYP3A4",
+          "INDUTOR",
+          3
+        ],
+        [
+          "CYP3A4",
+          "INIBIDOR",
+          5
+        ],
+        [
+          "CYP3A4",
+          "SUBSTRATO",
+          1
+        ]
+      ]
+    },
+    "n_cargas": 12,
+    "impressao": "9e9c85ee3ffea5e0"
+  },
+  "pareado_grau": [
+    {
+      "configuracao": "COMPLETO",
+      "familia": "LOGISTICA",
+      "teste": {
+        "n": 37504,
+        "positivos": 18623,
+        "prevalencia": 0.49656036689419797,
+        "roc_auc": 0.5051682797900419,
+        "pr_auc": 0.5038401919439837,
+        "pr_auc_piso": 0.49656036689419797,
+        "pr_auc_ganho": 0.007279825049785693,
+        "brier": 0.4961953213931192,
+        "ece": 0.4961925909800465,
+        "probabilidade_media": 0.0003677759141515067,
+        "ponto_f1": {
+          "limiar": 9.157621211386412e-08,
+          "precisao": 0.4966211704372446,
+          "recall": 0.9983890887612092,
+          "especificidade": 0.0018537153752449553,
+          "f1": 0.6633013449395313,
+          "verdadeiro_positivo": 18593,
+          "falso_positivo": 18846,
+          "falso_negativo": 30,
+          "verdadeiro_negativo": 35,
+          "alertas_emitidos": 37439
+        },
+        "ponto_recall_alto": {
+          "limiar": 1.4376249168890354e-07,
+          "precisao": 0.4970300931790671,
+          "recall": 0.9480749610696451,
+          "especificidade": 0.05370478258566813,
+          "f1": 0.6521626712961254,
+          "verdadeiro_positivo": 17656,
+          "falso_positivo": 17867,
+          "falso_negativo": 967,
+          "verdadeiro_negativo": 1014,
+          "alertas_emitidos": 35523
+        }
+      }
+    },
+    {
+      "configuracao": "COMPLETO",
+      "familia": "GRADIENT_BOOSTING",
+      "teste": {
+        "n": 37504,
+        "positivos": 18623,
+        "prevalencia": 0.49656036689419797,
+        "roc_auc": 0.6061332799811711,
+        "pr_auc": 0.60770323982306,
+        "pr_auc_piso": 0.49656036689419797,
+        "pr_auc_ganho": 0.11114287292886199,
+        "brier": 0.4554469443255592,
+        "ece": 0.45906429515371716,
+        "probabilidade_media": 0.03749607174048073,
+        "ponto_f1": {
+          "limiar": 0.004805174840066061,
+          "precisao": 0.4998782566350134,
+          "recall": 0.9921602319712184,
+          "especificidade": 0.02092050209205021,
+          "f1": 0.6648076853884071,
+          "verdadeiro_positivo": 18477,
+          "falso_positivo": 18486,
+          "falso_negativo": 146,
+          "verdadeiro_negativo": 395,
+          "alertas_emitidos": 36963
+        },
+        "ponto_recall_alto": {
+          "limiar": 0.007574427292152489,
+          "precisao": 0.5084324415943953,
+          "recall": 0.9664393491918595,
+          "especificidade": 0.07838567872464382,
+          "f1": 0.6663211284291585,
+          "verdadeiro_positivo": 17998,
+          "falso_positivo": 17401,
+          "falso_negativo": 625,
+          "verdadeiro_negativo": 1480,
+          "alertas_emitidos": 35399
+        }
+      }
+    },
+    {
+      "configuracao": "SEM_GRAFO",
+      "familia": "LOGISTICA",
+      "teste": {
+        "n": 37504,
+        "positivos": 18623,
+        "prevalencia": 0.49656036689419797,
+        "roc_auc": 0.6001774658632812,
+        "pr_auc": 0.6016690174787891,
+        "pr_auc_piso": 0.49656036689419797,
+        "pr_auc_ganho": 0.10510865058459112,
+        "brier": 0.240945725645935,
+        "ece": 0.01685178504125199,
+        "probabilidade_media": 0.5012898754277633,
+        "ponto_f1": {
+          "limiar": 0.29563280433416367,
+          "precisao": 0.4965598165235479,
+          "recall": 0.9998389088761209,
+          "especificidade": 0.00015888988930671044,
+          "f1": 0.6635662229824842,
+          "verdadeiro_positivo": 18620,
+          "falso_positivo": 18878,
+          "falso_negativo": 3,
+          "verdadeiro_negativo": 3,
+          "alertas_emitidos": 37498
+        },
+        "ponto_recall_alto": {
+          "limiar": 0.3992871642112732,
+          "precisao": 0.5030798521670959,
+          "recall": 0.9648284379530688,
+          "especificidade": 0.06000741486150098,
+          "f1": 0.6613297999595135,
+          "verdadeiro_positivo": 17968,
+          "falso_positivo": 17748,
+          "falso_negativo": 655,
+          "verdadeiro_negativo": 1133,
+          "alertas_emitidos": 35716
+        }
+      }
+    },
+    {
+      "configuracao": "SEM_GRAFO",
+      "familia": "GRADIENT_BOOSTING",
+      "teste": {
+        "n": 37504,
+        "positivos": 18623,
+        "prevalencia": 0.49656036689419797,
+        "roc_auc": 0.7237581861005784,
+        "pr_auc": 0.7332036275633769,
+        "pr_auc_piso": 0.49656036689419797,
+        "pr_auc_ganho": 0.2366432606691789,
+        "brier": 0.21142579175233278,
+        "ece": 0.01671201802764644,
+        "probabilidade_media": 0.5022593899056356,
+        "ponto_f1": {
+          "limiar": 0.35746902219424503,
+          "precisao": 0.5628604382929643,
+          "recall": 0.8909413091338667,
+          "especificidade": 0.31751496213124303,
+          "f1": 0.6898817072410137,
+          "verdadeiro_positivo": 16592,
+          "falso_positivo": 12886,
+          "falso_negativo": 2031,
+          "verdadeiro_negativo": 5995,
+          "alertas_emitidos": 29478
+        },
+        "ponto_recall_alto": {
+          "limiar": 0.2745420113800569,
+          "precisao": 0.5315269461077844,
+          "recall": 0.9532835740750685,
+          "especificidade": 0.17128330067263386,
+          "f1": 0.68250581473579,
+          "verdadeiro_positivo": 17753,
+          "falso_positivo": 15647,
+          "falso_negativo": 870,
+          "verdadeiro_negativo": 3234,
+          "alertas_emitidos": 33400
+        }
+      }
+    }
+  ],
+  "controle_negativo": {
+    "media_positivos_teste": 0.3709821762747133,
+    "media_negativos_teste": 0.1472128196587533,
+    "media_controle": 0.08737044277964369,
+    "acima_0_5": 62,
+    "acima_0_7": 8,
+    "acima_0_9": 0,
+    "n": 5000,
+    "sem_atc_em_um_lado": 3594
+  },
+  "rotulo_duas_fontes": [
+    {
+      "familia": "LOGISTICA",
+      "teste": {
+        "n": 105146,
+        "positivos": 4595,
+        "prevalencia": 0.04370113936811671,
+        "roc_auc": 0.7991791009556928,
+        "pr_auc": 0.21657260348361954,
+        "pr_auc_piso": 0.04370113936811671,
+        "pr_auc_ganho": 0.17287146411550283,
+        "brier": 0.03835634699741238,
+        "ece": 0.009428947340507567,
+        "probabilidade_media": 0.04694076838875704,
+        "ponto_f1": {
+          "limiar": 0.13223657379831583,
+          "precisao": 0.19576018549188473,
+          "recall": 0.38585418933623505,
+          "especificidade": 0.9275591490885222,
+          "f1": 0.25974216232053915,
+          "verdadeiro_positivo": 1773,
+          "falso_positivo": 7284,
+          "falso_negativo": 2822,
+          "verdadeiro_negativo": 93267,
+          "alertas_emitidos": 9057
+        },
+        "ponto_recall_alto": {
+          "limiar": 0.005774940829724073,
+          "precisao": 0.057331408537842854,
+          "recall": 0.9680087051142546,
+          "especificidade": 0.2726477111117741,
+          "f1": 0.10825149977488167,
+          "verdadeiro_positivo": 4448,
+          "falso_positivo": 73136,
+          "falso_negativo": 147,
+          "verdadeiro_negativo": 27415,
+          "alertas_emitidos": 77584
+        }
+      }
+    },
+    {
+      "familia": "GRADIENT_BOOSTING",
+      "teste": {
+        "n": 105146,
+        "positivos": 4595,
+        "prevalencia": 0.04370113936811671,
+        "roc_auc": 0.8580744991722378,
+        "pr_auc": 0.34920058226113343,
+        "pr_auc_piso": 0.04370113936811671,
+        "pr_auc_ganho": 0.3054994428930167,
+        "brier": 0.03466214989007102,
+        "ece": 0.011674559595075509,
+        "probabilidade_media": 0.04483427026934468,
+        "ponto_f1": {
+          "limiar": 0.17702203667457023,
+          "precisao": 0.30078012135221033,
+          "recall": 0.45310119695321,
+          "especificidade": 0.9518652226233454,
+          "f1": 0.3615524876269862,
+          "verdadeiro_positivo": 2082,
+          "falso_positivo": 4840,
+          "falso_negativo": 2513,
+          "verdadeiro_negativo": 95711,
+          "alertas_emitidos": 6922
+        },
+        "ponto_recall_alto": {
+          "limiar": 0.0072904991059529484,
+          "precisao": 0.0777988614800759,
+          "recall": 0.9368879216539717,
+          "especificidade": 0.49249634513828805,
+          "f1": 0.14366761221424998,
+          "verdadeiro_positivo": 4305,
+          "falso_positivo": 51030,
+          "falso_negativo": 290,
+          "verdadeiro_negativo": 49521,
+          "alertas_emitidos": 55335
+        }
+      }
+    }
+  ],
+  "ponto_cego": {
+    "substancias": 2094,
+    "com_atc": 1159,
+    "sem_atc": 935,
+    "sem_atc_e_sem_aresta": 887
+  },
+  "precisao_no_topo": {
+    "regime": "FRIO_FRIO",
+    "prevalencia": 0.20368364030335862,
+    "pontos": [
+      {
+        "fracao": 0.001,
+        "n": 10,
+        "precisao": 0.9,
+        "limiar": 0.9527967496465085,
+        "recall": 0.004352030947775629
+      },
+      {
+        "fracao": 0.005,
+        "n": 50,
+        "precisao": 0.78,
+        "limiar": 0.8769045643323866,
+        "recall": 0.018858800773694392
+      },
+      {
+        "fracao": 0.01,
+        "n": 101,
+        "precisao": 0.801980198019802,
+        "limiar": 0.836942846477452,
+        "recall": 0.03916827852998066
+      },
+      {
+        "fracao": 0.05,
+        "n": 507,
+        "precisao": 0.631163708086785,
+        "limiar": 0.6207845820353652,
+        "recall": 0.15473887814313347
+      },
+      {
+        "fracao": 0.1,
+        "n": 1015,
+        "precisao": 0.5201970443349754,
+        "limiar": 0.49210428536239326,
+        "recall": 0.2553191489361702
+      }
+    ]
+  }
+}

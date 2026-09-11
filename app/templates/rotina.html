@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block titulo %}Rotina — {{ at.codigo }}{% endblock %}
+{% block conteudo %}
+
+<h1>4. Rotina do paciente</h1>
+<p class="subtitulo">Sem isto o motor não consegue dizer se “em jejum às 06:30”
+é viável para quem acorda às 08:00, nem se “com alimento às 15:00” tem alguma
+refeição por perto. A interface só coleta — quem interpreta é o motor.</p>
+
+<div class="cartao">
+  <form method="post">
+    <h3>Sono e refeições</h3>
+    <p class="ajuda">Deixe em branco o que o paciente não souber ou não tiver.
+      Em branco é “não informado”, e o motor declara o que não pôde verificar
+      por causa disso.</p>
+    <div class="linha-campos">
+      {% for chave, nome in eventos[:8] %}
+        <div class="campo" style="flex:0 0 150px">
+          <label for="{{ chave }}">{{ nome }}</label>
+          <input type="time" id="{{ chave }}" name="{{ chave }}"
+                 value="{{ valores.get(chave, '') }}">
+        </div>
+      {% endfor %}
+    </div>
+
+    <h3>Trabalho e escola <span class="opcional" style="font-weight:400">(quando aplicável)</span></h3>
+    <p class="ajuda">Útil para saber se um horário cai num período em que o
+      paciente não consegue tomar o medicamento.</p>
+    <div class="linha-campos">
+      {% for chave, nome in eventos[8:] %}
+        <div class="campo" style="flex:0 0 170px">
+          <label for="{{ chave }}">{{ nome }}</label>
+          <input type="time" id="{{ chave }}" name="{{ chave }}"
+                 value="{{ valores.get(chave, '') }}">
+        </div>
+      {% endfor %}
+    </div>
+
+    <p style="margin-top:16px">
+      <button type="submit">Salvar e ir para alimentos e plantas</button>
+    </p>
+  </form>
+</div>
+
+{% endblock %}
